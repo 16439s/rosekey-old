@@ -982,6 +982,7 @@ _aboutFirefish:
   about: "Firefish 是由 ThatOneCalculator 创建的 Misskey 的一个分支，自 2022 年开始开发。"
   contributors: "主要贡献者"
   allContributors: "全体贡献者"
+  originalMisskeyContributors: "Misskey 的主要贡献者"
   source: "源代码"
   translation: "翻译 Firefish"
   donate: "赞助 Firefish"

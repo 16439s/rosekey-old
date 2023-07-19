@@ -128,6 +128,31 @@
 						>
 					</FormSection>
 					<FormSection>
+						<template #label>{{
+							i18n.ts._aboutFirefish.originalMisskeyContributors
+						}}</template>
+						<div class="_formLinks">
+							<FormLink to="/@syuilo@misskey.io"
+								><Mfm :text="'@syuilo@misskey.io'"
+							/></FormLink>
+							<FormLink to="/@aqz@p1.a9z.dev"
+								><Mfm :text="'@aqz@p1.a9z.dev'"
+							/></FormLink>
+							<FormLink to="/@ac@misskey.cloud"
+								><Mfm :text="'@ac@misskey.cloud'"
+							/></FormLink>
+							<FormLink to="/@rinsuki@mstdn.rinsuki.net"
+								><Mfm :text="'@rinsuki@mstdn.rinsuki.net'"
+							/></FormLink>
+							<FormLink to="/@mei23@misskey.m544.net"
+								><Mfm :text="'@mei23@misskey.m544.net'"
+							/></FormLink>
+							<FormLink to="/@robflop@misskey.io"
+								><Mfm :text="'@robflop@misskey.io'"
+							/></FormLink>
+						</div>
+					</FormSection>
+					<FormSection>
 						<template #label
 							><Mfm
 								:text="`$[x2 $[jelly ❤] ${i18n.ts._aboutFirefish.sponsors}]`"
