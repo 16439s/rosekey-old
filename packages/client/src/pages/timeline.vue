@@ -98,13 +98,13 @@ const keymap = {
 let timelines = ["home"];
 
 if (isLocalTimelineAvailable) {
-	timelines.push("local");
-}
-if (isLocalTimelineAvailable) {
 	timelines.push("social");
 }
 if (isRecommendedTimelineAvailable) {
 	timelines.push("recommended");
+}
+if (isLocalTimelineAvailable) {
+	timelines.push("local");
 }
 if (isGlobalTimelineAvailable) {
 	timelines.push("global");
@@ -232,16 +232,6 @@ const headerTabs = $computed(() => [
 	...(isLocalTimelineAvailable
 		? [
 				{
-					key: "local",
-					title: i18n.ts._timelines.local,
-					icon: "ph-users ph-bold ph-lg",
-					iconOnly: true,
-				},
-		  ]
-		: []),
-	...(isLocalTimelineAvailable
-		? [
-				{
 					key: "social",
 					title: i18n.ts._timelines.social,
 					icon: "ph-handshake ph-bold ph-lg",
@@ -255,6 +245,16 @@ const headerTabs = $computed(() => [
 					key: "recommended",
 					title: i18n.ts._timelines.recommended,
 					icon: "ph-thumbs-up ph-bold ph-lg",
+					iconOnly: true,
+				},
+		  ]
+		: []),
+	...(isLocalTimelineAvailable
+		? [
+				{
+					key: "local",
+					title: i18n.ts._timelines.local,
+					icon: "ph-users ph-bold ph-lg",
 					iconOnly: true,
 				},
 		  ]
