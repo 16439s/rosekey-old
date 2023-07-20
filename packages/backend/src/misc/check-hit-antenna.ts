@@ -95,14 +95,19 @@ export async function checkHitAntenna(
 		.map((xs) => xs.filter((x) => x !== ""))
 		.filter((xs) => xs.length > 0);
 
+	let text = `${note.text ?? ""} ${note.cw ?? ""}`;
+	if (note.files != null)
+		text += ` ${note.files.map((f) => f.comment ?? "").join(" ")}`;
+	text = text.trim();
+
 	if (keywords.length > 0) {
 		if (note.text == null) return false;
 
 		const matched = keywords.some((and) =>
 			and.every((keyword) =>
 				antenna.caseSensitive
-					? note.text!.includes(keyword)
-					: note.text!.toLowerCase().includes(keyword.toLowerCase()),
+					? text.includes(keyword)
+					: text.toLowerCase().includes(keyword.toLowerCase()),
 			),
 		);
 
