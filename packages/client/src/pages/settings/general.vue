@@ -238,6 +238,18 @@
 			>
 		</FormSection>
 
+		<FormSection>
+			<template #label>{{ i18n.ts.forMobile }}</template>
+			<FormSwitch
+				v-model="replaceChatButtonWithAccountButton"
+				class="_formBlock"
+				>{{ i18n.ts.replaceChatButtonWithAccountButton
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
+		</FormSection>
+
 		<FormRange
 			v-model="numberOfPageCache"
 			:min="1"
@@ -378,6 +390,9 @@ const showTimelineReplies = computed(
 );
 const hideFollowButtons = computed(
 	defaultStore.makeGetterSetter("hideFollowButtons"),
+);
+const replaceChatButtonWithAccountButton = computed(
+	defaultStore.makeGetterSetter("replaceChatButtonWithAccountButton"),
 );
 
 watch(swipeOnDesktop, () => {

@@ -154,6 +154,7 @@ export async function openAccountMenu(
 		onChoose?: (account: misskey.entities.UserDetailed) => void;
 	},
 	ev: MouseEvent,
+	isMobile?: boolean,
 ) {
 	function showSigninDialog() {
 		popup(
@@ -230,48 +231,70 @@ export async function openAccountMenu(
 		popupMenu(
 			[
 				...[
-					{
-						type: "link",
-						text: i18n.ts.profile,
-						to: `/@${$i.username}`,
-						avatar: $i,
-					},
-					null,
+					...(isMobile ?? false
+						? [
+								{
+									type: "parent",
+									icon: "ph-plus ph-bold ph-lg",
+									text: i18n.ts.addAccount,
+									children: [
+										{
+											text: i18n.ts.existingAccount,
+											action: () => {
+												showSigninDialog();
+											},
+										},
+										{
+											text: i18n.ts.createAccount,
+											action: () => {
+												createAccount();
+											},
+										},
+									],
+								},
+						  ]
+						: [
+								{
+									type: "link",
+									text: i18n.ts.profile,
+									to: `/@${$i.username}`,
+									avatar: $i,
+								},
+								null,
+						  ]),
 					...(opts.includeCurrentAccount ? [createItem($i)] : []),
 					...accountItemPromises,
-					{
-						type: "parent",
-						icon: "ph-plus ph-bold ph-lg",
-						text: i18n.ts.addAccount,
-						children: [
-							{
-								text: i18n.ts.existingAccount,
-								action: () => {
-									showSigninDialog();
+					...(isMobile ?? false
+						? [
+								null,
+								{
+									type: "link",
+									text: i18n.ts.profile,
+									to: `/@${$i.username}`,
+									avatar: $i,
 								},
-							},
-							{
-								text: i18n.ts.createAccount,
-								action: () => {
-									createAccount();
+						  ]
+						: [
+								{
+									type: "parent",
+									icon: "ph-plus ph-bold ph-lg",
+									text: i18n.ts.addAccount,
+									children: [
+										{
+											text: i18n.ts.existingAccount,
+											action: () => {
+												showSigninDialog();
+											},
+										},
+										{
+											text: i18n.ts.createAccount,
+											action: () => {
+												createAccount();
+											},
+										},
+									],
 								},
-							},
-						],
-					},
-					{
-						type: "link",
-						icon: "ph-users ph-bold ph-lg",
-						text: i18n.ts.manageAccounts,
-						to: "/settings/accounts",
-					},
-					{
-						type: "button",
-						icon: "ph-sign-out ph-bold ph-lg",
-						text: i18n.ts.logout,
-						action: () => {
-							signout();
-						},
-					},
+						  ]),
 				],
 			],
 			ev.currentTarget ?? ev.target,

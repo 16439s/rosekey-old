@@ -989,6 +989,8 @@ showPreviewByDefault: "投稿画面でプレビュー表示をデフォルトで
 originalFeature: "独自機能"
 preventMisclick: "誤タップ防止"
 hideFollowButtons: "新規フォロワーの通知とユーザーページの ... の隣にあるフォローボタンを隠す"
+forMobile: "モバイル向け"
+replaceChatButtonWithAccountButton: "画面下部のチャットのボタンをアカウント切り替えボタンに変更する"
 
 _sensitiveMediaDetection:
   description: "機械学習を使って自動でセンシティブなメディアを検出し、モデレーションに役立てられます。サーバーの負荷が少し増えます。"

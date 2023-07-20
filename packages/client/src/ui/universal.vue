@@ -86,6 +86,20 @@
 				</div>
 			</button>
 			<button
+				v-if="useAccountButton"
+				:aria-label="i18n.t('accounts')"
+				class="button messaging _button"
+				@click="openAccountMenu"
+			>
+				<div
+					class="button-wrapper"
+					:class="buttonAnimIndex === 2 ? 'on' : ''"
+				>
+					<i class="ph-users ph-bold ph-lg"></i>
+				</div>
+			</button>
+			<button
+				v-else
 				:aria-label="i18n.t('messaging')"
 				class="button messaging _button"
 				@click="
@@ -181,7 +195,7 @@ import * as os from "@/os";
 import { defaultStore } from "@/store";
 import { navbarItemDef } from "@/navbar";
 import { i18n } from "@/i18n";
-import { $i } from "@/account";
+import { $i, openAccountMenu as openAccountMenu_ } from "@/account";
 import { mainRouter } from "@/router";
 import {
 	provideMetadataReceiver,
@@ -206,6 +220,17 @@ window.addEventListener("resize", () => {
 	isMobile.value =
 		deviceKind === "smartphone" || window.innerWidth <= MOBILE_THRESHOLD;
 });
+
+const useAccountButton = defaultStore.state.replaceChatButtonWithAccountButton;
+const openAccountMenu = (ev: MouseEvent) => {
+	openAccountMenu_(
+		{
+			withExtraOperation: true,
+		},
+		ev,
+		isMobile.value,
+	);
+};
 
 const buttonAnimIndex = ref(0);
 const drawerMenuShowing = ref(false);

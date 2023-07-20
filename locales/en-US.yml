@@ -1129,6 +1129,8 @@ showPreviewByDefault: "Show preview in posting form by default"
 originalFeature: "original"
 preventMisclick: "Accidental click prevention"
 hideFollowButtons: "Hide follow buttons in notifications and user pages"
+forMobile: "Mobile"
+replaceChatButtonWithAccountButton: "Replace chat button at the bottom with account switch button"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
