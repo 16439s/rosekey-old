@@ -1127,6 +1127,8 @@ removeMember: "Remove member"
 verifiedLink: "Verified link"
 showPreviewByDefault: "Show preview in posting form by default"
 originalFeature: "original"
+preventMisclick: "Accidental click prevention"
+hideFollowButtons: "Hide follow buttons in notifications and user pages"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing

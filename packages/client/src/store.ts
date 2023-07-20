@@ -346,6 +346,10 @@ export const defaultStore = markRaw(
 			where: "deviceAccount",
 			default: true,
 		},
+		hideFollowButtons: {
+			where: "device",
+			default: true,
+		},
 	}),
 );
 

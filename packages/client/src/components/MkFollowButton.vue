@@ -8,7 +8,7 @@
 		<i class="ph-dots-three-outline ph-bold ph-lg"></i>
 	</button>
 	<button
-		v-if="$i != null && $i.id != user.id"
+		v-if="!hideFollowButton && $i != null && $i.id != user.id"
 		class="kpoogebi _button follow-button"
 		:class="{
 			wait,
@@ -79,6 +79,7 @@ const props = withDefaults(
 		full?: boolean;
 		large?: boolean;
 		hideMenu?: boolean;
+		hideFollowButton?: boolean;
 	}>(),
 	{
 		full: false,
@@ -96,6 +97,8 @@ let hasPendingFollowRequestFromYou = $ref(
 );
 let wait = $ref(false);
 const connection = stream.useChannel("main");
+
+const hideFollowButton = props.hideFollowButton ?? false;
 
 if (props.user.isFollowing == null) {
 	os.api("users/show", {

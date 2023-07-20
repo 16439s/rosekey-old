@@ -223,6 +223,7 @@
 									:inline="true"
 									:transparent="false"
 									:full="true"
+									:hideFollowButton="hideFollowButton"
 									class="koudoku"
 								/>
 							</div>
@@ -409,6 +410,8 @@ import { host } from "@/config";
 
 const XPhotos = defineAsyncComponent(() => import("./index.photos.vue"));
 const XActivity = defineAsyncComponent(() => import("./index.activity.vue"));
+
+const hideFollowButton = defaultStore.state.hideFollowButtons;
 
 const emit = defineEmits(["refresh"]);
 const props = withDefaults(
