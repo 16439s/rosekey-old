@@ -1,7 +1,9 @@
 <template>
 	<div
 		class="hpaizdrt"
-		v-tooltip="capitalize(instance.softwareName)"
+		v-tooltip="
+			`${capitalize(instance.softwareName)} ${instance.softwareVersion}`
+		"
 		ref="ticker"
 		:style="bg"
 	>
@@ -21,6 +23,7 @@ const props = defineProps<{
 		name: string;
 		themeColor?: string;
 		softwareName?: string;
+		softwareVersion?: string;
 	};
 }>();
 
@@ -36,6 +39,7 @@ const instance = props.instance ?? {
 		) as HTMLMetaElement
 	)?.content,
 	softwareName: Instance.softwareName || "Firefish",
+	softwareVersion: Instance.softwareVersion,
 };
 
 const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
