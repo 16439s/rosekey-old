@@ -8,7 +8,8 @@
 			<template #caption>
 				<I18n :src="i18n.ts.i18nInfo" tag="span">
 					<template #link>
-						<MkLink url="https://hosted.weblate.org/engage/firefish/"
+						<MkLink
+							url="https://hosted.weblate.org/engage/firefish/"
 							>Weblate</MkLink
 						>
 					</template>
@@ -44,6 +45,12 @@
 				v-model="useReactionPickerForContextMenu"
 				class="_formBlock"
 				>{{ i18n.ts.useReactionPickerForContextMenu }}</FormSwitch
+			>
+			<FormSwitch v-model="showPreviewByDefault" class="_formBlock"
+				>{{ i18n.ts.showPreviewByDefault
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
 			>
 			<FormSwitch
 				v-if="deviceKind !== 'desktop'"
@@ -352,6 +359,9 @@ const swipeOnDesktop = computed(
 const swipeOnMobile = computed(defaultStore.makeGetterSetter("swipeOnMobile"));
 const showAdminUpdates = computed(
 	defaultStore.makeGetterSetter("showAdminUpdates"),
+);
+const showPreviewByDefault = computed(
+	defaultStore.makeGetterSetter("showPreviewByDefault"),
 );
 const showTimelineReplies = computed(
 	defaultStore.makeGetterSetter("showTimelineReplies"),

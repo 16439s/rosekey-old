@@ -985,6 +985,8 @@ showWithSparkles: "タイトルをキラキラさせる"
 youHaveUnreadAnnouncements: "未読のお知らせがあります"
 neverShow: "今後表示しない"
 remindMeLater: "また後で"
+showPreviewByDefault: "投稿画面でプレビュー表示をデフォルトでオンにする"
+originalFeature: "独自機能"
 
 _sensitiveMediaDetection:
   description: "機械学習を使って自動でセンシティブなメディアを検出し、モデレーションに役立てられます。サーバーの負荷が少し増えます。"

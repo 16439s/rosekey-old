@@ -316,7 +316,7 @@ let poll = $ref<{
 	expiredAfter: string | null;
 } | null>(null);
 let useCw = $ref(false);
-let showPreview = $ref(false);
+let showPreview = $ref(defaultStore.state.showPreviewByDefault);
 let cw = $ref<string | null>(null);
 let localOnly = $ref<boolean>(
 	props.initialLocalOnly ?? defaultStore.state.rememberNoteVisibility
