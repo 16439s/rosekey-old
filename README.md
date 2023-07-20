@@ -13,6 +13,7 @@
 
 ## 細かい変更点
 
+- インデックス拒否に `noindex` に加えて `nofollow,noarchive,nocache,noimageindex` も指定
 - インスタンスティッカーに表示するサーバーのアイコンとして favicon を優先する
   - favicon のほうがよくカスタマイズされているため
 - 誤爆しやすい位置にあるフォローボタンを隠す設定を追加
