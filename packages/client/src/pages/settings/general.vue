@@ -248,6 +248,14 @@
 					i18n.ts.originalFeature
 				}}</span></FormSwitch
 			>
+			<FormSwitch
+				v-model="replaceWidgetsButtonWithReloadButton"
+				class="_formBlock"
+				>{{ i18n.ts.replaceWidgetsButtonWithReloadButton
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
 		</FormSection>
 
 		<FormRange
@@ -393,6 +401,9 @@ const hideFollowButtons = computed(
 );
 const replaceChatButtonWithAccountButton = computed(
 	defaultStore.makeGetterSetter("replaceChatButtonWithAccountButton"),
+);
+const replaceWidgetsButtonWithReloadButton = computed(
+	defaultStore.makeGetterSetter("replaceWidgetsButtonWithReloadButton"),
 );
 
 watch(swipeOnDesktop, () => {
