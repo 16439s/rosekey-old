@@ -244,7 +244,9 @@ const openAccountMenu = (ev: MouseEvent) => {
 };
 
 const useReloadButton = defaultStore.state.replaceWidgetsButtonWithReloadButton;
-const reload = () => { window.location.reload(); }
+const reload = () => {
+	window.location.reload();
+};
 
 const buttonAnimIndex = ref(0);
 const drawerMenuShowing = ref(false);
