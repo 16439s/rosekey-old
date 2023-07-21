@@ -49,7 +49,7 @@ const commonNames = new Map<string, string>([
 	["gnusocial", "GNU social"],
 	["gotosocial", "GoToSocial"],
 	["microblogpub", "microblog.pub"],
-	["nextcloud social" "Nextcloud Social"],
+	["nextcloud social", "Nextcloud Social"],
 	["peertube", "PeerTube"],
 	["snac", "snac"],
 	["takahe", "Takahē"],
