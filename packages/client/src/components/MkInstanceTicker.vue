@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { instanceName } from "@/config";
+import { instanceName, version } from "@/config";
 import { instance as Instance } from "@/instance";
 import { getProxiedImageUrlNullable } from "@/scripts/media-proxy";
 
@@ -38,8 +38,8 @@ const instance = props.instance ?? {
 			'meta[name="theme-color-orig"]',
 		) as HTMLMetaElement
 	)?.content,
-	softwareName: Instance.softwareName || "Firefish",
-	softwareVersion: Instance.softwareVersion,
+	softwareName: Instance.softwareName ?? "Firefish",
+	softwareVersion: version,
 };
 
 const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
