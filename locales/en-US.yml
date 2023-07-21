@@ -1132,6 +1132,7 @@ hideFollowButtons: "Hide follow buttons in notifications and user pages"
 forMobile: "Mobile"
 replaceChatButtonWithAccountButton: "Replace chat button at the bottom with account switch button"
 replaceWidgetsButtonWithReloadButton: "Replace widgets button at the bottom with reload button"
+addRe: "Add \"re:\" at the beginning of comment in reply to CW'd post"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
