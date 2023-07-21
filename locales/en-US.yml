@@ -1621,6 +1621,7 @@ _widgets:
   jobQueue: "Job Queue"
   serverMetric: "Server Metrics"
   aiscript: "AiScript Console"
+  aichan: "Ai"
   userList: "User List"
   serverInfo: "Server Info"
   _userList:

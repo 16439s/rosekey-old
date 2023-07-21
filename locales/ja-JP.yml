@@ -1436,6 +1436,7 @@ _widgets:
   jobQueue: "ジョブキュー"
   serverMetric: "サーバーメトリクス"
   aiscript: "AiScriptコンソール"
+  aichan: "藍"
   userList: "ユーザーリスト"
   _userList:
     chooseList: "リストを選択"

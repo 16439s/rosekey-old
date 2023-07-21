@@ -93,6 +93,10 @@ export default function (app: App) {
 		"MkwServerInfo",
 		defineAsyncComponent(() => import("./server-info.vue")),
 	);
+	app.component(
+		"MkwAichan",
+		defineAsyncComponent(() => import("./aichan.vue")),
+	);
 }
 
 export const widgets = [
@@ -119,4 +123,5 @@ export const widgets = [
 	"jobQueue",
 	"button",
 	"aiscript",
+	"aichan",
 ];
