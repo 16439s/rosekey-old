@@ -240,7 +240,7 @@ export const defaultStore = markRaw(
 		},
 		instanceTicker: {
 			where: "device",
-			default: "remote" as "none" | "remote" | "always",
+			default: "always" as "none" | "remote" | "always",
 		},
 		reactionPickerSkinTone: {
 			where: "account",
