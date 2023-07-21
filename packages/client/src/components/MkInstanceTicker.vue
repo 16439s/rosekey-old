@@ -42,7 +42,27 @@ const instance = props.instance ?? {
 	softwareVersion: version,
 };
 
-const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
+const commonNames = new Map<string, string>([
+	["birdsitelive", "BirdsiteLIVE"],
+	["bookwyrm", "BookWyrm"],
+	["foundkey", "FoundKey"],
+	["gnusocial", "GNU social"],
+	["gotosocial", "GoToSocial"],
+	["microblogpub", "microblog.pub"],
+	["nextcloud social" "Nextcloud Social"],
+	["peertube", "PeerTube"],
+	["snac", "snac"],
+	["takahe", "Takahē"],
+	["wordpress", "WordPress"],
+	["writefreely", "WriteFreely"],
+	["wxwclub", "wxwClub"],
+]);
+
+const capitalize = (s: string) => {
+	if (s == null) return "Unknown";
+	if (commonNames.has(s)) return commonNames.get(s);
+	return s[0].toUpperCase() + s.slice(1);
+};
 
 const computedStyle = getComputedStyle(document.documentElement);
 const themeColor =
