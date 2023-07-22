@@ -72,3 +72,6 @@ yarn*
 # Cargo cache for Docker
 /.cargo-cache
 /.cargo-target
+
+issue_template
+pull_request_template.yml

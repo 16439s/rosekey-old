@@ -31,13 +31,41 @@ function greet() {
 	if (!envOption.quiet) {
 		//#region Firefish logo
 		const v = `v${meta.version}`;
-		console.log(themeColor(" ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄   ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ◯       "));
-		console.log(themeColor("█       █   █   ▄  █ █       █       █   █       █  █ █  █      ○   ▄    ▄"));
-		console.log(themeColor("█    ▄▄▄█   █  █ █ █ █    ▄▄▄█    ▄▄▄█   █  ▄▄▄▄▄█  █▄█  █    ⚬     █▄▄  █▄▄    "));
-		console.log(themeColor("█   █▄▄▄█   █   █▄▄█▄█   █▄▄▄█   █▄▄▄█   █ █▄▄▄▄▄█       █      ▄▄▄▄▄▄   ▄"));
-		console.log(themeColor("█    ▄▄▄█   █    ▄▄  █    ▄▄▄█    ▄▄▄█   █▄▄▄▄▄  █   ▄   █     █      █  █▄▄"));
-		console.log(themeColor("█   █   █   █   █  █ █   █▄▄▄█   █   █   █▄▄▄▄▄█ █  █ █  █     █ ● ●  █"));
-		console.log(themeColor("█▄▄▄█   █▄▄▄█▄▄▄█  █▄█▄▄▄▄▄▄▄█▄▄▄█   █▄▄▄█▄▄▄▄▄▄▄█▄▄█ █▄▄█     ▀▄▄▄▄▄▄▀"));
+		console.log(
+			themeColor(
+				" ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄   ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ◯       ",
+			),
+		);
+		console.log(
+			themeColor(
+				"█       █   █   ▄  █ █       █       █   █       █  █ █  █      ○   ▄    ▄",
+			),
+		);
+		console.log(
+			themeColor(
+				"█    ▄▄▄█   █  █ █ █ █    ▄▄▄█    ▄▄▄█   █  ▄▄▄▄▄█  █▄█  █    ⚬     █▄▄  █▄▄    ",
+			),
+		);
+		console.log(
+			themeColor(
+				"█   █▄▄▄█   █   █▄▄█▄█   █▄▄▄█   █▄▄▄█   █ █▄▄▄▄▄█       █      ▄▄▄▄▄▄   ▄",
+			),
+		);
+		console.log(
+			themeColor(
+				"█    ▄▄▄█   █    ▄▄  █    ▄▄▄█    ▄▄▄█   █▄▄▄▄▄  █   ▄   █     █      █  █▄▄",
+			),
+		);
+		console.log(
+			themeColor(
+				"█   █   █   █   █  █ █   █▄▄▄█   █   █   █▄▄▄▄▄█ █  █ █  █     █ ● ●  █",
+			),
+		);
+		console.log(
+			themeColor(
+				"█▄▄▄█   █▄▄▄█▄▄▄█  █▄█▄▄▄▄▄▄▄█▄▄▄█   █▄▄▄█▄▄▄▄▄▄▄█▄▄█ █▄▄█     ▀▄▄▄▄▄▄▀",
+			),
+		);
 		//#endregion
 
 		console.log(
@@ -49,7 +77,7 @@ function greet() {
 				136,
 				0,
 			)(
-				" If you like Firefish, please consider starring or contributing to the repo. https://gitlab.prometheus.systems/firefish/firefish",
+				" If you like Firefish, please consider starring or contributing to the repo. https://git.joinfirefish.org/firefish/firefish",
 			),
 		);
 
