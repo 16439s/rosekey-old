@@ -26,7 +26,6 @@ export async function checkHitAntenna(
 	antennaUserFollowing?: User["id"][],
 ): Promise<boolean> {
 	if (note.visibility === "specified") return false;
-	if (note.visibility === "home") return false;
 
 	// アンテナ作成者がノート作成者にブロックされていたらスキップ
 	const blockings = await blockingCache.fetch(noteUser.id, () =>
@@ -36,7 +35,7 @@ export async function checkHitAntenna(
 	);
 	if (blockings.some((blocking) => blocking === antenna.userId)) return false;
 
-	if (note.visibility === "followers") {
+	if (note.visibility === "followers" || note.visibility === "home") {
 		if (noteUserFollowers && !noteUserFollowers.includes(antenna.userId))
 			return false;
 		if (antennaUserFollowing && !antennaUserFollowing.includes(note.userId))
