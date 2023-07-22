@@ -57,7 +57,7 @@
 					<FormSection>
 						<div class="_formLinks">
 							<FormLink
-								to="https://git.joinfirefish.org/firefish/firefish"
+								to="https://code.naskya.net/naskya/firefish"
 								external
 							>
 								<template #icon
