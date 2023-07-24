@@ -4,6 +4,10 @@
 
 # 変更点
 
+## 今後の予定
+
+[Issues](https://code.naskya.net/naskya/firefish/issues) にあります。
+
 ## 主要な変更点
 
 - モバイル表示の下部のウィジェットボタンを再読み込みボタンに変更可能に
@@ -51,19 +55,64 @@
 - バージョン番号にコミットハッシュが含まれるように
   - 正確なバージョンが分かるとバグ修正に役立つため
 
-# インストール方法
+# 使用方法
 
-[Firefish のインストールスクリプト](https://gitlab.prometheus.systems/firefish/ubuntu-bash-install)中で尋ねられるリポジトリの URL にこのリポジトリの URL を使ってください。
+## インストール
+
+[Firefish のインストールスクリプト](https://git.joinfirefish.org/firefish/ubuntu-bash-install)のプロンプトで尋ねられるリポジトリの URL にこのリポジトリの URL を使ってください。
 
 ```
 Repository url where you want to install:
 > https://code.naskya.net/naskya/firefish
 ```
 
-# アップデート方法
+## アップデート
 
 `update.sh` を実行します。
 
 ```sh
 $ ./update.sh
 ```
+
+## Firefish（フォーク元）からの乗り換え
+
+1. サーバーのバックアップを取る
+1. サーバーを停止する
+    ```sh
+    $ sudo systemctl stop yourserver.example.com
+    ```
+1. Firefish がインストールされているディレクトリ (e.g., `/home/calckey/calckey`) の親ディレクトリ (e.g., `/home/calckey`) に移動する
+    ```sh
+    $ cd /home/calckey
+    ```
+1. Firefish がインストールされているディレクトリ (e.g., `./calckey`) の名前を変える
+    ```sh
+    $ mv calckey calckey.old
+    ```
+1. 元々 Firefish がインストールされていたディレクトリ (e.g., `./calckey`) と同じ名前でこのリポジトリをクローンする
+    ```sh
+    $ git clone https://code.naskya.net/naskya/firefish calckey
+    ```
+1. 必要なファイルを元のディレクトリからコピーする
+    ```sh
+    $ rm -rf calckey/files calckey/custom calckey/.config
+    $ cp -r calckey.old/files calckey
+    $ cp -r calckey.old/custom calckey
+    $ cp -r calckey.old/.config calckey
+    ```
+1. ビルドする
+    ```sh
+    $ ./calckey/update.sh
+    ```
+1. サーバーを起動して動作を確認する
+    ```sh
+    $ sudo systemctl start yourserver.example.com
+    ```
+1. 元々 Firefish がインストールされていたディレクトリを削除する
+    ```sh
+    $ rm -rf calckey.old
+    ```
+
+## このフォークから Firefish（フォーク元）へ戻る
+
+ToDo (#58)
