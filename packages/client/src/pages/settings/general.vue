@@ -77,6 +77,12 @@
 					{{ i18n.ts.reflectMayTakeTime }}</template
 				></FormSwitch
 			>
+			<FormSwitch v-model="detectPostLanguage" class="_formBlock"
+				>{{ i18n.ts.detectPostLanguage
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
 			<FormSwitch v-model="addRe" class="_formBlock"
 				>{{ i18n.ts.addRe
 				}}<span class="_beta">{{
@@ -412,6 +418,9 @@ const replaceWidgetsButtonWithReloadButton = computed(
 	defaultStore.makeGetterSetter("replaceWidgetsButtonWithReloadButton"),
 );
 const addRe = computed(defaultStore.makeGetterSetter("addRe"));
+const detectPostLanguage = computed(
+	defaultStore.makeGetterSetter("detectPostLanguage"),
+);
 
 watch(swipeOnDesktop, () => {
 	defaultStore.set("swipeOnMobile", true);

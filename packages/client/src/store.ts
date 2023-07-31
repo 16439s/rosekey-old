@@ -362,6 +362,10 @@ export const defaultStore = markRaw(
 			where: "account",
 			default: true,
 		},
+		detectPostLanguage: {
+			where: "deviceAccount",
+			default: true,
+		},
 	}),
 );
 

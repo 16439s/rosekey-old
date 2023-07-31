@@ -220,6 +220,14 @@
 					</button>
 					<XQuoteButton class="button" :note="appearNote" />
 					<button
+						v-if="isForeignLanguage && translation == null"
+						class="button _button accent"
+						@click.stop="translate"
+						v-tooltip.noDelay.bottom="i18n.ts.translate"
+					>
+						<i class="ph-translate ph-bold ph-lg"></i>
+					</button>
+					<button
 						ref="menuButton"
 						v-tooltip.noDelay.bottom="i18n.ts.more"
 						class="button _button"
@@ -259,6 +267,7 @@ import { computed, inject, onMounted, onUnmounted, reactive, ref } from "vue";
 import * as mfm from "mfm-js";
 import type { Ref } from "vue";
 import type * as misskey from "firefish-js";
+import { detect as detectLanguage } from "tinyld";
 import MkNoteSub from "@/components/MkNoteSub.vue";
 import MkSubNoteContent from "./MkSubNoteContent.vue";
 import XNoteHeader from "@/components/MkNoteHeader.vue";
@@ -349,6 +358,35 @@ const translation = ref(null);
 const translating = ref(false);
 const enableEmojiReactions = defaultStore.state.enableEmojiReactions;
 const expandOnNoteClick = defaultStore.state.expandOnNoteClick;
+
+const purifyMFM = (src) => {
+	const nodes = mfm.parse(src);
+	const filtered = mfm.extract(nodes, (node) => {
+		return ["text", "bold", "center", "small", "italic", "strike"].includes(
+			node.type,
+		);
+	});
+	return mfm.toString(filtered);
+};
+const isForeignLanguage = (() => {
+	if (!defaultStore.state.detectPostLanguage || !appearNote.text)
+		return false;
+	const text = purifyMFM(appearNote.text).trim();
+	if (!text) return false;
+	const uiLanguage = (
+		localStorage.getItem("lang") || navigator.language
+	).slice(0, 2);
+	return detectLanguage(text) !== uiLanguage;
+})();
+const translate = async () => {
+	if (translation.value != null) return;
+	translating.value = true;
+	translation.value = await os.api("notes/translate", {
+		noteId: appearNote.id,
+		targetLang: localStorage.getItem("lang") || navigator.language,
+	});
+	translating.value = false;
+};
 
 const keymap = {
 	r: () => reply(true),
@@ -912,6 +950,10 @@ defineExpose({
 					}
 
 					&.reacted {
+						color: var(--accent);
+					}
+
+					&.accent {
 						color: var(--accent);
 					}
 				}

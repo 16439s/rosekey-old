@@ -125,6 +125,14 @@
 					</button>
 					<XQuoteButton class="button" :note="appearNote" />
 					<button
+						v-if="isForeignLanguage && translation == null"
+						class="button _button accent"
+						@click.stop="translate"
+						v-tooltip.noDelay.bottom="i18n.ts.translate"
+					>
+						<i class="ph-translate ph-bold ph-lg"></i>
+					</button>
+					<button
 						ref="menuButton"
 						v-tooltip.noDelay.bottom="i18n.ts.more"
 						class="button _button"
@@ -180,6 +188,8 @@
 import { inject, ref } from "vue";
 import type { Ref } from "vue";
 import * as misskey from "firefish-js";
+import * as mfm from "mfm-js";
+import { detect as detectLanguage } from "tinyld";
 import XNoteHeader from "@/components/MkNoteHeader.vue";
 import MkSubNoteContent from "@/components/MkSubNoteContent.vue";
 import XReactionsViewer from "@/components/MkReactionsViewer.vue";
@@ -264,6 +274,35 @@ const replies: misskey.entities.Note[] =
 		.reverse() ?? [];
 const enableEmojiReactions = defaultStore.state.enableEmojiReactions;
 const expandOnNoteClick = defaultStore.state.expandOnNoteClick;
+
+const purifyMFM = (src) => {
+	const nodes = mfm.parse(src);
+	const filtered = mfm.extract(nodes, (node) => {
+		return ["text", "bold", "center", "small", "italic", "strike"].includes(
+			node.type,
+		);
+	});
+	return mfm.toString(filtered);
+};
+const isForeignLanguage = (() => {
+	if (!defaultStore.state.detectPostLanguage || !appearNote.text)
+		return false;
+	const text = purifyMFM(appearNote.text).trim();
+	if (!text) return false;
+	const uiLanguage = (
+		localStorage.getItem("lang") || navigator.language
+	).slice(0, 2);
+	return detectLanguage(text) !== uiLanguage;
+})();
+const translate = async () => {
+	if (translation.value != null) return;
+	translating.value = true;
+	translation.value = await os.api("notes/translate", {
+		noteId: appearNote.id,
+		targetLang: localStorage.getItem("lang") || navigator.language,
+	});
+	translating.value = false;
+};
 
 useNoteCapture({
 	rootEl: el,
@@ -520,6 +559,10 @@ function noteClick(e) {
 					}
 
 					&.reacted {
+						color: var(--accent);
+					}
+
+					&.accent {
 						color: var(--accent);
 					}
 				}

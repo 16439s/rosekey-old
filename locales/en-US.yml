@@ -1142,6 +1142,7 @@ deletePasskeys: "Delete passkeys"
 delete2faConfirm: "This will irreversibly delete 2FA on this account. Proceed?"
 deletePasskeysConfirm: "This will irreversibly delete all passkeys and security keys on this account. Proceed?"
 inputNotMatch: "Input does not match"
+detectPostLanguage: "Automatically detect the language and show a translate button for non-English posts"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
