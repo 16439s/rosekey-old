@@ -241,7 +241,10 @@ export function getNoteMenu(props: {
 		props.translating.value = true;
 		const res = await os.api("notes/translate", {
 			noteId: appearNote.id,
-			targetLang: localStorage.getItem("lang") || navigator.language,
+			targetLang:
+				localStorege.getItem("translateLang") ||
+				localStorage.getItem("lang") ||
+				navigator.language,
 		});
 		props.translating.value = false;
 		props.translation.value = res;

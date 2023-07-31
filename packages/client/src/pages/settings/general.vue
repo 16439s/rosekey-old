@@ -17,6 +17,16 @@
 			</template>
 		</FormSelect>
 
+		<FormSelect v-model="translateLang" class="_formBlock">
+			<template #label>
+				{{ i18n.ts.languageForTranslation }}
+				<span class="_beta">{{ i18n.ts.originalFeature }}</span>
+			</template>
+			<option v-for="x in langs" :key="x[0]" :value="x[0]">
+				{{ x[1] }}
+			</option>
+		</FormSelect>
+
 		<FormRadios v-model="overridedDeviceKind" class="_formBlock">
 			<template #label>{{ i18n.ts.overridedDeviceKind }}</template>
 			<option :value="null">{{ i18n.ts.auto }}</option>
@@ -314,6 +324,7 @@ import { definePageMetadata } from "@/scripts/page-metadata";
 import { deviceKind } from "@/scripts/device-kind";
 
 const lang = ref(localStorage.getItem("lang"));
+const translateLang = ref(localStorage.getItem("translateLang"));
 const fontSize = ref(localStorage.getItem("fontSize"));
 const useSystemFont = ref(localStorage.getItem("useSystemFont") != null);
 
@@ -431,6 +442,10 @@ watch(lang, () => {
 	localStorage.removeItem("locale");
 });
 
+watch(translateLang, () => {
+	localStorage.setItem("translateLang", translateLang.value as string);
+});
+
 watch(fontSize, () => {
 	if (fontSize.value == null) {
 		localStorage.removeItem("fontSize");
@@ -450,6 +465,7 @@ watch(useSystemFont, () => {
 watch(
 	[
 		lang,
+		translateLang,
 		fontSize,
 		useSystemFont,
 		enableInfiniteScroll,

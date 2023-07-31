@@ -996,6 +996,7 @@ replaceChatButtonWithAccountButton: "画面下部のチャットのボタンを�
 replaceWidgetsButtonWithReloadButton: "画面下部のウィジェットのボタンを再読み込みボタンに変更する"
 addRe: "閲覧注意の投稿への返信で、注釈の先頭に\"re:\"を追加する"
 detectPostLanguage: "投稿の言語を自動検出し、外国語の投稿に翻訳ボタンを表示する"
+languageForTranslation: "投稿翻訳に使用する言語"
 
 _sensitiveMediaDetection:
   description: "機械学習を使って自動でセンシティブなメディアを検出し、モデレーションに役立てられます。サーバーの負荷が少し増えます。"

@@ -290,7 +290,9 @@ const isForeignLanguage = (() => {
 	const text = purifyMFM(appearNote.text).trim();
 	if (!text) return false;
 	const uiLanguage = (
-		localStorage.getItem("lang") || navigator.language
+		localStorage.getItem("translateLang") ||
+		localStorage.getItem("lang") ||
+		navigator.language
 	).slice(0, 2);
 	return detectLanguage(text) !== uiLanguage;
 })();
@@ -299,7 +301,10 @@ const translate = async () => {
 	translating.value = true;
 	translation.value = await os.api("notes/translate", {
 		noteId: appearNote.id,
-		targetLang: localStorage.getItem("lang") || navigator.language,
+		targetLang:
+			localStorage.getItem("translateLang") ||
+			localStorage.getItem("lang") ||
+			navigator.language,
 	});
 	translating.value = false;
 };
