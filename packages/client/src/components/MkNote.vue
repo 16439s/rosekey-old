@@ -362,9 +362,7 @@ const expandOnNoteClick = defaultStore.state.expandOnNoteClick;
 const purifyMFM = (src) => {
 	const nodes = mfm.parse(src);
 	const filtered = mfm.extract(nodes, (node) => {
-		return ["text", "bold", "center", "small", "italic", "strike"].includes(
-			node.type,
-		);
+		node.type === "text" || node.type === "quote";
 	});
 	return mfm.toString(filtered);
 };
