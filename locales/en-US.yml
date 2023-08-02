@@ -1135,7 +1135,6 @@ hideFollowButtons: "Hide follow buttons in notifications and user pages"
 forMobile: "Mobile"
 replaceChatButtonWithAccountButton: "Replace chat button at the bottom with account switch button"
 replaceWidgetsButtonWithReloadButton: "Replace widgets button at the bottom with reload button"
-addRe: "Add \"re:\" at the beginning of comment in reply to CW'd post"
 origin: "Origin"
 delete2fa: "Disable 2FA"
 deletePasskeys: "Delete passkeys"
@@ -1144,6 +1143,7 @@ deletePasskeysConfirm: "This will irreversibly delete all passkeys and security 
 inputNotMatch: "Input does not match"
 detectPostLanguage: "Automatically detect the language and show a translate button for non-English posts"
 languageForTranslation: "Language used for post translation"
+addRe: "Add \"re:\" at the beginning of comment in reply to a post with a content warning"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
@@ -1239,7 +1239,7 @@ _aboutFirefish:
     development since 2022."
   contributors: "Main contributors"
   allContributors: "All contributors"
-  originalMisskeyContributors: "Original Misskey main contributors"
+  misskeyContributors: "Misskey main contributors"
   source: "Source code"
   translation: "Translate Firefish"
   donate: "Donate to Firefish"
