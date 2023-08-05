@@ -225,6 +225,12 @@
 			<FormSwitch v-model="showFixedPostForm" class="_formBlock">{{
 				i18n.ts.showFixedPostForm
 			}}</FormSwitch>
+			<FormSwitch v-model="showBigPostButton" class="_formBlock"
+				>{{ i18n.ts.showBigPostButton
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
 			<FormSwitch
 				v-if="$i?.isAdmin"
 				v-model="showAdminUpdates"
@@ -431,6 +437,9 @@ const replaceWidgetsButtonWithReloadButton = computed(
 const addRe = computed(defaultStore.makeGetterSetter("addRe"));
 const detectPostLanguage = computed(
 	defaultStore.makeGetterSetter("detectPostLanguage"),
+);
+const showBigPostButton = computed(
+	defaultStore.makeGetterSetter("showBigPostButton"),
 );
 
 watch(swipeOnDesktop, () => {

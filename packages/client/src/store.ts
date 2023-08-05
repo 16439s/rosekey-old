@@ -366,6 +366,10 @@ export const defaultStore = markRaw(
 			where: "deviceAccount",
 			default: true,
 		},
+		showBigPostButton: {
+			where: "device",
+			default: false,
+		},
 	}),
 );
 
