@@ -238,13 +238,13 @@ onBeforeUnmount(() => {
 		}
 	}
 
-	&:hover {
-		//background: mix($primary, #fff, 20);
-	}
+	// &:hover {
+	// 	background: mix($primary, #fff, 20);
+	// }
 
-	&:active {
-		//background: mix($primary, #fff, 40);
-	}
+	// &:active {
+	// 	background: mix($primary, #fff, 40);
+	// }
 
 	&.active {
 		color: var(--fgOnAccent);

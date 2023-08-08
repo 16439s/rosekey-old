@@ -221,25 +221,25 @@
 				>
 					<i class="ph-question ph-bold ph-lg"></i>
 				</button>
-			<div v-if="showBigPostButton">
-				<button
-					class="submit bigPostButton"
-					:disabled="!canPost"
-					data-cy-open-post-form-submit
-					@click="post"
-				>
-					{{ submitText
-					}}<i
-						:class="
-							reply
-								? 'ph-arrow-u-up-left ph-bold ph-lg'
-								: renote
-								? 'ph-quotes ph-bold ph-lg'
-								: 'ph-paper-plane-tilt ph-bold ph-lg'
-						"
-					></i>
-				</button>
-			</div>
+				<div v-if="showBigPostButton">
+					<button
+						class="submit bigPostButton"
+						:disabled="!canPost"
+						data-cy-open-post-form-submit
+						@click="post"
+					>
+						{{ submitText
+						}}<i
+							:class="
+								reply
+									? 'ph-arrow-u-up-left ph-bold ph-lg'
+									: renote
+									? 'ph-quotes ph-bold ph-lg'
+									: 'ph-paper-plane-tilt ph-bold ph-lg'
+							"
+						></i>
+					</button>
+				</div>
 			</footer>
 			<datalist id="hashtags">
 				<option
@@ -357,8 +357,6 @@ let visibleUsers = $ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
 }
-let autocomplete = $ref(null);
-let draghover = $ref(false);
 let quoteId = $ref(null);
 let hasNotSpecifiedMentions = $ref(false);
 let recentHashtags = $ref(JSON.parse(localStorage.getItem("hashtags") || "[]"));
@@ -619,9 +617,9 @@ function togglePoll() {
 	}
 }
 
-function addTag(tag: string) {
-	insertTextAtCursor(textareaEl, ` #${tag} `);
-}
+// function addTag(tag: string) {
+// 	insertTextAtCursor(textareaEl, ` #${tag} `);
+// }
 
 function focus() {
 	if (textareaEl) {
