@@ -1145,6 +1145,7 @@ detectPostLanguage: "Automatically detect the language and show a translate butt
 languageForTranslation: "Language used for post translation"
 addRe: "Add \"re:\" at the beginning of comment in reply to a post with a content warning"
 showBigPostButton: "Show a bigger post button in the posting form"
+confirm: "Confirm"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
