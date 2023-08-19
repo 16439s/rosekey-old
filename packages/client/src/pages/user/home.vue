@@ -76,6 +76,9 @@
 											user.isFollowed
 										"
 										class="followed"
+										:class="{
+											'followed-emph': emphasizeFollowed,
+										}"
 										>{{ i18n.ts.followsYou }}</span
 									>
 								</div>
@@ -142,6 +145,9 @@
 										user.isFollowed
 									"
 									class="followed"
+									:class="{
+										'followed-emph': emphasizeFollowed,
+									}"
 									>{{ i18n.ts.followsYou }}</span
 								>
 								<div v-if="$i?.isModerator || $i?.isAdmin">
@@ -404,6 +410,7 @@ const XPhotos = defineAsyncComponent(() => import("./index.photos.vue"));
 const XActivity = defineAsyncComponent(() => import("./index.activity.vue"));
 
 const hideFollowButton = defaultStore.state.hideFollowButtons;
+const emphasizeFollowed = defaultStore.state.emphasizeFollowed;
 
 const emit = defineEmits(["refresh"]);
 const props = withDefaults(
@@ -552,6 +559,11 @@ onUnmounted(() => {
 						border-radius: 6px;
 					}
 
+					> .followed-emph {
+						background: var(--accent);
+						font-size: 1em;
+					}
+
 					> .title {
 						position: absolute;
 						bottom: 0;
@@ -580,6 +592,11 @@ onUnmounted(() => {
 								background: rgba(0, 0, 0, 0.6);
 								font-size: 0.7em;
 								border-radius: 24px;
+							}
+
+							> .followed-emph {
+								background: var(--accent);
+								font-size: 1em;
 							}
 						}
 
@@ -689,6 +706,11 @@ onUnmounted(() => {
 							background: rgba(0, 0, 0, 0.6);
 							font-size: 0.7em;
 							border-radius: 24px;
+						}
+
+						> .followed-emph {
+							background: var(--accent);
+							font-size: 1em;
 						}
 					}
 

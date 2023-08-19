@@ -998,6 +998,7 @@ addRe: "閲覧注意の投稿への返信で、注釈の先頭に\"re:\"を追�
 detectPostLanguage: "投稿の言語を自動検出し、外国語の投稿に翻訳ボタンを表示する"
 languageForTranslation: "投稿翻訳に使用する言語"
 showBigPostButton: "投稿ボタンを巨大にする"
+emphasizeFollowed: "フォロワーのアカウントに表示される「フォローされています」の表示を強調する"
 
 _sensitiveMediaDetection:
   description: "機械学習を使って自動でセンシティブなメディアを検出し、モデレーションに役立てられます。サーバーの負荷が少し増えます。"

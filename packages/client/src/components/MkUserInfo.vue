@@ -10,6 +10,7 @@
 			<span
 				v-if="$i && $i.id != user.id && user.isFollowed"
 				class="followed"
+				:class="{ 'followed-emph': emphasizeFollowed }"
 				>{{ i18n.ts.followsYou }}</span
 			>
 		</div>
@@ -92,11 +93,14 @@ import XShowMoreButton from "@/components/MkShowMoreButton.vue";
 import MkNumber from "@/components/MkNumber.vue";
 import { userPage } from "@/filters/user";
 import { i18n } from "@/i18n";
+import { defaultStore } from "@/store";
 
 const props = defineProps<{
 	user: misskey.entities.UserDetailed;
 	detailed?: boolean;
 }>();
+
+const emphasizeFollowed = defaultStore.state.emphasizeFollowed;
 
 let isLong = $ref(
 	props.detailed &&
@@ -141,6 +145,11 @@ let collapsed = $ref(isLong);
 			background: rgba(0, 0, 0, 0.7);
 			font-size: 0.7em;
 			border-radius: 6px;
+		}
+
+		> .followed-emph {
+			background: var(--accent);
+			font-size: 1em;
 		}
 		&.detailed::after {
 			content: "";

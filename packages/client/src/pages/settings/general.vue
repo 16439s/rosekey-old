@@ -198,6 +198,12 @@
 			<FormSwitch v-model="squareAvatars" class="_formBlock">{{
 				i18n.ts.squareAvatars
 			}}</FormSwitch>
+			<FormSwitch v-model="emphasizeFollowed" class="_formBlock"
+				>{{ i18n.ts.emphasizeFollowed
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
 			<FormSwitch v-model="seperateRenoteQuote" class="_formBlock">{{
 				i18n.ts.seperateRenoteQuote
 			}}</FormSwitch>
@@ -428,12 +434,14 @@ const replaceChatButtonWithAccountButton = computed(
 const replaceWidgetsButtonWithReloadButton = computed(
 	defaultStore.makeGetterSetter("replaceWidgetsButtonWithReloadButton"),
 );
-const addRe = computed(defaultStore.makeGetterSetter("addRe"));
 const detectPostLanguage = computed(
 	defaultStore.makeGetterSetter("detectPostLanguage"),
 );
 const showBigPostButton = computed(
 	defaultStore.makeGetterSetter("showBigPostButton"),
+);
+const emphasizeFollowed = computed(
+	defaultStore.makeGetterSetter("emphasizeFollowed"),
 );
 
 watch(swipeOnDesktop, () => {

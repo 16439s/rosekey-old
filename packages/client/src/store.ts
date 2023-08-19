@@ -370,6 +370,10 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: false,
 		},
+		emphasizeFollowed: {
+			where: "deviceAccount",
+			default: true,
+		},
 	}),
 );
 
