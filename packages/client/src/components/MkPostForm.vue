@@ -213,14 +213,6 @@
 				>
 					<i class="ph-plug ph-bold ph-lg"></i>
 				</button>
-				<!--	v-if="showMfmCheatsheet" -->
-				<button
-					v-tooltip="i18n.ts._mfm.cheatSheet"
-					class="_button right"
-					@click="openCheatSheet"
-				>
-					<i class="ph-question ph-bold ph-lg"></i>
-				</button>
 				<div v-if="showBigPostButton">
 					<button
 						class="submit bigPostButton"
@@ -285,7 +277,6 @@ import {
 } from "@/account";
 import { uploadFile } from "@/scripts/upload";
 import { deepClone } from "@/scripts/clone";
-import XCheatSheet from "@/components/MkCheatSheetDialog.vue";
 import { preprocess } from "@/scripts/preprocess";
 
 const modal = inject("modal");
@@ -306,13 +297,11 @@ const props = withDefaults(
 		instant?: boolean;
 		fixed?: boolean;
 		autofocus?: boolean;
-		showMfmCheatSheet?: boolean;
 		editId?: misskey.entities.Note["id"];
 	}>(),
 	{
 		initialVisibleUsers: () => [],
 		autofocus: true,
-		showMfmCheatSheet: true,
 	},
 );
 
@@ -953,10 +942,6 @@ function insertMention() {
 
 async function insertEmoji(ev: MouseEvent) {
 	os.openEmojiPicker(ev.currentTarget ?? ev.target, {}, textareaEl);
-}
-
-async function openCheatSheet(ev: MouseEvent) {
-	os.popup(XCheatSheet, {}, {}, "closed");
 }
 
 function showActions(ev) {

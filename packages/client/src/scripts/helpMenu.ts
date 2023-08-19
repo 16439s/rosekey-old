@@ -2,7 +2,8 @@ import { defaultStore } from "@/store";
 import { instance } from "@/instance";
 import { host } from "@/config";
 import * as os from "@/os";
-import XTutorial from "../components/MkTutorialDialog.vue";
+import XTutorial from "@/components/MkTutorialDialog.vue";
+import XCheatSheet from "@/components/MkCheatSheetDialog.vue";
 import { i18n } from "@/i18n";
 
 export function openHelpMenu_(ev: MouseEvent) {
@@ -48,6 +49,14 @@ export function openHelpMenu_(ev: MouseEvent) {
 				},
 				text: i18n.ts.replayTutorial,
 				icon: "ph-circle-wavy-question ph-bold ph-lg",
+			},
+			{
+				type: "button",
+				text: i18n.ts._mfm.cheatSheet,
+				icon: "ph-question ph-bold ph-lg",
+				action: async () => {
+					os.popup(XCheatSheet, {}, {}, "closed");
+				},
 			},
 			null,
 			{
