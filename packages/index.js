@@ -252,11 +252,12 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { nativeRandomStr, IdConvertType, convertId, nativeCreateId, nativeInitIdGenerator, nativePackAntennaById, NativeAntennaSrc, nativeInitDatabase } = nativeBinding
+const { nativeRandomStr, IdConvertType, convertId, nativeGetTimestamp, nativeCreateId, nativeInitIdGenerator, nativePackAntennaById, NativeAntennaSrc, nativeInitDatabase } = nativeBinding
 
 module.exports.nativeRandomStr = nativeRandomStr
 module.exports.IdConvertType = IdConvertType
 module.exports.convertId = convertId
+module.exports.nativeGetTimestamp = nativeGetTimestamp
 module.exports.nativeCreateId = nativeCreateId
 module.exports.nativeInitIdGenerator = nativeInitIdGenerator
 module.exports.nativePackAntennaById = nativePackAntennaById
