@@ -1,6 +1,6 @@
 import { AsyncComponentLoader, defineAsyncComponent, inject } from "vue";
 import { Router } from "@/nirax";
-import { $i, iAmModerator } from "@/account";
+import { $i, iAmModerator, iAmEmojiMod } from "@/account";
 import MkLoading from "@/pages/_loading_.vue";
 import MkError from "@/pages/_error_.vue";
 import { api } from "@/os";
@@ -439,6 +439,13 @@ export const routes = [
 			: page(() => import("./pages/not-found.vue")),
 	},
 	{
+		path: "/admin/emojis",
+		name: "emojis",
+		component: iAmEmojiMod
+			? page(() => import("./pages/admin/emojis.vue"))
+			: page(() => import("./pages/not-found.vue")),
+	},
+	{
 		path: "/admin",
 		component: iAmModerator
 			? page(() => import("./pages/admin/index.vue"))
@@ -458,11 +465,6 @@ export const routes = [
 				path: "/hashtags",
 				name: "hashtags",
 				component: page(() => import("./pages/admin/hashtags.vue")),
-			},
-			{
-				path: "/emojis",
-				name: "emojis",
-				component: page(() => import("./pages/admin/emojis.vue")),
 			},
 			{
 				path: "/federation",

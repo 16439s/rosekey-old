@@ -171,6 +171,23 @@ pub enum RelayStatusEnum {
 #[sea_orm(
     rs_type = "String",
     db_type = "Enum",
+    enum_name = "user_emojimodperm_enum"
+)]
+pub enum UserEmojimodpermEnum {
+    #[sea_orm(string_value = "add")]
+    Add,
+    #[sea_orm(string_value = "full")]
+    Full,
+    #[sea_orm(string_value = "mod")]
+    Mod,
+    #[default]
+    #[sea_orm(string_value = "none")]
+    None,
+}
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum, Default)]
+#[sea_orm(
+    rs_type = "String",
+    db_type = "Enum",
     enum_name = "user_profile_ffvisibility_enum"
 )]
 pub enum UserProfileFfvisibilityEnum {

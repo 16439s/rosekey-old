@@ -178,6 +178,29 @@
 					</FormSection>
 				</div>
 				<div v-else-if="tab === 'moderation'" class="_formRoot">
+					<FormSelect
+						v-model="emojiModPerm"
+						class="_formBlock"
+						@update:modelValue="setEmojiMod"
+					>
+						<template #label>{{ i18n.ts.emojiModPerm }}</template>
+						<option value="none">
+							{{ i18n.ts._emojiModPerm.none }}
+						</option>
+						<option value="add">
+							{{ i18n.ts._emojiModPerm.add }}
+						</option>
+						<option value="mod">
+							{{ i18n.ts._emojiModPerm.mod }}
+						</option>
+						<option value="full">
+							{{ i18n.ts._emojiModPerm.full }}
+						</option>
+					</FormSelect>
+					<MkInfo class="_formBlock"
+						>{{ i18n.ts.emojiModPermDescription }}</MkInfo
+					>
+
 					<FormSwitch
 						v-if="
 							user.host == null &&
@@ -369,6 +392,7 @@ import FormButton from "@/components/MkButton.vue";
 import FormInput from "@/components/form/input.vue";
 import FormSplit from "@/components/form/split.vue";
 import FormFolder from "@/components/form/folder.vue";
+import FormSelect from "@/components/form/select.vue";
 import MkKeyValue from "@/components/MkKeyValue.vue";
 import MkSelect from "@/components/form/select.vue";
 import FormSuspense from "@/components/form/suspense.vue";
@@ -398,6 +422,7 @@ let ap = $ref(null);
 let moderator = $ref(false);
 let silenced = $ref(false);
 let suspended = $ref(false);
+let emojiModPerm = $ref("");
 let driveCapacityOverrideMb: number | null = $ref(0);
 let moderationNote = $ref("");
 const filesPagination = {
@@ -430,6 +455,7 @@ function createFetcher() {
 				moderator = info.isModerator;
 				silenced = info.isSilenced;
 				suspended = info.isSuspended;
+				emojiModPerm = info.emojiModPerm;
 				driveCapacityOverrideMb = user.driveCapacityOverrideMb;
 				moderationNote = info.moderationNote;
 
@@ -508,6 +534,14 @@ async function toggleSuspend(v) {
 async function toggleModerator(v) {
 	await os.api(v ? "admin/moderators/add" : "admin/moderators/remove", {
 		userId: user.id,
+	});
+	await refreshUser();
+}
+
+async function setEmojiMod() {
+	await os.api("admin/set-emoji-moderator", {
+		userId: user.id,
+		emojiModPerm: emojiModPerm,
 	});
 	await refreshUser();
 }

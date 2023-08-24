@@ -19,6 +19,7 @@ export const $i = accountData
 
 export const iAmModerator = $i != null && ($i.isAdmin || $i.isModerator);
 export const iAmAdmin = $i?.isAdmin;
+export const iAmEmojiMod = iAmModerator || $i?.emojiModPerm !== "none";
 
 export async function signout() {
 	waiting();

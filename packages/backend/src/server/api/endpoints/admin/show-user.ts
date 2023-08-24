@@ -73,6 +73,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		isModerator: user.isModerator,
 		isSilenced: user.isSilenced,
 		isSuspended: user.isSuspended,
+		emojiModPerm: user.emojiModPerm,
 		lastActiveDate: user.lastActiveDate,
 		moderationNote: profile.moderationNote,
 		signins,

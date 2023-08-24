@@ -11,5 +11,5 @@ export default new DataSource({
 	database: config.db.db,
 	extra: config.db.extra,
 	entities: entities,
-	migrations: ["migration/*.js"],
+	migrations: ["migration/*.js", "migration-neko/*.js"],
 });

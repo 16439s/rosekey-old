@@ -80,6 +80,17 @@
 					<i class="icon ph-door ph-bold ph-lg ph-fw ph-lg"></i
 					><span class="text">{{ i18n.ts.controlPanel }}</span>
 				</MkA>
+				<MkA
+					v-else-if="$i.emojiModPerm !== 'none'"
+					v-click-anime
+					v-tooltip.noDelay.right="i18n.ts.customEmojis"
+					class="item _button"
+					active-class="active"
+					to="/admin/emojis"
+				>
+					<i class="icon ph-smiley ph-bold ph-fw ph-lg"></i
+					><span class="text">{{ i18n.ts.customEmojis }}</span>
+				</MkA>
 				<button v-click-anime class="item _button" @click="more">
 					<i
 						class="icon ph-dots-three-outline ph-bold ph-lg ph-fw ph-lg"
@@ -134,7 +145,7 @@ import {
 } from "vue";
 import * as os from "@/os";
 import { navbarItemDef } from "@/navbar";
-import { openAccountMenu as openAccountMenu_ } from "@/account";
+import { $i, openAccountMenu as openAccountMenu_ } from "@/account";
 import { openHelpMenu_ } from "@/scripts/helpMenu";
 import { defaultStore } from "@/store";
 import { i18n } from "@/i18n";

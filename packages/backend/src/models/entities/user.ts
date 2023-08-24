@@ -9,6 +9,12 @@ import {
 import { id } from "../id.js";
 import { DriveFile } from "./drive-file.js";
 
+// none: no permission
+//  add: add custom emojis to the server
+//  mod: add permission + modify {category, tags, license} of existing custom emojis
+// full: mod permission + {rename, delete} existing custom emojis
+export type EmojiModPerm = "none" | "add" | "mod" | "full";
+
 @Entity()
 @Index(["usernameLower", "host"], { unique: true })
 export class User {
@@ -177,6 +183,13 @@ export class User {
 		comment: "Whether the User is a moderator.",
 	})
 	public isModerator: boolean;
+
+	@Column({
+		type: "enum",
+		enum: ["none", "add", "mod", "full"],
+		default: "none",
+	})
+	public emojiModPerm: EmojiModPerm;
 
 	@Index()
 	@Column("boolean", {
