@@ -89,11 +89,19 @@ Repository url where you want to install:
 
 ## アップデート
 
-`update.sh` を実行します。
-
-```sh
-$ ./update.sh
-```
+1. サーバーのバックアップを取る
+1. サーバーを停止する
+    ```sh
+    $ sudo systemctl stop yourserver.example.com
+    ```
+1. `update.sh` を実行し、表示される指示に従う
+    ```sh
+    $ ./update.sh
+    ```
+1. サーバーを起動して動作を確認する
+    ```sh
+    $ sudo systemctl start yourserver.example.com
+    ```
 
 ## Firefish（フォーク元）からの乗り換え
 
@@ -121,9 +129,10 @@ $ ./update.sh
     $ cp -r calckey.old/custom calckey
     $ cp -r calckey.old/.config calckey
     ```
-1. ビルドする
+1. 新しい Firefish のディレクトリに入ってビルドする
     ```sh
-    $ ./calckey/update.sh
+    $ cd calckey
+    $ ./update.sh
     ```
 1. サーバーを起動して動作を確認する
     ```sh
@@ -131,6 +140,7 @@ $ ./update.sh
     ```
 1. 元々 Firefish がインストールされていたディレクトリを削除する
     ```sh
+    $ cd ..
     $ rm -rf calckey.old
     ```
 
