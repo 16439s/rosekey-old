@@ -250,9 +250,9 @@
 
 			<FormSelect v-model="nsfw" class="_formBlock">
 				<template #label>{{ i18n.ts.nsfw }}</template>
+				<option value="force">{{ i18n.ts._nsfw.force }}</option>
 				<option value="respect">{{ i18n.ts._nsfw.respect }}</option>
 				<option value="ignore">{{ i18n.ts._nsfw.ignore }}</option>
-				<option value="force">{{ i18n.ts._nsfw.force }}</option>
 			</FormSelect>
 		</FormSection>
 
@@ -499,9 +499,9 @@ watch(
 	},
 );
 
-const headerActions = $computed(() => []);
+const headerActions = computed(() => []);
 
-const headerTabs = $computed(() => []);
+const headerTabs = computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.general,

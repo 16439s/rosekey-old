@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, ref } from "vue";
+import { inject, ref, computed } from "vue";
 import type { Ref } from "vue";
 import * as misskey from "firefish-js";
 import * as mfm from "mfm-js";
@@ -233,7 +233,7 @@ const props = withDefaults(
 	},
 );
 
-let note = $ref(deepClone(props.note));
+let note = ref(deepClone(props.note));
 
 const softMuteReasonI18nSrc = (what?: string) => {
 	if (what === "note") return i18n.ts.userSaysSomethingReason;
@@ -246,10 +246,10 @@ const softMuteReasonI18nSrc = (what?: string) => {
 };
 
 const isRenote =
-	note.renote != null &&
-	note.text == null &&
-	note.fileIds.length === 0 &&
-	note.poll == null;
+	note.value.renote != null &&
+	note.value.text == null &&
+	note.value.fileIds.length === 0 &&
+	note.value.poll == null;
 
 const el = ref<HTMLElement>();
 const footerEl = ref<HTMLElement>();
@@ -257,11 +257,13 @@ const menuButton = ref<HTMLElement>();
 const starButton = ref<InstanceType<typeof XStarButton>>();
 const renoteButton = ref<InstanceType<typeof XRenoteButton>>();
 const reactButton = ref<HTMLElement>();
-let appearNote = $computed(() =>
-	isRenote ? (note.renote as misskey.entities.Note) : note,
+let appearNote = computed(() =>
+	isRenote ? (note.value.renote as misskey.entities.Note) : note.value,
 );
 const isDeleted = ref(false);
-const muted = ref(getWordSoftMute(note, $i, defaultStore.state.mutedWords));
+const muted = ref(
+	getWordSoftMute(note.value, $i, defaultStore.state.mutedWords),
+);
 const translation = ref(null);
 const translating = ref(false);
 const replies: misskey.entities.Note[] =
@@ -309,14 +311,14 @@ const translate = async () => {
 
 useNoteCapture({
 	rootEl: el,
-	note: $$(appearNote),
+	note: appearNote,
 	isDeletedRef: isDeleted,
 });
 
 function reply(viaKeyboard = false): void {
 	pleaseLogin();
 	os.post({
-		reply: appearNote,
+		reply: appearNote.value,
 		animation: !viaKeyboard,
 	}).then(() => {
 		focus();
@@ -330,7 +332,7 @@ function react(viaKeyboard = false): void {
 		reactButton.value,
 		(reaction) => {
 			os.api("notes/reactions/create", {
-				noteId: appearNote.id,
+				noteId: appearNote.value.id,
 				reaction: reaction,
 			});
 		},
@@ -356,7 +358,7 @@ const currentClipPage = inject<Ref<misskey.entities.Clip> | null>(
 function menu(viaKeyboard = false): void {
 	os.popupMenu(
 		getNoteMenu({
-			note: note,
+			note: note.value,
 			translating,
 			translation,
 			menuButton,
@@ -388,21 +390,24 @@ function onContextmenu(ev: MouseEvent): void {
 			[
 				{
 					type: "label",
-					text: notePage(appearNote),
+					text: notePage(appearNote.value),
 				},
 				{
 					icon: "ph-browser ph-bold ph-lg",
 					text: i18n.ts.openInWindow,
 					action: () => {
-						os.pageWindow(notePage(appearNote));
+						os.pageWindow(notePage(appearNote.value));
 					},
 				},
-				notePage(appearNote) != location.pathname
+				notePage(appearNote.value) != location.pathname
 					? {
 							icon: "ph-arrows-out-simple ph-bold ph-lg",
 							text: i18n.ts.showInPage,
 							action: () => {
-								router.push(notePage(appearNote), "forcePage");
+								router.push(
+									notePage(appearNote.value),
+									"forcePage",
+								);
 							},
 					  }
 					: undefined,
@@ -411,22 +416,22 @@ function onContextmenu(ev: MouseEvent): void {
 					type: "a",
 					icon: "ph-arrow-square-out ph-bold ph-lg",
 					text: i18n.ts.openInNewTab,
-					href: notePage(appearNote),
+					href: notePage(appearNote.value),
 					target: "_blank",
 				},
 				{
 					icon: "ph-link-simple ph-bold ph-lg",
 					text: i18n.ts.copyLink,
 					action: () => {
-						copyToClipboard(`${url}${notePage(appearNote)}`);
+						copyToClipboard(`${url}${notePage(appearNote.value)}`);
 					},
 				},
-				note.user.host != null
+				note.value.user.host != null
 					? {
 							type: "a",
 							icon: "ph-arrow-square-up-right ph-bold ph-lg",
 							text: i18n.ts.showOnRemote,
-							href: note.url ?? note.uri ?? "",
+							href: note.value.url ?? note.value.uri ?? "",
 							target: "_blank",
 					  }
 					: undefined,

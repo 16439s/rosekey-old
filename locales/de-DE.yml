@@ -77,7 +77,7 @@ lists: "Listen"
 noLists: "Du hast keine Listen angelegt"
 note: "Beitrag"
 notes: "Beiträge"
-following: "Folge ich"
+following: "Folgen"
 followers: "Folgen mir"
 followsYou: "Folgt dir"
 createList: "Liste erstellen"
@@ -474,7 +474,7 @@ invitations: "Einladungen"
 invitationCode: "Einladungscode"
 checking: "Wird überprüft …"
 available: "Verfügbar"
-unavailable: "Unverfügbar"
+unavailable: "Nicht verfügbar"
 usernameInvalidFormat: "Du kannst Klein- und Großbuchstaben, Zahlen sowie Unterstriche
   verwenden."
 tooShort: "Zu kurz"
@@ -1945,7 +1945,7 @@ _notification:
     renote: "Renote"
   voted: haben bei deiner Umfrage abgestimmt
   reacted: hat auf deinen Beitrag reagiert
-  renoted: hat Ihren Beitrag geteilt
+  renoted: hat deinen Beitrag geteilt
 _deck:
   alwaysShowMainColumn: "Hauptspalte immer zeigen"
   columnAlign: "Spaltenausrichtung"
@@ -2099,7 +2099,7 @@ customKaTeXMacro: Individuelle KaTeX Makros
 enableCustomKaTeXMacro: Individuelle KaTeX-Makros aktivieren
 replayTutorial: Wiederhole die Benutzeranleitung
 apps: Apps
-caption: Automatische Untertitelung
+caption: Automatische Beschreibung
 pwa: PWA installieren
 cw: Inhaltswarnung
 older: älter
@@ -2204,3 +2204,7 @@ deletePasskeysConfirm: Alle Passkeys und Security-Keys werden unwiderruflich von
 inputNotMatch: Eingabe stimmt nicht überein
 addRe: Ein "re:" am Anfang des Kommentars hinzufügen, um einem Beitrag mit einer Inhaltswarnung
   zu antworten
+confirm: Bestätigen
+importZip: ZIP Importieren
+emojiPackCreator: Emoji-Pack Ersteller
+exportZip: ZIP Exportieren

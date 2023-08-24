@@ -87,6 +87,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
+
 import * as misskey from "firefish-js";
 import MkFollowButton from "@/components/MkFollowButton.vue";
 import XShowMoreButton from "@/components/MkShowMoreButton.vue";
@@ -102,13 +104,13 @@ const props = defineProps<{
 
 const emphasizeFollowed = defaultStore.state.emphasizeFollowed;
 
-let isLong = $ref(
+let isLong = ref(
 	props.detailed &&
 		props.user.description &&
 		(props.user.description.split("\n").length > 9 ||
 			props.user.description.length > 400),
 );
-let collapsed = $ref(isLong);
+let collapsed = ref(isLong.value);
 </script>
 
 <style lang="scss" scoped>

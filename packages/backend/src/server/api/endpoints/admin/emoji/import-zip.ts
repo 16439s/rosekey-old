@@ -1,7 +1,6 @@
 import define from "../../../define.js";
 import { createImportCustomEmojisJob } from "@/queue/index.js";
 import { ApiError } from "../../../error.js";
-import ms from "ms";
 
 export const meta = {
 	tags: ["admin", "emoji"],
