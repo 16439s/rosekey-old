@@ -104,7 +104,7 @@ Repository url where you want to install:
     $ sudo systemctl start yourserver.example.com
     ```
 
-## Firefish（フォーク元）からの乗り換え
+## [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
 1. サーバーのバックアップを取る
 1. サーバーを停止する
@@ -145,6 +145,83 @@ Repository url where you want to install:
     $ rm -rf calckey.old
     ```
 
-## このフォークから Firefish（フォーク元）へ戻る
+## このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
 
-ToDo (#58)
+1. サーバーのバックアップを取る
+1. サーバーを停止する
+    ```sh
+    $ sudo systemctl stop yourserver.example.com
+    ```
+1. Firefish がインストールされているディレクトリ (e.g., `/home/calckey/calckey`) へ移動する
+    ```sh
+    $ cd /home/calckey/calckey
+    ```
+1. `packages/backend/ormconfig.js` をテキストエディターで開き、`migrations` に `migration-neko-revert/*.js` を追加する
+    ```sh
+    $ vim packages/backend/ormconfig.js
+    ```
+    ```diff
+    - migrations: ["migration/*.js", "migration-neko/*.js"],
+    + migrations: ["migration/*.js", "migration-neko/*.js", "migration-neko-revert/*.js"],
+    ```
+1. このフォークで加えられたデータベースへの変更を取り消す
+    ```sh
+    $ pnpm run migrate
+    ```
+1. Firefish がインストールされているディレクトリの親ディレクトリ (e.g., `/home/calckey`) に行く
+    ```sh
+    $ cd ..
+    ```
+1. Firefish がインストールされているディレクトリ (e.g., `./calckey`) の名前を変える
+    ```sh
+    $ mv calckey calckey.old
+    ```
+1. Firefish がインストールされているディレクトリと同じ名前で本家版の Firefish を clone する
+    ```sh
+    $ git clone https://git.joinfirefish.org/firefish/firefish.git calckey
+    ```
+1. 必要なファイルをコピーする
+    ```sh
+    $ rm -rf calckey/files calckey/custom calckey/.config
+    $ cp -r calckey.old/files calckey
+    $ cp -r calckey.old/custom calckey
+    $ cp -r calckey.old/config calckey
+    ```
+1. 新しい Firefish のディレクトリ (e.g., `./calckey`) に入り、`develop` ブランチに行く（既にそうなっているはず）
+    ```sh
+    $ cd calckey
+    $ git checkout develop
+    Already on 'develop'
+    Your branch is up to date with 'origin/develop'.
+    ```
+1. Firefish をビルドする
+    ```sh
+    $ corepack prepare pnpm@latest --activate
+    $ pnpm i
+    $ NODE_ENV=production pnpm run build
+    $ pnpm run migrate
+    ```
+1. サーバーを起動して動作を確認する
+    ```sh
+    $ sudo systemctl start yourserver.example.com
+    ```
+1. 元々 Firefish がインストールされていたディレクトリを削除する
+    ```sh
+    $ cd ..
+    $ rm -rf calckey.old
+    ```
+
+### 注意
+
+この手順を踏むとあなたの Firefish サーバーは `develop` 版になります。他のバージョンを動かしたい場合も、**次のアップデートがリリースされるまでは `develop` 版を動かしてください**。
+
+例えば `beta` 版を動かしたい場合、次に `beta` 版がリリースされたらそちらに移れます。
+
+```sh
+$ git checkout beta
+$ git pull --ff
+$ corepack prepare pnpm@latest --activate
+$ pnpm i
+$ NODE_ENV=production pnpm run build
+$ pnpm run migrate
+```
