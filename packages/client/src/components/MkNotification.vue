@@ -435,19 +435,19 @@ useTooltip(reactionRef, (showing) => {
 			&.receiveFollowRequest,
 			&.groupInvited {
 				padding: 3px;
-				background: #31748f;
+				background: #36aed2;
 				pointer-events: none;
 			}
 
 			&.renote {
 				padding: 3px;
-				background: #31748f;
+				background: #36d298;
 				pointer-events: none;
 			}
 
 			&.quote {
 				padding: 3px;
-				background: #31748f;
+				background: #36d298;
 				pointer-events: none;
 			}
 
