@@ -17,8 +17,6 @@
 		"build:debug": "pnpm swc src -d built -s -D",
 		"watch": "pnpm swc src -d built -D -w",
 		"lint": "pnpm rome check --apply *",
-		"mocha": "cross-env NODE_ENV=test TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT=\"./test/tsconfig.json\" mocha",
-		"test": "pnpm run mocha",
 		"format": "pnpm rome format * --write"
 	},
 	"optionalDependencies": {
@@ -164,7 +162,6 @@
 		"@types/koa__cors": "3.3.0",
 		"@types/koa__multer": "2.0.4",
 		"@types/koa__router": "8.0.11",
-		"@types/mocha": "9.1.1",
 		"@types/node": "18.11.18",
 		"@types/node-fetch": "3.0.3",
 		"@types/nodemailer": "6.4.9",
@@ -191,7 +188,6 @@
 		"eslint": "^8.46.0",
 		"execa": "6.1.0",
 		"json5-loader": "4.0.1",
-		"mocha": "10.2.0",
 		"pug": "3.0.2",
 		"strict-event-emitter-types": "2.0.0",
 		"swc-loader": "^0.2.3",

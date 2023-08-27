@@ -1,6 +1,6 @@
 [Misskey](https://misskey-hub.net/) のフォークの [Firefish](https://joinfirefish.org/) のフォークです。
 
-オリジナルの README は[こちら](./README.original.md)
+本家 Firefish のリポジトリは[こちら](https://git.joinfirefish.org/firefish/firefish)
 
 # 変更点
 
