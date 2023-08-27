@@ -35,8 +35,8 @@
 				<swiper-slide>
 					<XNotifications
 						class="notifications"
-						:include-types="includeTypes"
-						:unread-only="true"
+						:include-types="['reaction']"
+						:unread-only="false"
 					/>
 				</swiper-slide>
 				<swiper-slide>
@@ -65,12 +65,11 @@ import { defaultStore } from "@/store";
 import "swiper/scss";
 import "swiper/scss/virtual";
 
-const tabs = ["all", "unread", "mentions", "directNotes"];
+const tabs = ["all", "reactions", "mentions", "directNotes"];
 let tab = ref(tabs[0]);
 watch(tab, () => syncSlide(tabs.indexOf(tab.value)));
 
 let includeTypes = ref<string[] | null>(null);
-let unreadOnly = computed(() => tab.value === "unread");
 os.api("notifications/mark-all-as-read");
 
 const MOBILE_THRESHOLD = 500;
@@ -149,9 +148,9 @@ const headerTabs = computed(() => [
 		icon: "ph-bell ph-bold ph-lg",
 	},
 	{
-		key: "unread",
-		title: i18n.ts.unread,
-		icon: "ph-circle-wavy-warning ph-bold ph-lg",
+		key: "reactions",
+		title: i18n.ts.reaction,
+		icon: "ph-smiley ph-bold ph-lg",
 	},
 	{
 		key: "mentions",
