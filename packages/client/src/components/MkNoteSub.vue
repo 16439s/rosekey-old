@@ -286,28 +286,46 @@ const detectLanguage = (src: string): string => {
 	return detectLanguage_(purified);
 };
 
+const localTranslateLang = localStorage.getItem("translateLang");
+const localLang = localStorage.getItem("lang");
+
 const isForeignLanguage: boolean =
 	defaultStore.state.detectPostLanguage &&
 	(() => {
 		const targetLanguage = (
-			localStorage.getItem("translateLang") ||
-			localStorage.getItem("lang") ||
+			localTranslateLang ||
+			localLang ||
 			navigator.language
 		)?.slice(0, 2);
 		const postLanguage = detectLanguage(appearNote.value.text);
 		return postLanguage !== "" && postLanguage !== targetLanguage;
 	})();
 
+const translate_ = async (noteId: number, targetLang: string) => {
+	return await os.api("notes/translate", {
+		noteId: noteId,
+		targetLang: targetLang,
+	});
+};
+
 const translate = async () => {
 	if (translation.value != null) return;
 	translating.value = true;
-	translation.value = await os.api("notes/translate", {
-		noteId: appearNote.value.id,
-		targetLang:
-			localStorage.getItem("translateLang") ||
-			localStorage.getItem("lang") ||
-			navigator.language,
-	});
+	translation.value = await translate_(
+		appearNote.value.id,
+		localTranslateLang || localLang || navigator.language,
+	);
+
+	// use UI language as the second translation target
+	if (
+		localTranslateLang != null &&
+		localLang != null &&
+		localTranslateLang !== localLang &&
+		(!translation.value ||
+			translation.value.sourceLang.toLowerCase() ===
+				localTranslateLang.slice(0, 2))
+	)
+		translation.value = await translate_(appearNote.value.id, localLang);
 	translating.value = false;
 };
 

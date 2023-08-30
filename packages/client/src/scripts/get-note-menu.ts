@@ -236,19 +236,36 @@ export function getNoteMenu(props: {
 		});
 	}
 
-	async function translate(): Promise<void> {
+	const localTranslateLang = localStorage.getItem("translateLang");
+	const localLang = localStorage.getItem("lang");
+
+	const translate_ = async (noteId: number, targetLang: string) => {
+		return await os.api("notes/translate", {
+			noteId: noteId,
+			targetLang: targetLang,
+		});
+	};
+
+	const translate = async () => {
 		if (props.translation.value != null) return;
 		props.translating.value = true;
-		const res = await os.api("notes/translate", {
-			noteId: appearNote.id,
-			targetLang:
-				localStorage.getItem("translateLang") ||
-				localStorage.getItem("lang") ||
-				navigator.language,
-		});
+		props.translation.value = await translate_(
+			appearNote.id,
+			localTranslateLang || localLang || navigator.language,
+		);
+
+		// use UI language as the second translation target
+		if (
+			localTranslateLang != null &&
+			localLang != null &&
+			localTranslateLang !== localLang &&
+			(!props.translation.value ||
+				props.translation.value.sourceLang.toLowerCase() ===
+					localTranslateLang.slice(0, 2))
+		)
+			props.translation.value = await translate_(appearNote.id, localLang);
 		props.translating.value = false;
-		props.translation.value = res;
-	}
+	};
 
 	let menu;
 	if ($i) {
