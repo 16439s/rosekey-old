@@ -189,7 +189,7 @@ import { inject, ref, computed } from "vue";
 import type { Ref } from "vue";
 import * as misskey from "firefish-js";
 import * as mfm from "mfm-js";
-import { detect as detectLanguage } from "tinyld";
+import { detect as detectLanguage_ } from "tinyld";
 import XNoteHeader from "@/components/MkNoteHeader.vue";
 import MkSubNoteContent from "@/components/MkSubNoteContent.vue";
 import XReactionsViewer from "@/components/MkReactionsViewer.vue";
@@ -277,30 +277,32 @@ const replies: misskey.entities.Note[] =
 const enableEmojiReactions = defaultStore.state.enableEmojiReactions;
 const expandOnNoteClick = defaultStore.state.expandOnNoteClick;
 
-const purifyMFM = (src) => {
+const detectLanguage = (src: string): string => {
 	const nodes = mfm.parse(src);
 	const filtered = mfm.extract(nodes, (node) => {
-		node.type === "text" || node.type === "quote";
+		return node.type === "text" || node.type === "quote";
 	});
-	return mfm.toString(filtered);
+	const purified = mfm.toString(filtered).trim();
+	return detectLanguage_(purified);
 };
-const isForeignLanguage = (() => {
-	if (!defaultStore.state.detectPostLanguage || !appearNote.text)
-		return false;
-	const text = purifyMFM(appearNote.text).trim();
-	if (!text) return false;
-	const uiLanguage = (
-		localStorage.getItem("translateLang") ||
-		localStorage.getItem("lang") ||
-		navigator.language
-	).slice(0, 2);
-	return detectLanguage(text) !== uiLanguage;
-})();
+
+const isForeignLanguage: boolean =
+	defaultStore.state.detectPostLanguage &&
+	(() => {
+		const targetLanguage = (
+			localStorage.getItem("translateLang") ||
+			localStorage.getItem("lang") ||
+			navigator.language
+		)?.slice(0, 2);
+		const postLanguage = detectLanguage(appearNote.value.text);
+		return postLanguage !== "" && postLanguage !== targetLanguage;
+	})();
+
 const translate = async () => {
 	if (translation.value != null) return;
 	translating.value = true;
 	translation.value = await os.api("notes/translate", {
-		noteId: appearNote.id,
+		noteId: appearNote.value.id,
 		targetLang:
 			localStorage.getItem("translateLang") ||
 			localStorage.getItem("lang") ||
