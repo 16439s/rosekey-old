@@ -84,9 +84,8 @@ say "Done! We're almost there.\n"
 ## prevent migration errors
 if [[ ! -f packages/backend/native-utils/built/index.js ]]; then
   say "Something went wrong orz... Gonnya try fixing that."
-  pushd
-  running "pushd; cd packages/backend/native-utils; NODE_ENV=production pnpm build; popd"
-  cd packages/backend/native-utils
+  running "pushd packages/backend/native-utils; NODE_ENV=production pnpm build; popd"
+  pushd packages/backend/native-utils
   NODE_ENV=production pnpm build
   popd
 
