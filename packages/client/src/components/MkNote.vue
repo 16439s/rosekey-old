@@ -370,6 +370,7 @@ const localLang = localStorage.getItem("lang");
 
 const isForeignLanguage: boolean =
 	defaultStore.state.detectPostLanguage &&
+	appearNote.value.text != null &&
 	(() => {
 		const targetLanguage = (
 			localTranslateLang ||
