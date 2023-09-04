@@ -87,8 +87,8 @@
 				{{ i18n.ts.quoteAttached
 				}}<button
 					class="_button"
-					@click="quoteId = null"
 					:aria-label="i18n.t('removeQuote')"
+					@click="quoteId = null"
 				>
 					<i class="ph-x ph-bold ph-lg"></i>
 				</button>
@@ -100,8 +100,8 @@
 						<MkAcct :user="u" />
 						<button
 							class="_button"
-							@click="removeVisibleUser(u)"
 							:aria-label="i18n.t('removeRecipient')"
+							@click="removeVisibleUser(u)"
 						>
 							<i class="ph-x ph-bold ph-lg"></i>
 						</button>
@@ -246,16 +246,16 @@
 
 <script lang="ts" setup>
 import {
+	computed,
+	defineAsyncComponent,
 	inject,
-	watch,
 	nextTick,
 	onMounted,
-	defineAsyncComponent,
 	ref,
-	computed,
+	watch,
 } from "vue";
 import * as mfm from "mfm-js";
-import * as misskey from "firefish-js";
+import type * as misskey from "firefish-js";
 import autosize from "autosize";
 import insertTextAtCursor from "insert-text-at-cursor";
 import { length } from "stringz";
@@ -326,40 +326,42 @@ const visibilityButton = ref<HTMLElement | null>(null);
 
 const showBigPostButton = defaultStore.state.showBigPostButton;
 
-let posting = ref(false);
-let text = ref(props.initialText ?? "");
-let files = ref(props.initialFiles ?? []);
-let poll = ref<{
+const posting = ref(false);
+const text = ref(props.initialText ?? "");
+const files = ref(props.initialFiles ?? []);
+const poll = ref<{
 	choices: string[];
 	multiple: boolean;
 	expiresAt: string | null;
 	expiredAfter: string | null;
 } | null>(null);
-let useCw = ref(false);
+const useCw = ref(false);
 let showPreview = ref(defaultStore.state.showPreviewByDefault);
-let cw = ref<string | null>(null);
-let localOnly = ref<boolean>(
+const cw = ref<string | null>(null);
+const localOnly = ref<boolean>(
 	props.initialLocalOnly ?? defaultStore.state.rememberNoteVisibility
 		? defaultStore.state.localOnly
 		: defaultStore.state.defaultNoteLocalOnly,
 );
-let visibility = ref(
+const visibility = ref(
 	props.initialVisibility ??
 		((defaultStore.state.rememberNoteVisibility
 			? defaultStore.state.visibility
 			: defaultStore.state
 					.defaultNoteVisibility) as (typeof misskey.noteVisibilities)[number]),
 );
-let visibleUsers = ref([]);
+const visibleUsers = ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
 }
-let autocomplete = ref(null);
-let draghover = ref(false);
-let quoteId = ref(null);
-let hasNotSpecifiedMentions = ref(false);
-let recentHashtags = ref(JSON.parse(localStorage.getItem("hashtags") || "[]"));
-let imeText = ref("");
+const autocomplete = ref(null);
+const draghover = ref(false);
+const quoteId = ref(null);
+const hasNotSpecifiedMentions = ref(false);
+const recentHashtags = ref(
+	JSON.parse(localStorage.getItem("hashtags") || "[]"),
+);
+const imeText = ref("");
 
 const typing = throttle(3000, () => {
 	if (props.channel) {
@@ -426,8 +428,8 @@ const maxTextLength = computed((): number => {
 const canPost = computed((): boolean => {
 	return (
 		!posting.value &&
-		(1 <= textLength.value ||
-			1 <= files.value.length ||
+		(textLength.value >= 1 ||
+			files.value.length >= 1 ||
 			!!poll.value ||
 			!!props.renote) &&
 		textLength.value <= maxTextLength.value &&
@@ -827,14 +829,14 @@ function onDrop(ev): void {
 		return;
 	}
 
-	//#region ドライブのファイル
+	// #region ドライブのファイル
 	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
 	if (driveFile != null && driveFile !== "") {
 		const file = JSON.parse(driveFile);
 		files.value.push(file);
 		ev.preventDefault();
 	}
-	//#endregion
+	// #endregion
 }
 
 function saveDraft() {
@@ -907,7 +909,7 @@ async function post() {
 		}
 	}
 
-	let token = undefined;
+	let token;
 
 	if (postAccount.value) {
 		const storedAccounts = await getAccounts();
@@ -983,7 +985,7 @@ function showActions(ev) {
 	);
 }
 
-let postAccount = ref<misskey.entities.UserDetailed | null>(null);
+const postAccount = ref<misskey.entities.UserDetailed | null>(null);
 
 function openAccountMenu(ev: MouseEvent) {
 	openAccountMenu_(

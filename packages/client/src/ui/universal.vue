@@ -251,7 +251,7 @@ const reload = () => {
 const buttonAnimIndex = ref(0);
 const drawerMenuShowing = ref(false);
 
-let pageMetadata = ref<null | ComputedRef<PageMetadata>>();
+const pageMetadata = ref<null | ComputedRef<PageMetadata>>();
 const widgetsEl = ref<HTMLElement>();
 const postButton = ref<HTMLElement>();
 const widgetsShowing = ref(false);

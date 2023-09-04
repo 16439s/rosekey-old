@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import type * as misskey from "firefish-js";
 import { getStaticImageUrl } from "@/scripts/get-static-image-url";
 import { extractAvgColorFromBlurhash } from "@/scripts/extract-avg-color-from-blurhash";
@@ -80,7 +80,7 @@ function onClick(ev: MouseEvent) {
 	emit("click", ev);
 }
 
-let color = ref();
+const color = ref();
 
 watch(
 	() => props.user.avatarBlurhash,

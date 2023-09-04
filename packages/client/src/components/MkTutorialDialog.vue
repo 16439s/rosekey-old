@@ -227,7 +227,7 @@ const isGlobalTimelineAvailable =
 	!instance.disableGlobalTimeline ||
 	($i != null && ($i.isModerator || $i.isAdmin));
 
-let timelines = ["home"];
+const timelines = ["home"];
 
 if (isLocalTimelineAvailable) {
 	timelines.push("local");

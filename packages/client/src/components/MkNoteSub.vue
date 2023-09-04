@@ -1,10 +1,10 @@
 <template>
 	<article
 		v-if="!muted.muted || muted.what === 'reply'"
+		:id="detailedView ? appearNote.id : null"
 		ref="el"
 		v-size="{ max: [450, 500] }"
 		class="wrpstxzv"
-		:id="detailedView ? appearNote.id : null"
 		tabindex="-1"
 		:class="{
 			children: depth > 1,
@@ -16,8 +16,8 @@
 		<div v-if="conversation && depth > 1" class="line"></div>
 		<div
 			class="main"
-			@click="noteClick"
 			:style="{ cursor: expandOnNoteClick ? 'pointer' : '' }"
+			@click="noteClick"
 		>
 			<div class="avatar-container">
 				<MkAvatar class="avatar" :user="appearNote.user" />
@@ -32,9 +32,9 @@
 					<MkSubNoteContent
 						class="text"
 						:note="note"
-						:parentId="parentId"
+						:parent-id="parentId"
 						:conversation="conversation"
-						:detailedView="detailedView"
+						:detailed-view="detailedView"
 						@focusfooter="footerEl.focus()"
 					/>
 					<div v-if="translating || translation" class="translation">
@@ -117,9 +117,9 @@
 							appearNote.myReaction != null
 						"
 						ref="reactButton"
+						v-tooltip.noDelay.bottom="i18n.ts.removeReaction"
 						class="button _button reacted"
 						@click.stop="undoReact(appearNote)"
-						v-tooltip.noDelay.bottom="i18n.ts.removeReaction"
 					>
 						<i class="ph-minus ph-bold ph-lg"></i>
 					</button>
@@ -130,7 +130,7 @@
 							isForeignLanguage &&
 							translation == null
 						"
-						class="button _button accent"
+						class="button _button"
 						@click.stop="translate"
 						v-tooltip.noDelay.bottom="i18n.ts.translate"
 					>
@@ -149,17 +149,17 @@
 		</div>
 		<template v-if="conversation">
 			<MkNoteSub
-				v-if="replyLevel < 11 && depth < 5"
 				v-for="reply in replies"
+				v-if="replyLevel < 11 && depth < 5"
 				:key="reply.id"
 				:note="reply"
 				class="reply"
 				:class="{ single: replies.length == 1 }"
 				:conversation="conversation"
 				:depth="replies.length == 1 ? depth : depth + 1"
-				:replyLevel="replyLevel + 1"
-				:parentId="appearNote.id"
-				:detailedView="detailedView"
+				:reply-level="replyLevel + 1"
+				:parent-id="appearNote.id"
+				:detailed-view="detailedView"
 			/>
 			<div v-else-if="replies.length > 0" class="more">
 				<div class="line"></div>
@@ -189,9 +189,9 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, ref, computed } from "vue";
+import { computed, inject, ref } from "vue";
 import type { Ref } from "vue";
-import * as misskey from "firefish-js";
+import type * as misskey from "firefish-js";
 import * as mfm from "mfm-js";
 import { detect as detectLanguage_ } from "tinyld";
 import XNoteHeader from "@/components/MkNoteHeader.vue";
@@ -237,7 +237,7 @@ const props = withDefaults(
 	},
 );
 
-let note = ref(deepClone(props.note));
+const note = ref(deepClone(props.note));
 
 const softMuteReasonI18nSrc = (what?: string) => {
 	if (what === "note") return i18n.ts.userSaysSomethingReason;
@@ -261,7 +261,7 @@ const menuButton = ref<HTMLElement>();
 const starButton = ref<InstanceType<typeof XStarButton>>();
 const renoteButton = ref<InstanceType<typeof XRenoteButton>>();
 const reactButton = ref<HTMLElement>();
-let appearNote = computed(() =>
+const appearNote = computed(() =>
 	isRenote ? (note.value.renote as misskey.entities.Note) : note.value,
 );
 const isDeleted = ref(false);
@@ -280,59 +280,57 @@ const replies: misskey.entities.Note[] =
 		.reverse() ?? [];
 const enableEmojiReactions = defaultStore.state.enableEmojiReactions;
 const expandOnNoteClick = defaultStore.state.expandOnNoteClick;
+const lang = localStorage.getItem("lang");
+const translateLang = localStorage.getItem("translateLang");
 
-const detectLanguage = (src: string): string => {
-	const nodes = mfm.parse(src);
+function detectLanguage(text: string) {
+	const nodes = mfm.parse(text);
 	const filtered = mfm.extract(nodes, (node) => {
 		return node.type === "text" || node.type === "quote";
 	});
-	const purified = mfm.toString(filtered).trim();
+	const purified = mfm.toString(filtered);
 	return detectLanguage_(purified);
-};
-
-const localTranslateLang = localStorage.getItem("translateLang");
-const localLang = localStorage.getItem("lang");
+}
 
 const isForeignLanguage: boolean =
 	defaultStore.state.detectPostLanguage &&
 	appearNote.value.text != null &&
 	(() => {
-		const targetLanguage = (
-			localTranslateLang ||
-			localLang ||
-			navigator.language
-		)?.slice(0, 2);
-		const postLanguage = detectLanguage(appearNote.value.text);
-		return postLanguage !== "" && postLanguage !== targetLanguage;
+		const targetLang = (translateLang || lang || navigator.language)?.slice(
+			0,
+			2,
+		);
+		const postLang = detectLanguage(appearNote.value.text);
+		return postLang !== "" && postLang !== targetLang;
 	})();
 
-const translate_ = async (noteId: number, targetLang: string) => {
+async function translate_(noteId: number, targetLang: string) {
 	return await os.api("notes/translate", {
 		noteId: noteId,
 		targetLang: targetLang,
 	});
-};
+}
 
-const translate = async () => {
+async function translate() {
 	if (translation.value != null) return;
 	translating.value = true;
 	translation.value = await translate_(
 		appearNote.value.id,
-		localTranslateLang || localLang || navigator.language,
+		translateLang || lang || navigator.language,
 	);
 
-	// use UI language as the second translation target
+	// use UI language as the second translation language
 	if (
-		localTranslateLang != null &&
-		localLang != null &&
-		localTranslateLang !== localLang &&
+		translateLang != null &&
+		lang != null &&
+		translateLang !== lang &&
 		(!translation.value ||
 			translation.value.sourceLang.toLowerCase() ===
-				localTranslateLang.slice(0, 2))
+				translateLang.slice(0, 2))
 	)
-		translation.value = await translate_(appearNote.value.id, localLang);
+		translation.value = await translate_(appearNote.value.id, lang);
 	translating.value = false;
-};
+}
 
 useNoteCapture({
 	rootEl: el,
@@ -358,7 +356,7 @@ function react(viaKeyboard = false): void {
 		(reaction) => {
 			os.api("notes/reactions/create", {
 				noteId: appearNote.value.id,
-				reaction: reaction,
+				reaction,
 			});
 		},
 		() => {

@@ -20,7 +20,6 @@
 		<FormSelect v-model="translateLang" class="_formBlock">
 			<template #label>
 				{{ i18n.ts.languageForTranslation }}
-				<span class="_beta">{{ i18n.ts.originalFeature }}</span>
 			</template>
 			<option v-for="x in langs" :key="x[0]" :value="x[0]">
 				{{ x[1] }}
@@ -87,12 +86,9 @@
 					{{ i18n.ts.reflectMayTakeTime }}</template
 				></FormSwitch
 			>
-			<FormSwitch v-model="detectPostLanguage" class="_formBlock"
-				>{{ i18n.ts.detectPostLanguage
-				}}<span class="_beta">{{
-					i18n.ts.originalFeature
-				}}</span></FormSwitch
-			>
+			<FormSwitch v-model="detectPostLanguage" class="_formBlock">{{
+				i18n.ts.detectPostLanguage
+			}}</FormSwitch>
 
 			<FormSelect v-model="serverDisconnectedBehavior" class="_formBlock">
 				<template #label>{{ i18n.ts.whenServerDisconnected }}</template>
@@ -312,7 +308,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { $i } from "@/account";
 import FormSwitch from "@/components/form/switch.vue";
 import FormSelect from "@/components/form/select.vue";
@@ -498,10 +494,6 @@ watch(
 		await reloadAsk();
 	},
 );
-
-const headerActions = computed(() => []);
-
-const headerTabs = computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.general,

@@ -13,7 +13,7 @@
 				:round-lengths="true"
 				:touch-angle="25"
 				:threshold="10"
-				:centeredSlides="true"
+				:centered-slides="true"
 				:modules="[Virtual]"
 				:space-between="20"
 				:virtual="true"
@@ -66,10 +66,10 @@ import "swiper/scss";
 import "swiper/scss/virtual";
 
 const tabs = ["all", "reactions", "mentions", "directNotes"];
-let tab = ref(tabs[0]);
+const tab = ref(tabs[0]);
 watch(tab, () => syncSlide(tabs.indexOf(tab.value)));
 
-let includeTypes = ref<string[] | null>(null);
+const includeTypes = ref<string[] | null>(null);
 os.api("notifications/mark-all-as-read");
 
 const MOBILE_THRESHOLD = 500;

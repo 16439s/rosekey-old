@@ -1,5 +1,6 @@
-import { defineAsyncComponent, Ref, inject } from "vue";
-import * as misskey from "firefish-js";
+import type { Ref } from "vue";
+import { defineAsyncComponent, inject } from "vue";
+import type * as misskey from "firefish-js";
 import { $i } from "@/account";
 import { i18n } from "@/i18n";
 import { instance } from "@/instance";
@@ -236,36 +237,36 @@ export function getNoteMenu(props: {
 		});
 	}
 
-	const localTranslateLang = localStorage.getItem("translateLang");
-	const localLang = localStorage.getItem("lang");
-
-	const translate_ = async (noteId: number, targetLang: string) => {
+	async function translate_(noteId: number, targetLang: string) {
 		return await os.api("notes/translate", {
 			noteId: noteId,
 			targetLang: targetLang,
 		});
-	};
+	}
 
-	const translate = async () => {
+	async function translate(): Promise<void> {
+		const translateLang = localStorage.getItem("translateLang");
+		const lang = localStorage.getItem("lang");
+
 		if (props.translation.value != null) return;
 		props.translating.value = true;
 		props.translation.value = await translate_(
 			appearNote.id,
-			localTranslateLang || localLang || navigator.language,
+			translateLang || lang || navigator.language,
 		);
 
 		// use UI language as the second translation target
 		if (
-			localTranslateLang != null &&
-			localLang != null &&
-			localTranslateLang !== localLang &&
+			translateLang != null &&
+			lang != null &&
+			translateLang !== lang &&
 			(!props.translation.value ||
 				props.translation.value.sourceLang.toLowerCase() ===
-					localTranslateLang.slice(0, 2))
+					translateLang.slice(0, 2))
 		)
-			props.translation.value = await translate_(appearNote.id, localLang);
+			props.translation.value = await translate_(appearNote.id, lang);
 		props.translating.value = false;
-	};
+	}
 
 	let menu;
 	if ($i) {
@@ -403,7 +404,7 @@ export function getNoteMenu(props: {
 				action: promote
 			}]
 			: []
-		),*/
+		), */
 			null,
 			!isAppearAuthor
 				? {

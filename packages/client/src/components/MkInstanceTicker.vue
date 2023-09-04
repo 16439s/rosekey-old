@@ -1,10 +1,10 @@
 <template>
 	<div
-		class="hpaizdrt"
+		ref="ticker"
 		v-tooltip="
 			`${capitalize(instance.softwareName)} ${instance.softwareVersion}`
 		"
-		ref="ticker"
+		class="hpaizdrt"
 		:style="bg"
 	>
 		<img class="icon" :src="getInstanceIcon(instance)" aria-hidden="true" />
@@ -29,7 +29,7 @@ const props = defineProps<{
 	};
 }>();
 
-let ticker = ref<HTMLElement | null>(null);
+const ticker = ref<HTMLElement | null>(null);
 
 // if no instance data is given, this is for the local instance
 const instance = props.instance ?? {
