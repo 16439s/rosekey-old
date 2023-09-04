@@ -1,5 +1,5 @@
-export class EmojiModeratorRevert1692825433698 {
-	name = "EmojiModeratorRevert1692825433698";
+export class EmojiModeratorRevert9999999999999 {
+	name = "EmojiModeratorRevert9999999999999";
 
 	async down(queryRunner) {
 		await queryRunner.query(
