@@ -2,6 +2,10 @@
 
 本家 Firefish のリポジトリは[こちら](https://git.joinfirefish.org/firefish/firefish)
 
+`main` ブランチではこのフォークに適用された変更のコミット履歴のみが、`history` ブランチでは本家 Firefish のコミットを含む完全なコミット履歴が閲覧できます。
+
+このフォークの機能について調べるには `main` ブランチを、コードの著者について調べるには `history` ブランチを参照してください。
+
 # 変更点
 
 ## 今後の予定
