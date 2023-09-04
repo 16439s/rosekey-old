@@ -1,6 +1,5 @@
 import type Bull from "bull";
 import { tickCharts } from "./tick-charts.js";
-import { resyncCharts } from "./resync-charts.js";
 import { cleanCharts } from "./clean-charts.js";
 import { checkExpiredMutings } from "./check-expired-mutings.js";
 import { clean } from "./clean.js";
@@ -9,7 +8,6 @@ import { verifyLinks } from "./verify-links.js";
 
 const jobs = {
 	tickCharts,
-	resyncCharts,
 	cleanCharts,
 	checkExpiredMutings,
 	clean,

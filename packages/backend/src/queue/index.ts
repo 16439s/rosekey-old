@@ -538,15 +538,6 @@ export default function () {
 	);
 
 	systemQueue.add(
-		"resyncCharts",
-		{},
-		{
-			repeat: { cron: "0 0 * * *" },
-			removeOnComplete: true,
-		},
-	);
-
-	systemQueue.add(
 		"cleanCharts",
 		{},
 		{
