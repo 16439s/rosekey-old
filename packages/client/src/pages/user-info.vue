@@ -183,7 +183,12 @@
 						class="_formBlock"
 						@update:modelValue="setEmojiMod"
 					>
-						<template #label>{{ i18n.ts.emojiModPerm }}</template>
+						<template #label
+							>{{ i18n.ts.emojiModPerm
+							}}<span class="_beta">{{
+								i18n.ts.originalFeature
+							}}</span></template
+						>
 						<option value="none">
 							{{ i18n.ts._emojiModPerm.none }}
 						</option>
