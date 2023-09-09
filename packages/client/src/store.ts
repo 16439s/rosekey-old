@@ -338,8 +338,8 @@ export const defaultStore = markRaw(
 			default: true,
 		},
 		showTimelineReplies: {
-			where: "device",
-			default: false,
+			where: "deviceAccount",
+			default: true,
 		},
 		showPreviewByDefault: {
 			where: "deviceAccount",
