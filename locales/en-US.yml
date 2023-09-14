@@ -2146,3 +2146,5 @@ _emojiModPerm:
   full: "Allow All"
 privacyForNerds: "Privacy protection in public places"
 disableToast: "Don't show the \"Welcome back\" banner"
+hideMyIcon: "Hide my icon"
+hideMyName: "Hide my name and ID"

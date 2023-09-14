@@ -4,14 +4,14 @@
 		v-user-preview="disablePreview ? undefined : user.id"
 		class="eiwwqkts _noSelect"
 		:class="{
-			cat: user.isCat,
+			cat: show && user.isCat,
 			square: user.isCat ? false : $store.state.squareAvatars,
 		}"
 		:style="{ color }"
 		:title="acct(user)"
 		@click="onClick"
 	>
-		<img class="inner" :src="url" decoding="async" />
+		<img v-if="show" class="inner" :src="url" decoding="async" />
 		<MkUserOnlineIndicator
 			v-if="showIndicator && user.instance == null"
 			class="indicator"
@@ -23,7 +23,7 @@
 		v-user-preview="disablePreview ? undefined : user.id"
 		class="eiwwqkts _noSelect"
 		:class="{
-			cat: user.isCat,
+			cat: show && user.isCat,
 			square: user.isCat ? false : $store.state.squareAvatars,
 		}"
 		:style="{ color }"
@@ -32,7 +32,7 @@
 		:target="target"
 		@click.stop
 	>
-		<img class="inner" :src="url" decoding="async" />
+		<img v-if="show" class="inner" :src="url" decoding="async" />
 		<MkUserOnlineIndicator
 			v-if="showIndicator && user.instance == null"
 			class="indicator"
@@ -49,6 +49,7 @@ import { extractAvgColorFromBlurhash } from "@/scripts/extract-avg-color-from-bl
 import { acct, userPage } from "@/filters/user";
 import MkUserOnlineIndicator from "@/components/MkUserOnlineIndicator.vue";
 import { defaultStore } from "@/store";
+import { $i } from "@/account";
 
 const props = withDefaults(
 	defineProps<{
@@ -75,6 +76,8 @@ const url = computed(() =>
 		? getStaticImageUrl(props.user.avatarUrl)
 		: props.user.avatarUrl,
 );
+
+const show = !defaultStore.state.hideMyIcon || $i.id !== props.user.id;
 
 function onClick(ev: MouseEvent) {
 	emit("click", ev);

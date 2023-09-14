@@ -78,6 +78,8 @@ import MkButton from "@/components/MkButton.vue";
 import * as os from "@/os";
 import { definePageMetadata } from "@/scripts/page-metadata";
 import { i18n } from "@/i18n";
+import { defaultStore } from "@/store";
+import { $i } from "@/account";
 
 const props = defineProps<{
 	noteId: string;
@@ -172,11 +174,15 @@ definePageMetadata(
 	computed(() =>
 		appearNote.value
 			? {
-					title: i18n.t("noteOf", {
-						user:
-							appearNote.value.user.name ||
-							appearNote.value.user.username,
-					}),
+					title:
+						defaultStore.state.hideMyName &&
+						appearNote.value.userId === $i.id
+							? ""
+							: i18n.t("noteOf", {
+									user:
+										appearNote.value.user.name ||
+										appearNote.value.user.username,
+							  }),
 					subtitle: new Date(
 						appearNote.value.createdAt,
 					).toLocaleString(),

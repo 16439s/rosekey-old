@@ -270,6 +270,18 @@
 					i18n.ts.originalFeature
 				}}</span></FormSwitch
 			>
+			<FormSwitch v-model="hideMyIcon" class="_formBlock"
+				>{{ i18n.ts.hideMyIcon
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
+			<FormSwitch v-model="hideMyName" class="_formBlock"
+				>{{ i18n.ts.hideMyName
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
 		</FormSection>
 
 		<FormSection>
@@ -450,6 +462,8 @@ const emphasizeFollowed = computed(
 	defaultStore.makeGetterSetter("emphasizeFollowed"),
 );
 const disableToast = computed(defaultStore.makeGetterSetter("disableToast"));
+const hideMyIcon = computed(defaultStore.makeGetterSetter("hideMyIcon"));
+const hideMyName = computed(defaultStore.makeGetterSetter("hideMyName"));
 
 watch(swipeOnDesktop, () => {
 	defaultStore.set("swipeOnMobile", true);

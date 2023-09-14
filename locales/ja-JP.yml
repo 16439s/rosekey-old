@@ -2001,3 +2001,5 @@ emojiPackCreator: 絵文字パックの作者
 exportZip: ZIPをエクスポート
 privacyForNerds: "身バレ防止"
 disableToast: "「おかえりなさい、◯◯さん」を表示しない"
+hideMyIcon: "自分のアイコンを表示しない"
+hideMyName: "自分の名前とIDを表示しない"

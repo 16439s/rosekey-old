@@ -377,6 +377,14 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: false,
 		},
+		hideMyIcon: {
+			where: "device",
+			default: false,
+		},
+		hideMyName: {
+			where: "device",
+			default: false,
+		},
 	}),
 );
 

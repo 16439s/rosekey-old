@@ -1,5 +1,5 @@
 <template>
-	<span class="mk-acct">
+	<span class="mk-acct" v-if="show">
 		<span class="name">@{{ user.username }}</span>
 		<span
 			v-if="user.host || detail || $store.state.showFullAcct"
@@ -13,13 +13,16 @@
 import type * as misskey from "firefish-js";
 import { toUnicode } from "punycode/";
 import { host as hostRaw } from "@/config";
+import { defaultStore } from "@/store";
+import { $i } from "@/account";
 
-defineProps<{
+const props = defineProps<{
 	user: misskey.entities.UserDetailed;
 	detail?: boolean;
 }>();
 
 const host = toUnicode(hostRaw);
+const show = !defaultStore.state.hideMyName || $i.id !== props.user.id;
 </script>
 
 <style lang="scss" scoped>

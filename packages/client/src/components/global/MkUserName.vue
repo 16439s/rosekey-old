@@ -1,5 +1,6 @@
 <template>
 	<Mfm
+		v-if="show"
 		:class="$style.root"
 		:text="user.name || user.username"
 		:plain="true"
@@ -10,6 +11,8 @@
 
 <script lang="ts" setup>
 import type * as misskey from "firefish-js";
+import { defaultStore } from "@/store";
+import { $i } from "@/account";
 
 const props = withDefaults(
 	defineProps<{
@@ -20,6 +23,8 @@ const props = withDefaults(
 		nowrap: true,
 	},
 );
+
+const show = !defaultStore.state.hideMyName || $i.id !== props.user.id;
 </script>
 
 <style lang="scss" module>
