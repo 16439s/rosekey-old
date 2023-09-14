@@ -1999,3 +1999,5 @@ _emojiModPerm:
 importZip: ZIPをインポート
 emojiPackCreator: 絵文字パックの作者
 exportZip: ZIPをエクスポート
+privacyForNerds: "身バレ防止"
+disableToast: "「おかえりなさい、◯◯さん」を表示しない"

@@ -436,19 +436,21 @@ function checkForSplash() {
 			});
 		}
 
-		const lastUsed = localStorage.getItem("lastUsed");
-		if (lastUsed) {
-			const lastUsedDate = parseInt(lastUsed, 10);
-			// 二時間以上前なら
-			if (Date.now() - lastUsedDate > 1000 * 60 * 60 * 2) {
-				toast(
-					i18n.t("welcomeBackWithName", {
-						name: $i.name || $i.username,
-					}),
-				);
+		if (!defaultStore.state.disableToast) {
+			const lastUsed = localStorage.getItem("lastUsed");
+			if (lastUsed) {
+				const lastUsedDate = parseInt(lastUsed, 10);
+				// 二時間以上前なら
+				if (Date.now() - lastUsedDate > 1000 * 60 * 60 * 2) {
+					toast(
+						i18n.t("welcomeBackWithName", {
+							name: $i.name || $i.username,
+						}),
+					);
+				}
 			}
+			localStorage.setItem("lastUsed", Date.now().toString());
 		}
-		localStorage.setItem("lastUsed", Date.now().toString());
 
 		const latestDonationInfoShownAt = localStorage.getItem(
 			"latestDonationInfoShownAt",

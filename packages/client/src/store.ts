@@ -373,6 +373,10 @@ export const defaultStore = markRaw(
 			where: "deviceAccount",
 			default: true,
 		},
+		disableToast: {
+			where: "device",
+			default: false,
+		},
 	}),
 );
 

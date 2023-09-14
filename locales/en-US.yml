@@ -2144,3 +2144,5 @@ _emojiModPerm:
   add: "Add"
   mod: "Add and Edit"
   full: "Allow All"
+privacyForNerds: "Privacy protection in public places"
+disableToast: "Don't show the \"Welcome back\" banner"

@@ -263,6 +263,16 @@
 		</FormSection>
 
 		<FormSection>
+			<template #label>{{ i18n.ts.privacyForNerds }}</template>
+			<FormSwitch v-model="disableToast" class="_formBlock"
+				>{{ i18n.ts.disableToast
+				}}<span class="_beta">{{
+					i18n.ts.originalFeature
+				}}</span></FormSwitch
+			>
+		</FormSection>
+
+		<FormSection>
 			<template #label>{{ i18n.ts.forMobile }}</template>
 			<FormSwitch
 				v-model="replaceChatButtonWithAccountButton"
@@ -439,6 +449,7 @@ const showBigPostButton = computed(
 const emphasizeFollowed = computed(
 	defaultStore.makeGetterSetter("emphasizeFollowed"),
 );
+const disableToast = computed(defaultStore.makeGetterSetter("disableToast"));
 
 watch(swipeOnDesktop, () => {
 	defaultStore.set("swipeOnMobile", true);
