@@ -6,4 +6,4 @@ export const activeUsersChart = new ActiveUsersChart();
 // 20分おきにメモリ情報をDBに書き込み
 setInterval(() => activeUsersChart.save(), 1000 * 60 * 20);
 
-beforeShutdown(async () => await activeUsersChars.save());
+beforeShutdown(async () => await activeUsersChart.save());
