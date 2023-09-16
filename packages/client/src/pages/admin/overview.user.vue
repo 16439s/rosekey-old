@@ -12,7 +12,6 @@
 				><span class="acct _monospace">@{{ acct(user) }}</span></span
 			>
 		</div>
-		<MkMiniChart v-if="chart" class="chart" :src="chart.inc" />
 	</MkA>
 </template>
 
@@ -20,23 +19,12 @@
 import { ref } from "vue";
 
 import type * as misskey from "firefish-js";
-import MkMiniChart from "@/components/MkMiniChart.vue";
 import * as os from "@/os";
 import { acct } from "@/filters/user";
 
 const props = defineProps<{
 	user: misskey.entities.User;
 }>();
-
-const chart = ref(null);
-
-os.apiGet("charts/user/notes", {
-	userId: props.user.id,
-	limit: 16,
-	span: "day",
-}).then((res) => {
-	chart.value = res;
-});
 </script>
 
 <style lang="scss" module>
@@ -80,10 +68,6 @@ os.apiGet("charts/user/notes", {
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-	}
-
-	> :global(.chart) {
-		height: 30px;
 	}
 }
 </style>

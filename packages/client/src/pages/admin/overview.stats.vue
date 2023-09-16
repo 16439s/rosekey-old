@@ -16,11 +16,6 @@
 								:value="stats.originalUsersCount"
 								style="margin-right: 0.5em"
 							/>
-							<MkNumberDiff
-								v-tooltip="i18n.ts.dayOverDayChanges"
-								class="diff"
-								:value="usersComparedToThePrevDay"
-							></MkNumberDiff>
 						</div>
 						<div class="label">{{ i18n.ts.users }}</div>
 					</div>
@@ -35,11 +30,6 @@
 								:value="stats.originalNotesCount"
 								style="margin-right: 0.5em"
 							/>
-							<MkNumberDiff
-								v-tooltip="i18n.ts.dayOverDayChanges"
-								class="diff"
-								:value="notesComparedToThePrevDay"
-							></MkNumberDiff>
 						</div>
 						<div class="label">{{ i18n.ts.notes }}</div>
 					</div>
@@ -96,7 +86,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import * as os from "@/os";
-import MkNumberDiff from "@/components/MkNumberDiff.vue";
 import MkNumber from "@/components/MkNumber.vue";
 import { i18n } from "@/i18n";
 

@@ -17,40 +17,6 @@
 					<div class="subTitle">Top 10</div>
 				</div>
 			</div>
-			<div v-if="!fetching" class="items">
-				<div class="item _panel sub">
-					<div class="icon">
-						<i class="ph-download ph-bold ph-xl"></i>
-					</div>
-					<div class="body">
-						<div class="value">
-							{{ number(federationSubActive) }}
-							<MkNumberDiff
-								v-tooltip="i18n.ts.dayOverDayChanges"
-								class="diff"
-								:value="federationSubActiveDiff"
-							></MkNumberDiff>
-						</div>
-						<div class="label">Sub</div>
-					</div>
-				</div>
-				<div class="item _panel pub">
-					<div class="icon">
-						<i class="ph-upload ph-bold ph-xl"></i>
-					</div>
-					<div class="body">
-						<div class="value">
-							{{ number(federationPubActive) }}
-							<MkNumberDiff
-								v-tooltip="i18n.ts.dayOverDayChanges"
-								class="diff"
-								:value="federationPubActiveDiff"
-							></MkNumberDiff>
-						</div>
-						<div class="label">Pub</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </template>
