@@ -1,6 +1,7 @@
 import { Instances, Notes, Users } from "@/models/index.js";
 import define from "../define.js";
 import { IsNull } from "typeorm";
+import { Cache } from "@/misc/cache.js";
 
 export const meta = {
 	requireCredential: false,
@@ -60,7 +61,7 @@ export const paramDef = {
 	required: [],
 } as const;
 
-export default define(meta, paramDef, async () => {
+const stats = async () => {
 	const [
 		notesCount,
 		originalNotesCount,
@@ -107,4 +108,10 @@ export default define(meta, paramDef, async () => {
 		driveUsageLocal,
 		driveUsageRemote,
 	};
+};
+
+const cache = new Cache<Awaited<ReturnType<typeof stats>>>("stats", 60 * 10);
+
+export default define(meta, paramDef, async () => {
+	return await cache.fetch(null, () => stats());
 });
