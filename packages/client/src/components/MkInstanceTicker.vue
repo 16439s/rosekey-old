@@ -6,6 +6,7 @@
 		"
 		class="hpaizdrt"
 		:style="bg"
+		@click.stop="os.pageWindow(instanceInfoUrl)"
 	>
 		<img class="icon" :src="getInstanceIcon(instance)" aria-hidden="true" />
 		<span class="name">{{ instance.name }}</span>
@@ -18,6 +19,7 @@ import { ref } from "vue";
 import { instanceName, version } from "@/config";
 import { instance as Instance } from "@/instance";
 import { getProxiedImageUrlNullable } from "@/scripts/media-proxy";
+import * as os from "@/os";
 
 const props = defineProps<{
 	instance?: {
@@ -27,6 +29,7 @@ const props = defineProps<{
 		softwareName?: string;
 		softwareVersion?: string;
 	};
+	host: string | null;
 }>();
 
 const ticker = ref<HTMLElement | null>(null);
@@ -43,6 +46,9 @@ const instance = props.instance ?? {
 	softwareName: Instance.softwareName ?? "Firefish",
 	softwareVersion: version,
 };
+
+const instanceInfoUrl =
+	props.host == null ? "/about" : `/instance-info/${props.host}`;
 
 const commonNames = new Map<string, string>([
 	["birdsitelive", "BirdsiteLIVE"],
