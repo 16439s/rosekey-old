@@ -210,7 +210,7 @@ Repository url where you want to install:
     $ rm -rf calckey/files calckey/custom calckey/.config
     $ cp -r calckey.old/files calckey
     $ cp -r calckey.old/custom calckey
-    $ cp -r calckey.old/config calckey
+    $ cp -r calckey.old/.config calckey
     ```
 1. 新しい Firefish のディレクトリ (e.g., `./calckey`) に入り、`develop` ブランチに行く（既にそうなっているはず）
     ```sh
