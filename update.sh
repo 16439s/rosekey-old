@@ -13,7 +13,7 @@ function running {
   tput setaf 7
 }
 
-say "Start updating!"
+say "Start upgrading Firefish!"
 say "Did you stop your server?"
 read -r -p "[Y/n] > " yn
 case "${yn}" in
@@ -55,8 +55,8 @@ fi
 ## write version info
 say "Writing version info to package.json..."
 
-running "sed -i -r 's/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT}\",/' package.json"
-sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT}\",/" package.json
+running "sed -i -r 's/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT:0:7}\",/' package.json"
+sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT:0:7}\",/" package.json
 
 say "Done!\n"
 
@@ -67,8 +67,8 @@ say "Upgrading dependencies..."
 running "corepack prepare pnpm@latest --activate"
 corepack prepare pnpm@latest --activate
 
-running "pnpm install"
-pnpm install
+running "pnpm install --frozen-lockfile"
+pnpm install --frozen-lockfile
 
 say "Done!\n"
 
@@ -76,23 +76,25 @@ say "Done!\n"
 say "Start building Firefish."
 say "It takes some time! Why not brew a cup of cofe?"
 
-running "NODE_ENV=production pnpm run rebuild"
-NODE_ENV=production pnpm run rebuild
+running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run rebuild"
+NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run rebuild
 
 say "Done! We're almost there.\n"
 
 ## prevent migration errors
 if [[ ! -f packages/backend/native-utils/built/index.js ]]; then
   say "Something went wrong orz... Gonnya try fixing that."
-  running "pushd packages/backend/native-utils; NODE_ENV=production pnpm build; popd"
+  running "pushd packages/backend/native-utils"
   pushd packages/backend/native-utils
-  NODE_ENV=production pnpm build
+  running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm build"
+  NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm build
+  running "popd"
   popd
 
   if [[ ! -f packages/backend/native-utils/built/index.js ]]; then
     say "Something is still broken... I'll take another measure."
-    running "cp packages/index.js packages/backend/native-utils/built/index.js"
-    cp packages/index.js packages/backend/native-utils/built/index.js
+    running "cp neko/index.js packages/backend/native-utils/built/index.js"
+    cp neko/index.js packages/backend/native-utils/built/index.js
     say "Let's see if it works...\n"
   else
     say "The issue seems to be fixed!\n"
@@ -104,8 +106,8 @@ fi
 ## migrate
 say "Database migration time!"
 
-running "pnpm run migrate"
-pnpm run migrate
+running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run migrate"
+NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run migrate
 
 say "Done!\n"
 
