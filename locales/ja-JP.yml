@@ -66,7 +66,7 @@ import: "インポート"
 export: "エクスポート"
 files: "ファイル"
 download: "ダウンロード"
-driveFileDeleteConfirm: "ファイル「{name}」を削除しますか？これにより、このファイルが添付されている投稿も削除されます。"
+driveFileDeleteConfirm: "ファイル「{name}」を削除しますか？これにより、添付ファイルとして含まれているすべての投稿から削除されます。"
 unfollowConfirm: "{name}さんのフォローを解除しますか？"
 exportRequested: "エクスポートをリクエストしました。これには時間がかかる場合があります。エクスポートが終わると、「ドライブ」に追加されます。"
 importRequested: "インポートをリクエストしました。これには時間がかかる場合があります。"
@@ -1209,11 +1209,16 @@ _menuDisplay:
   hide: "隠す"
 _wordMute:
   muteWords: "ミュートするワード"
+  muteLangs: "ミュートされた言語"
   muteWordsDescription: "スペースで区切るとAND指定になり、改行で区切るとOR指定になります。"
   muteWordsDescription2: "キーワードをスラッシュで囲むと正規表現になります。"
+  muteLangsDescription: "OR 条件の場合はスペースまたは改行で区切ります。"
+  muteLangsDescription2: "言語コードを使用します。例: en, fr, ja, zh."
   softDescription: "指定した条件の投稿をタイムラインから隠します。"
+  langDescription: "設定した言語に一致する投稿をタイムラインから非表示にします。"
   hardDescription: "指定した条件の投稿をタイムラインに追加しないようにします。追加されなかった投稿は、条件を変更しても除外されたままになります。"
   soft: "ソフト"
+  lang: "言語"
   hard: "ハード"
   mutedNotes: "ミュートされた投稿"
 _instanceMute:
@@ -1982,7 +1987,7 @@ _feeds:
   rss: RSS
   jsonFeed: JSONフィード
   copyFeed: フィードのURLをコピー
-origin: オリジナル
+origin: 元のサーバー
 delete2fa: 2要素認証を無効化
 deletePasskeys: パスキーを削除
 delete2faConfirm: これで、このアカウントの2要素認証は完全に削除されます。続行しますか?
@@ -2003,3 +2008,4 @@ privacyForNerds: "身バレ防止"
 disableToast: "「おかえりなさい、◯◯さん」を表示しない"
 hideMyIcon: "自分のアイコンを表示しない"
 hideMyName: "自分の名前とIDを表示しない"
+openServerInfo: "投稿内のサーバー名をクリックでサーバー情報を開く"

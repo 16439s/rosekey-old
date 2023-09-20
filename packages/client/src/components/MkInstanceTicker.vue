@@ -6,7 +6,7 @@
 		"
 		class="hpaizdrt"
 		:style="bg"
-		@click.stop="os.pageWindow(instanceInfoUrl)"
+		@click.stop="openServerInfo"
 	>
 		<img class="icon" :src="getInstanceIcon(instance)" aria-hidden="true" />
 		<span class="name">{{ instance.name }}</span>
@@ -19,7 +19,8 @@ import { ref } from "vue";
 import { instanceName, version } from "@/config";
 import { instance as Instance } from "@/instance";
 import { getProxiedImageUrlNullable } from "@/scripts/media-proxy";
-import * as os from "@/os";
+import { defaultStore } from "@/store";
+import { pageWindow } from "@/os";
 
 const props = defineProps<{
 	instance?: {
@@ -92,6 +93,13 @@ function getInstanceIcon(instance): string {
 		getProxiedImageUrlNullable(instance.iconUrl, "preview") ??
 		"/client-assets/dummy.png"
 	);
+}
+
+function openServerInfo() {
+	if (!defaultStore.state.openServerInfo) return;
+	const instanceInfoUrl =
+		props.host == null ? "/about" : `/instance-info/${props.host}`;
+	pageWindow(instanceInfoUrl);
 }
 </script>
 

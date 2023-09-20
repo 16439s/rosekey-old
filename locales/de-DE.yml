@@ -2103,7 +2103,7 @@ pwa: PWA installieren
 cw: Inhaltswarnung
 older: älter
 newer: neuer
-accessibility: Erreichbarkeit
+accessibility: Barrierefreiheit
 jumpToPrevious: Zum Vorherigen springen
 silencedWarning: Diese Meldung wird angezeigt, weil diese Nutzer von Servern stammen,
   die Ihr Administrator abgeschaltet hat, so dass es sich möglicherweise um Spam handelt.
@@ -2213,3 +2213,5 @@ indexableDescription: Der integrierten Suche erlauben, Ihre öffentlichen Beitr�
   anzuzeigen
 indexable: Indexierbar
 languageForTranslation: Übersetzungssprache veröffentlichen
+openServerInfo: Anzeigen von Serverinformationen durch Anklicken des Server-Tickers
+  in einem Beitrag

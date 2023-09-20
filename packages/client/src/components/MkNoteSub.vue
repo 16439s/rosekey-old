@@ -130,9 +130,9 @@
 							isForeignLanguage &&
 							translation == null
 						"
+						v-tooltip.noDelay.bottom="i18n.ts.translate"
 						class="button _button"
 						@click.stop="translate"
-						v-tooltip.noDelay.bottom="i18n.ts.translate"
 					>
 						<i class="ph-translate ph-bold ph-lg"></i>
 					</button>
@@ -266,7 +266,12 @@ const appearNote = computed(() =>
 );
 const isDeleted = ref(false);
 const muted = ref(
-	getWordSoftMute(note.value, $i, defaultStore.state.mutedWords),
+	getWordSoftMute(
+		note.value,
+		$i,
+		defaultStore.state.mutedWords,
+		defaultStore.state.mutedLangs,
+	),
 );
 const translation = ref(null);
 const translating = ref(false);
@@ -306,8 +311,8 @@ const isForeignLanguage: boolean =
 
 async function translate_(noteId, targetLang: string) {
 	return await os.api("notes/translate", {
-		noteId: noteId,
-		targetLang: targetLang,
+		noteId,
+		targetLang,
 	});
 }
 

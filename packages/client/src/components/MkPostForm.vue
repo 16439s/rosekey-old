@@ -29,7 +29,7 @@
 					>{{ maxTextLength - textLength }}</span
 				>
 				<span v-if="localOnly" class="local-only"
-					><i class="ph-hand-fist ph-bold ph-lg"></i
+					><i class="ph-users ph-bold ph-lg"></i
 				></span>
 				<button
 					ref="visibilityButton"
@@ -286,6 +286,7 @@ import {
 import { uploadFile } from "@/scripts/upload";
 import { deepClone } from "@/scripts/clone";
 import { preprocess } from "@/scripts/preprocess";
+import { vibrate } from "@/scripts/vibrate";
 
 const modal = inject("modal");
 
@@ -948,6 +949,7 @@ async function post() {
 				text: err.message + "\n" + (err as any).id,
 			});
 		});
+	vibrate([10, 20, 10, 20, 10, 20, 60]);
 }
 
 function cancel() {

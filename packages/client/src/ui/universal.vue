@@ -25,6 +25,7 @@
 
 		<button
 			v-if="!isDesktop && !isMobile"
+			v-vibrate="5"
 			class="widgetButton _button"
 			@click="widgetsShowing = true"
 		>
@@ -33,6 +34,7 @@
 
 		<div v-if="isMobile" class="buttons">
 			<button
+				v-vibrate="5"
 				:aria-label="i18n.t('menu')"
 				class="button nav _button"
 				@click="drawerMenuShowing = true"
@@ -48,6 +50,7 @@
 				</div>
 			</button>
 			<button
+				v-vibrate="5"
 				:aria-label="i18n.t('home')"
 				class="button home _button"
 				@click="
@@ -65,6 +68,7 @@
 				</div>
 			</button>
 			<button
+				v-vibrate="5"
 				:aria-label="i18n.t('notifications')"
 				class="button notifications _button"
 				@click="
@@ -73,6 +77,7 @@
 				"
 			>
 				<div
+					v-vibrate="5"
 					class="button-wrapper"
 					:class="buttonAnimIndex === 1 ? 'on' : ''"
 				>
@@ -87,6 +92,7 @@
 			</button>
 			<button
 				v-if="useAccountButton"
+				v-vibrate="5"
 				:aria-label="i18n.t('accounts')"
 				class="button messaging _button"
 				@click="openAccountMenu"
@@ -100,6 +106,7 @@
 			</button>
 			<button
 				v-else
+				v-vibrate="5"
 				:aria-label="i18n.t('messaging')"
 				class="button messaging _button"
 				@click="
@@ -122,6 +129,7 @@
 			</button>
 			<button
 				v-if="useReloadButton"
+				v-vibrate="5"
 				:aria-label="i18n.t('reload')"
 				class="button widget _button"
 				@click="reload"
@@ -132,6 +140,7 @@
 			</button>
 			<button
 				v-else
+				v-vibrate="5"
 				:aria-label="i18n.t('_deck._columns.widgets')"
 				class="button widget _button"
 				@click="widgetsShowing = true"
@@ -144,6 +153,7 @@
 
 		<button
 			v-if="isMobile && mainRouter.currentRoute.value.name === 'index'"
+			v-vibrate="5"
 			ref="postButton"
 			:aria-label="i18n.t('note')"
 			class="postButton button post _button"
@@ -266,7 +276,12 @@ provideMetadataReceiver((info) => {
 
 const menuIndicated = computed(() => {
 	for (const def in navbarItemDef) {
-		if (def === "notifications") continue; // 通知は下にボタンとして表示されてるから
+		if (def === "notifications") continue; // Notifications & Messaging are bottom nav buttons and thus shouldn't be highlighted in the sidebar
+		if (
+			!defaultStore.state.replaceChatButtonWithAccountButton &&
+			def === "messaging"
+		)
+			continue;
 		if (navbarItemDef[def].indicated) return true;
 	}
 	return false;

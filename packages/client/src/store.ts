@@ -101,6 +101,10 @@ export const defaultStore = markRaw(
 			where: "account",
 			default: [],
 		},
+		mutedLangs: {
+			where: "account",
+			default: [],
+		},
 		mutedAds: {
 			where: "account",
 			default: [] as string[],
@@ -385,6 +389,10 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: false,
 		},
+		openServerInfo: {
+			where: "device",
+			default: true,
+		},
 	}),
 );
 
@@ -414,6 +422,7 @@ export class ColdDeviceStorage {
 		syncDeviceDarkMode: true,
 		plugins: [] as Plugin[],
 		mediaVolume: 0.5,
+		vibrate: true,
 		sound_masterVolume: 0.3,
 		sound_note: { type: "none", volume: 0 },
 		sound_noteMy: { type: "syuilo/up", volume: 1 },
