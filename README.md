@@ -32,6 +32,13 @@
 
 ## 細かい変更点
 
+- 検索の MFM で使用する検索エンジンを設定から変更可能に
+  - 以下の選択肢から選べます
+    - DuckDuckGo (duckduckgo.com)
+    - SearXNG (searx.be)
+    - Google Search (google.com)
+    - Moon Search (search.naskya.net)
+    - サーバーの投稿検索
 - サーバー設定の初期値を変更
   - 新規登録を無効化
   - サーバーメトリクスの表示を有効化

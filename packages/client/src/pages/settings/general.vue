@@ -108,6 +108,28 @@
 					{{ i18n.ts._serverDisconnectedBehavior.nothing }}
 				</option>
 			</FormSelect>
+
+			<FormSelect v-model="searchURL" class="_formBlock">
+				<template #label
+					>{{ i18n.ts.searchEngine
+					}}<span class="_beta">{{
+						i18n.ts.originalFeature
+					}}</span></template
+				>
+				<option value="https://duckduckgo.com/?q=">
+					DuckDuckGo (duckduckgo.com)
+				</option>
+				<option value="https://searx.be/?q=">SearXNG (searx.be)</option>
+				<option value="https://google.com/search?q=">
+					Google Search (google.com)
+				</option>
+				<option value="https://search.naskya.net/?q=">
+					Moon Search (search.naskya.net)
+				</option>
+				<option value="">
+					{{ i18n.ts.postSearch }}
+				</option>
+			</FormSelect>
 		</FormSection>
 
 		<FormSection>
@@ -481,6 +503,7 @@ const hideMyName = computed(defaultStore.makeGetterSetter("hideMyName"));
 const openServerInfo = computed(
 	defaultStore.makeGetterSetter("openServerInfo"),
 );
+const searchURL = computed(defaultStore.makeGetterSetter("searchURL"));
 
 watch(swipeOnDesktop, () => {
 	defaultStore.set("swipeOnMobile", true);
