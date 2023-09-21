@@ -35,6 +35,9 @@ export const renderActivity = (x: any): IActivity | null => {
 					schema: "http://schema.org#",
 					PropertyValue: "schema:PropertyValue",
 					value: "schema:value",
+					// Firefish
+					firefish: "https://joinfirefish.org/ns#",
+					speakAsCat: "firefish:speakAsCat",
 					// Misskey
 					misskey: "https://misskey-hub.net/ns#",
 					_misskey_content: "misskey:_misskey_content",
