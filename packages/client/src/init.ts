@@ -254,7 +254,7 @@ function checkForSplash() {
 			// 変なバージョン文字列来るとcompareVersionsでエラーになるため
 			if (
 				lastVersion != null &&
-				compareVersions(version, lastVersion) === 1 &&
+				version !== lastVersion &&
 				defaultStore.state.showUpdates
 			) {
 				// ログインしてる場合だけ
