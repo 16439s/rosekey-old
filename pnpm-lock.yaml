@@ -767,6 +767,9 @@ importers:
       katex:
         specifier: 0.16.8
         version: 0.16.8
+      libopenmpt-wasm:
+        specifier: github:TheEssem/libopenmpt-packaging#build
+        version: github.com/TheEssem/libopenmpt-packaging/d05d151a72b638c6312227af0417aca69521172c
       matter-js:
         specifier: 0.19.0
         version: 0.19.0
@@ -891,7 +894,7 @@ importers:
     devDependencies:
       '@microsoft/api-documenter':
         specifier: ^7.22.21
-        version: 7.23.1(@types/node@20.3.1)
+        version: 7.23.2(@types/node@20.3.1)
       '@microsoft/api-extractor':
         specifier: ^7.36.0
         version: 7.37.0(@types/node@20.3.1)
@@ -1129,7 +1132,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.22.20
       '@babel/helper-validator-option': 7.22.15
-      browserslist: 4.21.10
+      browserslist: 4.21.11
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -2012,7 +2015,7 @@ packages:
       '@typescript-eslint/parser': 6.7.2(eslint@8.49.0)(typescript@5.2.2)
       eslint: 8.49.0
       eslint-config-prettier: 9.0.0(eslint@8.49.0)
-      eslint-plugin-jsdoc: 46.8.1(eslint@8.49.0)
+      eslint-plugin-jsdoc: 46.8.2(eslint@8.49.0)
       eslint-plugin-prettier: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.49.0)(prettier@3.0.3)
       eslint-plugin-tsdoc: 0.2.17
       eslint-plugin-vitest-globals: 1.4.0
@@ -2207,8 +2210,8 @@ packages:
     dev: false
     optional: true
 
-  /@microsoft/api-documenter@7.23.1(@types/node@20.3.1):
-    resolution: {integrity: sha512-QI8pafsD8jg6xlD18cHgvkRJQOocmFcAGjkvpc1QBKfUO7wgbqDO+nFKPLZSphuWfFKc+AzSHFooPswaAyHiLw==}
+  /@microsoft/api-documenter@7.23.2(@types/node@20.3.1):
+    resolution: {integrity: sha512-aylwXjDf98G8RhAZaosyFZaXsCAAKOA5S0u1R0FvNlomd6oPJ+lf/3ZqAfk/yR05L8cEtH8RmNfmMEa0sOCNOA==}
     hasBin: true
     dependencies:
       '@microsoft/api-extractor-model': 7.28.0(@types/node@20.3.1)
@@ -5151,18 +5154,18 @@ packages:
     hasBin: true
     dependencies:
       caniuse-db: 1.0.30001538
-      electron-to-chromium: 1.4.525
+      electron-to-chromium: 1.4.527
     dev: true
 
-  /browserslist@4.21.10:
-    resolution: {integrity: sha512-bipEBdZfVH5/pwrvqc+Ub0kUPVfGUhlKxbvfD+z1BDnPEO/X98ruXGA1WP5ASpAFKan7Qr6j736IacbZQuAlKQ==}
+  /browserslist@4.21.11:
+    resolution: {integrity: sha512-xn1UXOKUz7DjdGlg9RrUr0GGiWzI97UQJnugHtH0OLDfJB7jMgoIkYvRIEO1l9EeEERVqeqLYOcFBW9ldjypbQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001538
-      electron-to-chromium: 1.4.525
+      electron-to-chromium: 1.4.527
       node-releases: 2.0.13
-      update-browserslist-db: 1.0.12(browserslist@4.21.10)
+      update-browserslist-db: 1.0.13(browserslist@4.21.11)
 
   /buffer-alloc-unsafe@1.1.0:
     resolution: {integrity: sha512-TEM2iMIEQdJ2yjPJoSIsldnleVaAk1oW3DBVUykyOLsEsFmEc9kn+SFFPz+gl54KQNxlDnAwCXosOS9Okx2xAg==}
@@ -5280,7 +5283,7 @@ packages:
     dependencies:
       '@npmcli/fs': 3.1.0
       fs-minipass: 3.0.3
-      glob: 10.3.4
+      glob: 10.3.5
       lru-cache: 7.18.3
       minipass: 7.0.3
       minipass-collect: 1.0.2
@@ -6873,8 +6876,8 @@ packages:
     dependencies:
       jake: 10.8.7
 
-  /electron-to-chromium@1.4.525:
-    resolution: {integrity: sha512-GIZ620hDK4YmIqAWkscG4W6RwY6gOx1y5J6f4JUQwctiJrqH2oxZYU4mXHi35oV32tr630UcepBzSBGJ/WYcZA==}
+  /electron-to-chromium@1.4.527:
+    resolution: {integrity: sha512-EafxEiEDzk2aLrdbtVczylHflHdHkNrpGNHIgDyA63sUQLQVS2ayj2hPw3RsVB42qkwURH+T2OxV7kGPUuYszA==}
 
   /emittery@1.0.1:
     resolution: {integrity: sha512-2ID6FdrMD9KDLldGesP6317G78K7km/kMcwItRtVFva7I/cSEOIaLpewaUb+YLXVwdAp3Ctfxh/V5zIl1sj7dQ==}
@@ -7376,8 +7379,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-jsdoc@46.8.1(eslint@8.49.0):
-    resolution: {integrity: sha512-uTce7IBluPKXIQMWJkIwFsI1gv7sZRmLjctca2K5DIxPi8fSBj9f4iru42XmGwuiMyH2f3nfc60sFmnSGv4Z/A==}
+  /eslint-plugin-jsdoc@46.8.2(eslint@8.49.0):
+    resolution: {integrity: sha512-5TSnD018f3tUJNne4s4gDWQflbsgOycIKEUBoCLn6XtBMgNHxQFmV8vVxUtiPxAQq8lrX85OaSG/2gnctxw9uQ==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
@@ -7447,7 +7450,7 @@ packages:
       builtins: 5.0.1
       eslint: 8.49.0
       eslint-plugin-es-x: 7.2.0(eslint@8.49.0)
-      get-tsconfig: 4.7.0
+      get-tsconfig: 4.7.1
       ignore: 5.2.4
       is-core-module: 2.13.0
       minimatch: 3.1.2
@@ -8595,8 +8598,8 @@ packages:
       get-intrinsic: 1.2.1
     dev: true
 
-  /get-tsconfig@4.7.0:
-    resolution: {integrity: sha512-pmjiZ7xtB8URYm74PlGJozDNyhvsVLUcpBa8DZBG3bWHwaHa9bPiRpiSfovw+fjhwONSCWKRyk+JQHEGZmMrzw==}
+  /get-tsconfig@4.7.1:
+    resolution: {integrity: sha512-sLtd6Bcwbi9IrAow/raCOTE9pmhvo5ksQo5v2lApUGJMzja64MUYhBp0G6X1S+f7IrBPn1HP+XkS2w2meoGcjg==}
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
@@ -8678,8 +8681,8 @@ packages:
       - supports-color
     dev: true
 
-  /glob@10.3.4:
-    resolution: {integrity: sha512-6LFElP3A+i/Q8XQKEvZjkEWEOTgAIALR9AO2rwT8bgPhDd1anmqDJDZ6lLddI4ehxxxR1S5RIqKe1uapMQfYaQ==}
+  /glob@10.3.5:
+    resolution: {integrity: sha512-bYUpUD7XDEHI4Q2O5a7PXGvyw4deKR70kHiDxzQbe925wbZknhOzUt2xBgTkYL6RBcVeXYuD9iNYeqoWbBZQnA==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
     dependencies:
@@ -15345,13 +15348,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /update-browserslist-db@1.0.12(browserslist@4.21.10):
-    resolution: {integrity: sha512-tE1smlR58jxbFMtrMpFNRmsrOXlpNXss965T1CrpwuZUzUAg/TBQc94SpyhDLSzrqrJS9xTRBthnZAGcE1oaxg==}
+  /update-browserslist-db@1.0.13(browserslist@4.21.11):
+    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
-      browserslist: 4.21.10
+      browserslist: 4.21.11
       escalade: 3.1.1
       picocolors: 1.0.0
 
@@ -15772,7 +15775,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.10.0
       acorn-import-assertions: 1.9.0(acorn@8.10.0)
-      browserslist: 4.21.10
+      browserslist: 4.21.11
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
       es-module-lexer: 1.3.1
@@ -16192,6 +16195,12 @@ packages:
     version: 7.0.0
     engines: {node: '>=14.16'}
     dev: false
+
+  github.com/TheEssem/libopenmpt-packaging/d05d151a72b638c6312227af0417aca69521172c:
+    resolution: {tarball: https://codeload.github.com/TheEssem/libopenmpt-packaging/tar.gz/d05d151a72b638c6312227af0417aca69521172c}
+    name: libopenmpt-wasm
+    version: 0.7.2
+    dev: true
 
   github.com/misskey-dev/browser-image-resizer/5a70660c2ac8aad3d436bfa67a5e7f7c8946cac4:
     resolution: {tarball: https://codeload.github.com/misskey-dev/browser-image-resizer/tar.gz/5a70660c2ac8aad3d436bfa67a5e7f7c8946cac4}
