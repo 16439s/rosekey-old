@@ -68,7 +68,7 @@ export const meta = {
 				type: "string",
 				optional: false,
 				nullable: false,
-				default: "https://git.joinfirefish.org/firefish/firefish",
+				default: "https://code.naskya.net/naskya/firefish",
 			},
 			feedbackUrl: {
 				type: "string",

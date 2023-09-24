@@ -436,7 +436,7 @@ export class Meta {
 
 	@Column("varchar", {
 		length: 512,
-		default: "https://git.joinfirefish.org/firefish/firefish",
+		default: "https://code.naskya.net/naskya/firefish",
 		nullable: false,
 	})
 	public repositoryUrl: string;
