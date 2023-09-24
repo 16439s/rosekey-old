@@ -20,7 +20,7 @@ export default define(meta, paramDef, async () => {
 	)
 		.then((response) => response.json())
 		.then((data) => {
-			tag_name = data[0].name;
+			tag_name = data[0].name.slice(1);
 		});
 
 	return {
