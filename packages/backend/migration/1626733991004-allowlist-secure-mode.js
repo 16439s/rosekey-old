@@ -8,7 +8,7 @@ export class allowlistSecureMode1626733991004 {
 			`ALTER TABLE "meta" ADD "secureMode" bool default false`,
 		);
 		await queryRunner.query(
-			`ALTER TABLE "meta" ADD "privateMode" bool default false`,
+			`ALTER TABLE "meta" ADD "privateMode" bool default true`,
 		);
 	}
 

@@ -381,7 +381,7 @@ export const meta = {
 				type: "boolean",
 				optional: true,
 				nullable: false,
-				default: false,
+				default: true,
 			},
 			defaultReaction: {
 				type: "string",

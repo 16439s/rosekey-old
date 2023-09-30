@@ -129,7 +129,7 @@ export class Meta {
 	public secureMode: boolean;
 
 	@Column("boolean", {
-		default: false,
+		default: true,
 	})
 	public privateMode: boolean;
 
