@@ -39,6 +39,7 @@ import type { App } from "@/models/entities/app.js";
 import { Not, In } from "typeorm";
 import type { User, ILocalUser, IRemoteUser } from "@/models/entities/user.js";
 import { genId } from "@/misc/gen-id.js";
+import { activeUsersChart } from "@/services/chart/index.js";
 import type { IPoll } from "@/models/entities/poll.js";
 import { Poll } from "@/models/entities/poll.js";
 import { createNotification } from "../create-notification.js";
@@ -434,6 +435,8 @@ export default async (
 		}
 
 		if (!silent) {
+			if (Users.isLocalUser(user)) activeUsersChart.write(user);
+
 			// 未読通知を作成
 			if (data.visibility === "specified") {
 				if (data.visibleUsers == null) throw new Error("invalid param");
