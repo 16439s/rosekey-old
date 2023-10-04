@@ -196,17 +196,9 @@ Repository url where you want to install:
     ```sh
     $ cd /home/calckey/calckey
     ```
-1. `packages/backend/ormconfig.js` をテキストエディターで開き、`migrations` に `migration-neko-revert/*.js` を追加する
+1. このフォークで加えられたデータベースへの変更を取り消す（`dbname`（以下の例では `mk1`）には `.config/default.yml` に記載されている PostgreSQL のデータベース名（`db:` の後に書かれているもの）を指定する）
     ```sh
-    $ vim packages/backend/ormconfig.js
-    ```
-    ```diff
-    - migrations: ["migration/*.js", "migration-neko/*.js"],
-    + migrations: ["migration/*.js", "migration-neko/*.js", "migration-neko-revert/*.js"],
-    ```
-1. このフォークで加えられたデータベースへの変更を取り消す
-    ```sh
-    $ pnpm run migrate
+    $ sudo -iu postgres psql --dbname=mk1 --file=neko/revert.sql
     ```
 1. Firefish がインストールされているディレクトリの親ディレクトリ (e.g., `/home/calckey`) に行く
     ```sh
