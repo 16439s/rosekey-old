@@ -786,7 +786,7 @@ previewNoteText: "預覽文本"
 customCss: "自定義 CSS"
 customCssWarn: "這個設定必須由具備相關知識的人員操作，不當的設定可能导致客戶端無法正常使用。"
 global: "公開"
-squareAvatars: "頭像以方形顯示"
+squareAvatars: 以方形顯示不是貓的使用者的大頭貼
 sent: "發送"
 received: "收取"
 searchResult: "搜尋結果"
@@ -1972,9 +1972,31 @@ delete2fa: 停用二階段認證(2FA)
 confirm: 確認
 deletePasskeysConfirm: 此帳號的所有通行密鑰及安全密鑰將被完全刪除。此動作無法復原，是否繼續？
 deletePasskeys: 刪除通行密鑰
-detectPostLanguage: 自動判定貼文的語言，並在外文貼文顯示翻譯按鈕
+detectPostLanguage: 自動偵測貼文的語言，並在外文貼文顯示翻譯按鈕
 indexableDescription: 允許內建搜尋引擎顯示您的公開貼文
 addRe: 在回覆有內容警告的貼文時，在標題前面加上 "re:"
 vibrate: 播放振動
 openServerInfo: 點擊貼文中的伺服器名稱以顯示伺服器資訊
 languageForTranslation: 貼文翻譯語言
+searchEngine: MFM搜尋欄使用的搜尋引擎
+postSearch: 在此伺服器進行搜尋
+hideMyIcon: 不顯示自己的大頭貼
+hideMyName: 不顯示自己的使用者名稱及ID
+privacyForNerds: 避免暴露身份
+disableToast: 不顯示「歡迎回來，◯◯」
+emojiModPerm: 自訂表情符號的管理
+emojiModPermDescription: "新增: 允許新增自訂表情符號，並允許設定尚未設定標籤/類別/授權條款的現有自訂表情符號。\n新增及編輯: 除了「新增」的權限之外，也允許編輯現有自訂表情符號的標籤/類別/授權條款\n全部允許: 除了「新增及編輯」的權限之外，也允許刪除現有的自訂表情符號。\n伺服器管理員及板主無論此設定為何皆有「全部允許」的權限。"
+_emojiModPerm:
+  none: 不允許
+  add: 新增
+  mod: 新增及編輯
+  full: 全部允許
+emphasizeFollowed: 強調追隨者的「追隨你的人」標記。
+showBigPostButton: 放大發文介面中的貼文按鈕
+replaceWidgetsButtonWithReloadButton: 將頁面下方的「小工具按鈕」替換成「重新整理按鈕」
+forMobile: 手機版網頁
+replaceChatButtonWithAccountButton: 將頁面下方的「傳送訊息按鈕」替換成「切換帳戶按鈕」
+preventMisclick: 預防誤觸
+hideFollowButtons: 隱藏通知頁面及個人檔案頁面的追隨按鈕
+showPreviewByDefault: 自動開啟發文介面中的預覽顯示
+originalFeature: 獨家功能
