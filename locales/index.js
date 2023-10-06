@@ -36,7 +36,7 @@ fs.readdirSync(__dirname + "/../custom/locales").forEach((file) => {
 const primaries = {
 	en: "US",
 	ja: "JP",
-	zh: "CN",
+	zh: "TW",
 };
 
 // 何故か文字列にバックスペース文字が混入することがあり、YAMLが壊れるので取り除く
