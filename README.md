@@ -37,6 +37,8 @@
 
 ## 細かい変更点
 
+- 標準のフォントを Atkinson Hyperlegible にする変更を取り消し
+  - フォントを変更したい場合は[このカスタム CSS](https://gitlab.com/LunarEclipse363/lunar-misskey-tweaks#setting-a-different-font) を使ってください
 - 簡体中文の翻訳が存在しない項目では繁体中文の翻訳を用いるように（本家では逆）
   - @sup39 さんが独自機能に使われているラベルの繁体中文訳を提供してくださったため
 - オンラインステータスが非公開のアカウントにはステータスを表す丸印を表示しないように
