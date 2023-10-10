@@ -12,6 +12,11 @@
 
 [Issues](https://code.naskya.net/naskya/firefish/issues) にあります。
 
+## 一時的な変更点
+
+- Mastodon API 対応のために Megalodon 8.1.1 を使用する変更を取り消し
+  - 正しく動いていないため
+
 ## 主要な変更点
 
 - パフォーマンス向上のためアクティブユーザー以外のチャート生成を無効化
