@@ -626,7 +626,7 @@ emptyToDisableSmtpAuth: "Lasciare username e password vuoti per disabilitare la 
 smtpSecure: "Usa la porta SSL/TLS predefinita per le connessioni SMTP"
 smtpSecureInfo: "Disabilita quando è attivo STARTTLS"
 testEmail: "Test di consegna email"
-wordMute: "Filtro parole"
+wordMute: "Filtro parole e lingua"
 instanceMute: "Server silenziati"
 userSaysSomething: "{name} ha detto qualcosa"
 makeActive: "Attiva"
@@ -901,7 +901,8 @@ _accountDelete:
     caricato.
 _ad:
   back: "Indietro"
-  reduceFrequencyOfThisAd: "Mostra meno spesso questa pubblicità"
+  reduceFrequencyOfThisAd: "Mostra meno spesso questo banner"
+  adsBy: Banner della comunità da {by}
 _forgotPassword:
   enterEmail: "Inserisci l'e-mail che hai registrato nel tuo profilo. Il link di ripristino
     della password verrà inviato a questo indirizzo."
@@ -1084,6 +1085,11 @@ _wordMute:
   soft: "Moderato"
   hard: "Severo"
   mutedNotes: "Post silenziati"
+  muteLangsDescription2: 'Usa il codice lingua, esempio: en, fr, ja, zh.'
+  lang: Lingua
+  langDescription: Nascondi dalla timeline i post in quest'insieme di lingue.
+  muteLangs: Lingue da non mostrare
+  muteLangsDescription: Separa andando a capo o con spazi per la condizione OR.
 _theme:
   explore: "Esplora temi"
   install: "Installa un tema"
@@ -1992,11 +1998,11 @@ secureMode: Modalità sicura (Acquisizione autorizzata)
 secureModeInfo: Le richieste dai server remoti non ricevono risposta senza prima una
   verifica.
 privateMode: Modalità privata
-allowedInstancesDescription: Gli host dei server che saranno federati in esclusiva,
+allowedInstancesDescription: Gli host dei server con cui sarà permessa la federazione,
   uno per riga (funziona solo in modalità privata).
-privateModeInfo: Se abilitata, solo i server in una whitelist potranno essere federati
+privateModeInfo: Se abilitata, solo i server nell'elenco potranno essere federati
   con questo server. Tutti i post saranno nascosti al pubblico.
-allowedInstances: Whitelist dei server
+allowedInstances: Elenco server permessi
 customCssWarn: Questa impostazione dovrebbe essere usata solo se sai cosa stai facendo.
   Inserire valori errati potrebbe bloccare il funzionamento del client.
 lastCommunication: Ultima comunicazione
@@ -2164,3 +2170,5 @@ indexable: Indicizzabile
 languageForTranslation: Linguaggio di traduzione dei post
 openServerInfo: Mostra informazioni sul server cliccando sul riquadro del server in
   un post
+vibrate: Abilita la vibrazione
+clickToShowPatterns: Clicca per vedere i pattern del modulo

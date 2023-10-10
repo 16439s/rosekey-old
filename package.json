@@ -1,18 +1,17 @@
 {
 	"name": "firefish",
-	"version": "1.0.5-dev17",
+	"version": "1.0.5-dev18",
 	"codename": "aqua",
 	"repository": {
 		"type": "git",
 		"url": "https://code.naskya.net/naskya/firefish"
 	},
-	"packageManager": "pnpm@8.7.6",
+	"packageManager": "pnpm@8.8.0",
 	"private": true,
 	"scripts": {
-		"rebuild": "pnpm run clean && ./scripts/build-greet.sh && pnpm --filter !sw -r --parallel run build && pnpm --filter sw run build && pnpm run gulp",
-		"build": "./scripts/build-greet.sh && pnpm --filter !sw -r --parallel run build && pnpm --filter sw run build && pnpm run gulp",
+		"rebuild": "pnpm run clean && pnpm run build",
+		"build": "./scripts/build-greet.sh && pnpm --filter firefish-js run build && pnpm --filter !firefish-js -r --parallel run build && pnpm run gulp",
 		"start": "pnpm --filter backend run start",
-		"start:test": "pnpm --filter backend run start:test",
 		"init": "pnpm run migrate",
 		"migrate": "pnpm --filter backend run migrate",
 		"revertmigration": "pnpm --filter backend run revertmigration",
@@ -58,7 +57,7 @@
 		"gulp-replace": "1.1.4",
 		"gulp-terser": "2.1.0",
 		"install-peers": "^1.0.4",
-		"pnpm": "8.7.1",
+		"pnpm": "8.8.0",
 		"typescript": "5.2.2"
 	}
 }

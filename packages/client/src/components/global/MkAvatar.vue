@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from "vue";
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import { getStaticImageUrl } from "@/scripts/get-static-image-url";
 import { extractAvgColorFromBlurhash } from "@/scripts/extract-avg-color-from-blurhash";
 import { acct, userPage } from "@/filters/user";
@@ -53,7 +53,7 @@ import { $i } from "@/account";
 
 const props = withDefaults(
 	defineProps<{
-		user: misskey.entities.User;
+		user: firefish.entities.User;
 		target?: string | null;
 		disableLink?: boolean;
 		disablePreview?: boolean;

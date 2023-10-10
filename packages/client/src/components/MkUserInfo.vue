@@ -89,7 +89,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import MkFollowButton from "@/components/MkFollowButton.vue";
 import XShowMoreButton from "@/components/MkShowMoreButton.vue";
 import MkNumber from "@/components/MkNumber.vue";
@@ -98,7 +98,7 @@ import { i18n } from "@/i18n";
 import { defaultStore } from "@/store";
 
 const props = defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: firefish.entities.UserDetailed;
 	detailed?: boolean;
 }>();
 

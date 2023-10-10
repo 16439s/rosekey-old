@@ -23,7 +23,6 @@ import {
 } from "@/misc/populate-emojis.js";
 import { db } from "@/db/postgre.js";
 import { IdentifiableError } from "@/misc/identifiable-error.js";
-import { detect as detectLanguage } from "tinyld";
 
 export async function populatePoll(note: Note, meId: User["id"] | null) {
 	const poll = await Polls.findOneByOrFail({ noteId: note.id });
@@ -265,7 +264,8 @@ export const NoteRepository = db.getRepository(Note).extend({
 			const tokens = packed.text ? mfm.parse(packed.text) : [];
 			function nyaizeNode(node: mfm.MfmNode) {
 				if (node.type === "quote") return;
-				if (node.type === "text") node.props.text = nyaize(node.props.text);
+				if (node.type === "text")
+					node.props.text = nyaize(node.props.text, packed.lang);
 
 				if (node.children) {
 					for (const child of node.children) {

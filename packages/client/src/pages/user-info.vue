@@ -348,7 +348,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from "vue";
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import MkObjectView from "@/components/MkObjectView.vue";
 import FormTextarea from "@/components/form/textarea.vue";
 import FormSwitch from "@/components/form/switch.vue";
@@ -376,7 +376,7 @@ const props = defineProps<{
 }>();
 
 const tab = ref("overview");
-const user = ref<null | misskey.entities.UserDetailed>();
+const user = ref<null | firefish.entities.UserDetailed>();
 const init = ref<ReturnType<typeof createFetcher>>();
 const info = ref();
 const ips = ref(null);

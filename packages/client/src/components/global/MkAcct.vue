@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts" setup>
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import { toUnicode } from "punycode/";
 import { host as hostRaw } from "@/config";
 import { defaultStore } from "@/store";
 import { $i } from "@/account";
 
 const props = defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: firefish.entities.UserDetailed;
 	detail?: boolean;
 }>();
 

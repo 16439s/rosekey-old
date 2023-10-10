@@ -86,6 +86,19 @@
 					{{ i18n.ts.reflectMayTakeTime }}</template
 				></FormSwitch
 			>
+			<!-- <FormSwitch
+				v-model="$i.injectFeaturedNote"
+				class="_formBlock"
+				@update:modelValue="onChangeInjectFeaturedNote"
+			>
+				{{ i18n.ts.showFeaturedNotesInTimeline }}
+			</FormSwitch> -->
+			<!-- <FormSwitch v-model="reportError" class="_formBlock"
+				>{{ i18n.ts.sendErrorReports
+				}}<template #caption>{{
+					i18n.ts.sendErrorReportsDescription
+				}}</template></FormSwitch
+			> -->
 			<FormSwitch v-model="detectPostLanguage" class="_formBlock">{{
 				i18n.ts.detectPostLanguage
 			}}</FormSwitch>
@@ -504,6 +517,15 @@ const openServerInfo = computed(
 	defaultStore.makeGetterSetter("openServerInfo"),
 );
 const searchURL = computed(defaultStore.makeGetterSetter("searchURL"));
+
+// This feature (along with injectPromo) is currently disabled
+// function onChangeInjectFeaturedNote(v) {
+// 	os.api("i/update", {
+// 		injectFeaturedNote: v,
+// 	}).then((i) => {
+// 		$i!.injectFeaturedNote = i.injectFeaturedNote;
+// 	});
+// }
 
 watch(swipeOnDesktop, () => {
 	defaultStore.set("swipeOnMobile", true);

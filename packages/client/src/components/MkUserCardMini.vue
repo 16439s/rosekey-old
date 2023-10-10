@@ -25,12 +25,12 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import { acct, userPage } from "@/filters/user";
 
 const props = withDefaults(
 	defineProps<{
-		user: misskey.entities.User;
+		user: firefish.entities.User;
 		showAboutPage?: boolean;
 	}>(),
 	{

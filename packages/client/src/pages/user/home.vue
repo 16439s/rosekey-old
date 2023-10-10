@@ -385,7 +385,7 @@ import {
 } from "vue";
 import calcAge from "s-age";
 import cityTimezones from "city-timezones";
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import XUserTimeline from "./index.timeline.vue";
 import XNote from "@/components/MkNote.vue";
 import MkFollowButton from "@/components/MkFollowButton.vue";
@@ -410,7 +410,7 @@ const emphasizeFollowed = defaultStore.state.emphasizeFollowed;
 const emit = defineEmits(["refresh"]);
 const props = withDefaults(
 	defineProps<{
-		user: misskey.entities.UserDetailed;
+		user: firefish.entities.UserDetailed;
 	}>(),
 	{},
 );

@@ -1,5 +1,5 @@
 import { defineAsyncComponent, reactive } from "vue";
-import type * as misskey from "firefish-js";
+import type * as firefish from "firefish-js";
 import { i18n } from "./i18n";
 import { del, get, set } from "@/scripts/idb-proxy";
 import { apiUrl } from "@/config";
@@ -8,7 +8,7 @@ import { reloadChannel, unisonReload } from "@/scripts/unison-reload";
 
 // TODO: 他のタブと永続化されたstateを同期
 
-type Account = misskey.entities.MeDetailed;
+type Account = firefish.entities.MeDetailed;
 
 const accountData = localStorage.getItem("account");
 
@@ -98,9 +98,9 @@ function fetchAccount(token: string): Promise<Account> {
 			.then((res) => {
 				if (res.error) {
 					if (res.error.id === "a8c724b3-6e9c-4b46-b1a8-bc3ed6258370") {
-						showSuspendedDialog().then(() => {
-							signout();
-						});
+						showSuspendedDialog();
+						signout();
+						return;
 					} else {
 						alert({
 							type: "error",
@@ -114,6 +114,14 @@ function fetchAccount(token: string): Promise<Account> {
 				}
 			})
 			.catch(fail);
+	});
+}
+
+function showSuspendedDialog() {
+	alert({
+		type: "error",
+		title: i18n.ts.yourAccountSuspendedTitle,
+		text: i18n.ts.yourAccountSuspendedDescription,
 	});
 }
 
@@ -151,8 +159,8 @@ export async function openAccountMenu(
 	opts: {
 		includeCurrentAccount?: boolean;
 		withExtraOperation: boolean;
-		active?: misskey.entities.UserDetailed["id"];
-		onChoose?: (account: misskey.entities.UserDetailed) => void;
+		active?: firefish.entities.UserDetailed["id"];
+		onChoose?: (account: firefish.entities.UserDetailed) => void;
 	},
 	ev: MouseEvent,
 	isMobile?: boolean,
@@ -185,7 +193,7 @@ export async function openAccountMenu(
 		);
 	}
 
-	async function switchAccount(account: misskey.entities.UserDetailed) {
+	async function switchAccount(account: firefish.entities.UserDetailed) {
 		const storedAccounts = await getAccounts();
 		const token = storedAccounts.find((x) => x.id === account.id).token;
 		switchAccountWithToken(token);
@@ -202,7 +210,7 @@ export async function openAccountMenu(
 		userIds: storedAccounts.map((x) => x.id),
 	});
 
-	function createItem(account: misskey.entities.UserDetailed) {
+	function createItem(account: firefish.entities.UserDetailed) {
 		return {
 			type: "user",
 			user: account,
