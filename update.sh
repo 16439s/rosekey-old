@@ -84,21 +84,8 @@ say "Done! We're almost there.\n"
 ## prevent migration errors
 if [[ ! -f packages/backend/native-utils/built/index.js ]]; then
   say "Something went wrong orz... Gonnya try fixing that."
-  running "pushd packages/backend/native-utils"
-  pushd packages/backend/native-utils
-  running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm build"
-  NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm build
-  running "popd"
-  popd
-
-  if [[ ! -f packages/backend/native-utils/built/index.js ]]; then
-    say "Something is still broken... I'll take another measure."
-    running "cp neko/index.js packages/backend/native-utils/built/index.js"
-    cp neko/index.js packages/backend/native-utils/built/index.js
-    say "Let's see if it works...\n"
-  else
-    say "The issue seems to be fixed!\n"
-  fi
+  running "cp neko/index.js packages/backend/native-utils/built/index.js"
+  cp neko/index.js packages/backend/native-utils/built/index.js
 else
   say "It's going well so far!\n"
 fi
