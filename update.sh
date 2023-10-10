@@ -76,8 +76,8 @@ say "Done!\n"
 say "Start building Firefish."
 say "It takes some time! Why not brew a cup of cofe?"
 
-running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run rebuild"
-NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run rebuild
+running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run rebuild"
+NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run rebuild
 
 say "Done! We're almost there.\n"
 
@@ -93,8 +93,8 @@ fi
 ## migrate
 say "Database migration time!"
 
-running "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run migrate"
-NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=production pnpm run migrate
+running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run migrate"
+NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run migrate
 
 say "Done!\n"
 
