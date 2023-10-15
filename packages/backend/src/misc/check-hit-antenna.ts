@@ -1,29 +1,20 @@
 import type { Antenna } from "@/models/entities/antenna.js";
 import type { Note } from "@/models/entities/note.js";
 import type { User } from "@/models/entities/user.js";
-import {
-	UserListJoinings,
-	UserGroupJoinings,
-	Blockings,
-} from "@/models/index.js";
+import { Blockings, UserProfiles } from "@/models/index.js";
 import { getFullApAccount } from "./convert-host.js";
 import * as Acct from "@/misc/acct.js";
 import type { Packed } from "./schema.js";
 import { Cache } from "./cache.js";
+import { getWordHardMute } from "./check-word-mute.js";
 
 const blockingCache = new Cache<User["id"][]>("blocking", 60 * 5);
 
-// NOTE: フォローしているユーザーのノート、リストのユーザーのノート、グループのユーザーのノート指定はパフォーマンス上の理由で無効になっている
-
-/**
- * noteUserFollowers / antennaUserFollowing はどちらか一方が指定されていればよい
- */
 export async function checkHitAntenna(
 	antenna: Antenna,
 	note: Note | Packed<"Note">,
 	noteUser: { id: User["id"]; username: string; host: string | null },
-	noteUserFollowers?: User["id"][],
-	antennaUserFollowing?: User["id"][],
+	antennaUserFollowing: User["id"][],
 ): Promise<boolean> {
 	if (note.visibility === "specified") return false;
 
@@ -35,41 +26,25 @@ export async function checkHitAntenna(
 	);
 	if (blockings.some((blocking) => blocking === antenna.userId)) return false;
 
+	if (
+		await getWordHardMute(
+			note,
+			antenna.userId,
+			(
+				await UserProfiles.findOneBy({ userId: antenna.userId })
+			)?.mutedWords,
+		)
+	)
+		return false;
+
 	if (note.visibility === "followers" || note.visibility === "home") {
-		if (noteUserFollowers && !noteUserFollowers.includes(antenna.userId))
-			return false;
 		if (antennaUserFollowing && !antennaUserFollowing.includes(note.userId))
 			return false;
 	}
 
 	if (!antenna.withReplies && note.replyId != null) return false;
 
-	if (antenna.src === "home") {
-		if (noteUserFollowers && !noteUserFollowers.includes(antenna.userId))
-			return false;
-		if (antennaUserFollowing && !antennaUserFollowing.includes(note.userId))
-			return false;
-	} else if (antenna.src === "list") {
-		const listUsers = (
-			await UserListJoinings.findBy({
-				userListId: antenna.userListId!,
-			})
-		).map((x) => x.userId);
-
-		if (!listUsers.includes(note.userId)) return false;
-	} else if (antenna.src === "group") {
-		const joining = await UserGroupJoinings.findOneByOrFail({
-			id: antenna.userGroupJoiningId!,
-		});
-
-		const groupUsers = (
-			await UserGroupJoinings.findBy({
-				userGroupId: joining.userGroupId,
-			})
-		).map((x) => x.userId);
-
-		if (!groupUsers.includes(note.userId)) return false;
-	} else if (antenna.src === "users") {
+	if (antenna.src === "users") {
 		const accts = antenna.users.map((x) => {
 			const { username, host } = Acct.parse(x);
 			return getFullApAccount(username, host).toLowerCase();

@@ -59,8 +59,9 @@ export default class extends Channel {
 		// レコードが追加されるNoteでも追加されるより先にここのストリーミングの処理に到達することが起こる。
 		// そのためレコードが存在するかのチェックでは不十分なので、改めてgetWordHardMuteを呼んでいる
 		if (
+			this.user &&
 			this.userProfile &&
-			(await getWordHardMute(note, this.user, this.userProfile.mutedWords))
+			(await getWordHardMute(note, this.user.id, this.userProfile.mutedWords))
 		)
 			return;
 

@@ -23,6 +23,7 @@ import { extractHashtags } from "@/misc/extract-hashtags.js";
 import type { IMentionedRemoteUsers } from "@/models/entities/note.js";
 import { Note } from "@/models/entities/note.js";
 import {
+	Followings,
 	Mutings,
 	Users,
 	NoteWatchings,
@@ -370,7 +371,7 @@ export default async (
 			)
 			.then((us) => {
 				for (const u of us) {
-					getWordHardMute(data, { id: u.userId }, u.mutedWords).then(
+					getWordHardMute(data, u.userId, u.mutedWords).then(
 						(shouldMute) => {
 							if (shouldMute) {
 								MutedNotes.insert({
@@ -387,7 +388,17 @@ export default async (
 
 		// Antenna
 		for (const antenna of await getAntennas()) {
-			checkHitAntenna(antenna, note, user).then((hit) => {
+			checkHitAntenna(
+				antenna,
+				note,
+				user,
+				(
+					await Followings.find({
+						where: { followerId: user.id },
+						select: ["followeeId"],
+					})
+				).map((x) => x.followeeId),
+			).then((hit) => {
 				if (hit) {
 					addNoteToAntenna(antenna, note, user);
 				}
