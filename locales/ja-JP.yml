@@ -2015,3 +2015,5 @@ openServerInfo: "投稿内のサーバー名をクリックでサーバー情報
 searchEngine: "検索の MFM で使用する検索エンジン"
 postSearch: "このサーバーの投稿検索"
 indexableDescription: MastodonやFirefishなどの検索機能に、あなたの投稿が表示されるのを許可します。
+makePrivate: "秘密にする"
+makePrivateConfirm: "リモートサーバーに削除リクエストを送信し、投稿の公開範囲を「秘密」にして他の人から見られないようにします。実行しますか？"

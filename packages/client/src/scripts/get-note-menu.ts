@@ -10,6 +10,7 @@ import { url } from "@/config";
 import { noteActions } from "@/store";
 import { shareAvailable } from "@/scripts/share-available";
 import { getUserMenu } from "@/scripts/get-user-menu";
+import { unisonReload } from "@/scripts/unison-reload";
 
 export function getNoteMenu(props: {
 	note: firefish.entities.Note;
@@ -69,6 +70,21 @@ export function getNoteMenu(props: {
 			reply: appearNote.reply,
 			channel: appearNote.channel,
 			editId: appearNote.id,
+		});
+	}
+
+	function makePrivate(): void {
+		os.confirm({
+			type: "warning",
+			text: i18n.ts.makePrivateConfirm,
+		}).then(async ({ canceled }) => {
+			if (canceled) return;
+
+			await os.api("notes/make-private", {
+				noteId: appearNote.id,
+			});
+
+			unisonReload();
 		});
 	}
 
@@ -435,6 +451,18 @@ export function getNoteMenu(props: {
 						text: i18n.ts.edit,
 						accent: true,
 						action: edit,
+				  }
+				: undefined,
+			isAppearAuthor &&
+			!(
+				appearNote.visibility === "specified" &&
+				appearNote.visibleUserIds.length === 0
+			)
+				? {
+						icon: "ph-eye-slash ph-bold ph-lg",
+						text: i18n.ts.makePrivate,
+						danger: true,
+						action: makePrivate,
 				  }
 				: undefined,
 			isAppearAuthor

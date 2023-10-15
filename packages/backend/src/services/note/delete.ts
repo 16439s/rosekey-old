@@ -27,19 +27,21 @@ export default async function (
 	user: { id: User["id"]; uri: User["uri"]; host: User["host"] },
 	note: Note,
 	quiet = false,
+	deleteFromDb = true,
 ) {
 	const deletedAt = new Date();
 
 	// この投稿を除く指定したユーザーによる指定したノートのリノートが存在しないとき
 	if (
 		note.renoteId &&
-		(await countSameRenotes(user.id, note.renoteId, note.id)) === 0
+		(await countSameRenotes(user.id, note.renoteId, note.id)) === 0 &&
+		deleteFromDb
 	) {
 		Notes.decrement({ id: note.renoteId }, "renoteCount", 1);
 		Notes.decrement({ id: note.renoteId }, "score", 1);
 	}
 
-	if (note.replyId) {
+	if (note.replyId && deleteFromDb) {
 		await Notes.decrement({ id: note.replyId }, "repliesCount", 1);
 	}
 
@@ -106,10 +108,12 @@ export default async function (
 		}
 	}
 
-	await Notes.delete({
-		id: note.id,
-		userId: user.id,
-	});
+	if (deleteFromDb) {
+		await Notes.delete({
+			id: note.id,
+			userId: user.id,
+		});
+	}
 
 	if (meilisearch) {
 		await meilisearch.deleteNotes(note.id);
