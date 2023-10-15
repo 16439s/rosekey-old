@@ -40,6 +40,9 @@
 
 ## 細かい変更点
 
+- リアクションの履歴を公開する設定をデフォルトで有効に
+  - 私がみんなのリアクションを見たいと思っているため
+  - もちろん設定から無効にできます
 - 標準のフォントを Atkinson Hyperlegible にする変更を取り消し
   - フォントを変更したい場合は[このカスタム CSS](https://gitlab.com/LunarEclipse363/lunar-misskey-tweaks#setting-a-different-font) を使ってください
 - 簡体中文の翻訳が存在しない項目では繁体中文の翻訳を用いるように（本家では逆）
