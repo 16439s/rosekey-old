@@ -1710,6 +1710,8 @@ _visibility:
   followersDescription: "Make visible to your followers and mentioned users only"
   specified: "Direct"
   specifiedDescription: "Make visible for specified users only"
+  private: "Private"
+  privateDescription: "Make visible for you only"
   localOnly: "Local only"
   localOnlyDescription: "Not visible to remote users"
 _postForm:

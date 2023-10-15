@@ -1494,6 +1494,8 @@ _visibility:
   followersDescription: "フォロワーと会話相手のみに公開"
   specified: "ダイレクト"
   specifiedDescription: "指定したユーザーのみに公開"
+  private: "秘密"
+  privateDescription: "あなた以外には非公開"
   localOnly: "ローカルのみ"
   localOnlyDescription: "リモートユーザーには非公開"
 _postForm:

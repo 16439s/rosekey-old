@@ -1395,6 +1395,8 @@ _visibility:
   followersDescription: "仅对您的关注者和提及的用户可见"
   specified: "指定用户"
   specifiedDescription: "仅发送至指定用户"
+  private: "秘密"
+  privateDescription: "仅你可见"
   localOnly: "仅限本地"
   localOnlyDescription: "对远程用户不可见"
 _postForm:

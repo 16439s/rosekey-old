@@ -1390,6 +1390,8 @@ _visibility:
   followersDescription: "僅發佈至關注者"
   specified: "指定使用者"
   specifiedDescription: "僅發送至指定使用者"
+  private: "祕密"
+  privateDescription: "僅你可見"
   localOnly: "僅限本地"
   localOnlyDescription: "對遠端使用者隱藏"
 _postForm:

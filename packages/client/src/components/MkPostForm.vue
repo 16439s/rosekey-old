@@ -50,6 +50,9 @@
 					<span v-if="visibility === 'specified'"
 						><i class="ph-envelope-simple-open ph-bold ph-lg"></i
 					></span>
+					<span v-if="visibility === 'private'"
+						><i class="ph-eye-slash ph-bold ph-lg"></i
+					></span>
 				</button>
 				<button
 					v-tooltip="i18n.ts.previewNoteText"
@@ -527,6 +530,8 @@ if (
 			}).then((users) => {
 				users.forEach(pushVisibleUser);
 			});
+		} else {
+			visibility.value = "private";
 		}
 
 		if (props.reply.userId !== $i.id) {
@@ -885,9 +890,12 @@ async function post() {
 		poll: poll.value,
 		cw: useCw.value ? cw.value || "" : undefined,
 		localOnly: localOnly.value,
-		visibility: visibility.value,
+		visibility:
+			visibility.value === "private" ? "specified" : visibility.value,
 		visibleUserIds:
-			visibility.value === "specified"
+			visibility.value === "private"
+				? []
+				: visibility.value === "specified"
 				? visibleUsers.value.map((u) => u.id)
 				: undefined,
 	};
