@@ -31,10 +31,7 @@
 			primary
 			class="save"
 			@click="updated"
-			><i
-				:class="defaultStore.state.iconSet"
-				class="ph-floppy-disk-back ph-lg"
-			></i>
+			><i class="ph-floppy-disk-back ph ph-lg"></i>
 			{{ i18n.ts.save }}</MkButton
 		>
 	</div>
@@ -53,8 +50,6 @@ import {
 import { debounce } from "throttle-debounce";
 import MkButton from "@/components/MkButton.vue";
 import { i18n } from "@/i18n";
-// import icon from "@/scripts/icon";
-import { defaultStore } from "@/store";
 
 export default defineComponent({
 	components: {
