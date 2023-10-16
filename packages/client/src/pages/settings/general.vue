@@ -46,19 +46,19 @@
 		<FormRadios v-model="iconSet" class="_formBlock">
 			<template #label>{{ i18n.ts.iconSet }}</template>
 			<option value="ph-bold" :aria-label="i18n.ts._iconSets.bold">
-				<i class="ph-bold ph-2x ph-smiley"></i>
+				<i class="ph-bold ph-2x ph-star"></i>
 			</option>
 			<option value="ph-duotone" :aria-label="i18n.ts._iconSets.duotone">
-				<i class="ph-duotone ph-2x ph-smiley"></i>
+				<i class="ph-duotone ph-2x ph-star"></i>
 			</option>
 			<option value="ph-fill" :aria-label="i18n.ts._iconSets.fill">
-				<i class="ph-fill ph-2x ph-smiley"></i>
+				<i class="ph-fill ph-2x ph-star"></i>
 			</option>
 			<option value="ph" :aria-label="i18n.ts._iconSets.regular">
-				<i class="ph ph-2x ph-smiley"></i>
+				<i class="ph ph-2x ph-star"></i>
 			</option>
 			<option value="ph-light" :aria-label="i18n.ts._iconSets.light">
-				<i class="ph-light ph-2x ph-smiley"></i>
+				<i class="ph-light ph-2x ph-star"></i>
 			</option>
 		</FormRadios>
 
