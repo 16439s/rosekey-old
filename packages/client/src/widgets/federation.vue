@@ -6,7 +6,7 @@
 		class="mkw-federation"
 	>
 		<template #header
-			><i class="ph-planet ph-bold ph-lg"></i
+			><i :class="icon('ph-planet')"></i
 			>{{ i18n.ts._widgets.federation }}</template
 		>
 
@@ -15,7 +15,7 @@
 			<transition-group
 				v-else
 				tag="div"
-				:name="$store.state.animation ? 'chart' : ''"
+				:name="defaultStore.state.animation ? 'chart' : ''"
 				class="instances"
 			>
 				<div
@@ -44,19 +44,17 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
 import type { Widget, WidgetComponentExpose } from "./widget";
-import {
-	WidgetComponentEmits,
-	WidgetComponentProps,
-	useWidgetPropsManager,
-} from "./widget";
+import { useWidgetPropsManager } from "./widget";
 import type { GetFormResultType } from "@/scripts/form";
 import MkContainer from "@/components/MkContainer.vue";
 import * as os from "@/os";
 import { useInterval } from "@/scripts/use-interval";
 import { i18n } from "@/i18n";
 import { getProxiedImageUrlNullable } from "@/scripts/media-proxy";
+import { defaultStore } from "@/store";
+import icon from "@/scripts/icon";
 
 const name = "federation";
 

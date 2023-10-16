@@ -73,6 +73,7 @@ import { stream } from "@/stream";
 import { i18n } from "@/i18n";
 import { definePageMetadata } from "@/scripts/page-metadata";
 import MkFolder from "@/components/MkFolder.vue";
+import icon from "@/scripts/icon";
 
 const rootEl = shallowRef<HTMLElement>();
 const serverInfo = ref<any>(null);
@@ -171,7 +172,7 @@ onBeforeUnmount(() => {
 
 definePageMetadata({
 	title: i18n.ts.dashboard,
-	icon: "ph-gauge ph-bold ph-lg",
+	icon: `${icon("ph-gauge")}`,
 });
 </script>
 

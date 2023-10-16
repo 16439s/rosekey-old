@@ -25,43 +25,43 @@
 			<div class="sub-icon" :class="notification.type">
 				<i
 					v-if="notification.type === 'follow'"
-					class="ph-hand-waving ph-bold"
+					:class="icon('ph-hand-waving', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'receiveFollowRequest'"
-					class="ph-clock ph-bold"
+					:class="icon('ph-clock', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'followRequestAccepted'"
-					class="ph-check ph-bold"
+					:class="icon('ph-check', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'groupInvited'"
-					class="ph-identification-card ph-bold"
+					:class="icon('ph-identification-card', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'renote'"
-					class="ph-rocket-launch ph-bold"
+					:class="icon('ph-rocket-launch', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'reply'"
-					class="ph-arrow-bend-up-left ph-bold"
+					:class="icon('ph-arrow-bend-up-left', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'mention'"
-					class="ph-at ph-bold"
+					:class="icon('ph-at', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'quote'"
-					class="ph-quotes ph-bold"
+					:class="icon('ph-quotes', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'pollVote'"
-					class="ph-microphone-stage ph-bold"
+					:class="icon('ph-microphone-stage', false)"
 				></i>
 				<i
 					v-else-if="notification.type === 'pollEnded'"
-					class="ph-microphone-stage ph-bold"
+					:class="icon('ph-microphone-stage', false)"
 				></i>
 				<!-- notification.reaction が null になることはまずないが、ここでoptional chaining使うと一部ブラウザで刺さるので念の為 -->
 				<XReactionIcon
@@ -276,6 +276,7 @@ import { stream } from "@/stream";
 import { useTooltip } from "@/scripts/use-tooltip";
 import { defaultStore } from "@/store";
 import { instance } from "@/instance";
+import icon from "@/scripts/icon";
 
 const props = withDefaults(
 	defineProps<{

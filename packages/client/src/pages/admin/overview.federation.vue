@@ -29,6 +29,7 @@ import number from "@/filters/number";
 import MkNumberDiff from "@/components/MkNumberDiff.vue";
 import { i18n } from "@/i18n";
 import { useChartTooltip } from "@/scripts/use-chart-tooltip";
+import icon from "@/scripts/icon";
 
 const topSubInstancesForPie = ref<any>(null);
 const topPubInstancesForPie = ref<any>(null);

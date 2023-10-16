@@ -5,7 +5,7 @@
 		class="eiwwqkts _noSelect"
 		:class="{
 			cat: show && user.isCat,
-			square: user.isCat ? false : $store.state.squareAvatars,
+			square: user.isCat ? false : defaultStore.state.squareAvatars,
 		}"
 		:style="{ color }"
 		:title="acct(user)"
@@ -24,7 +24,7 @@
 		class="eiwwqkts _noSelect"
 		:class="{
 			cat: show && user.isCat,
-			square: user.isCat ? false : $store.state.squareAvatars,
+			square: user.isCat ? false : defaultStore.state.squareAvatars,
 		}"
 		:style="{ color }"
 		:to="userPage(user)"

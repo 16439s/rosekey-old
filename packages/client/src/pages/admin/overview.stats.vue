@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<Transition
-			:name="$store.state.animation ? '_transition_zoom' : ''"
+			:name="defaultStore.state.animation ? '_transition_zoom' : ''"
 			mode="out-in"
 		>
 			<MkLoading v-if="fetching" />
 			<div v-else :class="$style.root">
 				<div class="item _panel users">
 					<div class="icon">
-						<i class="ph-users ph-bold ph-xl"></i>
+						<i :class="icon('ph-users ph-xl', false)"></i>
 					</div>
 					<div class="body">
 						<div class="value">
@@ -22,7 +22,7 @@
 				</div>
 				<div class="item _panel notes">
 					<div class="icon">
-						<i class="ph-pencil ph-bold ph-xl"></i>
+						<i :class="icon('ph-pencil ph-xl', false)"></i>
 					</div>
 					<div class="body">
 						<div class="value">
@@ -36,7 +36,7 @@
 				</div>
 				<div class="item _panel instances">
 					<div class="icon">
-						<i class="ph-planet ph-bold ph-xl"></i>
+						<i :class="icon('ph-planet ph-xl', false)"></i>
 					</div>
 					<div class="body">
 						<div class="value">
@@ -50,7 +50,7 @@
 				</div>
 				<div class="item _panel online">
 					<div class="icon">
-						<i class="ph-broadcast ph-bold ph-xl"></i>
+						<i :class="icon('ph-broadcast ph-xl', false)"></i>
 					</div>
 					<div class="body">
 						<div class="value">
@@ -64,7 +64,7 @@
 				</div>
 				<div class="item _panel emojis">
 					<div class="icon">
-						<i class="ph-smiley ph-bold ph-xl"></i>
+						<i :class="icon('ph-smiley ph-xl', false)"></i>
 					</div>
 					<div class="body">
 						<div class="value">
@@ -88,6 +88,8 @@ import { onMounted, ref } from "vue";
 import * as os from "@/os";
 import MkNumber from "@/components/MkNumber.vue";
 import { i18n } from "@/i18n";
+import { defaultStore } from "@/store";
+import icon from "@/scripts/icon";
 
 const stats = ref(null);
 const usersComparedToThePrevDay = ref<number>();

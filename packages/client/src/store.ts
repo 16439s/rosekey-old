@@ -405,6 +405,15 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: "https://duckduckgo.com/?q=",
 		},
+		iconSet: {
+			where: "device",
+			default: "ph" as
+				| "ph-bold"
+				| "ph-duotone"
+				| "ph-light"
+				| "ph" // this is ph-regular
+				| "ph-fill",
+		},
 	}),
 );
 
@@ -422,7 +431,7 @@ interface Plugin {
 }
 
 /**
- * 常にメモリにロードしておく必要がないような設定情報を保管するストレージ(非リアクティブ)
+ * Storage for configuration information that does not need to be constantly loaded into memory (non-reactive)
  */
 import lightTheme from "@/themes/l-rosepinedawn.json5";
 import darkTheme from "@/themes/d-rosepine.json5";
@@ -512,12 +521,5 @@ export class ColdDeviceStorage {
 				ColdDeviceStorage.set(key, val);
 			},
 		};
-	}
-}
-
-// このファイルに書きたくないけどここに書かないと何故かVeturが認識しない
-declare module "@vue/runtime-core" {
-	interface ComponentCustomProperties {
-		$store: typeof defaultStore;
 	}
 }

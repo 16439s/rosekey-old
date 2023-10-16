@@ -2,7 +2,7 @@
 	<span class="mk-acct" v-if="show">
 		<span class="name">@{{ user.username }}</span>
 		<span
-			v-if="user.host || detail || $store.state.showFullAcct"
+			v-if="user.host || detail || defaultStore.state.showFullAcct"
 			class="host"
 			>@{{ user.host || host }}</span
 		>

@@ -30,7 +30,7 @@
 					to="/"
 					exact
 				>
-					<i class="icon ph-house ph-bold ph-lg ph-fw ph-lg"></i
+					<i :class="icon('ph-house icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.timeline }}</span>
 				</MkA>
 				<template v-for="item in menu">
@@ -63,7 +63,7 @@
 							v-if="navbarItemDef[item].indicated"
 							class="indicator"
 							:class="{
-								animateIndicator: $store.state.animation,
+								animateIndicator: defaultStore.state.animation,
 							}"
 							><i class="icon ph-circle ph-fill"></i
 						></span>
@@ -77,7 +77,7 @@
 					active-class="active"
 					to="/admin"
 				>
-					<i class="icon ph-door ph-bold ph-lg ph-fw ph-lg"></i
+					<i :class="icon('ph-door icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.controlPanel }}</span>
 				</MkA>
 				<MkA
@@ -88,18 +88,18 @@
 					active-class="active"
 					to="/admin/emojis"
 				>
-					<i class="icon ph-smiley ph-bold ph-fw ph-lg"></i
+					<i :class="icon('ph-smiley icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.customEmojis }}</span>
 				</MkA>
 				<button v-click-anime class="item _button" @click="more">
-					<i
-						class="icon ph-dots-three-outline ph-bold ph-lg ph-fw ph-lg"
-					></i
+					<i :class="icon('ph-dots-three-outline icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.more }}</span>
 					<span
 						v-if="otherMenuItemIndicated"
 						class="indicator"
-						:class="{ animateIndicator: $store.state.animation }"
+						:class="{
+							animateIndicator: defaultStore.state.animation,
+						}"
 						><i class="icon ph-circle ph-fill"></i
 					></span>
 				</button>
@@ -109,7 +109,7 @@
 					active-class="active"
 					to="/settings"
 				>
-					<i class="icon ph-gear-six ph-bold ph-lg ph-fw ph-lg"></i
+					<i :class="icon('ph-gear-six icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.settings }}</span>
 				</MkA>
 			</div>
@@ -119,7 +119,7 @@
 					data-cy-open-post-form
 					@click="os.post"
 				>
-					<i class="icon ph-pencil ph-bold ph-lg ph-fw ph-lg"></i
+					<i :class="icon('ph-pencil icon ph-fw')"></i
 					><span class="text">{{ i18n.ts.note }}</span>
 				</button>
 				<button
@@ -127,7 +127,7 @@
 					class="item _button help"
 					@click="openHelpMenu"
 				>
-					<i class="help icon ph-info ph-bold ph-xl ph-fw"></i>
+					<i :class="icon('ph-info ph-xl ph-fw help', false)"></i>
 				</button>
 			</div>
 		</div>
@@ -149,6 +149,7 @@ import { $i, openAccountMenu as openAccountMenu_ } from "@/account";
 import { openHelpMenu_ } from "@/scripts/helpMenu";
 import { defaultStore } from "@/store";
 import { i18n } from "@/i18n";
+import icon from "@/scripts/icon";
 
 const menu = toRef(defaultStore.state, "menu");
 const otherMenuItemIndicated = computed(() => {

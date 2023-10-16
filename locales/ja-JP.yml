@@ -1000,6 +1000,7 @@ detectPostLanguage: "投稿の言語を自動検出し、外国語の投稿に�
 languageForTranslation: "投稿翻訳に使用する言語"
 showBigPostButton: "投稿ボタンを巨大にする"
 emphasizeFollowed: "フォロワーのアカウントに表示される「フォローされています」の表示を強調する"
+iconSet: "アイコンのスタイル"
 
 _sensitiveMediaDetection:
   description: "機械学習を使って自動でセンシティブなメディアを検出し、モデレーションに役立てられます。サーバーの負荷が少し増えます。"
@@ -2018,3 +2019,9 @@ postSearch: "このサーバーの投稿検索"
 indexableDescription: MastodonやFirefishなどの検索機能に、あなたの投稿が表示されるのを許可します。
 makePrivate: "秘密にする"
 makePrivateConfirm: "リモートサーバーに削除リクエストを送信し、投稿の公開範囲を「秘密」にして他の人から見られないようにします。実行しますか？"
+_iconSets:
+  bold: "太め"
+  light: "細め"
+  regular: "標準"
+  fill: "塗りつぶし"
+  duotone: "2色"

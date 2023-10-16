@@ -1162,6 +1162,7 @@ detectPostLanguage: "Automatically detect the language and show a translate butt
   for posts in foreign languages"
 vibrate: "Play vibrations"
 openServerInfo: "Show server information by clicking the server ticker on a post"
+iconSet: "Icon set"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
@@ -2179,3 +2180,9 @@ searchEngine: "Search engine used in search bar MFM"
 postSearch: "Post search on this server"
 makePrivate: "Make private"
 makePrivateConfirm: "This operation will send a deletion request to remote servers and change the visibility to private. Proceed?"
+_iconSets:
+  bold: "Bold"
+  light: "Light"
+  regular: "Regular"
+  fill: "Filled"
+  duotone: "Duotone"

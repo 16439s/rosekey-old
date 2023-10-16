@@ -44,6 +44,8 @@
   - 投稿ページのタブに表示される英単語の単数形・複数形を正しくする ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10621))
   - GitHub や Discord のアカウントでサインインする機能の廃止 ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10612))
     - Misskey v12 のときからずっとこの機能ってちゃんと使えた記憶が無い……
+  - アイコンフォントのスタイルを設定から選べるように ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10613))
+    - デフォルトのアイコンの太さも細めに変更
 - リアクションの履歴を公開する設定をデフォルトで有効に
   - 私がみんなのリアクションを見たいと思っているため
   - もちろん設定から無効にできます
