@@ -40,6 +40,7 @@
 
 ## 細かい変更点
 
+- 管理者アカウントも引っ越しできるように
 - まだマージされていない本家 Firefish へのマージリクエストを独断で取り込み
   - アイコンフォントのスタイルを設定から選べるように ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10613))
     - デフォルトのアイコンの太さも細めに変更
