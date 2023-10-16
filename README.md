@@ -42,6 +42,8 @@
 
 - まだマージされていない本家 Firefish へのマージリクエストを独断で取り込み
   - 投稿ページのタブに表示される英単語の単数形・複数形を正しくする ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10621))
+  - GitHub や Discord のアカウントでサインインする機能の廃止 ([MR](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10612))
+    - Misskey v12 のときからずっとこの機能ってちゃんと使えた記憶が無い……
 - リアクションの履歴を公開する設定をデフォルトで有効に
   - 私がみんなのリアクションを見たいと思っているため
   - もちろん設定から無効にできます
