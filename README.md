@@ -216,6 +216,10 @@ Repository url where you want to install:
     ```sh
     $ cd /home/calckey/calckey
     ```
+1. 最新版にアップデートする
+    ```sh
+    $ ./update.sh
+    ```
 1. このフォークで加えられたデータベースへの変更を取り消す（`dbname`（以下の例では `mk1`）には `.config/default.yml` に記載されている PostgreSQL のデータベース名（`db:` の後に書かれているもの）を指定する）
     ```sh
     $ sudo -iu postgres psql --dbname=mk1 --file=neko/revert.sql
