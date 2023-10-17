@@ -4,6 +4,7 @@ import define from "../../define.js";
 import { getNote } from "../../common/getters.js";
 import { ApiError } from "../../error.js";
 import { SECOND, HOUR } from "@/const.js";
+import { publishNoteStream } from "@/services/stream.js";
 
 export const meta = {
 	tags: ["notes"],
@@ -56,5 +57,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	await Notes.update(note.id, {
 		visibility: "specified",
 		visibleUserIds: [],
+	});
+
+	// Publish update event for the updated note details
+	// TODO: Send "deleted" to other users?
+	publishNoteStream(note.id, "updated", {
+		updatedAt: new Date(),
 	});
 });

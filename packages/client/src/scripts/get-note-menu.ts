@@ -10,7 +10,6 @@ import { url } from "@/config";
 import { noteActions } from "@/store";
 import { shareAvailable } from "@/scripts/share-available";
 import { getUserMenu } from "@/scripts/get-user-menu";
-import { unisonReload } from "@/scripts/unison-reload";
 import icon from "@/scripts/icon";
 
 export function getNoteMenu(props: {
@@ -84,8 +83,6 @@ export function getNoteMenu(props: {
 			await os.api("notes/make-private", {
 				noteId: appearNote.id,
 			});
-
-			unisonReload();
 		});
 	}
 

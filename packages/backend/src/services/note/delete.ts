@@ -46,9 +46,12 @@ export default async function (
 	}
 
 	if (!quiet) {
-		publishNoteStream(note.id, "deleted", {
-			deletedAt: deletedAt,
-		});
+		// Only broadcast "deleted" to local if the note is deleted from db
+		if (deleteFromDb) {
+			publishNoteStream(note.id, "deleted", {
+				deletedAt: deletedAt,
+			});
+		}
 
 		//#region ローカルの投稿なら削除アクティビティを配送
 		if (Users.isLocalUser(user) && !note.localOnly) {
