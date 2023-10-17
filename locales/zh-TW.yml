@@ -2005,3 +2005,10 @@ showPreviewByDefault: 自動開啟發文介面中的預覽顯示
 originalFeature: 獨家功能
 makePrivate: 設為祕密
 makePrivateConfirm: 此操作將向遠端伺服器發送刪除請求，並將貼文的公開範圍設為「祕密」。是否繼續？
+iconSet: 圖示的樣式
+_iconSets:
+  bold: 粗線
+  light: 細線
+  regular: 標準
+  fill: 填滿
+  duotone: 雙色
