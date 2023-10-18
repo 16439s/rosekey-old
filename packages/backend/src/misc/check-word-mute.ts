@@ -59,10 +59,7 @@ export async function getWordHardMute(
 	meId: string | null | undefined,
 	mutedWords?: Array<string | string[]>,
 ): Promise<boolean> {
-	// 自分自身
-	if (note.userId === meId || mutedWords == null) {
-		return false;
-	}
+	if (note.userId === meId || mutedWords == null) return false;
 
 	if (mutedWords.length > 0) {
 		return (

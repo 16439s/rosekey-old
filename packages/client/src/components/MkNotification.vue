@@ -507,12 +507,9 @@ useTooltip(reactionRef, (showing) => {
 			overflow: hidden;
 			text-overflow: ellipsis;
 
-			//	> span:first-child {
-			//		opacity: 0.7;
-			//		&::after {
-			//			content: ": ";
-			//		}
-			//	}
+			// > span:first-child {
+			// 	opacity: 0.7;
+			// }
 
 			> i {
 				vertical-align: super;

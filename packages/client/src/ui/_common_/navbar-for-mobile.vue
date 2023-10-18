@@ -127,7 +127,9 @@
 					class="item _button help"
 					@click="openHelpMenu"
 				>
-					<i :class="icon('ph-info ph-xl ph-fw help', false)"></i>
+					<i
+						:class="icon('ph-info help icon ph-xl ph-fw', false)"
+					></i>
 				</button>
 			</div>
 		</div>
