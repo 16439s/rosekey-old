@@ -31,7 +31,6 @@ import {
 	version as vueVersion,
 	watch,
 } from "vue";
-import { compareVersions } from "compare-versions";
 
 import widgets from "@/widgets";
 import directives from "@/directives";
@@ -250,25 +249,13 @@ function checkForSplash() {
 		// テーマリビルドするため
 		localStorage.removeItem("theme");
 
-		try {
-			// 変なバージョン文字列来るとcompareVersionsでエラーになるため
-			if (
-				lastVersion != null &&
-				version !== lastVersion &&
-				defaultStore.state.showUpdates
-			) {
-				// ログインしてる場合だけ
-				if ($i) {
-					popup(
-						defineAsyncComponent(() => import("@/components/MkUpdated.vue")),
-						{},
-						{},
-						"closed",
-					);
-				}
-			}
-		} catch (err) {
-			console.error(err);
+		if ($i && defaultStore.state.showUpdates) {
+			popup(
+				defineAsyncComponent(() => import("@/components/MkUpdated.vue")),
+				{},
+				{},
+				"closed",
+			);
 		}
 	}
 
