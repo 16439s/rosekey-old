@@ -12,6 +12,7 @@
 import { ref } from "vue";
 import { i18n } from "@/i18n";
 import { useRouter } from "@/router";
+import { defaultStore } from "@/store";
 import icon from "@/scripts/icon";
 
 const router = useRouter();
