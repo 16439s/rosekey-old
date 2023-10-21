@@ -243,7 +243,7 @@ export const defaultStore = markRaw(
 		},
 		showGapBetweenNotesInTimeline: {
 			where: "device",
-			default: true,
+			default: false,
 		},
 		darkMode: {
 			where: "device",
@@ -315,7 +315,7 @@ export const defaultStore = markRaw(
 		},
 		enterSendsMessage: {
 			where: "device",
-			default: true,
+			default: false,
 		},
 		showUpdates: {
 			where: "device",
