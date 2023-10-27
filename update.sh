@@ -64,7 +64,7 @@ sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT:0
 
 say "Done!\n"
 
-# upgrade
+# Upgrade
 ## install dependencies
 say "Upgrading dependencies..."
 
