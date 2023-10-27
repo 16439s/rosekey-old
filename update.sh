@@ -14,17 +14,21 @@ function running {
 }
 
 say "Start upgrading Firefish!"
-say "Did you stop your server?"
-read -r -p "[Y/n] > " yn
-case "${yn}" in
-  [Nn]|[Nn][Oo])
-    say "You must stop your server first!"
-    exit 1
-    ;;
-  *)
-    say "uwu~ erai erai!\n"
-    ;;
-esac
+
+# Confirm that the server is stopped
+if [[ $# != 1 ]] || [[ $1 != "--no-confirm" ]]; then
+  say "Did you stop your server?"
+  read -r -p "[Y/n] > " yn
+  case "${yn}" in
+    [Nn]|[Nn][Oo])
+      say "You must stop your server first!"
+      exit 1
+      ;;
+    *)
+      say "uwu~ erai erai!\n"
+      ;;
+  esac
+fi
 
 # Pull changes
 ## git pull
