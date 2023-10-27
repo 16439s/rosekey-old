@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
 set -eu
 
+function color {
+  if [[ -t 1 ]]; then
+    tput setaf ${1:-7}
+  fi
+}
+
 function say {
-  tput setaf 5
+  color 5  # magenta
   echo -e "( ^-^) < $1"
-  tput setaf 7
+  color
 }
 
 function running {
-  tput setaf 3
+  color 3  # yellow
   echo "[running] \$ $1"
-  tput setaf 7
+  color
 }
 
 say "Start upgrading Firefish!"
