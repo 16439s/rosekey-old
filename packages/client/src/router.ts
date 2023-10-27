@@ -315,7 +315,10 @@ export const routes = [
 	},
 	{
 		path: "/search",
-		component: page(() => import("./pages/search.vue")),
+		component:
+			$i != null
+				? page(() => import("./pages/search.vue"))
+				: page(() => import("./pages/not-found.vue")),
 		query: {
 			q: "query",
 			channel: "channel",

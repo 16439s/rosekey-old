@@ -15,6 +15,7 @@ import { sqlLikeEscape } from "@/misc/sql-like-escape.js";
 export const meta = {
 	tags: ["notes"],
 
+	// but the result will be empty if no credentials provided
 	requireCredential: false,
 	requireCredentialPrivateMode: true,
 
@@ -69,6 +70,9 @@ export const paramDef = {
 } as const;
 
 export default define(meta, paramDef, async (ps, me) => {
+	// disable the post search if no credentials are provided
+	if (me == null) return [];
+
 	if (es == null && sonic == null && meilisearch == null) {
 		const query = makePaginationQuery(
 			Notes.createQueryBuilder("note"),
