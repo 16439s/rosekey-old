@@ -191,6 +191,7 @@ ToDo (#82)
     $ cp -r calckey.old/.config calckey
     ```
 1. 全文検索エンジン（Meilisearch, Sonic, Elasticsearch のいずれか）を使用している場合には、`.config/default.yml` からその設定を削除またはコメントアウトする
+
     先頭に `#` をつけると設定をコメントアウトできます。
     ```yaml
     #sonic:
@@ -201,6 +202,7 @@ ToDo (#82)
     #  bucket: default
     ```
     全文検索エンジンは停止またはアンインストールしてしまってよいです。本家の Firefish に戻るつもりがあるなら停止を、そうでなければアンインストールをおすすめします。
+
     停止コマンドの例
     ```sh
     $ sudo systemctl disable --now sonic
@@ -210,7 +212,8 @@ ToDo (#82)
     $ psql --version
     ```
 1. PGroonga をインストールする
-    インストールコマンドの例（詳しくは[この投稿](https://post.naskya.net/notes/9ldi29amfanomef5)を参考にしてください）
+
+    コマンドの例（詳しくは[この投稿](https://post.naskya.net/notes/9ldi29amfanomef5)を参考にしてください）
     ```sh
     $ sudo apt install -y software-properties-common
     $ sudo add-apt-repository -y universe
@@ -290,7 +293,8 @@ ToDo (#82)
     $ sudo -iu postgres psql --file=neko/revert.sql --dbname=mk1
     ```
 1. PGroonga をアンインストールする
-    アンインストールするコマンドの例
+
+    コマンドの例
     ```sh
     $ sudo apt purge --remove postgresql-14-pgdg-pgroonga
     $ sudo add-apt-repository --remove ppa:groonga/ppa
