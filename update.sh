@@ -22,7 +22,7 @@ function running {
 say "Start upgrading Firefish!"
 
 # Confirm that the server is stopped
-if [[ $# != 1 ]] || [[ $1 != "--no-confirm" ]]; then
+if [[ $# != 1 ]] || [[ $1 != "--skip-all-confirmations" ]]; then
   say "Did you stop your server?"
   read -r -p "[Y/n] > " yn
   case "${yn}" in
@@ -66,9 +66,9 @@ fi
 for message in neko/messages/*; do
   file=$(basename -- "${message}")
   if [[ ! -f "neko/flags/${file}" ]]; then
-    say "There is an important notice!"
-    cat "${message}"
-    if [[ $# != 1 ]] || [[ $1 != "--no-confirm" ]]; then
+    if [[ $# != 1 ]] || [[ $1 != "--skip-all-confirmations" ]]; then
+      say "There is an important notice!"
+      cat "${message}"
       say "Continue? (Are you ready for upgrading?)"
       read -r -p "[y/N] > " yn
       case "${yn}" in
@@ -82,6 +82,8 @@ for message in neko/messages/*; do
           exit 1
           ;;
       esac
+    else
+      touch "neko/flags/${file}"
     fi
   fi
 done

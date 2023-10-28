@@ -248,15 +248,17 @@ ToDo (#82)
     mk1=#
     ```
 1. 以下のコマンドを実行して PGroonga の拡張機能を有効にする
-    ```
+    ```sql
     CREATE EXTENSION pgroonga;
     ```
 1. `\q` というコマンドを実行するか Ctrl+D を押して PostgreSQL のプロンプトを終了する
 1. 新しい Firefish のディレクトリに入ってビルドする
     ```sh
     $ cd calckey
-    $ ./update.sh --no-confirm
+    $ ./update.sh --skip-all-confirmations
     ```
+
+    **注意**: `--skip-all-confirmations` というオプションは普段のアップデートでは使わないでください。重要なお知らせがある場合でも表示がスキップされてしまいます。
 1. サーバーを起動して動作を確認する
     ```sh
     $ sudo systemctl start yourserver.example.com
