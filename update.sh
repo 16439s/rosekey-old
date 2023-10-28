@@ -62,6 +62,18 @@ else
   say "This script seems to be up-to-date!\n"
 fi
 
+## show messages
+for message in neko/messages/*; do
+  file=$(basename -- "${message}")
+  if [[ ! -f "neko/flags/${file}" ]]; then
+    say "There is an important notice!"
+    cat "${message}"
+    touch "neko/flags/${file}"
+    say "To read this again, run: \$ cat ${message}"
+    exit 1
+  fi
+done
+
 ## write version info
 say "Writing version info to package.json..."
 

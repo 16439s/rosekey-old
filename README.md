@@ -14,6 +14,9 @@
 
 ## 主要な変更点
 
+- 全文検索のエンジンを [PGroonga](https://pgroonga.github.io/) に変更
+  - PGroonga のインストールが必要になります！詳しくは[この投稿](https://post.naskya.net/notes/9ldi29amfanomef5)をご覧ください
+  - Meilisearch, Elasticsearch, Sonic は非推奨となります
 - 「秘密」という公開範囲を追加
   - 宛先無しのダイレクト投稿を言い換えているだけです
   - 既存の投稿を削除せずに後から秘密にすることもできます
@@ -139,14 +142,13 @@
 
 ## インストール
 
-[Firefish のインストールスクリプト](https://git.joinfirefish.org/firefish/ubuntu-bash-install)のプロンプトで尋ねられるリポジトリの URL にこのリポジトリの URL を使ってください。
+ToDo (#82)
 
-```
-Repository url where you want to install:
-> https://code.naskya.net/naskya/firefish
-```
+遠回りな方法ですが、公式のインストールスクリプトを使いたい場合にはそれを用いて本家の Firefish をインストールしてから下記の手順でこのフォークに移行できます。
 
 ## アップデート
+
+重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
 
 1. サーバーのバックアップを取る
 1. サーバーを停止する
@@ -188,6 +190,64 @@ Repository url where you want to install:
     $ cp -r calckey.old/custom calckey
     $ cp -r calckey.old/.config calckey
     ```
+1. 全文検索エンジン（Meilisearch, Sonic, Elasticsearch のいずれか）を使用している場合には、`.config/default.yml` からその設定を削除またはコメントアウトする
+    先頭に `#` をつけると設定をコメントアウトできます。
+    ```yaml
+    #sonic:
+    #  host: localhost
+    #  port: 1491
+    #  auth: SecretPassword
+    #  collection: notes
+    #  bucket: default
+    ```
+    全文検索エンジンは停止またはアンインストールしてしまってよいです。本家の Firefish に戻るつもりがあるなら停止を、そうでなければアンインストールをおすすめします。
+    停止コマンドの例
+    ```sh
+    $ sudo systemctl disable --now sonic
+    ```
+1. PostgreSQL のバージョンを確認する
+    ```sh
+    $ psql --version
+    ```
+1. PGroonga をインストールする
+    インストールコマンドの例（詳しくは[この投稿](https://post.naskya.net/notes/9ldi29amfanomef5)を参考にしてください）
+    ```sh
+    $ sudo apt install -y software-properties-common
+    $ sudo add-apt-repository -y universe
+    $ sudo add-apt-repository -y ppa:groonga/ppa
+    $ sudo apt install -y wget lsb-release
+    $ wget https://packages.groonga.org/ubuntu/groonga-apt-source-latest-$(lsb_release --codename --short).deb
+    $ sudo apt install -y -V ./groonga-apt-source-latest-$(lsb_release --codename --short).deb
+    $ echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release --codename --short)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+    $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    $ sudo apt update
+    $ sudo apt install -y -V postgresql-14-pgdg-pgroonga
+                             ^^^^^^^^^^^^^
+                             for PostgreSQL 14.x
+    ```
+1. `.config/default.yml` に書かれているデータベースの名前を確認する（以下の例では `mk1`）
+    ```yaml
+    db:
+      host: localhost
+      port: 5432
+      db: mk1  # <---
+    ```
+1. PostgreSQL のプロンプトを起動する（`mk1` の部分は自分のデータベース名に変えて実行）
+    ```sh
+    $ sudo -iu postgres psql --dbname=mk1
+    ```
+    以下のような表示が出てコマンドの入力待ちになります。
+    ```
+    psql (16.0)
+    Type "help" for help.
+
+    mk1=#
+    ```
+1. 以下のコマンドを実行して PGroonga の拡張機能を有効にする
+    ```
+    CREATE EXTENSION pgroonga;
+    ```
+1. `\q` というコマンドを実行するか Ctrl+D を押して PostgreSQL のプロンプトを終了する
 1. 新しい Firefish のディレクトリに入ってビルドする
     ```sh
     $ cd calckey
@@ -218,9 +278,24 @@ Repository url where you want to install:
     ```sh
     $ ./update.sh
     ```
-1. このフォークで加えられたデータベースへの変更を取り消す（`dbname`（以下の例では `mk1`）には `.config/default.yml` に記載されている PostgreSQL のデータベース名（`db:` の後に書かれているもの）を指定する）
+1. `.config/default.yml` に書かれているデータベースの名前を確認する（以下の例では `mk1`）
+    ```yaml
+    db:
+      host: localhost
+      port: 5432
+      db: mk1  # <---
+    ```
+1. このフォークで加えられたデータベースへの変更を取り消す（`mk1` の部分は自分のデータベース名に変更する）
     ```sh
-    $ sudo -iu postgres psql --dbname=mk1 --file=neko/revert.sql
+    $ sudo -iu postgres psql --file=neko/revert.sql --dbname=mk1
+    ```
+1. PGroonga をアンインストールする
+    アンインストールするコマンドの例
+    ```sh
+    $ sudo apt purge --remove postgresql-14-pgdg-pgroonga
+    $ sudo add-apt-repository --remove ppa:groonga/ppa
+    $ sudo apt-key del ACCC4CF8
+    $ sudo apt update
     ```
 1. Firefish がインストールされているディレクトリの親ディレクトリ (e.g., `/home/calckey`) に行く
     ```sh
