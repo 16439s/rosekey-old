@@ -443,7 +443,7 @@ export class ColdDeviceStorage {
 		syncDeviceDarkMode: true,
 		plugins: [] as Plugin[],
 		mediaVolume: 0.5,
-		vibrate: true,
+		vibrate: false,
 		sound_masterVolume: 0.3,
 		sound_note: { type: "none", volume: 0 },
 		sound_noteMy: { type: "syuilo/up", volume: 1 },
