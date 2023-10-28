@@ -68,9 +68,21 @@ for message in neko/messages/*; do
   if [[ ! -f "neko/flags/${file}" ]]; then
     say "There is an important notice!"
     cat "${message}"
-    touch "neko/flags/${file}"
-    say "To read this again, run: \$ cat ${message}"
-    exit 1
+    if [[ $# != 1 ]] || [[ $1 != "--no-confirm" ]]; then
+      say "Continue? (Are you ready for upgrading?)"
+      read -r -p "[y/N] > " yn
+      case "${yn}" in
+        [Yy]|[Yy][Ee][Ss])
+          touch "neko/flags/${file}"
+          say "Let's go!"
+          say "To read the message again, run: \$ cat ${message}"
+          ;;
+        *)
+          say "Okay, please run this script again when you're ready!"
+          exit 1
+          ;;
+      esac
+    fi
   fi
 done
 

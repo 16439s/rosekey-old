@@ -251,7 +251,7 @@ ToDo (#82)
 1. 新しい Firefish のディレクトリに入ってビルドする
     ```sh
     $ cd calckey
-    $ ./update.sh
+    $ ./update.sh --no-confirm
     ```
 1. サーバーを起動して動作を確認する
     ```sh
