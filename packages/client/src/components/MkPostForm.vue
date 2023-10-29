@@ -285,11 +285,8 @@ import { defaultStore, notePostInterruptors, postFormActions } from "@/store";
 import MkInfo from "@/components/MkInfo.vue";
 import { i18n } from "@/i18n";
 import { instance } from "@/instance";
-import {
-	$i,
-	getAccounts,
-	openAccountMenu as openAccountMenu_,
-} from "@/account";
+import { getAccounts, openAccountMenu as openAccountMenu_ } from "@/account";
+import { $i } from "@/reactiveAccount";
 import { uploadFile } from "@/scripts/upload";
 import { deepClone } from "@/scripts/clone";
 import preprocess from "@/scripts/preprocess";
@@ -345,7 +342,7 @@ const poll = ref<{
 	expiredAfter: string | null;
 } | null>(null);
 const useCw = ref(false);
-let showPreview = ref(defaultStore.state.showPreviewByDefault);
+const showPreview = ref(defaultStore.state.showPreviewByDefault);
 const cw = ref<string | null>(null);
 const localOnly = ref<boolean>(
 	props.initialLocalOnly ?? defaultStore.state.rememberNoteVisibility

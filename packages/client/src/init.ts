@@ -14,7 +14,6 @@ import "@phosphor-icons/web/light";
 import "@phosphor-icons/web/duotone";
 
 // #region account indexedDB migration
-import { set } from "@/scripts/idb-proxy";
 
 const accounts = localStorage.getItem("accounts");
 if (accounts) {
@@ -31,6 +30,7 @@ import {
 	version as vueVersion,
 	watch,
 } from "vue";
+import { set } from "@/scripts/idb-proxy";
 
 import widgets from "@/widgets";
 import directives from "@/directives";
@@ -42,7 +42,8 @@ import { i18n } from "@/i18n";
 import { alert, api, confirm, popup, post, toast } from "@/os";
 import { stream } from "@/stream";
 import * as sound from "@/scripts/sound";
-import { $i, login, refreshAccount, signout, updateAccount } from "@/account";
+import { login, refreshAccount, signout, updateAccount } from "@/account";
+import { $i } from "@/reactiveAccount";
 import { ColdDeviceStorage, defaultStore } from "@/store";
 import { fetchInstance, instance } from "@/instance";
 import { makeHotkey } from "@/scripts/hotkey";

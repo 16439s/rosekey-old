@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 import type * as firefish from "firefish-js";
 import { defaultStore } from "@/store";
-import { $i } from "@/account";
+import { $i } from "@/reactiveAccount";
 
 const props = withDefaults(
 	defineProps<{

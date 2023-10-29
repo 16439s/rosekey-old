@@ -1,5 +1,5 @@
 <template>
-	<span class="mk-acct" v-if="show">
+	<span v-if="show" class="mk-acct">
 		<span class="name">@{{ user.username }}</span>
 		<span
 			v-if="user.host || detail || defaultStore.state.showFullAcct"
@@ -14,7 +14,7 @@ import type * as firefish from "firefish-js";
 import { toUnicode } from "punycode/";
 import { host as hostRaw } from "@/config";
 import { defaultStore } from "@/store";
-import { $i } from "@/account";
+import { $i } from "@/reactiveAccount";
 
 const props = defineProps<{
 	user: firefish.entities.UserDetailed;

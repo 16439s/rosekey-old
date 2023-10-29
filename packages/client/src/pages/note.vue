@@ -79,7 +79,7 @@ import * as os from "@/os";
 import { definePageMetadata } from "@/scripts/page-metadata";
 import { i18n } from "@/i18n";
 import { defaultStore } from "@/store";
-import { $i } from "@/account";
+import { $i } from "@/reactiveAccount";
 import icon from "@/scripts/icon";
 
 const props = defineProps<{

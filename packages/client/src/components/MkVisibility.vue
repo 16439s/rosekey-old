@@ -20,8 +20,8 @@
 		></i>
 		<i
 			v-else-if="note.visibility === 'specified'"
-			v-tooltip="i18n.ts._visibility.private"
 			ref="specified"
+			v-tooltip="i18n.ts._visibility.private"
 			:class="icon('ph-eye-slash')"
 		></i>
 	</span>

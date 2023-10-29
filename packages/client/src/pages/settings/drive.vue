@@ -70,7 +70,7 @@ import bytes from "@/filters/bytes";
 import { defaultStore } from "@/store";
 import { i18n } from "@/i18n";
 import { definePageMetadata } from "@/scripts/page-metadata";
-import { $i } from "@/account";
+import { $i } from "@/reactiveAccount";
 import icon from "@/scripts/icon";
 
 const fetching = ref(true);

@@ -64,7 +64,7 @@
 									><i :class="icon('ph-code')"></i
 								></template>
 								{{ i18n.ts._aboutFirefish.source }}
-								<template #suffix>GitLab</template>
+								<template #suffix>Repository</template>
 							</FormLink>
 							<FormLink
 								to="https://opencollective.com/firefish"

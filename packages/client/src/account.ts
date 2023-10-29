@@ -6,17 +6,11 @@ import { apiUrl } from "@/config";
 import { alert, api, popup, popupMenu, waiting } from "@/os";
 import { reloadChannel, unisonReload } from "@/scripts/unison-reload";
 import icon from "@/scripts/icon";
+import { $i } from "@/reactiveAccount";
 
 // TODO: 他のタブと永続化されたstateを同期
 
-type Account = firefish.entities.MeDetailed;
-
-const accountData = localStorage.getItem("account");
-
-// TODO: 外部からはreadonlyに
-export const $i = accountData
-	? reactive(JSON.parse(accountData) as Account)
-	: null;
+export type Account = firefish.entities.MeDetailed;
 
 export const iAmModerator = $i != null && ($i.isAdmin || $i.isModerator);
 export const iAmAdmin = $i?.isAdmin;
@@ -101,7 +95,6 @@ function fetchAccount(token: string): Promise<Account> {
 					if (res.error.id === "a8c724b3-6e9c-4b46-b1a8-bc3ed6258370") {
 						showSuspendedDialog();
 						signout();
-						return;
 					} else {
 						alert({
 							type: "error",

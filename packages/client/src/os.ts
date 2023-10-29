@@ -12,7 +12,7 @@ import MkWaitingDialog from "@/components/MkWaitingDialog.vue";
 import MkToast from "@/components/MkToast.vue";
 import MkDialog from "@/components/MkDialog.vue";
 import type { MenuItem } from "@/types/menu";
-import { $i } from "@/account";
+import { $i } from "@/reactiveAccount";
 
 export const pendingApiRequestsCount = ref(0);
 
@@ -24,7 +24,7 @@ export const api = ((
 	endpoint: string,
 	data: Record<string, any> = {},
 	token?: string | null | undefined,
-	useToken: boolean = true,
+	useToken = true,
 ) => {
 	pendingApiRequestsCount.value++;
 
