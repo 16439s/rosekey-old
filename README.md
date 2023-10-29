@@ -38,6 +38,8 @@
 
 ## 細かい変更点
 
+- 本家 Firefish へのまだマージされていないマージリクエストを独断でマージ
+  - https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10631
 - デフォルトではバイブレーションを無効に
 - ログインしていなければ投稿検索ができないように
   - 攻撃対策のため
