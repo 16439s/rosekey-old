@@ -40,6 +40,7 @@
 
 - 本家 Firefish へのまだマージされていないマージリクエストを独断でマージ
   - https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10631
+  - https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10634
 - デフォルトではバイブレーションを無効に
 - ログインしていなければ投稿検索ができないように
   - 攻撃対策のため
