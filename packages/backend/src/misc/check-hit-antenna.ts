@@ -1,7 +1,7 @@
 import type { Antenna } from "@/models/entities/antenna.js";
 import type { Note } from "@/models/entities/note.js";
 import type { User } from "@/models/entities/user.js";
-import { Blockings, UserProfiles } from "@/models/index.js";
+import { Blockings, Followings, UserProfiles } from "@/models/index.js";
 import { getFullApAccount } from "./convert-host.js";
 import * as Acct from "@/misc/acct.js";
 import type { Packed } from "./schema.js";
@@ -10,23 +10,18 @@ import { getWordHardMute } from "./check-word-mute.js";
 
 const blockingCache = new Cache<User["id"][]>("blocking", 60 * 5);
 const mutedWordsCache = new Cache<string[][] | undefined>("mutedWords", 60 * 5);
+const followingCache = new Cache<User["id"][]>("following", 60 * 5);
 
 export async function checkHitAntenna(
 	antenna: Antenna,
 	note: Note | Packed<"Note">,
 	noteUser: { id: User["id"]; username: string; host: string | null },
-	antennaUserFollowing: User["id"][],
 ): Promise<boolean> {
 	if (note.visibility === "specified") return false;
 	if (antenna.withFile) {
 		if (note.fileIds && note.fileIds.length === 0) return false;
 	}
 	if (!antenna.withReplies && note.replyId != null) return false;
-
-	if (note.visibility === "followers" || note.visibility === "home") {
-		if (antennaUserFollowing && !antennaUserFollowing.includes(note.userId))
-			return false;
-	}
 
 	if (antenna.src === "users") {
 		const accts = antenna.users.map((x) => {
@@ -98,6 +93,16 @@ export async function checkHitAntenna(
 		),
 	);
 	if (blockings.includes(antenna.userId)) return false;
+
+	if (note.visibility === "followers" || note.visibility === "home") {
+		const following = await followingCache.fetch(antenna.userId, () =>
+			Followings.find({
+				where: { followerId: antenna.userId },
+				select: ["followeeId"],
+			}).then((relations) => relations.map((relation) => relation.followeeId)),
+		);
+		if (!following.includes(note.userId)) return false;
+	}
 
 	const mutedWords = await mutedWordsCache.fetch(antenna.userId, () =>
 		UserProfiles.findOneBy({ userId: antenna.userId }).then(

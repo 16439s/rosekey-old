@@ -386,17 +386,7 @@ export default async (
 
 		// Antenna
 		for (const antenna of await getAntennas()) {
-			checkHitAntenna(
-				antenna,
-				note,
-				user,
-				(
-					await Followings.find({
-						where: { followerId: user.id },
-						select: ["followeeId"],
-					})
-				).map((x) => x.followeeId),
-			).then((hit) => {
+			checkHitAntenna(antenna, note, user).then((hit) => {
 				if (hit) {
 					addNoteToAntenna(antenna, note, user);
 				}
