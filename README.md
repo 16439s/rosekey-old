@@ -168,6 +168,22 @@ ToDo (#82)
     $ sudo systemctl start yourserver.example.com
     ```
 
+### 正常にアップデートできなかった場合
+
+```sh
+$ ./update.sh |& tee /tmp/fflog
+```
+
+を実行して（ログが `/tmp/fflog` に保存されます）、OS などの環境の情報とともにログの内容を私 ([@dev@post.naskya.net](https://post.naskya.net/@dev)) まで送ってください。
+
+ログは長いのでおそらく一投稿に収まりません。そのため、ログを送る際には投稿にファイルを直接添付するか、[Pastebin](https://pastebin.com/) などのサービスを使ってください。
+
+ログを送ったら `/tmp/fflog` は削除してよいです。
+
+```sh
+$ rm /tmp/fflog
+```
+
 ## [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
 1. サーバーのバックアップを取る
