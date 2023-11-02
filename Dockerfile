@@ -42,6 +42,11 @@ RUN pnpm run --filter native-utils build
 
 # Copy in the rest of the files to compile
 COPY . ./
+# Create dummy .git/objects directory for `git rev-parse`
+RUN mkdir .git/objects
+# Write version info
+RUN bash -c 'NEW_COMMIT=$(git rev-parse --short HEAD) && sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT:0:7}\",/" package.json'
+# Compile
 RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pnpm run gulp"
 
 # Trim down the dependencies to only those for production
@@ -55,6 +60,8 @@ WORKDIR /firefish
 RUN apt-get update && apt-get install -y libvips-dev zip unzip tini ffmpeg
 
 COPY . ./
+# Remove .git
+RUN rm -rf .git
 
 COPY --from=build /firefish/packages/megalodon /firefish/packages/megalodon
 
