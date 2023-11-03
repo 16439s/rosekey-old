@@ -38,6 +38,8 @@
 
 ## 細かい変更点
 
+- HTML のコードに入るコメントアートを削除
+  - 全ページにこんなの入れなくても……
 - 本家 Firefish へのまだマージされていないマージリクエストを独断でマージ
   - https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10631
   - https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10634
