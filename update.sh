@@ -46,8 +46,8 @@ say "Pulling changes from the remote repo..."
 running "git checkout -- package.json packages/backend/assets"
 git checkout -- package.json packages/backend/assets
 
-running "git pull --ff --no-edit --autostash --strategy-option theirs --ipv4"
-git pull --ff --no-edit --autostash --strategy-option theirs --ipv4
+running "git pull --ff --no-edit --autostash --strategy-option theirs"
+git pull --ff --no-edit --autostash --strategy-option theirs
 
 NEW_COMMIT=$(git rev-parse --short HEAD)
 say "Pulled successfully! Now we're on \`${NEW_COMMIT}\`\n"
