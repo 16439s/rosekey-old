@@ -17,7 +17,7 @@
 		"@rollup/plugin-alias": "5.0.1",
 		"@rollup/plugin-json": "6.0.1",
 		"@rollup/pluginutils": "5.0.5",
-		"@syuilo/aiscript": "0.11.1",
+		"@syuilo/aiscript": "0.16.0",
 		"@types/glob": "8.1.0",
 		"@types/gulp": "4.0.16",
 		"@types/gulp-rename": "2.0.4",
