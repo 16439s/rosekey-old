@@ -103,8 +103,8 @@ say "Upgrading dependencies..."
 running "corepack prepare pnpm@latest --activate"
 corepack prepare pnpm@latest --activate
 
-running "pnpm install --frozen-lockfile"
-pnpm install --frozen-lockfile
+running "pnpm install"
+pnpm install
 
 say "Done!\n"
 
