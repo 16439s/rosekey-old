@@ -2,7 +2,6 @@ import config from "@/config/index.js";
 import { fetchMeta } from "@/misc/fetch-meta.js";
 import { MAX_NOTE_TEXT_LENGTH, MAX_CAPTION_TEXT_LENGTH } from "@/const.js";
 import define from "../../define.js";
-import { Exp } from "@tensorflow/tfjs";
 
 export const meta = {
 	tags: ["meta"],
@@ -473,6 +472,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		description: instance.description,
 		langs: instance.langs,
 		tosUrl: instance.ToSUrl,
+		moreUrls: instance.moreUrls,
 		repositoryUrl: instance.repositoryUrl,
 		feedbackUrl: instance.feedbackUrl,
 		disableRegistration: instance.disableRegistration,

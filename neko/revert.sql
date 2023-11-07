@@ -1,3 +1,6 @@
+-- more-urls
+ALTER TABLE "meta" DROP COLUMN "moreUrls";
+
 -- pgroonga
 DROP INDEX "public"."IDX_f27f5d88941e57442be75ba9c8";
 DROP INDEX "public"."IDX_065d4d8f3b5adb4a08841eae3c";
