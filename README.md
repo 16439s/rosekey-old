@@ -146,15 +146,23 @@
 
 # 使用方法
 
-## インストール
+## Docker ユーザー
 
-[ToDo](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw)
+ToDo ([#ndqEd](https://code.naskya.net/decks/4wJQ3/tickets/ndqEd))
+
+- Docker image とアップデートスクリプトを提供することを考えています
+
+## 非 Docker ユーザー
+
+### インストール
+
+ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
 
 - インストールスクリプトかインストール方法の説明を提供することを考えています
 - 遠回りな方法ですが、公式のインストールスクリプトを使いたい場合にはそれを用いて本家の Firefish をインストールしてから下記の手順でこのフォークに移行できます。
 - 慣れている方への説明: PostgreSQL を用いた通常の Firefish のインストールに加えて PGroonga のインストールおよびデータベースの拡張機能の有効化を行います。
 
-## アップデート
+### アップデート
 
 重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
 
@@ -177,7 +185,7 @@
     sudo systemctl start yourserver.example.com
     ```
 
-### 正常にアップデートできなかった場合
+#### 正常にアップデートできなかった場合
 
 ```bash
 ./update.sh |& tee /tmp/fflog
@@ -193,7 +201,7 @@
 rm /tmp/fflog
 ```
 
-## [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
+### [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
 1. サーバーのバックアップを取る
 2. サーバーを停止する
@@ -326,7 +334,7 @@ rm /tmp/fflog
     rm -rf calckey.old
     ```
 
-## このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
+### このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
 
 1. サーバーのバックアップを取る
 2. サーバーを停止する
@@ -428,7 +436,7 @@ rm /tmp/fflog
     rm -rf calckey.old
     ```
 
-### 注意
+#### 注意
 
 この手順を踏むとあなたの Firefish サーバーは `develop` 版になります。他のバージョンを動かしたい場合も、**次のアップデートがリリースされるまでは `develop` 版を動かしてください**。
 
