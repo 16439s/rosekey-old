@@ -106,7 +106,7 @@ export function genOpenapiSpec() {
 			description: desc,
 			externalDocs: {
 				description: "Source code",
-				url: `https://code.naskya.net/naskya/firefish/src/branch/main/packages/backend/src/server/api/endpoints/${endpoint.name}.ts`,
+				url: `https://code.naskya.net/naskya/firefish/source-by/main/packages/backend/src/server/api/endpoints/${endpoint.name}.ts`,
 			},
 			tags: endpoint.meta.tags || undefined,
 			security,

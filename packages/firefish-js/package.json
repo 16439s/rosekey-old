@@ -15,7 +15,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://code.naskya.net/naskya/firefish.git"
+		"url": "https://code.naskya.net/naskya/firefish"
 	},
 	"devDependencies": {
 		"@swc/cli": "0.1.62",

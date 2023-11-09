@@ -41,7 +41,7 @@
 					<MkInfo v-if="updateAvailable" warn class="info"
 						>{{ i18n.ts.updateAvailable }}
 						<a
-							href="https://code.naskya.net/naskya/firefish/tags"
+							href="https://code.naskya.net/naskya/firefish"
 							target="_bank"
 							class="_link"
 							>{{ i18n.ts.check }}</a

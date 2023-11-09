@@ -148,7 +148,7 @@
 
 ## インストール
 
-[ToDo](https://code.naskya.net/decks/Zm1Am/tickets/Nm7zK)
+[ToDo](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw)
 
 - インストールスクリプトかインストール方法の説明を提供することを考えています
 - 遠回りな方法ですが、公式のインストールスクリプトを使いたい場合にはそれを用いて本家の Firefish をインストールしてから下記の手順でこのフォークに移行できます。

@@ -1,3 +1,6 @@
+-- vervis
+UPDATE meta SET "repositoryUrl" = 'https://git.joinfirefish.org/firefish/firefish';
+
 -- more-urls
 ALTER TABLE "meta" DROP COLUMN "moreUrls";
 
