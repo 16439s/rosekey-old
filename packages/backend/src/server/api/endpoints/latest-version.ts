@@ -17,7 +17,9 @@ export default define(meta, paramDef, async () => {
 	let tag_name: string;
 	const pattern = /&quot;version&quot;: &quot;(.*)&quot;,$/m;
 
-	await fetch("https://code.naskya.net/naskya/firefish/source-by/main/package.json")
+	await fetch(
+		"https://code.naskya.net/naskya/firefish/source-by/main/package.json",
+	)
 		.then((response) => response.text())
 		.then((text) => {
 			tag_name = pattern.exec(text)[1];
