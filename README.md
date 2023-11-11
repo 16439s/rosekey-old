@@ -290,29 +290,13 @@ rm /tmp/fflog
       db: mk1  # <---
     ```
 
-11. PostgreSQL のプロンプトを起動する（`mk1` の部分は自分のデータベース名に変えて実行）
+11. 以下のコマンドを実行して PGroonga の拡張機能を有効にする（`mk1` の部分は自分のデータベース名に変えて実行）
 
     ```bash
-    sudo -iu postgres psql --dbname=mk1
+    sudo -iu postgres psql --command="CREATE EXTENSION pgroonga;" --dbname=mk1
     ```
 
-    以下のような表示が出てコマンドの入力待ちになります。
-
-    ```text
-    psql (16.0)
-    Type "help" for help.
-
-    mk1=#
-    ```
-
-12. 以下のコマンドを実行して PGroonga の拡張機能を有効にする
-
-    ```sql
-    CREATE EXTENSION pgroonga;
-    ```
-
-13. `\q` というコマンドを実行するか Ctrl+D を押して PostgreSQL のプロンプトを終了する
-14. 新しい Firefish のディレクトリに入ってビルドする
+12. 新しい Firefish のディレクトリに入ってビルドする
 
     ```bash
     cd calckey
@@ -321,13 +305,13 @@ rm /tmp/fflog
 
     **注意**: `--skip-all-confirmations` というオプションは普段のアップデートでは使わないでください。重要なお知らせがある場合でも表示がスキップされてしまいます。
 
-15. サーバーを起動して動作を確認する
+13. サーバーを起動して動作を確認する
 
     ```bash
     sudo systemctl start yourserver.example.com
     ```
 
-16. 元々 Firefish がインストールされていたディレクトリを削除する
+14. 元々 Firefish がインストールされていたディレクトリを削除する
 
     ```bash
     cd ..
