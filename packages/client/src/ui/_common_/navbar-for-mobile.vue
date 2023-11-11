@@ -81,7 +81,7 @@
 					><span class="text">{{ i18n.ts.controlPanel }}</span>
 				</MkA>
 				<MkA
-					v-else-if="$i.emojiModPerm !== 'none'"
+					v-else-if="$i.emojiModPerm !== 'unauthorized'"
 					v-click-anime
 					v-tooltip.noDelay.right="i18n.ts.customEmojis"
 					class="item _button"

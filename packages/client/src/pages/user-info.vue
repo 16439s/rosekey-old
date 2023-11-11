@@ -189,8 +189,8 @@
 								i18n.ts.originalFeature
 							}}</span></template
 						>
-						<option value="none">
-							{{ i18n.ts._emojiModPerm.none }}
+						<option value="unauthorized">
+							{{ i18n.ts._emojiModPerm.unauthorized }}
 						</option>
 						<option value="add">
 							{{ i18n.ts._emojiModPerm.add }}

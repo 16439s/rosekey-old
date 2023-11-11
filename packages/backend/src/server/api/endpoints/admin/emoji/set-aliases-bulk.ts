@@ -41,7 +41,7 @@ export const paramDef = {
 
 export default define(meta, paramDef, async (ps, me) => {
 	// require emoji mod permission (or add permission if there is no alias)
-	if (!(me.isAdmin || me.isModerator || me.emojiModPerm === "none"))
+	if (!(me.isAdmin || me.isModerator || me.emojiModPerm === "unauthorized"))
 		throw new ApiError(meta.errors.accessDenied);
 
 	const emojis = await Emojis.findBy({

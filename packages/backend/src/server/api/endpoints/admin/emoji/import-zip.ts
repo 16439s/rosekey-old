@@ -28,7 +28,9 @@ export const paramDef = {
 
 export default define(meta, paramDef, async (ps, user) => {
 	// require emoji add permission
-	if (!(user.isAdmin || user.isModerator || user.emojiModPerm !== "none"))
+	if (
+		!(user.isAdmin || user.isModerator || user.emojiModPerm !== "unauthorized")
+	)
 		throw new ApiError(meta.errors.accessDenied);
 
 	createImportCustomEmojisJob(user, ps.fileId);

@@ -182,7 +182,7 @@ pub enum UserEmojimodpermEnum {
     Mod,
     #[default]
     #[sea_orm(string_value = "none")]
-    None,
+    Unauthorized,
 }
 #[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum, Default)]
 #[sea_orm(

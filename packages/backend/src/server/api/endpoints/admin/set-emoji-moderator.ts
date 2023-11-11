@@ -25,12 +25,15 @@ export default define(meta, paramDef, async (ps) => {
 		throw new Error("user not found");
 	}
 
-	if (!["none", "add", "mod", "full"].includes(ps.emojiModPerm)) {
-		throw new Error("emojiModPerm must be 'none', 'add', 'mod', or 'full'");
+	if (!["unauthorized", "add", "mod", "full"].includes(ps.emojiModPerm)) {
+		throw new Error(
+			"emojiModPerm must be 'unauthorized', 'add', 'mod', or 'full'",
+		);
 	}
 
 	const _emojiModPerm =
-		(ps.emojiModPerm as "none" | "add" | "mod" | "full") ?? "none";
+		(ps.emojiModPerm as "unauthorized" | "add" | "mod" | "full") ??
+		"unauthorized";
 
 	await Users.update(user.id, {
 		emojiModPerm: _emojiModPerm,

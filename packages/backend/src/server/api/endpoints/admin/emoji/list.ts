@@ -98,7 +98,7 @@ export const paramDef = {
 
 export default define(meta, paramDef, async (ps, me) => {
 	// require emoji add permission
-	if (!(me.isAdmin || me.isModerator || me.emojiModPerm !== "none"))
+	if (!(me.isAdmin || me.isModerator || me.emojiModPerm !== "unauthorized"))
 		throw new ApiError(meta.errors.accessDenied);
 
 	const q = makePaginationQuery(
