@@ -148,9 +148,33 @@
 
 ## Docker ユーザー
 
-ToDo ([#ndqEd](https://code.naskya.net/decks/4wJQ3/tickets/ndqEd))
+### インストール
 
-- Docker image とアップデートスクリプトを提供することを考えています
+ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
+
+- インストールスクリプトの提供を考えています
+- 慣れている方向けの説明: [`docker.io/naskya/firefish`](https://hub.docker.com/r/naskya/firefish) を用いて Firefish をインストールし、以下のコマンドを用いて PGroonga の拡張機能を有効にしてください。
+
+    ```bash
+    docker-compose exec db psql --command="CREATE EXTENSION pgroonga;" --dbname=firefish
+    ```
+
+### アップデート
+
+重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
+
+1. サーバーのバックアップを取る
+2. `update.sh` を実行し、表示される指示に従う
+
+    ```bash
+    ./update.sh
+    ```
+
+3. サーバーを起動して動作を確認する
+
+    ```bash
+    docker-compose up --detach
+    ```
 
 ## 非 Docker ユーザー
 

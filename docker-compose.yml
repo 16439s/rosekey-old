@@ -2,8 +2,7 @@ version: "3"
 
 services:
   web:
-    image: firefish
-    build: .
+    image: docker.io/naskya/firefish
     container_name: firefish_web
     restart: unless-stopped
     depends_on:

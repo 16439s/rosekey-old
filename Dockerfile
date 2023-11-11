@@ -32,7 +32,7 @@ COPY packages/backend/native-utils/npm/linux-x64-musl/package.json packages/back
 COPY packages/backend/native-utils/npm/linux-arm64-musl/package.json packages/backend/native-utils/npm/linux-arm64-musl/package.json
 
 # Configure pnpm, and install dev mode dependencies for compilation
-RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm i
+RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install
 
 # Copy in the rest of the native-utils rust files
 COPY packages/backend/native-utils packages/backend/native-utils/
@@ -42,15 +42,17 @@ RUN pnpm run --filter native-utils build
 
 # Copy in the rest of the files to compile
 COPY . ./
-# Create dummy .git/objects directory for `git rev-parse`
-RUN mkdir .git/objects
+
 # Write version info
-RUN bash -c 'NEW_COMMIT=$(git rev-parse --short HEAD) && sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${NEW_COMMIT:0:7}\",/" package.json'
+ARG COMMIT_HASH
+ENV COMMIT_HASH=${COMMIT_HASH}
+RUN sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH}\",/" package.json
+
 # Compile
 RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pnpm run gulp"
 
 # Trim down the dependencies to only those for production
-RUN pnpm i --prod
+RUN pnpm install --prod
 
 ## Runtime container
 FROM node:20
@@ -60,8 +62,6 @@ WORKDIR /firefish
 RUN apt-get update && apt-get install -y libvips-dev zip unzip tini ffmpeg
 
 COPY . ./
-# Remove .git
-RUN rm -rf .git
 
 COPY --from=build /firefish/packages/megalodon /firefish/packages/megalodon
 

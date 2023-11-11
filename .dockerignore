@@ -40,7 +40,5 @@ packages/backend/assets/instance.css
 
 # dockerignore custom
 .git
-!.git/HEAD
-!.git/refs
 Dockerfile
 docker-compose.yml

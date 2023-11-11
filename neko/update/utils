@@ -1,0 +1,17 @@
+color() {
+  if [ -t 1 ]; then
+    tput setaf "${1:-7}"
+  fi
+}
+
+say() {
+  color 5  # magenta
+  echo -e "( ^-^) < $1"
+  color
+}
+
+running() {
+  color 3  # yellow
+  echo "[running] \$ $1"
+  color
+}
