@@ -44,9 +44,9 @@ RUN pnpm run --filter native-utils build
 COPY . ./
 
 # Write version info
-ARG COMMIT_HASH
-ENV COMMIT_HASH=${COMMIT_HASH}
-RUN sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH}\",/" package.json
+ARG VERSION
+ENV VERSION=${VERSION}
+RUN sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${VERSION}\",/" package.json
 
 # Compile
 RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pnpm run gulp"

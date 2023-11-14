@@ -24,9 +24,8 @@ fi
 # write version info
 say "Writing version info to package.json..."
 
-COMMIT_HASH=$(printf "%s" "$(git rev-parse HEAD)" | cut -c 1-7)
-running "sed -e \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:${COMMIT_HASH}\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
-sed -e "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH}\",/" package.json > package.json.new && mv -- package.json.new package.json
+running "sed -e \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:$(version)\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
+sed -e "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:$(version)\",/" package.json > package.json.new && mv -- package.json.new package.json
 
 say "Done!"
 br
