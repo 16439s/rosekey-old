@@ -6,12 +6,16 @@ color() {
 
 say() {
   color 5  # magenta
-  echo -e "( ^-^) < $1"
+  printf "( ^-^) < %s\n" "$1"
   color
 }
 
 running() {
   color 3  # yellow
-  echo "[running] \$ $1"
+  printf "[running] \$ %s\n" "$1"
   color
+}
+
+br() {
+  printf "\\n"
 }

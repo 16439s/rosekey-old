@@ -1,13 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -eu
 
-source neko/update/utils
+. neko/update/utils
 
 say "Start upgrading Firefish!"
+br
 
 # Pull changes
 ## git pull
-OLD_COMMIT=$(git rev-parse --short HEAD)
+OLD_COMMIT=$(git rev-parse HEAD)
 
 say "Pulling changes from the remote repo..."
 
@@ -17,8 +18,9 @@ git checkout -- package.json packages/backend/assets
 running "git pull --ff --no-edit --autostash --strategy-option theirs"
 git pull --ff --no-edit --autostash --strategy-option theirs
 
-NEW_COMMIT=$(git rev-parse --short HEAD)
-say "Pulled successfully!\n"
+NEW_COMMIT=$(git rev-parse HEAD)
+say "Pulled successfully!"
+br
 
 ## check if the update script itself is updated
 say "Checking if the update script itself has been modified by this update..."
@@ -27,7 +29,8 @@ if [ "$(git diff "${OLD_COMMIT}" "${NEW_COMMIT}" update.sh)" != "" ]; then
   say "I'm sorry to bother you, but please run this script again!"
   exit 1
 else
-  say "This script seems to be up-to-date!\n"
+  say "This script seems to be up-to-date!"
+  br
 fi
 
 ## show messages
@@ -37,8 +40,11 @@ for message in neko/messages/*; do
     if [ $# != 1 ] || [ "$1" != "--skip-all-confirmations" ]; then
       say "There is an important notice!"
       cat "${message}"
+
       say "Continue? (Are you ready for upgrading?)"
-      read -r -p "[y/N] > " yn
+      printf "[y/N] > "
+      read -r yn
+
       case "${yn}" in
         [Yy]|[Yy][Ee][Ss])
           touch "neko/flags/${file}"
@@ -57,7 +63,8 @@ for message in neko/messages/*; do
 done
 
 say "Do you use Docker?"
-read -r -p "[y/N] > " yn
+printf "[y/N] > "
+read -r yn
 
 case "${yn}" in
   [Yy]|[Yy][Ee][Ss])

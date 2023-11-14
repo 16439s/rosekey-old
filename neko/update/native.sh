@@ -1,19 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -eu
 
-source neko/update/utils
+. neko/update/utils
 
 # Confirm that the server is stopped
 if [ $# != 1 ] || [ "$1" != "--skip-all-confirmations" ]; then
   say "Did you stop your server?"
-  read -r -p "[Y/n] > " yn
+  printf "[Y/n] > "
+  read -r yn
+
   case "${yn}" in
     [Nn]|[Nn][Oo])
       say "You must stop your server first!"
       exit 1
       ;;
     *)
-      say "uwu~ erai erai!\n"
+      say "uwu~ erai erai!"
+      br
       ;;
   esac
 fi
@@ -21,12 +24,12 @@ fi
 # write version info
 say "Writing version info to package.json..."
 
-COMMIT_HASH=$(git rev-parse --short HEAD)
+COMMIT_HASH=$(printf "%s" "$(git rev-parse HEAD)" | cut -c 1-7)
+running "sed -e \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:${COMMIT_HASH}\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
+sed -e "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH}\",/" package.json > package.json.new && mv -- package.json.new package.json
 
-running "sed -i -r 's/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH:0:7}\",/' package.json"
-sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${COMMIT_HASH:0:7}\",/" package.json
-
-say "Done!\n"
+say "Done!"
+br
 
 # install dependencies
 say "Upgrading dependencies..."
@@ -37,7 +40,8 @@ corepack prepare pnpm@latest --activate
 running "pnpm install"
 pnpm install
 
-say "Done!\n"
+say "Done!"
+br
 
 # build
 say "Start building Firefish."
@@ -46,7 +50,8 @@ say "It takes some time! Why not brew a cup of cofe?"
 running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run rebuild"
 NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run rebuild
 
-say "Done! We're almost there.\n"
+say "Done! We're almost there."
+br
 
 # prevent migration errors
 if [ ! -f packages/backend/native-utils/built/index.js ]; then
@@ -54,7 +59,8 @@ if [ ! -f packages/backend/native-utils/built/index.js ]; then
   running "cp neko/index.js packages/backend/native-utils/built/index.js"
   cp neko/index.js packages/backend/native-utils/built/index.js
 else
-  say "It's going well so far!\n"
+  say "It's going well so far!"
+  br
 fi
 
 # migrate
@@ -63,4 +69,5 @@ say "Database migration time!"
 running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run migrate"
 NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run migrate
 
-say "Done!\n"
+say "Done!"
+br
