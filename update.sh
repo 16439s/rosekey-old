@@ -22,7 +22,7 @@ say "Pulled successfully!\n"
 
 ## check if the update script itself is updated
 say "Checking if the update script itself has been modified by this update..."
-if [ $(git diff "${OLD_COMMIT}" "${NEW_COMMIT}" update.sh) != "" ]; then
+if [ "$(git diff "${OLD_COMMIT}" "${NEW_COMMIT}" update.sh)" != "" ]; then
   say "Oh meow, that seems to be the case."
   say "I'm sorry to bother you, but please run this script again!"
   exit 1
@@ -61,10 +61,10 @@ read -r -p "[y/N] > " yn
 
 case "${yn}" in
   [Yy]|[Yy][Ee][Ss])
-    ./neko/update/docker.sh $@
+    ./neko/update/docker.sh "$@"
     ;;
   *)
-    ./neko/update/native.sh $@
+    ./neko/update/native.sh "$@"
     ;;
 esac
 
