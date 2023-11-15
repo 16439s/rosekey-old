@@ -24,7 +24,7 @@ br
 
 ## check if the update script itself is updated
 say "Checking if the update script itself has been modified by this update..."
-if [ "$(git diff "${OLD_COMMIT}" "${NEW_COMMIT}" update.sh)" != "" ]; then
+if [ "$(git diff "${OLD_COMMIT}" "${NEW_COMMIT}" update.sh neko/update)" != "" ]; then
   say "Oh meow, that seems to be the case."
   say "I'm sorry to bother you, but please run this script again!"
   exit 1
