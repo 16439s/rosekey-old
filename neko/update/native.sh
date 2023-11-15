@@ -24,8 +24,8 @@ fi
 # write version info
 say "Writing version info to package.json..."
 
-running "sed -e \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:$(version)\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
-sed -e "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:$(version)\",/" package.json > package.json.new && mv -- package.json.new package.json
+running "sed \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:$(version)\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
+sed "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:$(version)\",/" package.json > package.json.new && mv -- package.json.new package.json
 
 say "Done!"
 br
