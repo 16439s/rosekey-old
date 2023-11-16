@@ -1,22 +1,21 @@
 import type { AsyncComponentLoader } from "vue";
 import { defineAsyncComponent, inject } from "vue";
 import { iAmEmojiMod, iAmModerator } from "@/account";
-import { ui } from "@/config";
 import { Router } from "@/nirax";
-import { api } from "@/os";
 import MkError from "@/pages/_error_.vue";
 import MkLoading from "@/pages/_loading_.vue";
 import { $i } from "@/reactiveAccount";
+// import { api } from "@/os";
 
-function getGuestTimelineStatus() {
-	api("meta", {
-		detail: false,
-	}).then((meta) => {
-		return meta.enableGuestTimeline;
-	});
-}
+// function getGuestTimelineStatus() {
+// 	api("meta", {
+// 		detail: false,
+// 	}).then((meta) => {
+// 		return meta.enableGuestTimeline;
+// 	});
+// }
 
-const guestTimeline = getGuestTimelineStatus();
+// const guestTimeline = getGuestTimelineStatus();
 
 const page = (loader: AsyncComponentLoader<any>) =>
 	defineAsyncComponent({

@@ -1,5 +1,5 @@
 import type * as firefish from "firefish-js";
-import { defineAsyncComponent, reactive } from "vue";
+import { defineAsyncComponent } from "vue";
 import { i18n } from "./i18n";
 import { apiUrl } from "@/config";
 import { alert, api, popup, popupMenu, waiting } from "@/os";

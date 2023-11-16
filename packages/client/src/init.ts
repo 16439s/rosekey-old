@@ -22,6 +22,7 @@ if (accounts) {
 }
 // #endregion
 
+import { compareVersions } from "compare-versions";
 import {
 	computed,
 	createApp,
@@ -34,7 +35,7 @@ import { set } from "@/scripts/idb-proxy";
 
 import { login, refreshAccount, signout, updateAccount } from "@/account";
 import components from "@/components";
-import { host, lang, ui, version } from "@/config";
+import { lang, ui, version } from "@/config";
 import directives from "@/directives";
 import { i18n } from "@/i18n";
 import { fetchInstance, instance } from "@/instance";

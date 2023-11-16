@@ -1,5 +1,5 @@
 import { Instances, Notes, Users } from "@/models/index.js";
-import define from "../define.js";
+import define from "@/server/api/define.js";
 import { IsNull } from "typeorm";
 import { Cache } from "@/misc/cache.js";
 
