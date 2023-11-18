@@ -1,5 +1,5 @@
 ## Install dev and compilation dependencies, build files
-FROM node:20 as build
+FROM node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
@@ -55,7 +55,7 @@ RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pn
 RUN pnpm install --prod --frozen-lockfile
 
 ## Runtime container
-FROM node:20
+FROM node:21-slim
 WORKDIR /firefish
 
 # Install runtime dependencies
