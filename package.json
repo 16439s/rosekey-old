@@ -10,7 +10,7 @@
 	"private": true,
 	"scripts": {
 		"rebuild": "pnpm run clean && pnpm run build",
-		"build": "./scripts/build-greet.sh && pnpm --filter firefish-js run build && pnpm --filter !firefish-js -r --parallel run build && pnpm run gulp",
+		"build": "pnpm --filter firefish-js run build && pnpm --filter !firefish-js -r --parallel run build && pnpm run gulp",
 		"start": "pnpm --filter backend run start",
 		"init": "pnpm run migrate",
 		"migrate": "pnpm --filter backend run migrate",
