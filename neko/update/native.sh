@@ -4,58 +4,56 @@ set -eu
 . neko/update/utils
 
 # Confirm that the server is stopped
-if [ $# != 1 ] || [ "$1" != "--skip-all-confirmations" ]; then
-  say "Did you stop your server?"
-  printf "[Y/n] > "
+if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
+  say 'Did you stop your server?'
+  printf '[Y/n] > '
   read -r yn
 
   case "${yn}" in
     [Nn]|[Nn][Oo])
-      say "You must stop your server first!"
+      say 'You must stop your server first!'
       exit 1
       ;;
     *)
-      say "uwu~ erai erai!"
+      say 'uwu~ erai erai!'
       br
       ;;
   esac
 fi
 
 # write version info
-say "Writing version info to package.json..."
+say 'Writing version info to package.json...'
 
-running "sed \"s/\\\"version\\\": \\\"\\([^+][^+]*\\).*\\\",$/\\\"version\\\": \\\"\\\\1+neko:$(version)\\\",/\" package.json > package.json.new && mv -- package.json.new package.json"
+run "$(cat - << EOC
 sed "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:$(version)\",/" package.json > package.json.new && mv -- package.json.new package.json
+EOC
+)"
 
-say "Done!"
+say 'Done!'
 br
 
 # install dependencies
-say "Upgrading dependencies..."
+say 'Upgrading dependencies...'
 
-running "corepack prepare pnpm@latest --activate"
-corepack prepare pnpm@latest --activate
+run 'corepack prepare pnpm@latest --activate'
+run 'pnpm install --frozen-lockfile'
 
-running "pnpm install --frozen-lockfile"
-pnpm install --frozen-lockfile
-
-say "Done!"
+say 'Done!'
 br
 
 # build
-say "Start building Firefish."
-say "It takes some time! Why not brew a cup of cofe?"
+say 'Start building Firefish.'
+say 'It takes some time! Why not brew a cup of cofe?'
 
-running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run rebuild"
-NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run rebuild
+run 'NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run rebuild'
 
 say "Done! We're almost there."
 br
 
 # prevent migration errors
 if [ ! -f packages/backend/native-utils/built/index.js ]; then
-  say "Something went wrong orz... Gonnya try fixing that."
-  running "cp neko/index.js packages/backend/native-utils/built/index.js"
+  say 'Something went wrong orz... Gonnya try fixing that.'
+  run 'cp neko/index.js packages/backend/native-utils/built/index.js'
   cp neko/index.js packages/backend/native-utils/built/index.js
 else
   say "It's going well so far!"
@@ -63,10 +61,8 @@ else
 fi
 
 # migrate
-say "Database migration time!"
+say 'Database migration time!'
+run 'NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run migrate'
 
-running "NODE_OPTIONS=\"--max_old_space_size=3072\" NODE_ENV=\"production\" pnpm run migrate"
-NODE_OPTIONS="--max_old_space_size=3072" NODE_ENV="production" pnpm run migrate
-
-say "Done!"
+say 'Done!'
 br
