@@ -180,8 +180,6 @@
 		"@types/ws": "8.5.9",
 		"cross-env": "7.0.3",
 		"eslint": "8.53.0",
-		"execa": "8.0.1",
-		"json5-loader": "4.0.1",
 		"pug": "3.0.2",
 		"strict-event-emitter-types": "2.0.0",
 		"swc-loader": "0.2.3",
