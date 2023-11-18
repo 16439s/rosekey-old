@@ -1,5 +1,3 @@
-pnpm-lock.yaml
-
 # Visual Studio Code
 /.vscode
 !/.vscode/extensions.json

@@ -32,7 +32,7 @@ COPY packages/backend/native-utils/npm/linux-x64-musl/package.json packages/back
 COPY packages/backend/native-utils/npm/linux-arm64-musl/package.json packages/backend/native-utils/npm/linux-arm64-musl/package.json
 
 # Configure pnpm, and install dev mode dependencies for compilation
-RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install
+RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
 
 # Copy in the rest of the native-utils rust files
 COPY packages/backend/native-utils packages/backend/native-utils/
@@ -52,7 +52,7 @@ RUN sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${VERSION}
 RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pnpm run gulp"
 
 # Trim down the dependencies to only those for production
-RUN pnpm install --prod
+RUN pnpm install --prod --frozen-lockfile
 
 ## Runtime container
 FROM node:20
