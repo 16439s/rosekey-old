@@ -16,6 +16,7 @@ services:
     environment:
       NODE_ENV: production
     volumes:
+      - ./assets:/firefish/custom/assets
       - ./files:/firefish/files
       - ./.config:/firefish/.config:ro
 
