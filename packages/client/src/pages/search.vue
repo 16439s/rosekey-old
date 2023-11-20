@@ -50,6 +50,7 @@ import { definePageMetadata } from "@/scripts/page-metadata";
 import { defaultStore } from "@/store";
 import { deviceKind } from "@/scripts/device-kind";
 import icon from "@/scripts/icon";
+import { $i } from "@/reactiveAccount";
 import "swiper/scss";
 import "swiper/scss/virtual";
 
@@ -62,7 +63,10 @@ const notesPagination = {
 	endpoint: "notes/search" as const,
 	limit: 10,
 	params: computed(() => ({
-		query: props.query,
+		query: props.query.endsWith("from:me")
+			? props.query.slice(0, -7).trim()
+			: props.query,
+		userId: props.query.endsWith("from:me") ? $i.id : null,
 		channelId: props.channel,
 	})),
 };

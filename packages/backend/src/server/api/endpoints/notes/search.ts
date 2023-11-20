@@ -1,10 +1,10 @@
-import { FindManyOptions, In } from "typeorm";
+// import { FindManyOptions, In } from "typeorm";
 import { Notes } from "@/models/index.js";
 import { Note } from "@/models/entities/note.js";
-import config from "@/config/index.js";
-import es from "@/db/elasticsearch.js";
-import sonic from "@/db/sonic.js";
-import meilisearch, { MeilisearchNote } from "@/db/meilisearch.js";
+// import config from "@/config/index.js";
+// import es from "@/db/elasticsearch.js";
+// import sonic from "@/db/sonic.js";
+// import meilisearch, { MeilisearchNote } from "@/db/meilisearch.js";
 import define from "@/server/api/define.js";
 import { makePaginationQuery } from "@/server/api/common/make-pagination-query.js";
 import { generateVisibilityQuery } from "@/server/api/common/generate-visibility-query.js";
@@ -73,47 +73,55 @@ export default define(meta, paramDef, async (ps, me) => {
 	// disable the post search if no credentials are provided
 	if (me == null) return [];
 
-	if (es == null && sonic == null && meilisearch == null) {
-		const query = makePaginationQuery(
-			Notes.createQueryBuilder("note"),
-			ps.sinceId,
-			ps.untilId,
-		);
+	/*	if (es == null && sonic == null && meilisearch == null) { */
+	const query = makePaginationQuery(
+		Notes.createQueryBuilder("note"),
+		ps.sinceId,
+		ps.untilId,
+	);
 
-		if (ps.userId != null) {
-			query.andWhere("note.userId = :userId", { userId: ps.userId });
-		}
+	if (ps.channelId != null) {
+		query.andWhere("note.channelId = :channelId", {
+			channelId: ps.channelId,
+		});
+	}
 
-		if (ps.channelId != null) {
-			query.andWhere("note.channelId = :channelId", {
-				channelId: ps.channelId,
-			});
-		}
+	query
+		.andWhere("note.text &@~ :q", { q: `${sqlLikeEscape(ps.query)}` })
+		.innerJoinAndSelect("note.user", "user");
 
+	// "from: me": search all (public, home, followers, specified) my posts
+	//  otherwise: search public indexable posts only
+	if (ps.userId == null || ps.userId !== me.id) {
 		query
-			.andWhere("note.text &@~ :q", { q: `${sqlLikeEscape(ps.query)}` })
 			.andWhere("note.visibility = 'public'")
-			.innerJoinAndSelect("note.user", "user")
-			.andWhere("user.isIndexable = TRUE")
-			.leftJoinAndSelect("user.avatar", "avatar")
-			.leftJoinAndSelect("user.banner", "banner")
-			.leftJoinAndSelect("note.reply", "reply")
-			.leftJoinAndSelect("note.renote", "renote")
-			.leftJoinAndSelect("reply.user", "replyUser")
-			.leftJoinAndSelect("replyUser.avatar", "replyUserAvatar")
-			.leftJoinAndSelect("replyUser.banner", "replyUserBanner")
-			.leftJoinAndSelect("renote.user", "renoteUser")
-			.leftJoinAndSelect("renoteUser.avatar", "renoteUserAvatar")
-			.leftJoinAndSelect("renoteUser.banner", "renoteUserBanner");
+			.andWhere("user.isIndexable = TRUE");
+	}
 
-		generateVisibilityQuery(query, me);
-		if (me) generateMutedUserQuery(query, me);
-		if (me) generateBlockedUserQuery(query, me);
+	if (ps.userId != null) {
+		query.andWhere("note.userId = :userId", { userId: ps.userId });
+	}
 
-		const notes: Note[] = await query.take(ps.limit).getMany();
+	query
+		.leftJoinAndSelect("user.avatar", "avatar")
+		.leftJoinAndSelect("user.banner", "banner")
+		.leftJoinAndSelect("note.reply", "reply")
+		.leftJoinAndSelect("note.renote", "renote")
+		.leftJoinAndSelect("reply.user", "replyUser")
+		.leftJoinAndSelect("replyUser.avatar", "replyUserAvatar")
+		.leftJoinAndSelect("replyUser.banner", "replyUserBanner")
+		.leftJoinAndSelect("renote.user", "renoteUser")
+		.leftJoinAndSelect("renoteUser.avatar", "renoteUserAvatar")
+		.leftJoinAndSelect("renoteUser.banner", "renoteUserBanner");
 
-		return await Notes.packMany(notes, me);
-	} else if (sonic) {
+	generateVisibilityQuery(query, me);
+	if (me) generateMutedUserQuery(query, me);
+	if (me) generateBlockedUserQuery(query, me);
+
+	const notes: Note[] = await query.take(ps.limit).getMany();
+
+	return await Notes.packMany(notes, me);
+	/*	} else if (sonic) {
 		let start = 0;
 		const chunkSize = 100;
 
@@ -270,7 +278,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		}
 
 		return found;
-	} else {
+	} else { // Elasticsearch
 		const userQuery =
 			ps.userId != null
 				? [
@@ -350,5 +358,5 @@ export default define(meta, paramDef, async (ps, me) => {
 		});
 
 		return await Notes.packMany(notes, me);
-	}
+	} */
 });
