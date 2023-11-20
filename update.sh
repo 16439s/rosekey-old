@@ -13,10 +13,8 @@ OLD_COMMIT=$(git rev-parse HEAD)
 say 'Pulling changes from the remote repo...'
 
 run 'git checkout -- package.json packages/backend/assets'
-git checkout -- package.json packages/backend/assets
 
 run 'git pull --ff --no-edit --autostash --strategy-option theirs'
-git pull --ff --no-edit --autostash --strategy-option theirs
 
 NEW_COMMIT=$(git rev-parse HEAD)
 say 'Pulled successfully!'

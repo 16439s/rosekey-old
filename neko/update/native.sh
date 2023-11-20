@@ -54,7 +54,6 @@ br
 if [ ! -f packages/backend/native-utils/built/index.js ]; then
   say 'Something went wrong orz... Gonnya try fixing that.'
   run 'cp neko/index.js packages/backend/native-utils/built/index.js'
-  cp neko/index.js packages/backend/native-utils/built/index.js
 else
   say "It's going well so far!"
   br
