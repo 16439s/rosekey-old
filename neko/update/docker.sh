@@ -5,7 +5,7 @@ set -eu
 
 pull() {
   say 'Pulling the image...'
-  docker pull docker.io/naskya/firefish
+  run 'docker pull docker.io/naskya/firefish'
 }
 
 if ! pull; then
@@ -13,7 +13,10 @@ if ! pull; then
   say 'Gonnya try building the image locally!'
 
   say 'It takes some time! Why not brew a cup of cofe?'
-  docker build --tag docker.io/naskya/firefish --build-arg VERSION="$(version)" .
+  run "$(cat - << EOC
+docker build --tag docker.io/naskya/firefish --build-arg VERSION="$(version)" .
+EOC
+  )"
 fi
 
 say 'Done!'
