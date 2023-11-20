@@ -12,7 +12,7 @@ say() {
 
 run() {
   color 3  # yellow
-  printf "[running] \$ %s\n" "$1"
+  printf '[running] $ %s\n' "$1"
   color
   /bin/sh -c "$1"
 }
