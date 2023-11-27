@@ -22,7 +22,8 @@ br() {
 }
 
 version() {
+  UPSTREAM_VERSION=$(pnpm pkg get version | sed -e 's/"//g')
   COMMIT_DATE=$(git show --no-patch --pretty='%cs' FETCH_HEAD | sed -e 's/-//g' | cut -c 3-)
   COMMIT_HASH_INITIAL=$(printf '%s' "$(git rev-parse FETCH_HEAD)" | cut -c 1)
-  printf '%s.%s' "${COMMIT_DATE}" "${COMMIT_HASH_INITIAL}"
+  printf '%s+neko:%s.%s' "${UPSTREAM_VERSION}" "${COMMIT_DATE}" "${COMMIT_HASH_INITIAL}"
 }

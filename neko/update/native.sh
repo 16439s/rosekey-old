@@ -24,10 +24,7 @@ fi
 # write version info
 say 'Writing version info to package.json...'
 
-run "$(cat - << EOC
-sed "s/\"version\": \"\([^+][^+]*\).*\",$/\"version\": \"\\1+neko:$(version)\",/" package.json > package.json.new && mv -- package.json.new package.json
-EOC
-)"
+run "pnpm pkg set version=$(version)"
 
 say 'Done!'
 br

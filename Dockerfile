@@ -46,7 +46,7 @@ COPY . ./
 # Write version info
 ARG VERSION
 ENV VERSION=${VERSION}
-RUN sed -i -r "s/\"version\": \"([^+]+).*\",$/\"version\": \"\\1+neko:${VERSION}\",/" package.json
+RUN pnpm pkg set version="${VERSION}"
 
 # Compile
 RUN env NODE_ENV=production sh -c "pnpm run --filter '!native-utils' build && pnpm run gulp"
