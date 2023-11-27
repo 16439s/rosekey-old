@@ -1,6 +1,6 @@
+import { url } from "@/config";
 import type * as firefish from "firefish-js";
 import * as Acct from "firefish-js/built/acct";
-import { url } from "@/config";
 
 export const acct = (user: firefish.Acct) => {
 	return Acct.toString(user);

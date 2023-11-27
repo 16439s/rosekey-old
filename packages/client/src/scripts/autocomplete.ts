@@ -1,8 +1,8 @@
+import { popup } from "@/os";
+import { toASCII } from "punycode/";
+import getCaretCoordinates from "textarea-caret";
 import type { Ref } from "vue";
 import { defineAsyncComponent, nextTick, ref } from "vue";
-import getCaretCoordinates from "textarea-caret";
-import { toASCII } from "punycode/";
-import { popup } from "@/os";
 
 export class Autocomplete {
 	private suggestion: {
@@ -91,8 +91,8 @@ export class Autocomplete {
 			emojiIndex !== -1 &&
 			text
 				.split(/:[a-z0-9_+\-]+:/)
-				.pop()!
-				.includes(":");
+				.pop()
+				?.includes(":");
 
 		let opened = false;
 

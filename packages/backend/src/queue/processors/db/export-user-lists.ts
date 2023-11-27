@@ -1,14 +1,14 @@
-import type Bull from "bull";
 import * as fs from "node:fs";
+import type Bull from "bull";
 
-import { queueLogger } from "../../logger.js";
-import { addFile } from "@/services/drive/add-file.js";
-import { format as dateFormat } from "date-fns";
 import { getFullApAccount } from "@/misc/convert-host.js";
 import { createTemp } from "@/misc/create-temp.js";
-import { Users, UserLists, UserListJoinings } from "@/models/index.js";
-import { In } from "typeorm";
+import { UserListJoinings, UserLists, Users } from "@/models/index.js";
 import type { DbUserJobData } from "@/queue/types.js";
+import { addFile } from "@/services/drive/add-file.js";
+import { format as dateFormat } from "date-fns";
+import { In } from "typeorm";
+import { queueLogger } from "../../logger.js";
 
 const logger = queueLogger.createSubLogger("export-user-lists");
 
@@ -46,7 +46,7 @@ export async function exportUserLists(
 				const acct = getFullApAccount(u.username, u.host);
 				const content = `${list.name},${acct}`;
 				await new Promise<void>((res, rej) => {
-					stream.write(content + "\n", (err) => {
+					stream.write(`${content}\n`, (err) => {
 						if (err) {
 							logger.error(err);
 							rej(err);

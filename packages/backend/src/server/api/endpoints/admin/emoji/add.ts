@@ -1,12 +1,12 @@
-import define from "@/server/api/define.js";
-import { Emojis, DriveFiles } from "@/models/index.js";
-import { genId } from "@/misc/gen-id.js";
-import { insertModerationLog } from "@/services/insert-moderation-log.js";
-import { ApiError } from "@/server/api/error.js";
-import rndstr from "rndstr";
-import { publishBroadcastStream } from "@/services/stream.js";
 import { db } from "@/db/postgre.js";
 import { getEmojiSize } from "@/misc/emoji-meta.js";
+import { genId } from "@/misc/gen-id.js";
+import { DriveFiles, Emojis } from "@/models/index.js";
+import define from "@/server/api/define.js";
+import { ApiError } from "@/server/api/error.js";
+import { insertModerationLog } from "@/services/insert-moderation-log.js";
+import { publishBroadcastStream } from "@/services/stream.js";
+import rndstr from "rndstr";
 
 export const meta = {
 	tags: ["admin", "emoji"],
@@ -66,7 +66,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		height: size.height || null,
 	}).then((x) => Emojis.findOneByOrFail(x.identifiers[0]));
 
-	await db.queryResultCache!.remove(["meta_emojis"]);
+	await db.queryResultCache?.remove(["meta_emojis"]);
 
 	publishBroadcastStream("emojiAdded", {
 		emoji: await Emojis.pack(emoji.id),

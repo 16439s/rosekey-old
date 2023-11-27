@@ -1,5 +1,5 @@
-import type { Directive } from "vue";
 import { vibrate } from "@/scripts/vibrate";
+import type { Directive } from "vue";
 
 export default {
 	mounted(el, binding) {

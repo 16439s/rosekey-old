@@ -1,8 +1,8 @@
-import { post } from "@/os";
 import { login } from "@/account";
+import { post } from "@/os";
 import { $i } from "@/reactiveAccount";
-import { getAccountFromId } from "@/scripts/get-account-from-id";
 import { mainRouter } from "@/router";
+import { getAccountFromId } from "@/scripts/get-account-from-id";
 
 export function swInject() {
 	navigator.serviceWorker.addEventListener("message", (ev) => {

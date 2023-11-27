@@ -1,13 +1,13 @@
 import { downloadTextFile } from "@/misc/download-text-file.js";
 import { processMastoNotes } from "@/misc/process-masto-notes.js";
-import { Users, DriveFiles } from "@/models/index.js";
-import type { DbUserImportPostsJobData } from "@/queue/types.js";
-import { queueLogger } from "../../logger.js";
-import type Bull from "bull";
+import { DriveFiles, Users } from "@/models/index.js";
 import {
 	createImportCkPostJob,
 	createImportMastoPostJob,
 } from "@/queue/index.js";
+import type { DbUserImportPostsJobData } from "@/queue/types.js";
+import type Bull from "bull";
+import { queueLogger } from "../../logger.js";
 
 const logger = queueLogger.createSubLogger("import-posts");
 
@@ -55,7 +55,7 @@ export async function importPosts(
 
 	try {
 		const parsed = JSON.parse(json);
-		if (parsed instanceof Array) {
+		if (Array.isArray(parsed)) {
 			logger.info("Parsing key style posts");
 			const arr = recreateChain(parsed);
 			for (const post of arr) {

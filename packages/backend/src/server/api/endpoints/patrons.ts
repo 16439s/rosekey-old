@@ -1,7 +1,7 @@
-import define from "@/server/api/define.js";
 import * as fs from "node:fs";
-import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import define from "@/server/api/define.js";
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
@@ -27,7 +27,7 @@ export default define(meta, paramDef, async (ps) => {
 		fs.readFileSync(`${_dirname}/../../../../../../patrons.json`, "utf-8"),
 	);
 	return {
-		patrons: patrons["patrons"],
-		sponsors: patrons["sponsors"],
+		patrons: patrons.patrons,
+		sponsors: patrons.sponsors,
 	};
 });

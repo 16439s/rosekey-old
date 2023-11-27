@@ -1,11 +1,11 @@
-import XTutorial from "@/components/MkTutorialDialog.vue";
 import XCheatSheet from "@/components/MkCheatSheetDialog.vue";
-import { defaultStore } from "@/store";
-import { instance } from "@/instance";
+import XTutorial from "@/components/MkTutorialDialog.vue";
 import { host } from "@/config";
-import * as os from "@/os";
 import { i18n } from "@/i18n";
+import { instance } from "@/instance";
+import * as os from "@/os";
 import icon from "@/scripts/icon";
+import { defaultStore } from "@/store";
 import type { MenuItem } from "@/types/menu";
 
 const instanceSpecificItems: MenuItem[] = [];

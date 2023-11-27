@@ -1,8 +1,8 @@
-import define from "@/server/api/define.js";
-import { Emojis } from "@/models/index.js";
-import { In } from "typeorm";
-import { insertModerationLog } from "@/services/insert-moderation-log.js";
 import { db } from "@/db/postgre.js";
+import { Emojis } from "@/models/index.js";
+import define from "@/server/api/define.js";
+import { insertModerationLog } from "@/services/insert-moderation-log.js";
+import { In } from "typeorm";
 
 export const meta = {
 	tags: ["admin", "emoji"],
@@ -45,7 +45,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	for (const emoji of emojis) {
 		await Emojis.delete(emoji.id);
 
-		await db.queryResultCache!.remove(["meta_emojis"]);
+		await db.queryResultCache?.remove(["meta_emojis"]);
 
 		insertModerationLog(me, "deleteEmoji", {
 			emoji: emoji,

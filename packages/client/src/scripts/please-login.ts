@@ -1,8 +1,8 @@
-import { defineAsyncComponent } from "vue";
-import { $i } from "@/reactiveAccount";
 import { i18n } from "@/i18n";
 import { popup } from "@/os";
+import { $i } from "@/reactiveAccount";
 import { vibrate } from "@/scripts/vibrate";
+import { defineAsyncComponent } from "vue";
 
 export function pleaseLogin(path?: string) {
 	if ($i) return;

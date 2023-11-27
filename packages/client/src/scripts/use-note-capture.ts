@@ -1,9 +1,9 @@
+import * as os from "@/os";
+import { $i } from "@/reactiveAccount";
+import { stream } from "@/stream";
+import type * as firefish from "firefish-js";
 import type { Ref } from "vue";
 import { onUnmounted } from "vue";
-import type * as firefish from "firefish-js";
-import { stream } from "@/stream";
-import { $i } from "@/reactiveAccount";
-import * as os from "@/os";
 
 export function useNoteCapture(props: {
 	rootEl: Ref<HTMLElement>;

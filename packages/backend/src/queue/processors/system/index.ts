@@ -1,6 +1,6 @@
 import type Bull from "bull";
-import { cleanCharts } from "./clean-charts.js";
 import { checkExpiredMutings } from "./check-expired-mutings.js";
+import { cleanCharts } from "./clean-charts.js";
 import { clean } from "./clean.js";
 import { setLocalEmojiSizes } from "./local-emoji-size.js";
 import { verifyLinks } from "./verify-links.js";

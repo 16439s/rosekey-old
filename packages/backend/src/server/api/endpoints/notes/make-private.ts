@@ -1,10 +1,10 @@
-import deleteNote from "@/services/note/delete.js";
+import { HOUR, SECOND } from "@/const.js";
 import { Notes } from "@/models/index.js";
-import define from "../../define.js";
-import { getNote } from "../../common/getters.js";
-import { ApiError } from "../../error.js";
-import { SECOND, HOUR } from "@/const.js";
+import deleteNote from "@/services/note/delete.js";
 import { publishNoteStream } from "@/services/stream.js";
+import { getNote } from "../../common/getters.js";
+import define from "../../define.js";
+import { ApiError } from "../../error.js";
 
 export const meta = {
 	tags: ["notes"],

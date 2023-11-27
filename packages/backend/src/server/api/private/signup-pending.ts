@@ -1,12 +1,12 @@
-import type Koa from "koa";
 import { UserPendings, UserProfiles } from "@/models/index.js";
-import { signup } from "@/server/api/common/signup.js";
 import signin from "@/server/api/common/signin.js";
+import { signup } from "@/server/api/common/signup.js";
+import type Koa from "koa";
 
 export default async (ctx: Koa.Context) => {
 	const body = ctx.request.body;
 
-	const code = body["code"];
+	const code = body.code;
 
 	try {
 		const pendingUser = await UserPendings.findOneByOrFail({ code });

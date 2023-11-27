@@ -2,10 +2,10 @@
  * Hpml
  */
 
+import icon from "@/scripts/icon";
 import autobind from "autobind-decorator";
 import type { Hpml } from "./evaluator";
 import { funcDefs } from "./lib";
-import icon from "@/scripts/icon";
 
 export interface Fn {
 	slots: string[];

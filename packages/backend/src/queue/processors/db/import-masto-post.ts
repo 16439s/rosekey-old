@@ -1,15 +1,15 @@
-import create from "@/services/note/create.js";
+import { genId } from "@/misc/gen-id.js";
+import type { DriveFile } from "@/models/entities/drive-file.js";
+import type { Note } from "@/models/entities/note.js";
 import { Users } from "@/models/index.js";
+import { NoteEdits, Notes } from "@/models/index.js";
 import type { DbUserImportMastoPostJobData } from "@/queue/types.js";
-import { queueLogger } from "../../logger.js";
-import type Bull from "bull";
 import { htmlToMfm } from "@/remote/activitypub/misc/html-to-mfm.js";
 import { resolveNote } from "@/remote/activitypub/models/note.js";
 import { uploadFromUrl } from "@/services/drive/upload-from-url.js";
-import type { DriveFile } from "@/models/entities/drive-file.js";
-import { Notes, NoteEdits } from "@/models/index.js";
-import type { Note } from "@/models/entities/note.js";
-import { genId } from "@/misc/gen-id.js";
+import create from "@/services/note/create.js";
+import type Bull from "bull";
+import { queueLogger } from "../../logger.js";
 
 const logger = queueLogger.createSubLogger("import-masto-post");
 
@@ -52,10 +52,10 @@ export async function importMastoPost(
 		.map((x: any) => x?.driveFile)
 		.filter((x: any) => x);
 
-	if (files.length == 0) {
+	if (files.length === 0) {
 		const urls = post.object.attachment
 			.map((x: any) => x.url)
-			.filter((x: String) => x.startsWith("http"));
+			.filter((x: string) => x.startsWith("http"));
 		files = [];
 		for (const url of urls) {
 			try {
@@ -87,12 +87,12 @@ export async function importMastoPost(
 			fileIds: note.fileIds,
 			updatedAt: new Date(),
 		});
-		logger.info(`Note file updated`);
+		logger.info("Note file updated");
 	}
 	if (!note) {
 		note = await create(user, {
 			createdAt: new Date(post.object.published),
-			files: files.length == 0 ? undefined : files,
+			files: files.length === 0 ? undefined : files,
 			poll: undefined,
 			text: text || undefined,
 			reply,
@@ -106,9 +106,9 @@ export async function importMastoPost(
 			apHashtags: undefined,
 			apEmojis: undefined,
 		});
-		logger.info(`Create new note`);
+		logger.info("Create new note");
 	} else {
-		logger.info(`Note exist`);
+		logger.info("Note exist");
 	}
 	job.progress(100);
 	done();

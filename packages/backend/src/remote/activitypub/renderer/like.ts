@@ -1,8 +1,8 @@
-import { IsNull } from "typeorm";
 import config from "@/config/index.js";
 import type { NoteReaction } from "@/models/entities/note-reaction.js";
 import type { Note } from "@/models/entities/note.js";
 import { Emojis } from "@/models/index.js";
+import { IsNull } from "typeorm";
 import renderEmoji from "./emoji.js";
 
 export const renderLike = async (noteReaction: NoteReaction, note: Note) => {

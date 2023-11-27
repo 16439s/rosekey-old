@@ -1,16 +1,16 @@
-import type { Ref } from "vue";
-import { defineAsyncComponent } from "vue";
-import type * as firefish from "firefish-js";
-import { $i } from "@/reactiveAccount";
+import { url } from "@/config";
 import { i18n } from "@/i18n";
 import { instance } from "@/instance";
 import * as os from "@/os";
+import { $i } from "@/reactiveAccount";
 import copyToClipboard from "@/scripts/copy-to-clipboard";
-import { url } from "@/config";
-import { noteActions } from "@/store";
-import { shareAvailable } from "@/scripts/share-available";
 import { getUserMenu } from "@/scripts/get-user-menu";
 import icon from "@/scripts/icon";
+import { shareAvailable } from "@/scripts/share-available";
+import { noteActions } from "@/store";
+import type * as firefish from "firefish-js";
+import type { Ref } from "vue";
+import { defineAsyncComponent } from "vue";
 
 export function getNoteMenu(props: {
 	note: firefish.entities.Note;
@@ -209,7 +209,7 @@ export function getNoteMenu(props: {
 								} else {
 									os.alert({
 										type: "error",
-										text: err.message + "\n" + err.id,
+										text: `${err.message}\n${err.id}`,
 									});
 								}
 							},

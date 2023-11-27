@@ -4,20 +4,20 @@
  * Tests located in test/chart
  */
 
-import * as nestedProperty from "nested-property";
-import Logger from "../logger.js";
-import type { Repository } from "typeorm";
-import { EntitySchema, LessThan, Between } from "typeorm";
-import {
-	dateUTC,
-	isTimeSame,
-	isTimeBefore,
-	subtractTime,
-	addTime,
-} from "@/prelude/time.js";
-import { getChartInsertLock } from "@/misc/app-lock.js";
 import { db } from "@/db/postgre.js";
+import { getChartInsertLock } from "@/misc/app-lock.js";
+import {
+	addTime,
+	dateUTC,
+	isTimeBefore,
+	isTimeSame,
+	subtractTime,
+} from "@/prelude/time.js";
+import * as nestedProperty from "nested-property";
 import promiseLimit from "promise-limit";
+import type { Repository } from "typeorm";
+import { Between, EntitySchema, LessThan } from "typeorm";
+import Logger from "../logger.js";
 
 const logger = new Logger("chart", "white", process.env.NODE_ENV !== "test");
 
@@ -463,7 +463,7 @@ export default abstract class Chart<T extends Schema> {
 	protected commit(diff: Commit<T>, group: string | null = null): void {
 		for (const [k, v] of Object.entries(diff)) {
 			if (v == null || v === 0 || (Array.isArray(v) && v.length === 0))
-				// rome-ignore lint/performance/noDelete: needs to be deleted not just set to undefined
+				// biome-ignore lint/performance/noDelete: needs to be deleted not just set to undefined
 				delete diff[k];
 		}
 		this.buffer.push({

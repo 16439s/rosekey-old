@@ -1,6 +1,6 @@
-import { utils, values } from "@syuilo/aiscript";
 import * as os from "@/os";
 import { $i } from "@/reactiveAccount";
+import { utils, values } from "@syuilo/aiscript";
 
 export function createAiScriptEnv(opts) {
 	let apiRequests = 0;

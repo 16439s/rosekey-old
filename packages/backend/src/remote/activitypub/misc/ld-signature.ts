@@ -1,8 +1,8 @@
 import * as crypto from "node:crypto";
-import jsonld from "jsonld";
-import { CONTEXTS } from "./contexts.js";
-import fetch from "node-fetch";
 import { httpAgent, httpsAgent } from "@/misc/fetch.js";
+import jsonld from "jsonld";
+import fetch from "node-fetch";
+import { CONTEXTS } from "./contexts.js";
 
 // RsaSignature2017 based from https://github.com/transmute-industries/RsaSignature2017
 
@@ -68,13 +68,13 @@ export class LdSignature {
 			...options,
 			"@context": "https://w3id.org/identity/v1",
 		};
-		delete transformedOptions["type"];
-		delete transformedOptions["id"];
-		delete transformedOptions["signatureValue"];
+		transformedOptions.type = undefined;
+		transformedOptions.id = undefined;
+		transformedOptions.signatureValue = undefined;
 		const canonizedOptions = await this.normalize(transformedOptions);
 		const optionsHash = this.sha256(canonizedOptions);
 		const transformedData = { ...data };
-		delete transformedData["signature"];
+		transformedData.signature = undefined;
 		const cannonidedData = await this.normalize(transformedData);
 		if (this.debug) console.debug(`cannonidedData: ${cannonidedData}`);
 		const documentHash = this.sha256(cannonidedData);

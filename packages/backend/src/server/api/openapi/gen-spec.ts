@@ -1,7 +1,7 @@
-import endpoints from "@/server/api/endpoints.js";
 import config from "@/config/index.js";
+import endpoints from "@/server/api/endpoints.js";
 import { errors as basicErrors } from "./errors.js";
-import { schemas, convertSchemaToOpenApiSchema } from "./schemas.js";
+import { convertSchemaToOpenApiSchema, schemas } from "./schemas.js";
 
 export function genOpenapiSpec() {
 	const spec = {
@@ -61,10 +61,11 @@ export function genOpenapiSpec() {
 			? convertSchemaToOpenApiSchema(endpoint.meta.res)
 			: {};
 
-		let desc =
-			(endpoint.meta.description
+		let desc = `${
+			endpoint.meta.description
 				? endpoint.meta.description
-				: "No description provided.") + "\n\n";
+				: "No description provided."
+		}\n\n`;
 		desc += `**Credential required**: *${
 			endpoint.meta.requireCredential ? "Yes" : "No"
 		}*`;

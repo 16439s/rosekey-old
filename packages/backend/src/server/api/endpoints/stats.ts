@@ -1,7 +1,7 @@
+import { Cache } from "@/misc/cache.js";
 import { Instances, Notes, Users } from "@/models/index.js";
 import define from "@/server/api/define.js";
 import { IsNull } from "typeorm";
-import { Cache } from "@/misc/cache.js";
 
 export const meta = {
 	requireCredential: false,

@@ -1,6 +1,6 @@
-import * as mfm from "mfm-js";
-import { defaultStore } from "@/store";
 import { expandKaTeXMacro } from "@/scripts/katex-macro";
+import { defaultStore } from "@/store";
+import * as mfm from "mfm-js";
 
 export default function (text: string): string {
 	if (defaultStore.state.enableCustomKaTeXMacro) {
