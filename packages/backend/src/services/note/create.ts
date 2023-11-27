@@ -31,7 +31,6 @@ import type { ILocalUser, IRemoteUser, User } from "@/models/entities/user.js";
 import {
 	ChannelFollowings,
 	Channels,
-	Followings,
 	Instances,
 	MutedNotes,
 	Mutings,

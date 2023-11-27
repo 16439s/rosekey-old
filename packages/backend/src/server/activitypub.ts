@@ -1,7 +1,8 @@
 import Router from "@koa/router";
 import httpSignature from "@peertube/http-signature";
-import json from "koa-json-body";
+import bodyParser from "koa-bodyparser";
 
+import config from "@/config/index.js";
 import { isSelfHost } from "@/misc/convert-host.js";
 import { fetchMeta } from "@/misc/fetch-meta.js";
 import { getUserKeypair } from "@/misc/keypair-store.js";
@@ -17,6 +18,7 @@ import { inbox as processInbox } from "@/queue/index.js";
 import {
 	checkFetch,
 	getSignatureUser,
+	verifyDigest,
 } from "@/remote/activitypub/check-fetch.js";
 import renderEmoji from "@/remote/activitypub/renderer/emoji.js";
 import renderFollow from "@/remote/activitypub/renderer/follow.js";
@@ -26,6 +28,7 @@ import { renderLike } from "@/remote/activitypub/renderer/like.js";
 import renderNote from "@/remote/activitypub/renderer/note.js";
 import { renderPerson } from "@/remote/activitypub/renderer/person.js";
 import { getInstanceActor } from "@/services/instance-actor.js";
+import Koa from "koa";
 import { In, IsNull, Not } from "typeorm";
 import Featured from "./activitypub/featured.js";
 import Followers from "./activitypub/followers.js";
@@ -39,11 +42,23 @@ const router = new Router();
 //#region Routing
 
 function inbox(ctx: Router.RouterContext) {
+	if (ctx.req.headers.host !== config.host) {
+		ctx.status = 400;
+		return;
+	}
+
 	let signature;
 
 	try {
-		signature = httpSignature.parseRequest(ctx.req, { headers: [] });
+		signature = httpSignature.parseRequest(ctx.req, {
+			headers: ["(request-target)", "digest", "host", "date"],
+		});
 	} catch (e) {
+		ctx.status = 401;
+		return;
+	}
+
+	if (!verifyDigest(ctx.request.rawBody, ctx.headers.digest)) {
 		ctx.status = 401;
 		return;
 	}
@@ -72,9 +87,23 @@ export function setResponseType(ctx: Router.RouterContext) {
 	}
 }
 
+async function parseJsonBodyOrFail(ctx: Router.RouterContext, next: Koa.Next) {
+	const koaBodyParser = bodyParser({
+		enableTypes: ["json"],
+		detectJSON: () => true,
+	});
+
+	try {
+		await koaBodyParser(ctx, next);
+	} catch {
+		ctx.status = 400;
+		return;
+	}
+}
+
 // inbox
-router.post("/inbox", json(), inbox);
-router.post("/users/:user/inbox", json(), inbox);
+router.post("/inbox", parseJsonBodyOrFail, inbox);
+router.post("/users/:user/inbox", parseJsonBodyOrFail, inbox);
 
 // note
 router.get("/notes/:note", async (ctx, next) => {

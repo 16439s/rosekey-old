@@ -1,7 +1,7 @@
 import type Bull from "bull";
 
 import { activeUsersChart } from "@/services/chart/index.js";
-import { queueLogger } from "../../logger.js";
+import { queueLogger } from "@/queue/logger.js";
 
 const logger = queueLogger.createSubLogger("clean-charts");
 

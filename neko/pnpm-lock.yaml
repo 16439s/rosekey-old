@@ -139,7 +139,7 @@ importers:
         specifier: 6.0.1
         version: 6.0.1
       argon2:
-        specifier: 0.31.2
+        specifier: ^0.31.2
         version: 0.31.2
       aws-sdk:
         specifier: 2.1498.0
@@ -624,7 +624,7 @@ importers:
         specifier: 0.16.0
         version: 0.16.0
       '@types/autosize':
-        specifier: 4.0.3
+        specifier: ^4.0.3
         version: 4.0.3
       '@types/glob':
         specifier: 8.1.0
@@ -717,7 +717,7 @@ importers:
         specifier: 2.30.0
         version: 2.30.0
       emojilib:
-        specifier: 3.0.11
+        specifier: ^3.0.11
         version: 3.0.11
       eslint-config-prettier:
         specifier: 9.0.0
@@ -810,7 +810,7 @@ importers:
         specifier: 1.6.0
         version: 1.6.0
       tinyld:
-        specifier: 1.3.4
+        specifier: ^1.3.4
         version: 1.3.4
       typescript:
         specifier: 5.2.2
@@ -831,10 +831,10 @@ importers:
         specifier: 3.3.8
         version: 3.3.8(typescript@5.2.2)
       vue-draggable-plus:
-        specifier: 0.2.7
+        specifier: ^0.2.7
         version: 0.2.7(@types/sortablejs@1.15.5)
       vue-plyr:
-        specifier: 7.0.0
+        specifier: ^7.0.0
         version: 7.0.0
       vue-prism-editor:
         specifier: 2.0.0-alpha.2

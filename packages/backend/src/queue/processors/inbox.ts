@@ -6,6 +6,7 @@ import { shouldBlockInstance } from "@/misc/should-block-instance.js";
 import type { UserPublickey } from "@/models/entities/user-publickey.js";
 import type { CacheableRemoteUser } from "@/models/entities/user.js";
 import { Instances } from "@/models/index.js";
+import { verifySignature } from "@/remote/activitypub/check-fetch.js";
 import DbResolver from "@/remote/activitypub/db-resolver.js";
 import { LdSignature } from "@/remote/activitypub/misc/ld-signature.js";
 import { resolvePerson } from "@/remote/activitypub/models/person.js";
@@ -107,6 +108,12 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 			signature,
 			authUser.key.keyPem,
 		);
+	}
+
+	if (httpSignatureValidated) {
+		if (!verifySignature(signature, authUser.key)) {
+			return "skip: Invalid HTTP signature";
+		}
 	}
 
 	// また、signatureのsignerは、activity.actorと一致する必要がある
