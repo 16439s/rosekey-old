@@ -1,0 +1,9 @@
+ ----------------------------------------------------------
+| For Docker users:                                        |
+| docker-compose.yml has now been renamed to               |
+| docker-compose.example.yml. So you need to restore it by |
+| $ cp docker-compose.example.yml docker-compose.yml       |
+|                                                          |
+| For the detailed explanation, see:                       |
+| https://post.naskya.net/notes/9mmcy2s9cmvpr9im           |
+ ----------------------------------------------------------
