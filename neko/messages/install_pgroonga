@@ -1,7 +1,9 @@
- -------------------------------------------------------------------------
-| This Firefish fork now requires PGroonga (https://pgroonga.github.io/), |
-| so PLEASE INSTALL PGroonga BEFORE UPGRADING!!!                          |
-|                                                                         |
-| For the detailed explanation, see:                                      |
-| https://post.naskya.net/notes/9ldi29amfanomef5                          |
- -------------------------------------------------------------------------
+ ----------------------------------------------------
+| For all users:                                     |
+| This Firefish fork now requires PGroonga           |
+| (https://pgroonga.github.io/),                     |
+| so PLEASE INSTALL AND ENABLE IT BEFORE UPGRADING!! |
+|                                                    |
+| For the detailed explanation, see:                 |
+| https://post.naskya.net/notes/9ldi29amfanomef5     |
+ ----------------------------------------------------
