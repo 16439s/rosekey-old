@@ -59,7 +59,7 @@ FROM node:21-slim
 WORKDIR /firefish
 
 # Install runtime dependencies
-RUN apt-get update && apt-get install -y libvips-dev zip unzip tini ffmpeg
+RUN apt-get update && apt-get install -y --no-install-recommends libvips-dev zip unzip tini ffmpeg
 
 COPY . ./
 
