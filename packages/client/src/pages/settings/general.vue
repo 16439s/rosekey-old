@@ -93,6 +93,9 @@
 				class="_formBlock"
 				>{{ i18n.ts.swipeOnDesktop }}</FormSwitch
 			>
+			<FormSwitch v-model="enableTimelineStreaming" class="_formBlock">{{
+				i18n.ts.enableTimelineStreaming
+			}}</FormSwitch>
 			<FormSwitch v-model="enterSendsMessage" class="_formBlock">{{
 				i18n.ts.enterSendsMessage
 			}}</FormSwitch>
@@ -539,6 +542,9 @@ const openServerInfo = computed(
 );
 const searchURL = computed(defaultStore.makeGetterSetter("searchURL"));
 const iconSet = computed(defaultStore.makeGetterSetter("iconSet"));
+const enableTimelineStreaming = computed(
+	defaultStore.makeGetterSetter("enableTimelineStreaming"),
+);
 
 // This feature (along with injectPromo) is currently disabled
 // function onChangeInjectFeaturedNote(v) {
@@ -603,6 +609,7 @@ watch(
 		autoplayMfm,
 		expandOnNoteClick,
 		iconSet,
+		enableTimelineStreaming,
 	],
 	async () => {
 		await reloadAsk();

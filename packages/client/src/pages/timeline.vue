@@ -6,9 +6,13 @@
 				:actions="headerActions"
 				:tabs="headerTabs"
 				:display-my-avatar="true"
+				class="xytnxiau"
 			/>
 		</template>
-		<MkSpacer :content-max="800">
+		<MkSpacer
+			:content-max="800"
+			:style="`padding-top: ${isMobile ? 67 : 79}px`"
+		>
 			<div ref="rootEl" v-hotkey.global="keymap" class="cmuxhskf">
 				<XPostForm
 					v-if="defaultStore.reactiveState.showFixedPostForm.value"
@@ -270,12 +274,12 @@ definePageMetadata(
 			src.value === "local"
 				? "ph-users ph-lg"
 				: src.value === "social"
-				? "ph-handshake ph-lg"
-				: src.value === "recommended"
-				? "ph-thumbs-up ph-lg"
-				: src.value === "global"
-				? "ph-planet ph-lg"
-				: "ph-house ph-lg",
+				  ? "ph-handshake ph-lg"
+				  : src.value === "recommended"
+				    ? "ph-thumbs-up ph-lg"
+				    : src.value === "global"
+				      ? "ph-planet ph-lg"
+				      : "ph-house ph-lg",
 	})),
 );
 
@@ -300,6 +304,12 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.xytnxiau {
+	overflow-y: hidden;
+	position: fixed;
+	top: 0;
+}
+
 .cmuxhskf {
 	--swiper-theme-color: var(--accent);
 	> .tl {

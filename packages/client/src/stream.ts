@@ -3,22 +3,44 @@ import { $i } from "@/reactiveAccount";
 import * as firefish from "firefish-js";
 import { markRaw } from "vue";
 
-export const stream = markRaw(
-	new firefish.Stream(
-		url,
-		$i
-			? {
-					token: $i.token,
-			  }
-			: null,
-	),
-);
+let stream: firefish.Stream | null = null;
+let timeoutHeartBeat: number | null = null;
+export let isReloading: boolean = false;
 
-window.setTimeout(heartbeat, 1000 * 60);
+export function useStream() {
+	if (stream != null) return stream;
+
+	stream = markRaw(
+		new firefish.Stream(
+			url,
+			$i
+				? {
+						token: $i.token,
+				  }
+				: null,
+		),
+	);
+	timeoutHeartBeat = window.setTimeout(heartbeat, 1000 * 60);
+
+	return stream;
+}
+
+export function reloadStream() {
+	if (stream == null) return useStream();
+	if (timeoutHeartBeat != null) window.clearTimeout(timeoutHeartBeat);
+
+	isReloading = true;
+	stream.close();
+	stream.once("_connected_", () => (isReloading = false));
+	stream.stream.reconnect();
+	isReloading = false;
+
+	return stream;
+}
 
 function heartbeat(): void {
 	if (stream != null && document.visibilityState === "visible") {
 		stream.send("ping");
 	}
-	window.setTimeout(heartbeat, 1000 * 60);
+	timeoutHeartBeat = window.setTimeout(heartbeat, 1000 * 60);
 }

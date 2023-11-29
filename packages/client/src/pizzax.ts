@@ -4,7 +4,7 @@ import { $i } from "@/reactiveAccount";
 import type { Ref } from "vue";
 import { onUnmounted, ref, watch } from "vue";
 import { api } from "./os";
-import { stream } from "./stream";
+import { useStream } from "./stream";
 
 type StateDef = Record<
 	string,
@@ -16,6 +16,7 @@ type StateDef = Record<
 
 type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
 
+const stream = useStream();
 const connection = $i && stream.useChannel("main");
 
 export class Storage<T extends StateDef> {

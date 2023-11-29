@@ -64,7 +64,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import type * as firefish from "firefish-js";
 import * as os from "@/os";
-import { stream } from "@/stream";
+import { useStream } from "@/stream";
 import { i18n } from "@/i18n";
 import { $i } from "@/reactiveAccount";
 import { getUserMenu } from "@/scripts/get-user-menu";
@@ -73,6 +73,7 @@ import { vibrate } from "@/scripts/vibrate";
 import icon from "@/scripts/icon";
 
 const router = useRouter();
+const stream = useStream();
 
 const emit = defineEmits(["refresh"]);
 const props = withDefaults(

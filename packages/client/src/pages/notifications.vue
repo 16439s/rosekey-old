@@ -6,9 +6,13 @@
 				:actions="headerActions"
 				:tabs="headerTabs"
 				:display-my-avatar="true"
+				class="xytnxiau"
 			/>
 		</template>
-		<MkSpacer :content-max="800">
+		<MkSpacer
+			:content-max="800"
+			:style="`padding-top: ${isMobile ? 67 : 79}px`"
+		>
 			<swiper
 				:round-lengths="true"
 				:touch-angle="25"
@@ -187,3 +191,11 @@ function syncSlide(index) {
 	swiperRef.slideTo(index);
 }
 </script>
+
+<style lang="scss" scoped>
+.xytnxiau {
+	overflow-y: hidden;
+	position: fixed;
+	top: 0;
+}
+</style>

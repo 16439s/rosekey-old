@@ -2032,3 +2032,7 @@ _iconSets:
   duotone: "2色"
 moreUrls: "固定するページ"
 moreUrlsDescription: "左下のヘルプメニューに固定したいページを以下の形式で、改行区切りで入力してください:\n\"表示名\": https://example.com/"
+releaseToReload: "離して再読み込み"
+reloading: "読み込み中"
+pullDownToReload: "下に引っ張って再読み込み"
+enableTimelineStreaming: "タイムラインを自動で更新する"

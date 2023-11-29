@@ -1,6 +1,6 @@
 import * as os from "@/os";
 import { $i } from "@/reactiveAccount";
-import { stream } from "@/stream";
+import { useStream } from "@/stream";
 import type * as firefish from "firefish-js";
 import type { Ref } from "vue";
 import { onUnmounted } from "vue";
@@ -11,6 +11,7 @@ export function useNoteCapture(props: {
 	isDeletedRef: Ref<boolean>;
 }) {
 	const note = props.note;
+	const stream = useStream();
 	const connection = $i ? stream : null;
 
 	async function onStreamNoteUpdated(noteData): Promise<void> {

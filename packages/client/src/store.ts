@@ -367,7 +367,7 @@ export const defaultStore = markRaw(
 		},
 		replaceWidgetsButtonWithReloadButton: {
 			where: "device",
-			default: true,
+			default: false,
 		},
 		addRe: {
 			where: "account",
@@ -413,6 +413,10 @@ export const defaultStore = markRaw(
 				| "ph-light"
 				| "ph" // this is ph-regular
 				| "ph-fill",
+		},
+		enableTimelineStreaming: {
+			where: "deviceAccount",
+			default: true,
 		},
 	}),
 );

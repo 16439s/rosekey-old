@@ -119,6 +119,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
 	(ev: "queue", count: number): void;
+	(ev: "status", error: boolean): void;
 }>();
 
 interface Item {
@@ -189,12 +190,12 @@ const init = async (): Promise<void> => {
 		);
 };
 
-const reload = (): void => {
+const reload = (): Promise<void> => {
 	items.value = [];
-	init();
+	return init();
 };
 
-const refresh = async (): void => {
+const refresh = async (): Promise<void> => {
 	const params = props.pagination.params
 		? isRef(props.pagination.params)
 			? props.pagination.params.value
@@ -259,12 +260,12 @@ const fetchMore = async (): Promise<void> => {
 						offset: offset.value,
 				  }
 				: props.pagination.reversed
-				? {
-						sinceId: items.value[0].id,
-				  }
-				: {
-						untilId: items.value[items.value.length - 1].id,
-				  }),
+				  ? {
+							sinceId: items.value[0].id,
+				    }
+				  : {
+							untilId: items.value[items.value.length - 1].id,
+				    }),
 		})
 		.then(
 			(res) => {
@@ -320,12 +321,12 @@ const fetchMoreAhead = async (): Promise<void> => {
 						offset: offset.value,
 				  }
 				: props.pagination.reversed
-				? {
-						untilId: items.value[0].id,
-				  }
-				: {
-						sinceId: items.value[items.value.length - 1].id,
-				  }),
+				  ? {
+							untilId: items.value[0].id,
+				    }
+				  : {
+							sinceId: items.value[items.value.length - 1].id,
+				    }),
 		})
 		.then(
 			(res) => {
@@ -449,6 +450,11 @@ watch(
 	},
 	{ deep: true },
 );
+
+watch(error, (n, o) => {
+	if (n === o) return;
+	emit("status", n);
+});
 
 init();
 

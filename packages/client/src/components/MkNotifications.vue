@@ -1,59 +1,62 @@
 <template>
-	<MkPagination ref="pagingComponent" :pagination="pagination">
-		<template #empty>
-			<div class="_fullinfo">
-				<img
-					src="/static-assets/badges/info.webp"
-					class="_ghost"
-					alt="Info"
-				/>
-				<div>{{ i18n.ts.noNotifications }}</div>
-			</div>
-		</template>
+	<MkPullToRefresh :refresher="() => reload()">
+		<MkPagination ref="pagingComponent" :pagination="pagination">
+			<template #empty>
+				<div class="_fullinfo">
+					<img
+						src="/static-assets/badges/info.webp"
+						class="_ghost"
+						alt="Info"
+					/>
+					<div>{{ i18n.ts.noNotifications }}</div>
+				</div>
+			</template>
 
-		<template #default="{ items: notifications }">
-			<XList
-				v-slot="{ item: notification }"
-				class="elsfgstc"
-				:items="notifications"
-				:no-gap="true"
-			>
-				<XNote
-					v-if="
-						['reply', 'quote', 'mention'].includes(
-							notification.type,
-						)
-					"
-					:key="notification.id"
-					:note="notification.note"
-					:collapsed-reply="
-						notification.type === 'reply' ||
-						(notification.type === 'mention' &&
-							notification.note.replyId != null)
-					"
-				/>
-				<XNotification
-					v-else
-					:key="notification.id"
-					:notification="notification"
-					:with-time="true"
-					:full="true"
-					class="_panel notification"
-				/>
-			</XList>
-		</template>
-	</MkPagination>
+			<template #default="{ items: notifications }">
+				<XList
+					v-slot="{ item: notification }"
+					class="elsfgstc"
+					:items="notifications"
+					:no-gap="true"
+				>
+					<XNote
+						v-if="
+							['reply', 'quote', 'mention'].includes(
+								notification.type,
+							)
+						"
+						:key="notification.id"
+						:note="notification.note"
+						:collapsed-reply="
+							notification.type === 'reply' ||
+							(notification.type === 'mention' &&
+								notification.note.replyId != null)
+						"
+					/>
+					<XNotification
+						v-else
+						:key="notification.id"
+						:notification="notification"
+						:with-time="true"
+						:full="true"
+						class="_panel notification"
+					/>
+				</XList>
+			</template>
+		</MkPagination>
+	</MkPullToRefresh>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onActivated, onMounted, onUnmounted, ref } from "vue";
 import type { notificationTypes } from "firefish-js";
 import type { Paging } from "@/components/MkPagination.vue";
 import MkPagination from "@/components/MkPagination.vue";
 import XNotification from "@/components/MkNotification.vue";
+import MkPullToRefresh from "@/components/MkPullToRefresh.vue";
 import XList from "@/components/MkDateSeparatedList.vue";
 import XNote from "@/components/MkNote.vue";
-import { stream } from "@/stream";
+import { useStream } from "@/stream";
 import { $i } from "@/reactiveAccount";
 import { i18n } from "@/i18n";
 
@@ -61,6 +64,8 @@ const props = defineProps<{
 	includeTypes?: (typeof notificationTypes)[number][];
 	unreadOnly?: boolean;
 }>();
+
+const stream = useStream();
 
 const pagingComponent = ref<InstanceType<typeof MkPagination>>();
 
@@ -87,11 +92,19 @@ const onNotification = (notification) => {
 	}
 
 	if (!isMuted) {
-		pagingComponent.value.prepend({
+		pagingComponent.value?.prepend({
 			...notification,
 			isRead: document.visibilityState === "visible",
 		});
 	}
+};
+
+function reload(): Promise<void> {
+	return new Promise<void>((res) => {
+		pagingComponent.value?.reload().then(() => {
+			res();
+		});
+	});
 };
 
 let connection;
@@ -131,6 +144,12 @@ onMounted(() => {
 			}
 		}
 	});
+});
+
+onActivated(() => {
+	pagingComponent.value?.reload();
+	connection = useStream().useChannel("main");
+	connection.on("notification", onNotification);
 });
 
 onUnmounted(() => {

@@ -1165,6 +1165,10 @@ detectPostLanguage: "Automatically detect the language and show a translate butt
 vibrate: "Play vibrations"
 openServerInfo: "Show server information by clicking the server ticker on a post"
 iconSet: "Icon set"
+releaseToReload: "Release to reload"
+reloading: "Reloading"
+pullDownToReload: "Pull down to reload"
+enableTimelineStreaming: "Update timelines automatically"
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing
