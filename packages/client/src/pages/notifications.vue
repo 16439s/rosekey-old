@@ -192,7 +192,7 @@ function syncSlide(index) {
 <style lang="scss" scoped>
 .xytnxiau {
 	overflow-y: hidden;
-	position: fixed;
+	position: absolute;
 	top: 0;
 }
 
