@@ -396,13 +396,25 @@ rm /tmp/fflog
       db: mk1  # <---
     ```
 
-6. このフォークで加えられたデータベースへの変更を取り消す（`mk1` の部分は自分のデータベース名に変更する）
+6. 次のコマンドでデータベースをいじる前に、そのコマンドが正常に動作するか確認する（`mk1` の部分は自分のデータベース名に変更する）
+
+    ```bash
+    printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --set='ON_ERROR_STOP=1' --dbname=mk1
+    ```
+
+    最後の行が `ROLLBACK` で終わっていれば問題ありません。そうでない場合には[私](https://post.naskya.net/@dev)に以下のコマンドの実行結果を送ってください。
+
+    ```bash
+    printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --echo-all --set='ON_ERROR_STOP=1' --dbname=mk1
+    ```
+
+7. このフォークで加えられたデータベースへの変更を実際に取り消す（`mk1` の部分は自分のデータベース名に変更する）
 
     ```bash
     sudo -iu postgres psql --file=neko/revert.sql --dbname=mk1
     ```
 
-7. PGroonga をアンインストールする
+8. PGroonga をアンインストールする
 
     コマンドの例
 
@@ -413,25 +425,25 @@ rm /tmp/fflog
     sudo apt update
     ```
 
-8. Firefish がインストールされているディレクトリの親ディレクトリ (e.g., `/home/calckey`) に行く
+9. Firefish がインストールされているディレクトリの親ディレクトリ (e.g., `/home/calckey`) に行く
 
     ```bash
     cd ..
     ```
 
-9. Firefish がインストールされているディレクトリ (e.g., `./calckey`) の名前を変える
+10. Firefish がインストールされているディレクトリ (e.g., `./calckey`) の名前を変える
 
     ```bash
     mv calckey calckey.old
     ```
 
-10. Firefish がインストールされているディレクトリと同じ名前で本家版の Firefish を clone する
+11. Firefish がインストールされているディレクトリと同じ名前で本家版の Firefish を clone する
 
     ```bash
     git clone https://git.joinfirefish.org/firefish/firefish.git calckey
     ```
 
-11. 必要なファイルをコピーする
+12. 必要なファイルをコピーする
 
     ```bash
     rm -rf calckey/files calckey/custom calckey/.config
@@ -440,14 +452,14 @@ rm /tmp/fflog
     cp -r calckey.old/.config calckey
     ```
 
-12. 新しい Firefish のディレクトリ (e.g., `./calckey`) に入り、`develop` ブランチに行く（実際には既に `develop` にいるはず）
+13. 新しい Firefish のディレクトリ (e.g., `./calckey`) に入り、`develop` ブランチに行く（実際には既に `develop` にいるはず）
 
     ```bash
     cd calckey
     git checkout develop
     ```
 
-13. Firefish をビルドする
+14. Firefish をビルドする
 
     ```bash
     corepack prepare pnpm@latest --activate
@@ -456,13 +468,13 @@ rm /tmp/fflog
     pnpm run migrate
     ```
 
-14. サーバーを起動して動作を確認する
+15. サーバーを起動して動作を確認する
 
     ```bash
     sudo systemctl start yourserver.example.com
     ```
 
-15. 元々 Firefish がインストールされていたディレクトリを削除する
+16. 元々 Firefish がインストールされていたディレクトリを削除する
 
     ```bash
     cd ..
