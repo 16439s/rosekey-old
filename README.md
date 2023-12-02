@@ -236,19 +236,7 @@ ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
 
 #### 正常にアップデートできなかった場合
 
-```bash
-./update.sh |& tee /tmp/fflog
-```
-
-を実行して（ログが `/tmp/fflog` に保存されます）、OS などの環境の情報とともにログの内容を[私](https://post.naskya.net/@dev)まで送ってください。
-
-ログは長いのでおそらく一投稿に収まりません。そのため、ログを送る際には投稿にファイルを直接添付するか、[Pastebin](https://pastebin.com/) などのサービスを使ってください。
-
-ログを送ったら `/tmp/fflog` は削除してよいです。
-
-```bash
-rm /tmp/fflog
-```
+私が対処する必要がある問題が発生している可能性もあるため、一人で解決しようとせずに `./update.sh` の[実行ログを私まで送ってください](https://code.naskya.net/naskya/firefish#私にコマンドの実行ログを送る)。
 
 ### [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
@@ -402,7 +390,7 @@ rm /tmp/fflog
     printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --set='ON_ERROR_STOP=1' --dbname=mk1
     ```
 
-    最後の行が `ROLLBACK` で終わっていれば問題ありません。そうでない場合には[私](https://post.naskya.net/@dev)に以下のコマンドの実行結果を送ってください。
+    最後の行が `ROLLBACK` で終わっていれば問題ありません。そうでない場合には以下の[コマンドの実行結果を私に送ってください](https://code.naskya.net/naskya/firefish#私にコマンドの実行ログを送る)。
 
     ```bash
     printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --echo-all --set='ON_ERROR_STOP=1' --dbname=mk1
@@ -494,4 +482,40 @@ corepack prepare pnpm@latest --activate
 pnpm i
 NODE_ENV=production pnpm run build
 pnpm run migrate
+```
+
+# 補足
+
+## 私にコマンドの実行ログを送る
+
+実行したいコマンドの後ろに `|& tee /tmp/fflog` をつけてコマンドを実行します。例えば実行したいコマンドが `./update.sh` ならば
+
+```bash
+./update.sh |& tee /tmp/fflog
+```
+
+とし、実行したいコマンドが
+
+```bash
+printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --echo-all --set='ON_ERROR_STOP=1' --dbname=mk1
+```
+
+ならば
+
+```bash
+printf 'BEGIN;\n%s\nROLLBACK;' "$(cat neko/revert.sql)" | sudo -iu postgres psql --echo-all --set='ON_ERROR_STOP=1' --dbname=mk1 |& tee /tmp/fflog
+```
+
+とします。
+
+するとコマンドの実行ログが `/tmp/fflog` に保存されるので、保存されたテキスト全体をサーバーの OS などの環境の情報とともに[私](https://post.naskya.net/@dev)に送ってください。
+
+ログのうちの参考になりそうだと思った一部だけを抜粋して送ることは絶対にしないでください。必要な情報が欠落していてもう一度全体を送り直してもらうことになったり、私が対処方法の判断を誤ったりする可能性が高まったりします。
+
+テキストが一つの投稿に収まる長さの場合はコードブロックの記法（``` で囲む）を用いて投稿してもらってよいです。ログが一投稿に収まらない長さの場合は [Pastebin](https://pastebin.com/) などのサービスを使って共有してください。投稿にログファイルを直接添付して送ることはしないでください。
+
+ログを私に送ったら `/tmp/fflog` は削除してよいです。
+
+```bash
+rm /tmp/fflog
 ```
