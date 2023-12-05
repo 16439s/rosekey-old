@@ -38,8 +38,6 @@
 
 ## 細かい変更点
 
-- iOS で効果音と音楽の再生が干渉する問題を修正（Misskey から取り込み）
-  - 本家にもマージリクエストを出しています ([!10641](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10641))
 - HTML のコードに入るコメントアートを削除
   - 全ページにこんなの入れなくても……
 - デフォルトではバイブレーションを無効に
@@ -130,27 +128,13 @@
 うまく動いていそうだったら本家に push されます
 
 - 画面を下に引いてタイムラインなどを更新する機能を追加（Misskey から取り込み）
-- Docker ユーザーも PWA のアイコンを変更できるように
-  - 以下の画像ファイルを追加して Docker コンテナを再起動し、ブラウザのキャッシュを削除して PWA をインストールしてみてください
-    - `custom/assets/favicon.png`
-      - サーバーのページの favicon（一辺 32 px から 192 px くらいの正方形の画像）
-    - `custom/assets/favicon.ico`
-      - [ICO 形式](https://ja.wikipedia.org/wiki/ICO_(%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))の favicon（`ffmpeg -i favicon.png favicon.ico` などで変換可能）
-    - `custom/assets/apple-touch-icon.png`
-      - 一辺 256 px 程度の正方形の画像
-    - `custom/assets/icons/192.png`
-      - 一辺 192 px の正方形の画像
-    - `custom/assets/icons/512.png`
-      - 一辺 512 px の正方形の画像
-    - `custom/assets/icons/maskable.png`
-      - 一辺 512 px 程度の正方形の画像（端が切り取られて使われる可能性があるため余白があるといい）
-    - `custom/assets/icons/monochrome.png`
-      - 一辺 512 px 程度の正方形の画像（白黒であるといい）
+  - 本家にもマージリクエストを出しました ([!10644](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10644))
 
 ## このフォークから本家 Firefish に輸出された変更点
 
 このフォークは本家に push する前のテスト環境としても使われるため、有用な機能はよく輸出されます（そしてニッチな機能だけが残る）
 
+- iOS で効果音と音楽の再生が干渉する問題を修正（Misskey から取り込み）
 - サーバーの管理者が左下のヘルプメニューに利用規約以外のページも固定できるように
 - 依存ライブラリのバージョンをアップデート
   - AiScript のバージョンも上がりました！
