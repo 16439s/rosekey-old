@@ -191,7 +191,7 @@ function connectChannel() {
 	}
 	if (props.src !== "directs" && props.src !== "mentions")
 		connection.on("note", prepend);
-};
+}
 
 provide(
 	"inChannel",
@@ -220,8 +220,6 @@ function closeHint() {
 			break;
 	}
 }
-
-
 
 if (defaultStore.state.enableTimelineStreaming) {
 	connectChannel();

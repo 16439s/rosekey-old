@@ -105,7 +105,7 @@ function reload(): Promise<void> {
 			res();
 		});
 	});
-};
+}
 
 let connection;
 

@@ -2015,16 +2015,18 @@ showPreviewByDefault: 自動開啟發文介面中的預覽顯示
 originalFeature: 獨家功能
 makePrivate: 設為祕密
 makePrivateConfirm: 此操作將向遠端伺服器發送刪除請求，並將貼文的公開範圍設為「祕密」。是否繼續？
-iconSet: 圖示的樣式
-_iconSets:
-  bold: 粗線
-  light: 細線
-  regular: 標準
-  fill: 填滿
-  duotone: 雙色
 objectStorageS3ForcePathStyleDesc: 以 "s3.amazonaws.com/<bucket>/" 而非 "<bucket>.s3.amazonaws.com"
   的格式建構端點（Endpoint）URL。
 indexable: 登錄至貼文搜尋引擎
 origin: 來源
 objectStorageS3ForcePathStyle: 使用基於路徑的端點（Endpoint）URL
 clickToShowPatterns: 點擊顯示模組模式（Module Pattern）
+iconSet: 圖示的樣式
+_iconSets:
+  fill: 填滿
+  regular: 標準
+  bold: 粗線
+  duotone: 雙色
+  light: 細線
+showAttachedNotes: 顯示有此附件的貼文
+attachedToNotes: 帶有此附件的貼文

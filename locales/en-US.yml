@@ -1169,6 +1169,8 @@ releaseToReload: "Release to reload"
 reloading: "Reloading"
 pullDownToReload: "Pull down to reload"
 enableTimelineStreaming: "Update timelines automatically"
+useEmojiCdn: "Get Twemoji from CDN"
+useEmojiCdnDescription: "Use Twemoji from the JSDelivr CDN instead of the server's assets."
 
 _sensitiveMediaDetection:
   description: "Reduces the effort of server moderation through automatically recognizing

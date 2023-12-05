@@ -1,5 +1,9 @@
 <template>
-	<MkPagination ref="pagingComponent" :pagination="pagination" :disable-auto-load="disableAutoLoad">
+	<MkPagination
+		ref="pagingComponent"
+		:pagination="pagination"
+		:disable-auto-load="disableAutoLoad"
+	>
 		<template #empty>
 			<div class="_fullinfo">
 				<img

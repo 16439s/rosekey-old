@@ -6,7 +6,7 @@
 		"type": "git",
 		"url": "https://code.naskya.net/naskya/firefish"
 	},
-	"packageManager": "pnpm@8.10.5",
+	"packageManager": "pnpm@8.11.0",
 	"private": true,
 	"scripts": {
 		"rebuild": "pnpm run clean && pnpm run build",
@@ -56,8 +56,8 @@
 		"gulp-rename": "2.0.0",
 		"gulp-replace": "1.1.4",
 		"gulp-terser": "2.1.0",
-		"install-peers": "1.0.4",
-		"pnpm": "8.10.5",
+		"install-peers": "^1.0.4",
+		"pnpm": "8.11.0",
 		"typescript": "5.2.2"
 	}
 }
