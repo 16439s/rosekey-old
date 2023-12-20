@@ -6,13 +6,10 @@
 				:actions="headerActions"
 				:tabs="headerTabs"
 				:display-my-avatar="true"
-				class="xytnxiau"
+				:class="{ isMobile: 'xytnxiau' }"
 			/>
 		</template>
-		<MkSpacer
-			:content-max="800"
-			:style="`padding-top: ${isMobile ? 67 : 79}px`"
-		>
+		<MkSpacer :content-max="800" :class="{ isMobile: 'upsvvhaz' }">
 			<div ref="rootEl" v-hotkey.global="keymap" class="cmuxhskf">
 				<XPostForm
 					v-if="defaultStore.reactiveState.showFixedPostForm.value"
@@ -308,6 +305,10 @@ onMounted(() => {
 	overflow-y: hidden;
 	position: fixed;
 	top: 0;
+}
+
+.upsvvhaz {
+	padding-top: 67px;
 }
 
 .cmuxhskf {
