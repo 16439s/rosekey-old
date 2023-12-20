@@ -422,6 +422,14 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: true,
 		},
+		enablePullToRefresh: {
+			where: "deviceAccount",
+			default: true,
+		},
+		pullToRefreshThreshold: {
+			where: "device",
+			default: 140,
+		},
 	}),
 );
 

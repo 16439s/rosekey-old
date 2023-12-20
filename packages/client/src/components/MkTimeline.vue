@@ -20,6 +20,7 @@
 		</button>
 	</div>
 	<MkPullToRefresh
+		v-if="defaultStore.state.enablePullToRefresh"
 		ref="pullToRefreshComponent"
 		:refresher="() => reloadTimeline()"
 	>
@@ -31,6 +32,14 @@
 			@status="pullToRefreshComponent?.setDisabled($event)"
 		/>
 	</MkPullToRefresh>
+	<XNotes
+		v-else
+		ref="tlComponent"
+		:no-gap="!defaultStore.state.showGapBetweenNotesInTimeline"
+		:pagination="pagination"
+		@queue="(x) => (queue = x)"
+		@status="pullToRefreshComponent?.setDisabled($event)"
+	/>
 </template>
 
 <script lang="ts" setup>

@@ -93,9 +93,6 @@
 				class="_formBlock"
 				>{{ i18n.ts.swipeOnDesktop }}</FormSwitch
 			>
-			<FormSwitch v-model="enableTimelineStreaming" class="_formBlock">{{
-				i18n.ts.enableTimelineStreaming
-			}}</FormSwitch>
 			<FormSwitch v-model="enterSendsMessage" class="_formBlock">{{
 				i18n.ts.enterSendsMessage
 			}}</FormSwitch>
@@ -166,6 +163,26 @@
 					{{ i18n.ts.postSearch }}
 				</option>
 			</FormSelect>
+			<FormSwitch v-model="enableTimelineStreaming" class="_formBlock">{{
+				i18n.ts.enableTimelineStreaming
+			}}</FormSwitch>
+			<FormSwitch v-model="enablePullToRefresh" class="_formBlock">{{
+				i18n.ts.enablePullToRefresh
+			}}</FormSwitch>
+			<FormRange
+				v-if="enablePullToRefresh"
+				v-model="pullToRefreshThreshold"
+				:min="100"
+				:max="300"
+				:step="10"
+				easing
+				class="_formBlock"
+			>
+				<template #label>{{ i18n.ts.pullToRefreshThreshold }}</template>
+				<template #caption>{{
+					i18n.ts.pullToRefreshThreshold
+				}}</template>
+			</FormRange>
 		</FormSection>
 
 		<FormSection>
@@ -551,6 +568,12 @@ const iconSet = computed(defaultStore.makeGetterSetter("iconSet"));
 const enableTimelineStreaming = computed(
 	defaultStore.makeGetterSetter("enableTimelineStreaming"),
 );
+const enablePullToRefresh = computed(
+	defaultStore.makeGetterSetter("enablePullToRefresh"),
+);
+const pullToRefreshThreshold = computed(
+	defaultStore.makeGetterSetter("pullToRefreshThreshold"),
+);
 const useEmojiCdn = computed(defaultStore.makeGetterSetter("useEmojiCdn"));
 
 // This feature (along with injectPromo) is currently disabled
@@ -617,6 +640,8 @@ watch(
 		expandOnNoteClick,
 		iconSet,
 		enableTimelineStreaming,
+		enablePullToRefresh,
+		pullToRefreshThreshold,
 		useEmojiCdn,
 	],
 	async () => {

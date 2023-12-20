@@ -1,5 +1,8 @@
 <template>
-	<MkPullToRefresh :refresher="() => reload()">
+	<MkPullToRefresh
+		v-if="defaultStore.state.enablePullToRefresh"
+		:refresher="() => reload()"
+	>
 		<MkPagination ref="pagingComponent" :pagination="pagination">
 			<template #empty>
 				<div class="_fullinfo">
@@ -45,6 +48,50 @@
 			</template>
 		</MkPagination>
 	</MkPullToRefresh>
+	<MkPagination v-else ref="pagingComponent" :pagination="pagination">
+		<template #empty>
+			<div class="_fullinfo">
+				<img
+					src="/static-assets/badges/info.webp"
+					class="_ghost"
+					alt="Info"
+				/>
+				<div>{{ i18n.ts.noNotifications }}</div>
+			</div>
+		</template>
+
+		<template #default="{ items: notifications }">
+			<XList
+				v-slot="{ item: notification }"
+				class="elsfgstc"
+				:items="notifications"
+				:no-gap="true"
+			>
+				<XNote
+					v-if="
+						['reply', 'quote', 'mention'].includes(
+							notification.type,
+						)
+					"
+					:key="notification.id"
+					:note="notification.note"
+					:collapsed-reply="
+						notification.type === 'reply' ||
+						(notification.type === 'mention' &&
+							notification.note.replyId != null)
+					"
+				/>
+				<XNotification
+					v-else
+					:key="notification.id"
+					:notification="notification"
+					:with-time="true"
+					:full="true"
+					class="_panel notification"
+				/>
+			</XList>
+		</template>
+	</MkPagination>
 </template>
 
 <script lang="ts" setup>
@@ -59,6 +106,7 @@ import XNote from "@/components/MkNote.vue";
 import { useStream } from "@/stream";
 import { $i } from "@/reactiveAccount";
 import { i18n } from "@/i18n";
+import { defaultStore } from "@/store";
 
 const props = defineProps<{
 	includeTypes?: (typeof notificationTypes)[number][];

@@ -9,19 +9,6 @@
 			}px;`"
 		>
 			<div :class="$style.frameContent">
-				<MkLoading
-					v-if="isRefreshing"
-					:class="$style.loader"
-					:em="true"
-				/>
-				<i
-					v-else
-					:class="[
-						icon('ph-arrow-down'),
-						$style.icon,
-						{ [$style.refresh]: pullEnded },
-					]"
-				></i>
 				<div :class="$style.text">
 					<template v-if="pullEnded">{{
 						i18n.ts.releaseToReload
@@ -43,11 +30,10 @@
 import { onMounted, onUnmounted, ref, shallowRef } from "vue";
 // import { deviceKind } from "@/scripts/device-kind";
 import { i18n } from "@/i18n";
-import icon from "@/scripts/icon";
 
 const SCROLL_STOP = 10;
 const MAX_PULL_DISTANCE = Infinity;
-const FIRE_THRESHOLD = 140;
+const FIRE_THRESHOLD = defaultStore.state.pullToRefreshThreshold;
 const RELEASE_TRANSITION_DURATION = 120;
 const PULL_BRAKE_BASE = 1.5;
 const PULL_BRAKE_FACTOR = 100;
