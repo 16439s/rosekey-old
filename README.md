@@ -160,14 +160,18 @@
 
 ### インストール
 
-ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
+#### 自動でインストール
 
-- インストールスクリプトの提供を考えています
-- 慣れている方向けの説明: [`docker.io/naskya/firefish`](https://hub.docker.com/r/naskya/firefish) を用いて Firefish をインストールし、以下のコマンドを用いて PGroonga の拡張機能を有効にしてください。
+[Ubuntu 向けのインストールスクリプト](https://code.naskya.net/repos/Wm6vm)がありますが、未検証です。
 
-    ```bash
-    docker-compose exec db psql --command="CREATE EXTENSION pgroonga;" --dbname=firefish
-    ```
+#### 手動でインストール
+
+このリポジトリをクローンして本家版と同様にサーバーを構築すればよいですが、そのまま起動するとデータベースのマイグレーションに失敗します。最初にデータベースのコンテナのみを起動させて以下のコマンドで PGroonga を有効にしてください（`firefish` と `firefish_db` はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）。
+
+```bash
+docker-compose up db --detach
+docker-compose exec db psql --command='CREATE EXTENSION pgroonga;' --user=firefish --dbname=firefish_db
+```
 
 ### アップデート
 
