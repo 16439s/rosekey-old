@@ -30,6 +30,7 @@
 import { onMounted, onUnmounted, ref, shallowRef } from "vue";
 // import { deviceKind } from "@/scripts/device-kind";
 import { i18n } from "@/i18n";
+import { defaultStore } from "@/store";
 
 const SCROLL_STOP = 10;
 const MAX_PULL_DISTANCE = Infinity;
