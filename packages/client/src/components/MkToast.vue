@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import * as os from "@/os";
 import { defaultStore } from "@/store";
 
