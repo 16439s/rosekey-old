@@ -179,9 +179,6 @@
 				class="_formBlock"
 			>
 				<template #label>{{ i18n.ts.pullToRefreshThreshold }}</template>
-				<template #caption>{{
-					i18n.ts.pullToRefreshThreshold
-				}}</template>
 			</FormRange>
 		</FormSection>
 
