@@ -79,6 +79,6 @@ if (
 <style lang="scss" module>
 .visibility,
 .localOnly {
-	margin-left: 0.5em;
+	margin-inline-start: 0.5em;
 }
 </style>

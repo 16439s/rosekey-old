@@ -202,7 +202,7 @@ function choose(
 	display: flex;
 	padding: 8px 14px;
 	font-size: 12px;
-	text-align: left;
+	text-align: initial;
 	width: 100%;
 	box-sizing: border-box;
 
@@ -229,7 +229,7 @@ function choose(
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 10px;
+	margin-inline-end: 10px;
 	width: 16px;
 	top: 0;
 	bottom: 0;
@@ -258,7 +258,7 @@ function choose(
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-left: 10px;
+	margin-inline-start: 10px;
 	width: 16px;
 	top: 0;
 	bottom: 0;

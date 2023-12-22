@@ -84,9 +84,9 @@ defineExpose({
 
 	&.fade {
 		display: block;
-		position: absolute;
+		position: sticky;
 		bottom: 0;
-		left: 0;
+		inset-inline-start: 0;
 		width: 100%;
 		> span {
 			display: inline-block;

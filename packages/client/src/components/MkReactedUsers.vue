@@ -18,7 +18,7 @@
 					:custom-emojis="note.emojis"
 					style="max-width: 100%"
 				/>
-				<span style="margin-left: 4px">{{
+				<span style="margin-inline-start: 4px">{{
 					note.reactions[reaction]
 				}}</span>
 			</button>

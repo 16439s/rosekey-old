@@ -358,7 +358,7 @@ defineExpose({
 			> .remove {
 				display: none;
 				position: absolute;
-				right: -6px;
+				inset-inline-end: -6px;
 				top: -6px;
 				margin: 0;
 				padding: 0;
@@ -394,7 +394,7 @@ defineExpose({
 		}
 
 		> .send {
-			margin-left: auto;
+			margin-inline-start: auto;
 			color: var(--accent);
 
 			&:hover {

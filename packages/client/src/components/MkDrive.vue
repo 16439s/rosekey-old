@@ -848,7 +848,7 @@ onBeforeUnmount(() => {
 		}
 
 		> .menu {
-			margin-left: auto;
+			margin-inline-start: auto;
 			padding: 0 12px;
 		}
 	}
@@ -916,7 +916,7 @@ onBeforeUnmount(() => {
 
 	> .dropzone {
 		position: absolute;
-		left: 0;
+		inset-inline-start: 0;
 		top: 38px;
 		width: 100%;
 		height: calc(100% - 38px);

@@ -35,6 +35,7 @@ import { set } from "@/scripts/idb-proxy";
 
 import { login, refreshAccount, signout, updateAccount } from "@/account";
 import components from "@/components";
+import { langmap } from "@/scripts/langmap";
 import { lang, ui, version } from "@/config";
 import directives from "@/directives";
 import { i18n } from "@/i18n";
@@ -123,7 +124,8 @@ function checkForSplash() {
 	// #region Set lang attr
 	const html = document.documentElement;
 	html.setAttribute("lang", lang || "en-US");
-	// #endregion
+	html.setAttribute("dir", langmap[lang].rtl ? "rtl" : "ltr");
+	//#endregion
 
 	// #region loginId
 	const params = new URLSearchParams(location.search);

@@ -333,9 +333,9 @@ defineExpose({
 			z-index: -1;
 		}
 		i {
-			margin-left: 0.7em;
-			border-left: 1px solid var(--accentedBg);
-			padding-left: 0.4em;
+			margin-inline-start: 0.7em;
+			border-inline-start: 1px solid var(--accentedBg);
+			padding-inline-start: 0.4em;
 		}
 	}
 }
