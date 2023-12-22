@@ -38,6 +38,7 @@
 
 ## 細かい変更点
 
+- `emojis` の API エンドポイント（Misskey v13- 互換）を追加（[firefish-mkdir](https://git.mkdir.uk/hiira/firefish-mkdir) から取り込み）
 - Docker のベースイメージに Node v21 を使用
 - HTML のコードに入るコメントアートを削除
   - 全ページにこんなの入れなくても……
