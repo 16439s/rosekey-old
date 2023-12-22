@@ -430,6 +430,10 @@ export const defaultStore = markRaw(
 			where: "device",
 			default: 140,
 		},
+		recentlyUsedPostLanguages: {
+			where: "account",
+			default: [] as string[],
+		},
 	}),
 );
 

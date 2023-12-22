@@ -55,6 +55,21 @@
 					></span>
 				</button>
 				<button
+					ref="languageButton"
+					v-tooltip="i18n.ts.language"
+					class="_button language"
+					@click="setLanguage"
+				>
+					<i
+						v-if="language === '' || language == null"
+						class="_button"
+						:class="icon('ph-seal-warning')"
+					></i>
+					<p v-else class="_button" style="font-weight: bold">
+						{{ language.split("-")[0] }}
+					</p>
+				</button>
+				<button
 					v-tooltip="i18n.ts.previewNoteText"
 					class="_button preview"
 					:class="{ active: showPreview }"
@@ -293,6 +308,9 @@ import { uploadFile } from "@/scripts/upload";
 import { deepClone } from "@/scripts/clone";
 import preprocess from "@/scripts/preprocess";
 import { vibrate } from "@/scripts/vibrate";
+import { langmap } from "@/scripts/langmap";
+import { MenuItem } from "@/types/menu";
+import detectLanguage from "@/scripts/detect-language";
 import icon from "@/scripts/icon";
 
 const modal = inject("modal");
@@ -306,6 +324,7 @@ const props = withDefaults(
 		specified?: firefish.entities.User;
 		initialText?: string;
 		initialVisibility?: typeof firefish.noteVisibilities;
+		initialLanguage?: typeof firefish.languages;
 		initialFiles?: firefish.entities.DriveFile[];
 		initialLocalOnly?: boolean;
 		initialVisibleUsers?: firefish.entities.User[];
@@ -333,6 +352,7 @@ const textareaEl = ref<HTMLTextAreaElement | null>(null);
 const cwInputEl = ref<HTMLInputElement | null>(null);
 const hashtagsInputEl = ref<HTMLInputElement | null>(null);
 const visibilityButton = ref<HTMLElement | null>(null);
+const languageButton = ref<HTMLElement | undefined>();
 
 const showBigPostButton = defaultStore.state.showBigPostButton;
 
@@ -360,6 +380,7 @@ const visibility = ref(
 			: defaultStore.state
 					.defaultNoteVisibility) as (typeof firefish.noteVisibilities)[number]),
 );
+
 const visibleUsers = ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
@@ -581,6 +602,7 @@ function watchForDraft() {
 	watch(files, () => saveDraft(), { deep: true });
 	watch(visibility, () => saveDraft());
 	watch(localOnly, () => saveDraft());
+	watch(language, () => saveDraft());
 }
 
 function checkMissingMention() {
@@ -706,6 +728,105 @@ function setVisibility() {
 		},
 		"closed",
 	);
+}
+
+const language = ref<string | null>(
+	props.initialLanguage ??
+		defaultStore.state.recentlyUsedPostLanguages[0] ??
+		localStorage.getItem("lang")?.split("-")[0],
+);
+
+function filterLangmapByPrefix(
+	prefix: string,
+): { langCode: string; nativeName: string }[] {
+	let to_return = Object.entries(langmap)
+		.filter(([langCode, _]) => langCode.startsWith(prefix))
+		.map(([langCode, v]) => {
+			return { langCode, nativeName: v.nativeName };
+		});
+
+	if (prefix === "zh")
+		to_return = to_return.concat([
+			{ langCode: "yue", nativeName: langmap["yue"].nativeName },
+			{ langCode: "nan", nativeName: langmap["nan"].nativeName },
+		]);
+
+	return to_return;
+}
+
+function setLanguage() {
+	const actions: Array<MenuItem> = [];
+
+	const detectedLanguage: string = detectLanguage(text.value) ?? "";
+	if (detectedLanguage !== "" && detectedLanguage !== language.value) {
+		actions.push({
+			type: "label",
+			text: i18n.ts.suggested,
+		});
+		filterLangmapByPrefix(detectedLanguage).forEach((v) => {
+			actions.push({
+				text: v.nativeName,
+				danger: false,
+				active: false,
+				action: () => {
+					language.value = v.langCode;
+				},
+			});
+		});
+		actions.push(null);
+	}
+
+	if (language.value != null)
+		actions.push({
+			text: langmap[language.value].nativeName,
+			danger: false,
+			active: true,
+			action: () => {},
+		});
+
+	const langs = Object.keys(langmap);
+
+	// Show recently used language first
+	let recentlyUsedLanguagesExist = false;
+	for (const lang of defaultStore.state.recentlyUsedPostLanguages) {
+		if (lang === language.value) continue;
+		if (!langs.includes(lang)) continue;
+		actions.push({
+			text: langmap[lang].nativeName,
+			danger: false,
+			active: false,
+			action: () => {
+				language.value = lang;
+			},
+		});
+		recentlyUsedLanguagesExist = true;
+	}
+	if (recentlyUsedLanguagesExist) actions.push(null);
+
+	actions.push({
+		text: i18n.ts.noLanguage,
+		danger: false,
+		active: false,
+		action: () => {
+			language.value = null;
+		},
+	});
+
+	for (const lang of langs) {
+		if (lang === language.value) continue;
+		if (defaultStore.state.recentlyUsedPostLanguages.includes(lang))
+			continue;
+		actions.push({
+			text: langmap[lang].nativeName,
+			danger: false,
+			active: false,
+			action: () => {
+				language.value = lang;
+			},
+		});
+	}
+
+	os.popupMenu(actions, languageButton.value, {});
 }
 
 function pushVisibleUser(user) {
@@ -859,6 +980,7 @@ function saveDraft() {
 			cw: cw.value,
 			visibility: visibility.value,
 			localOnly: localOnly.value,
+			lang: language.value,
 			files: files.value,
 			poll: poll.value,
 		},
@@ -892,6 +1014,7 @@ async function post() {
 		channelId: props.channel ? props.channel.id : undefined,
 		poll: poll.value,
 		cw: useCw.value ? cw.value || "" : undefined,
+		lang: language.value ? language.value : undefined,
 		localOnly: localOnly.value,
 		visibility:
 			visibility.value === "private" ? "specified" : visibility.value,
@@ -961,6 +1084,20 @@ async function post() {
 			});
 		});
 	vibrate([10, 20, 10, 20, 10, 20, 60]);
+
+	// update recentlyUsedLanguages
+	if (language.value != null) {
+		const languages = Object.keys(langmap);
+		const maxLength = 6;
+
+		defaultStore.state.recentlyUsedPostLanguages = [language.value]
+			.concat(
+				defaultStore.state.recentlyUsedPostLanguages.filter((lang) => {
+					return lang !== language.value && languages.includes(lang);
+				}),
+			)
+			.slice(0, maxLength);
+	}
 }
 
 function cancel() {
@@ -1047,6 +1184,7 @@ onMounted(() => {
 				cw.value = draft.data.cw;
 				visibility.value = draft.data.visibility;
 				localOnly.value = draft.data.localOnly;
+				language.value = draft.data.lang;
 				files.value = (draft.data.files || []).filter(
 					(draftFile) => draftFile,
 				);
@@ -1073,6 +1211,7 @@ onMounted(() => {
 			}
 			visibility.value = init.visibility;
 			localOnly.value = init.localOnly;
+			language.value = init.lang;
 			quoteId.value = init.renote ? init.renote.id : null;
 		}
 
@@ -1148,6 +1287,11 @@ onMounted(() => {
 			> .local-only {
 				margin: 0 0 0 12px;
 				opacity: 0.7;
+			}
+
+			> .language {
+				height: 34px;
+				width: 34px;
 			}
 
 			> .preview {

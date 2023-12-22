@@ -1,5 +1,6 @@
 import { In } from "typeorm";
 import create from "@/services/note/create.js";
+import { langmap } from "@/misc/langmap.js";
 import type { User } from "@/models/entities/user.js";
 import {
 	Users,
@@ -108,7 +109,11 @@ export const paramDef = {
 			},
 		},
 		text: { type: "string", maxLength: MAX_NOTE_TEXT_LENGTH, nullable: true },
-		lang: { type: "string", nullable: true, maxLength: 10 },
+		lang: {
+			type: "string",
+			enum: Object.keys(langmap),
+			nullable: true,
+		},
 		cw: { type: "string", nullable: true, maxLength: 100 },
 		localOnly: { type: "boolean", default: false },
 		noExtractMentions: { type: "boolean", default: false },
