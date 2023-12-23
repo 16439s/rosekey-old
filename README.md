@@ -160,24 +160,59 @@
 
 # 使用方法
 
-## Docker ユーザー
+## インストール
 
-### インストール
+いくつかの方法があります。更新が最も早く反映されるのは systemd 版の手動インストールです。Docker イメージや Ubuntu 向けの deb ファイルの更新も定期的に行うようにしますが、Vervis にはそのようなことを自動で行う仕組みが無いのでちょっとつらいです。
 
-#### 自動でインストール
+### 自動でインストールする
 
-[Ubuntu 向けのインストールスクリプト](https://code.naskya.net/repos/Wm6vm)がありますが、未検証です。
+[Ubuntu 向けのインストールスクリプト](https://code.naskya.net/repos/Wm6vm) があります。
 
-#### 手動でインストール
+### 手動でインストールする
 
-このリポジトリをクローンして `docker-compose.example.yml` を `docker-compose.yml` に（リネームではなく）コピーし、本家版と同様にサーバーを構築すればよいですが、そのまま起動するとデータベースのマイグレーションに失敗します。最初にデータベースのコンテナのみを起動させて以下のコマンドで PGroonga を有効にしてください（`firefish` と `firefish_db` はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）。
+基本的に本家版のインストールと同じ手順で行えますが、[PGroonga](https://pgroonga.github.io/ja/) のインストールが必要である点が異なります。
+
+#### Docker 版
+
+このリポジトリをクローンして `docker-compose.example.yml` を `docker-compose.yml` にコピーし、本家版と同様にサーバーを構築すればよいですが、そのまま起動するとデータベースのマイグレーションに失敗します。最初にデータベースのコンテナのみを起動させて以下のコマンドで PGroonga を有効にしてください（`firefish` と `firefish_db` はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）。
 
 ```bash
+# DNS・ファイヤーウォール・リバースプロキシなどを各自で設定する
+
+git clone https://code.naskya.net/naskya/firefish
+cd firefish
+cp docker-compose.example.yml docker-compose.yml
+cp .config/example.yml .config/default.yml
+
+# docker-compose.yml, .config/default.yml, .config/docker.env を編集する
+
 docker-compose up db --detach
 docker-compose exec db psql --command='CREATE EXTENSION pgroonga;' --user=firefish --dbname=firefish_db
 ```
 
-### アップデート
+#### systemd 版
+
+このリポジトリをクローンして、本家版と同様にサーバーを構築します。ビルド等の作業 (`pnpm install`, `pnpm run build`, `pnpm run migrate`) は添付のアップデートスクリプトによって一括で行えます。`--skip-all-confirmations` というオプションは普段のアップデートでは使用しないでください（重要なお知らせがあっても表示が飛ばされてしまいます）。
+
+```bash
+# DNS・ファイヤーウォール・リバースプロキシ・PostgreSQL・Redis などを各自でインストールして設定する
+
+git clone https://code.naskya.net/naskya/firefish
+cd firefish
+cp .config/example.yml .config/default.yml
+
+# .config/default.yml を編集する
+
+sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_db
+
+./update.sh --skip-all-confirmations
+```
+
+[インストール方法に関する私の記事](https://blog.naskya.net/post/6kic0tebueju/)も参考になるかもしれません。
+
+## アップデート
+
+### Docker 版
 
 重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
 
@@ -194,17 +229,7 @@ docker-compose exec db psql --command='CREATE EXTENSION pgroonga;' --user=firefi
     docker-compose up --detach
     ```
 
-## 非 Docker ユーザー
-
-### インストール
-
-ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
-
-- インストールスクリプトかインストール方法の説明を提供することを考えています
-- 遠回りな方法ですが、公式のインストールスクリプトを使いたい場合にはそれを用いて本家の Firefish をインストールしてから下記の手順でこのフォークに移行できます。
-- 慣れている方への説明: PostgreSQL を用いた通常の Firefish のインストールに加えて PGroonga のインストールおよびデータベースの拡張機能の有効化を行います。
-
-### アップデート
+### systemd 版（手動インストール）
 
 重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
 
@@ -227,11 +252,35 @@ ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
     sudo systemctl start yourserver.example.com
     ```
 
+### systemd 版（自動インストール）
+
+`apt` を利用してアップデートします。
+
+1. サーバーのバックアップを取る
+2. サーバーを停止する
+
+    ```bash
+    sudo systemctl stop firefish
+    ```
+
+3. パッケージをアップデートする
+
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    ```
+
+4. サーバーを起動して動作を確認する
+
+    ```bash
+    sudo systemctl start firefish
+    ```
+
 #### 正常にアップデートできなかった場合
 
 私が対処する必要がある問題が発生している可能性もあるため、一人で解決しようとせずに `./update.sh` の[実行ログを私まで送ってください](https://code.naskya.net/naskya/firefish#私にコマンドの実行ログを送る)。
 
-### [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
+## [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
 1. サーバーのバックアップを取る
 2. サーバーを停止する
@@ -348,7 +397,7 @@ ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
     rm -rf calckey.old
     ```
 
-### このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
+## このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
 
 1. サーバーのバックアップを取る
 2. サーバーを停止する
@@ -462,7 +511,7 @@ ToDo ([#a3WPw](https://code.naskya.net/decks/4wJQ3/tickets/a3WPw))
     rm -rf calckey.old
     ```
 
-#### 注意
+### 注意
 
 この手順を踏むとあなたの Firefish サーバーは `develop` 版になります。他のバージョンを動かしたい場合も、**次のアップデートがリリースされるまでは `develop` 版を動かしてください**。
 
