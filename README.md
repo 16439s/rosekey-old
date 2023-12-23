@@ -170,7 +170,7 @@
 
 #### 手動でインストール
 
-このリポジトリをクローンして本家版と同様にサーバーを構築すればよいですが、そのまま起動するとデータベースのマイグレーションに失敗します。最初にデータベースのコンテナのみを起動させて以下のコマンドで PGroonga を有効にしてください（`firefish` と `firefish_db` はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）。
+このリポジトリをクローンして `docker-compose.example.yml` を `docker-compose.yml` に（リネームではなく）コピーし、本家版と同様にサーバーを構築すればよいですが、そのまま起動するとデータベースのマイグレーションに失敗します。最初にデータベースのコンテナのみを起動させて以下のコマンドで PGroonga を有効にしてください（`firefish` と `firefish_db` はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）。
 
 ```bash
 docker-compose up db --detach
