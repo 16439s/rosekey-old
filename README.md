@@ -166,9 +166,9 @@
 
 - systemd 版（手動インストールのみ）
 - [Debian package](https://code.naskya.net/repos/Wmaym) 版
-- [Docker](https://hub.docker.com/repository/docker/naskya/firefish) 版
+- [Docker](https://hub.docker.com/r/naskya/firefish) 版
 
-更新が最も早く反映されるのは systemd 版の手動インストールです。Docker イメージや Ubuntu 向けの deb ファイルの更新も定期的に行うようにしますが、Vervis にはそのようなことを自動で行う仕組みが無いのでちょっとつらいです。
+更新が最も早く反映されるのは systemd 版の手動インストールです。Docker イメージや Debian/Ubuntu 向けの deb ファイルの更新も定期的に行うようにしますが、Vervis にはそのようなことを自動で行う仕組みが無いのでちょっとつらいです。
 
 ### 自動でインストールする
 
