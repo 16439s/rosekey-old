@@ -257,23 +257,11 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
 `apt` を利用してアップデートします。
 
 1. サーバーのバックアップを取る
-2. サーバーを停止する
-
-    ```bash
-    sudo systemctl stop firefish
-    ```
-
-3. パッケージをアップデートする
+2. パッケージをアップデートして動作を確認する
 
     ```bash
     sudo apt update
     sudo apt upgrade
-    ```
-
-4. サーバーを起動して動作を確認する
-
-    ```bash
-    sudo systemctl start firefish
     ```
 
 #### 正常にアップデートできなかった場合
