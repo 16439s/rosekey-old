@@ -270,6 +270,8 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
 
 ## [本家 Firefish](https://git.joinfirefish.org/firefish/firefish) からの乗り換え
 
+### systemd 版
+
 1. サーバーのバックアップを取る
 2. サーバーを停止する
 
@@ -385,7 +387,65 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
     rm -rf calckey.old
     ```
 
+### Docker 版
+
+1. サーバーのバックアップを取る
+2. サーバーを停止する
+
+    ```bash
+    docker-compose down
+    ```
+
+3. Firefish がインストールされているディレクトリ (e.g., `/home/calckey/calckey`) の親ディレクトリ (e.g., `/home/calckey`) に移動する
+
+    ```bash
+    cd /home/calckey
+    ```
+
+4. Firefish がインストールされているディレクトリ (e.g., `./calckey`) の名前を変える
+
+    ```bash
+    mv calckey calckey.old
+    ```
+
+5. 元々 Firefish がインストールされていたディレクトリ (e.g., `./calckey`) と同じ名前でこのリポジトリをクローンする
+
+    ```bash
+    git clone https://code.naskya.net/naskya/firefish calckey
+    ```
+
+6. 必要なファイルを元のディレクトリからコピーする
+
+    ```bash
+    rm -rf calckey/files calckey/custom calckey/.config
+    cp -r calckey.old/files calckey
+    cp -r calckey.old/custom calckey
+    cp -r calckey.old/.config calckey
+    ```
+
+7. 以下のコマンドを実行して PGroonga を有効にする（firefish と firefish_db はそれぞれ `.config/docker.env` や `.config/default.yml` に書いた PostgreSQL のユーザー名とデータベース名にしてください）
+
+    ```bash
+    docker-compose up db --detach
+    docker-compose exec db psql --command='CREATE EXTENSION pgroonga;' --user=firefish --dbname=firefish_db
+    ```
+
+8. サーバーを起動して動作を確認する
+
+    ```bash
+    docker-compose up --detach
+    ```
+
+9. 元々 Firefish がインストールされていたディレクトリを削除する
+
+    ```bash
+    cd ..
+    rm -rf calckey.old
+    ```
+
 ## このフォークから[本家 Firefish](https://git.joinfirefish.org/firefish/firefish) へ戻る
+
+### systemd 版
 
 1. サーバーのバックアップを取る
 2. サーバーを停止する
@@ -499,7 +559,7 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
     rm -rf calckey.old
     ```
 
-### 注意
+#### 注意
 
 この手順を踏むとあなたの Firefish サーバーは `develop` 版になります。他のバージョンを動かしたい場合も、**次のアップデートがリリースされるまでは `develop` 版を動かしてください**。
 
