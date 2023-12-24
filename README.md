@@ -212,7 +212,7 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
 
 ## アップデート
 
-### Docker 版
+### Docker 版（手動インストール・自動インストール）
 
 重要なお知らせがある場合にはアップデートスクリプトを通じてお伝えするので、必ず `update.sh` を用いてアップデートしてください。
 
@@ -252,7 +252,7 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
     sudo systemctl start yourserver.example.com
     ```
 
-### systemd 版（自動インストール）
+### Debian package 版（自動インストール）
 
 `apt` を利用してアップデートします。
 
