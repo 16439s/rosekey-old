@@ -38,6 +38,7 @@
 
 ## 細かい変更点
 
+- 設定のバックアップファイルに `misskeyVersion` の値が含まれていなくても警告しないように変更
 - マージされていない本家版へのプルリクエストを独断でマージ
   - RTL Layout Support ([!10452](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10452))
   - Add language picker to post form ([!10616](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10616))
