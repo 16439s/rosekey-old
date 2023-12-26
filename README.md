@@ -41,6 +41,7 @@
 - マージされていない本家版へのプルリクエストを独断でマージ
   - RTL Layout Support ([!10452](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10452))
   - Add language picker to post form ([!10616](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10616))
+  - chore: up swc ([!10649](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10649))
 - `emojis` の API エンドポイント（Misskey v13- 互換）を追加（[firefish-mkdir](https://git.mkdir.uk/hiira/firefish-mkdir) から取り込み）
 - Docker のベースイメージに Node v21 を使用
 - HTML のコードに入るコメントアートを削除
