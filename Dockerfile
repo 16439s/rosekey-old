@@ -3,6 +3,7 @@ FROM node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y python3 git wget curl build-essential
 RUN mkdir -m777 /opt/rust /opt/cargo
 ENV RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/cargo PATH=/opt/cargo/bin:$PATH
@@ -59,6 +60,7 @@ FROM node:21-slim
 WORKDIR /firefish
 
 # Install runtime dependencies
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends zip unzip tini ffmpeg
 
 COPY . ./
