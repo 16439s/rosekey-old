@@ -41,7 +41,7 @@
 		"prepublishOnly": "napi prepublish -t npm",
 		"universal": "napi universal",
 		"version": "napi version",
-		"format": "cargo fmt --all -- --check",
-		"lint": "cargo clippy --fix --allow-dirty --allow-staged && cargo fmt --all -- --check"
+		"format": "cargo fmt --all --",
+		"lint": "cargo clippy --fix --allow-dirty --allow-staged && cargo fmt --all --"
 	}
 }
