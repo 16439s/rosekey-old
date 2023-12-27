@@ -171,11 +171,10 @@ pub enum UserEmojimodpermEnum {
     Full,
     #[sea_orm(string_value = "mod")]
     Mod,
-    #[default]
     #[sea_orm(string_value = "none")]
     Unauthorized,
 }
-#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum)]
 #[sea_orm(
     rs_type = "String",
     db_type = "Enum",
