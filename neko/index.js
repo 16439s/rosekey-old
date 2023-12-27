@@ -272,9 +272,6 @@ const {
 	nativeGetTimestamp,
 	nativeCreateId,
 	nativeInitIdGenerator,
-	nativePackAntennaById,
-	NativeAntennaSrc,
-	nativeInitDatabase,
 } = nativeBinding;
 
 module.exports.nativeRandomStr = nativeRandomStr;
@@ -283,6 +280,3 @@ module.exports.convertId = convertId;
 module.exports.nativeGetTimestamp = nativeGetTimestamp;
 module.exports.nativeCreateId = nativeCreateId;
 module.exports.nativeInitIdGenerator = nativeInitIdGenerator;
-module.exports.nativePackAntennaById = nativePackAntennaById;
-module.exports.NativeAntennaSrc = NativeAntennaSrc;
-module.exports.nativeInitDatabase = nativeInitDatabase;
