@@ -16,7 +16,7 @@ import {
 import { countSameRenotes } from "@/misc/count-same-renotes.js";
 import { registerOrFetchInstanceDoc } from "@/services/register-or-fetch-instance-doc.js";
 import { deliverToRelays } from "@/services/relay.js";
-import meilisearch from "@/db/meilisearch.js";
+// import meilisearch from "@/db/meilisearch.js";
 
 /**
  * 投稿を削除します。
@@ -118,9 +118,9 @@ export default async function (
 		});
 	}
 
-	if (meilisearch) {
-		await meilisearch.deleteNotes(note.id);
-	}
+	// if (meilisearch) {
+	// 	await meilisearch.deleteNotes(note.id);
+	// }
 }
 
 async function findCascadingNotes(note: Note) {

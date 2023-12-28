@@ -1,5 +1,5 @@
 import define from "@/server/api/define.js";
-import { createIndexAllNotesJob } from "@/queue/index.js";
+// import { createIndexAllNotesJob } from "@/queue/index.js";
 
 export const meta = {
 	tags: ["admin"],
@@ -22,7 +22,7 @@ export const paramDef = {
 } as const;
 
 export default define(meta, paramDef, async (ps, _me) => {
-	createIndexAllNotesJob({
-		cursor: ps.cursor ?? undefined,
-	});
+	// createIndexAllNotesJob({
+	// 	cursor: ps.cursor ?? undefined,
+	// });
 });

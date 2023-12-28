@@ -82,7 +82,7 @@ const nodeinfo2 = async () => {
 			disableRecommendedTimeline: meta.disableRecommendedTimeline,
 			disableGlobalTimeline: meta.disableGlobalTimeline,
 			emailRequiredForSignup: meta.emailRequiredForSignup,
-			searchFilters: config.meilisearch ? true : false,
+			searchFilters: false, // TODO: implement search filters
 			postEditing: true,
 			postImports: meta.experimentalFeatures?.postImports || false,
 			enableHcaptcha: meta.enableHcaptcha,

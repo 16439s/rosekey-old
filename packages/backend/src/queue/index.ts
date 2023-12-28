@@ -13,7 +13,7 @@ import processDb from "./processors/db/index.js";
 import processObjectStorage from "./processors/object-storage/index.js";
 import processSystemQueue from "./processors/system/index.js";
 import processWebhookDeliver from "./processors/webhook-deliver.js";
-import processBackground from "./processors/background/index.js";
+// import processBackground from "./processors/background/index.js";
 import { endedPollNotification } from "./processors/ended-poll-notification.js";
 import { queueLogger } from "./logger.js";
 import { getJobInfo } from "./get-job-info.js";
@@ -482,13 +482,13 @@ export function createCleanRemoteFilesJob() {
 	);
 }
 
-export function createIndexAllNotesJob(data = {}) {
-	return backgroundQueue.add("indexAllNotes", data, {
-		removeOnComplete: true,
-		removeOnFail: false,
-		timeout: 1000 * 60 * 60 * 24,
-	});
-}
+// export function createIndexAllNotesJob(data = {}) {
+// 	return backgroundQueue.add("indexAllNotes", data, {
+// 		removeOnComplete: true,
+// 		removeOnFail: false,
+// 		timeout: 1000 * 60 * 60 * 24,
+// 	});
+// }
 
 export function webhookDeliver(
 	webhook: Webhook,
@@ -526,7 +526,7 @@ export default function () {
 	webhookDeliverQueue.process(64, processWebhookDeliver);
 	processDb(dbQueue);
 	processObjectStorage(objectStorageQueue);
-	processBackground(backgroundQueue);
+	// processBackground(backgroundQueue);
 
 	systemQueue.add(
 		"cleanCharts",

@@ -2,7 +2,7 @@ import si from "systeminformation";
 import Xev from "xev";
 import * as osUtils from "os-utils";
 import { fetchMeta } from "@/misc/fetch-meta.js";
-import meilisearch from "@/db/meilisearch.js";
+// import meilisearch from "@/db/meilisearch.js";
 
 const ev = new Xev();
 
@@ -30,7 +30,7 @@ export default function () {
 		const memStats = await mem();
 		const netStats = await net();
 		const fsStats = await fs();
-		const meilisearchStats = await meilisearchStatus();
+		// const meilisearchStats = await meilisearchStatus();
 
 		const stats = {
 			cpu: roundCpu(cpu),
@@ -47,7 +47,7 @@ export default function () {
 				r: round(Math.max(0, fsStats.rIO_sec ?? 0)),
 				w: round(Math.max(0, fsStats.wIO_sec ?? 0)),
 			},
-			meilisearch: meilisearchStats,
+			// meilisearch: meilisearchStats,
 		};
 		ev.emit("serverStats", stats);
 		log.unshift(stats);
@@ -88,14 +88,14 @@ async function fs() {
 }
 
 // MEILI STAT
-async function meilisearchStatus() {
-	if (meilisearch) {
-		return meilisearch.serverStats();
-	} else {
-		return {
-			health: "unconfigured",
-			size: 0,
-			indexed_count: 0,
-		};
-	}
-}
+// async function meilisearchStatus() {
+// 	if (meilisearch) {
+// 		return meilisearch.serverStats();
+// 	} else {
+// 		return {
+// 			health: "unconfigured",
+// 			size: 0,
+// 			indexed_count: 0,
+// 		};
+// 	}
+// }
