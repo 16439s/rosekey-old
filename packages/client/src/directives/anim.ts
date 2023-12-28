@@ -1,6 +1,6 @@
 import type { Directive } from "vue";
 
-export default {
+export default ({
 	beforeMount(src, binding, vn) {
 		src.style.opacity = "0";
 		src.style.transform = "scale(0.9)";
@@ -15,4 +15,4 @@ export default {
 			src.style.transform = "none";
 		}, 1);
 	},
-} as Directive;
+} as Directive);

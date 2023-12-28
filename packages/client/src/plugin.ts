@@ -80,13 +80,15 @@ function createPluginEnv(opts) {
 			});
 		}),
 		// #endregion
-		"Plugin:register_post_form_action": values.FN_NATIVE(([title, handler]) => {
-			registerPostFormAction({
-				pluginId: opts.plugin.id,
-				title: title.value,
-				handler,
-			});
-		}),
+		"Plugin:register_post_form_action": values.FN_NATIVE(
+			([title, handler]) => {
+				registerPostFormAction({
+					pluginId: opts.plugin.id,
+					title: title.value,
+					handler,
+				});
+			},
+		),
 		"Plugin:register_user_action": values.FN_NATIVE(([title, handler]) => {
 			registerUserAction({
 				pluginId: opts.plugin.id,

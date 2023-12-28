@@ -230,7 +230,7 @@ const headerTabs = computed(() => [
 					icon: `${icon("ph-handshake")}`,
 					iconOnly: true,
 				},
-		  ]
+			]
 		: []),
 	...(isRecommendedTimelineAvailable
 		? [
@@ -240,7 +240,7 @@ const headerTabs = computed(() => [
 					icon: `${icon("ph-thumbs-up")}`,
 					iconOnly: true,
 				},
-		  ]
+			]
 		: []),
 	...(isLocalTimelineAvailable
 		? [
@@ -250,7 +250,7 @@ const headerTabs = computed(() => [
 					icon: `${icon("ph-users")}`,
 					iconOnly: true,
 				},
-		  ]
+			]
 		: []),
 	...(isGlobalTimelineAvailable
 		? [
@@ -260,7 +260,7 @@ const headerTabs = computed(() => [
 					icon: `${icon("ph-planet")}`,
 					iconOnly: true,
 				},
-		  ]
+			]
 		: []),
 ]);
 
@@ -271,12 +271,12 @@ definePageMetadata(
 			src.value === "local"
 				? "ph-users ph-lg"
 				: src.value === "social"
-				  ? "ph-handshake ph-lg"
-				  : src.value === "recommended"
-				    ? "ph-thumbs-up ph-lg"
-				    : src.value === "global"
-				      ? "ph-planet ph-lg"
-				      : "ph-house ph-lg",
+					? "ph-handshake ph-lg"
+					: src.value === "recommended"
+						? "ph-thumbs-up ph-lg"
+						: src.value === "global"
+							? "ph-planet ph-lg"
+							: "ph-house ph-lg",
 	})),
 );
 

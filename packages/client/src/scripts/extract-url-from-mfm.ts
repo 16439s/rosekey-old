@@ -17,10 +17,13 @@ export function extractUrlFromMfm(
 	});
 	const urls: string[] = unique(urlNodes.map((x) => x.props.url));
 
-	return urls.reduce((array, url) => {
-		const urlWithoutHash = removeHash(url);
-		if (!array.map((x) => removeHash(x)).includes(urlWithoutHash))
-			array.push(url);
-		return array;
-	}, [] as string[]);
+	return urls.reduce(
+		(array, url) => {
+			const urlWithoutHash = removeHash(url);
+			if (!array.map((x) => removeHash(x)).includes(urlWithoutHash))
+				array.push(url);
+			return array;
+		},
+		[] as string[],
+	);
 }

@@ -238,7 +238,7 @@ definePageMetadata(
 			? {
 					title: post.value.title,
 					avatar: post.value.user,
-			  }
+				}
 			: null,
 	),
 );

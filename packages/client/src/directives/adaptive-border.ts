@@ -1,6 +1,6 @@
 import type { Directive } from "vue";
 
-export default {
+export default ({
 	mounted(src, binding, vn) {
 		const getBgColor = (el: HTMLElement) => {
 			const style = window.getComputedStyle(el);
@@ -26,4 +26,4 @@ export default {
 			src.style.borderColor = myBg;
 		}
 	},
-} as Directive;
+} as Directive);

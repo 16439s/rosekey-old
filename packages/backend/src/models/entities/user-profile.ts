@@ -100,7 +100,7 @@ export class UserProfile {
 		enum: ffVisibility,
 		default: "public",
 	})
-	public ffVisibility: typeof ffVisibility[number];
+	public ffVisibility: (typeof ffVisibility)[number];
 
 	@Column("varchar", {
 		length: 128,
@@ -239,7 +239,7 @@ export class UserProfile {
 		array: true,
 		default: [],
 	})
-	public mutingNotificationTypes: typeof notificationTypes[number][];
+	public mutingNotificationTypes: (typeof notificationTypes)[number][];
 
 	//#region Denormalized fields
 	@Index()

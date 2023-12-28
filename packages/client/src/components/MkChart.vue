@@ -330,7 +330,7 @@ const render = () => {
 									max: "original",
 								},
 							},
-					  }
+						}
 					: undefined,
 				// gradient,
 			},

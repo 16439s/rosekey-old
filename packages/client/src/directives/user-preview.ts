@@ -104,7 +104,7 @@ export class UserPreview {
 	}
 }
 
-export default {
+export default ({
 	mounted(el: HTMLElement, binding, vn) {
 		if (binding.value == null) return;
 
@@ -121,4 +121,4 @@ export default {
 		const self = el._userPreviewDirective_;
 		self.preview.detach();
 	},
-} as Directive;
+} as Directive);

@@ -10,7 +10,7 @@ import { defineAsyncComponent, ref } from "vue";
 const start = isTouchUsing ? "touchstart" : "mouseover";
 const end = isTouchUsing ? "touchend" : "mouseleave";
 
-export default {
+export default ({
 	mounted(el: HTMLElement, binding, vn) {
 		const delay = binding.modifiers.noDelay ? 0 : 100;
 
@@ -63,12 +63,12 @@ export default {
 					direction: binding.modifiers.left
 						? "left"
 						: binding.modifiers.right
-						? "right"
-						: binding.modifiers.top
-						? "top"
-						: binding.modifiers.bottom
-						? "bottom"
-						: "top",
+						  ? "right"
+						  : binding.modifiers.top
+							  ? "top"
+							  : binding.modifiers.bottom
+								  ? "bottom"
+								  : "top",
 					targetElement: el,
 				},
 				{},
@@ -119,4 +119,4 @@ export default {
 		window.clearInterval(self.checkTimer);
 		self.close();
 	},
-} as Directive;
+} as Directive);

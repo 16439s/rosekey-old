@@ -88,7 +88,7 @@ function calc(el: Element) {
 	}
 }
 
-export default {
+export default ({
 	mounted(src, binding, vn) {
 		const resize = new ResizeObserver((entries, observer) => {
 			calc(src);
@@ -119,4 +119,4 @@ export default {
 		if (info.intersection) info.intersection.disconnect();
 		mountings.delete(src);
 	},
-} as Directive<Element, Value>;
+} as Directive<Element, Value>);

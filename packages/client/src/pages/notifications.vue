@@ -116,7 +116,7 @@ function setFilter(ev) {
 					},
 					null,
 					...typeItems,
-			  ]
+				]
 			: typeItems;
 	os.popupMenu(items, ev.currentTarget ?? ev.target);
 }
@@ -129,7 +129,7 @@ const headerActions = computed(() =>
 					icon: `${icon("ph-funnel")}`,
 					highlighted: includeTypes.value != null,
 					handler: setFilter,
-			  }
+				}
 			: undefined,
 		tab.value === "all"
 			? {
@@ -138,7 +138,7 @@ const headerActions = computed(() =>
 					handler: () => {
 						os.apiWithDialog("notifications/mark-all-as-read");
 					},
-			  }
+				}
 			: undefined,
 	].filter((x) => x !== undefined),
 );

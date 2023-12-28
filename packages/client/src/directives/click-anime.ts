@@ -1,7 +1,7 @@
 import type { Directive } from "vue";
 // import { defaultStore } from "@/store";
 
-export default {
+export default ({
 	mounted(el, binding, vn) {
 		/*
 		if (!defaultStore.state.animation) return;
@@ -28,4 +28,4 @@ export default {
 		});
 		*/
 	},
-} as Directive;
+} as Directive);

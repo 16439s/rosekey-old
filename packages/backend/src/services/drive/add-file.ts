@@ -492,12 +492,12 @@ export async function addFile({
 			instance.sensitiveMediaDetectionSensitivity === "veryHigh"
 				? 0.1
 				: instance.sensitiveMediaDetectionSensitivity === "high"
-				? 0.3
-				: instance.sensitiveMediaDetectionSensitivity === "low"
-				? 0.7
-				: instance.sensitiveMediaDetectionSensitivity === "veryLow"
-				? 0.9
-				: 0.5,
+				  ? 0.3
+				  : instance.sensitiveMediaDetectionSensitivity === "low"
+					  ? 0.7
+					  : instance.sensitiveMediaDetectionSensitivity === "veryLow"
+						  ? 0.9
+						  : 0.5,
 		sensitiveThresholdForPorn: 0.75,
 		enableSensitiveMediaDetectionForVideos:
 			instance.enableSensitiveMediaDetectionForVideos,
@@ -622,8 +622,8 @@ export async function addFile({
 		? Users.isLocalUser(user) && profile?.alwaysMarkNsfw
 			? true
 			: sensitive !== null && sensitive !== undefined
-			? sensitive
-			: false
+			  ? sensitive
+			  : false
 		: false;
 
 	if (info.sensitive && profile?.autoSensitive) file.isSensitive = true;

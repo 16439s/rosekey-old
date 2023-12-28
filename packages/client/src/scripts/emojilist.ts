@@ -6,7 +6,7 @@ import emojiComponents from "unicode-emoji-json/data-emoji-components.json";
 
 export interface UnicodeEmojiDef {
 	emoji: string;
-	category: typeof unicodeEmojiCategories[number];
+	category: (typeof unicodeEmojiCategories)[number];
 	skin_tone_support: boolean;
 	slug: string;
 	keywords?: string[];

@@ -150,7 +150,7 @@ const menuDef = computed(() => [
 							text: i18n.ts.invite,
 							action: invite,
 						},
-				  ]
+					]
 				: []),
 		],
 	},
@@ -293,7 +293,7 @@ const menuDef = computed(() => [
 						},
 					],
 				},
-		  ]
+			]
 		: []),
 ]);
 

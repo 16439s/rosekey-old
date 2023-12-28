@@ -409,7 +409,7 @@ function createFetcher() {
 				iAmAdmin
 					? os.api("admin/get-user-ips", {
 							userId: props.userId,
-					  })
+						})
 					: Promise.resolve(null),
 			]).then(([_user, _info, _ips]) => {
 				user.value = _user;
@@ -644,7 +644,7 @@ const headerTabs = computed(() =>
 					key: "moderation",
 					title: i18n.ts.moderation,
 					icon: `${icon("ph-shield")}`,
-			  }
+				}
 			: null,
 		{
 			key: "raw",

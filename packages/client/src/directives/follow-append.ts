@@ -1,7 +1,7 @@
 import { getScrollContainer, getScrollPosition } from "@/scripts/scroll";
 import type { Directive } from "vue";
 
-export default {
+export default ({
 	mounted(src, binding, vn) {
 		if (binding.value === false) return;
 
@@ -36,4 +36,4 @@ export default {
 	unmounted(src, binding, vn) {
 		if (src._ro_) src._ro_.unobserve(src);
 	},
-} as Directive;
+} as Directive);

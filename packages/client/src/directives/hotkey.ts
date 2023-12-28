@@ -1,7 +1,7 @@
 import { makeHotkey } from "@/scripts/hotkey";
 import type { Directive } from "vue";
 
-export default {
+export default ({
 	mounted(el, binding) {
 		el._hotkey_global = binding.modifiers.global === true;
 
@@ -21,4 +21,4 @@ export default {
 			el.removeEventListener("keydown", el._keyHandler);
 		}
 	},
-} as Directive;
+} as Directive);

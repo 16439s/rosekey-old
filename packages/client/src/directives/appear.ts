@@ -1,6 +1,6 @@
 import type { Directive } from "vue";
 
-export default {
+export default ({
 	mounted(src, binding, vn) {
 		const fn = binding.value;
 		if (fn == null) return;
@@ -19,4 +19,4 @@ export default {
 	unmounted(src, binding, vn) {
 		if (src._observer_) src._observer_.disconnect();
 	},
-} as Directive;
+} as Directive);
