@@ -23,6 +23,7 @@ import {
 } from "@/misc/populate-emojis.js";
 import { db } from "@/db/postgre.js";
 import { IdentifiableError } from "@/misc/identifiable-error.js";
+import rng from "random-seed";
 
 export async function populatePoll(note: Note, meId: User["id"] | null) {
 	const poll = await Polls.findOneByOrFail({ noteId: note.id });
@@ -260,12 +261,30 @@ export const NoteRepository = db.getRepository(Note).extend({
 			lang: note.lang,
 		});
 
-		if (packed.user.isCat && packed.user.speakAsCat && packed.text) {
+		const CHINESE_APPEND_MIAO_PROBABILITY = 0.1;
+		const shouldAppendMiao = (() => {
+			if (packed.lang?.startsWith("zh")) {
+				let seed: string | null = null;
+				if (packed.url != null) seed = packed.url.split("/").pop() ?? null;
+				if (packed.uri != null) seed = packed.uri.split("/").pop() ?? null;
+				if (seed == null) seed = packed.id;
+
+				const rand = rng.create(seed);
+				return rand.random() <= CHINESE_APPEND_MIAO_PROBABILITY;
+			}
+			return false;
+		})();
+
+		if (packed.user.isCat && packed.user.speakAsCat && packed.text != null) {
 			const tokens = packed.text ? mfm.parse(packed.text) : [];
 			function nyaizeNode(node: mfm.MfmNode) {
 				if (node.type === "quote") return;
 				if (node.type === "text")
-					node.props.text = nyaize(node.props.text, packed.lang);
+					node.props.text = nyaize(
+						node.props.text,
+						packed.lang,
+						shouldAppendMiao,
+					);
 
 				if (node.children) {
 					for (const child of node.children) {

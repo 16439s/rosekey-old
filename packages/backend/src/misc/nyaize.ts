@@ -1,4 +1,8 @@
-export function nyaize(text: string, lang?: string): string {
+export function nyaize(
+	text: string,
+	lang: string | undefined,
+	appendMiao: boolean,
+): string {
 	text = text
 		// ja-JP
 		.replaceAll("な", "にゃ")
@@ -26,6 +30,7 @@ export function nyaize(text: string, lang?: string): string {
 
 	// zh-CN, zh-TW
 	if (lang === "zh") text = text.replace(/(妙|庙|描|渺|瞄|秒|苗|藐|廟)/g, "喵");
+	if (appendMiao) text += "喵";
 
 	return text;
 }

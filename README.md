@@ -38,6 +38,7 @@
 
 ## 細かい変更点
 
+- 中国語の猫モードでは 0.1 の確率で投稿の末尾に「喵」を追加するように
 - 設定のバックアップファイルに `misskeyVersion` の値が含まれていなくても警告しないように変更
 - マージされていない本家版へのプルリクエストを独断でマージ
   - RTL Layout Support ([!10452](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10452))
