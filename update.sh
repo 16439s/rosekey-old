@@ -33,31 +33,37 @@ fi
 ## show messages
 for message in neko/messages/*; do
   file=$(basename -- "${message}")
-  if [ ! -f "neko/flags/${file}" ]; then
-    if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
-      say 'There is an important notice!'
-      cat "${message}"
 
-      say 'Continue? (Are you ready for upgrading?)'
-      printf '[y/N] > '
-      read -r yn
+  case "${file}" in
+    *'.resolved') ;;
+    *)
+      if [ ! -f "neko/flags/${file}" ]; then
+        if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
+          say 'There is an important notice!'
+          cat "${message}"
 
-      case "${yn}" in
-        [Yy]|[Yy][Ee][Ss])
+          say 'Continue? (Are you ready for upgrading?)'
+          printf '[y/N] > '
+          read -r yn
+
+          case "${yn}" in
+            [Yy]|[Yy][Ee][Ss])
+              touch "neko/flags/${file}"
+              say "Let's go!"
+              say "To read the message again, run: \$ cat ${message}"
+              br
+              ;;
+            *)
+              say "Okay, please run this script again when you're ready!"
+              exit 1
+              ;;
+          esac
+        else
           touch "neko/flags/${file}"
-          say "Let's go!"
-          say "To read the message again, run: \$ cat ${message}"
-          br
-          ;;
-        *)
-          say "Okay, please run this script again when you're ready!"
-          exit 1
-          ;;
-      esac
-    else
-      touch "neko/flags/${file}"
-    fi
-  fi
+        fi
+      fi
+    ;;
+  esac
 done
 
 say 'Do you use Docker?'
