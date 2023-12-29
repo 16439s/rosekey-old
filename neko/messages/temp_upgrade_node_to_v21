@@ -1,0 +1,8 @@
+ ----------------------------------------------------
+| For systemd users:                                |
+| This Firefish flavor currently requires Node v21  |
+| PLEASE CHECK YOUR NODE VERSION BEFORE UPGRADING!! |
+|                                                   |
+| For the detailed explanation, see:                |
+| https://post.naskya.net/notes/9ntn882tzcfe1qm6    |
+ ----------------------------------------------------
