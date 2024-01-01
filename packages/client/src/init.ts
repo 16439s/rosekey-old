@@ -22,7 +22,7 @@ if (accounts) {
 }
 // #endregion
 
-import { compareVersions } from "compare-versions";
+// import { compareVersions } from "compare-versions";
 import {
 	computed,
 	createApp,

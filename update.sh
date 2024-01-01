@@ -8,13 +8,17 @@ br
 
 # Pull changes
 ## git pull
-OLD_COMMIT=$(git rev-parse HEAD)
+OLD_COMMIT=$(git rev-parse --short HEAD)
 
 say 'Pulling changes from the remote repo...'
 run 'git checkout -- package.json packages/backend/assets'
 run 'git pull --ff --no-edit --autostash --strategy-option theirs'
 
-NEW_COMMIT=$(git rev-parse HEAD)
+NEW_COMMIT=$(git rev-parse --short HEAD)
+
+if [ "${OLD_COMMIT}" != "${NEW_COMMIT}" ]; then
+  run "git log --reverse --format='%s (by %an)' ${OLD_COMMIT}..${NEW_COMMIT} > neko/volume/CHANGELOG"
+fi
 
 say 'Pulled successfully!'
 br

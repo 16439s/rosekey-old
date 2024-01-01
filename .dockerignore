@@ -42,3 +42,6 @@ packages/backend/assets/instance.css
 .git
 Dockerfile
 docker-compose.yml
+
+# Auto-generated files
+/neko/volume

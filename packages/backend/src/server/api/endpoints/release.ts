@@ -1,8 +1,15 @@
+import * as fs from "node:fs/promises";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import define from "@/server/api/define.js";
+import config from "@/config/index.js";
+
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(_filename);
 
 export const meta = {
 	tags: ["meta"],
-	description: "Get release notes from Codeberg",
+	description: "Get changelog",
 
 	requireCredential: false,
 	requireCredentialPrivateMode: false,
@@ -14,15 +21,11 @@ export const paramDef = {
 	required: [],
 } as const;
 
-export default define(meta, paramDef, async () => {
-	let release;
-
-	await fetch(
-		"https://git.joinfirefish.org/firefish/firefish/-/raw/develop/release.json",
-	)
-		.then((response) => response.json())
-		.then((data) => {
-			release = data;
-		});
-	return release;
-});
+export default define(meta, paramDef, async () => ({
+	version: config.version,
+	notes: await fs.readFile(
+		`${_dirname}/../../../../../../neko/volume/CHANGELOG`,
+		"utf-8",
+	),
+	screenshots: [],
+}));

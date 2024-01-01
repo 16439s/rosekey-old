@@ -10,7 +10,7 @@
 				<MkSparkle>{{ i18n.ts.misskeyUpdated }}</MkSparkle>
 			</div>
 			<div :class="$style.version">✨ {{ version }} 🚀</div>
-			<div v-if="newRelease" :class="$style.releaseNotes">
+			<!-- <div :class="$style.releaseNotes">
 				<Mfm :text="data.notes" />
 				<div v-if="data.screenshots.length > 0" style="max-width: 500">
 					<img
@@ -20,7 +20,14 @@
 						alt="screenshot"
 					/>
 				</div>
-			</div>
+			</div> -->
+			<MkButton
+				v-if="notes.length > 0"
+				:class="$style.gotIt"
+				full
+				@click="openReleaseNotes"
+				>{{ i18n.ts.whatIsNew }}</MkButton
+			>
 			<MkButton
 				:class="$style.gotIt"
 				primary
@@ -33,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef } from "vue";
+import { defineAsyncComponent, ref, shallowRef } from "vue";
 import MkModal from "@/components/MkModal.vue";
 import MkSparkle from "@/components/MkSparkle.vue";
 import MkButton from "@/components/MkButton.vue";
@@ -43,18 +50,24 @@ import * as os from "@/os";
 
 const modal = shallowRef<InstanceType<typeof MkModal>>();
 
-const newRelease = ref(false);
-const data = ref(Object);
+const notes = ref([] as string[]);
 
 os.api("release").then((res) => {
-	data.value = res;
-	newRelease.value = version === data.value?.version;
+	notes.value = res.notes.trim().split("\n");
 });
 
-console.log(`Version: ${version}`);
-console.log(`Data version: ${data.value.version}`);
-console.log(newRelease.value);
-console.log(data.value);
+function openReleaseNotes(): void {
+	os.popup(
+		defineAsyncComponent(
+			() => import("@/components/MkReleaseNotesWindow.vue"),
+		),
+		{
+			notes: notes.value,
+		},
+		{},
+		"closed",
+	);
+}
 </script>
 
 <style lang="scss" module>

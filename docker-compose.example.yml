@@ -19,6 +19,7 @@ services:
       - ./assets:/firefish/custom/assets
       - ./files:/firefish/files
       - ./.config:/firefish/.config:ro
+      - ./neko/volume:/firefish/neko/volume:ro
 
   redis:
     restart: unless-stopped

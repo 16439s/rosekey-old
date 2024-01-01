@@ -507,7 +507,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			recommendedTimeline: !instance.disableRecommendedTimeline,
 			globalTimeLine: !instance.disableGlobalTimeline,
 			emailRequiredForSignup: instance.emailRequiredForSignup,
-			searchFilters: config.meilisearch ? true : false,
+			searchFilters: false, // TODO: implement search filters
 			hcaptcha: instance.enableHcaptcha,
 			recaptcha: instance.enableRecaptcha,
 			objectStorage: instance.useObjectStorage,
