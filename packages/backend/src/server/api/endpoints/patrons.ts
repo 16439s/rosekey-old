@@ -1,6 +1,6 @@
 import define from "@/server/api/define.js";
 // import { redisClient } from "@/db/redis.js";
-import * as fs from "node:fs";
+import * as fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 
@@ -25,7 +25,7 @@ export const paramDef = {
 
 export default define(meta, paramDef, async (ps) => {
 	const patrons = JSON.parse(
-		fs.readFileSync(`${_dirname}/../../../../../../patrons.json`, "utf-8"),
+		await fs.readFile(`${_dirname}/../../../../../../patrons.json`, "utf-8"),
 	);
 	return {
 		patrons: patrons.patrons,
