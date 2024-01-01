@@ -22,7 +22,7 @@
 		"dev:staging": "NODE_OPTIONS=--max_old_space_size=3072 NODE_ENV=development pnpm run build && pnpm run start",
 		"lint": "pnpm -r --parallel run lint",
 		"debug": "pnpm run build:debug && pnpm run start",
-		"build:debug": "pnpm -r --parallel run build:debug && pnpm run gulp",
+		"build:debug": "pnpm clean && pnpm --filter firefish-js run build:types && pnpm -r --parallel run build:debug && pnpm run gulp",
 		"format": "pnpm -r --parallel run format",
 		"clean": "pnpm node ./scripts/clean.mjs",
 		"clean-all": "pnpm node ./scripts/clean-all.mjs",
