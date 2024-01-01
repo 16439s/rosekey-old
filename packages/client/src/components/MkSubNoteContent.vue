@@ -341,6 +341,7 @@ function focusFooter(ev) {
 
 		&.collapsed,
 		&.showContent {
+			display: block;
 			position: relative;
 			max-height: calc(15em + 100px);
 			> .body {
