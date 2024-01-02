@@ -6,6 +6,10 @@ set -eu
 say 'Start upgrading Firefish!'
 br
 
+# Apply patches
+run './neko/update/patch.sh'
+br
+
 # Pull changes
 ## git pull
 OLD_COMMIT=$(git rev-parse --short HEAD)
