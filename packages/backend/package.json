@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"start": "pnpm node --dns-result-order=ipv4first ./built/index.js",
+		"start": "pnpm node ./built/index.js",
 		"start:test": "NODE_ENV=test pnpm node ./built/index.js",
 		"migrate": "pnpm run migrate:typeorm && pnpm run migrate:cargo",
 		"migrate:typeorm": "typeorm migration:run -d ormconfig.js",
