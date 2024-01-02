@@ -78,7 +78,7 @@ export default async function (
 	const result = await deeplTranslator.translateText(
 		text,
 		source as deepl.SourceLanguageCode | null,
-		target as deepl.TargetLanguageCode,
+		(target === "en" ? to : target) as deepl.TargetLanguageCode,
 	);
 
 	return {
