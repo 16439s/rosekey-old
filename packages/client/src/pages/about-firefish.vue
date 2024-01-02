@@ -235,9 +235,10 @@ const easterEggEngine = ref(null);
 const containerEl = ref<HTMLElement>();
 
 function iconLoaded() {
-	const emojis = defaultStore.state.reactions.length > 0
-		? defaultStore.state.reactions
-		: defaultReactions;
+	const emojis =
+		defaultStore.state.reactions.length > 0
+			? defaultStore.state.reactions
+			: defaultReactions;
 	const containerWidth = containerEl.value?.offsetWidth;
 	for (let i = 0; i < 32; i++) {
 		easterEggEmojis.value.push({
