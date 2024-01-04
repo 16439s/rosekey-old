@@ -5,16 +5,16 @@ set -eu
 
 pull() {
   say 'Pulling the image...'
-  run 'docker pull registry.code.naskya.net/naskya/firefish'
+  run "$1 pull registry.code.naskya.net/naskya/firefish"
 }
 
-if ! pull; then
+if ! pull "$1"; then
   say 'awawa, the image may not be compatible with your environment...'
   say 'Gonnya try building the image locally!'
 
   say 'It takes some time! Why not brew a cup of cofe?'
   run "$(cat - << EOC
-docker build --tag registry.code.naskya.net/naskya/firefish --build-arg VERSION="$(version)" .
+$1 build --tag registry.code.naskya.net/naskya/firefish --build-arg VERSION="$(version)" .
 EOC
   )"
 fi

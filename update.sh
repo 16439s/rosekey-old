@@ -74,13 +74,16 @@ for message in neko/messages/*; do
   esac
 done
 
-say 'Do you use Docker?'
-printf '[y/N] > '
+say 'Do you use Docker or Podman?'
+printf '(d: Docker, p: Podman, n: No) [d/p/N] > '
 read -r yn
 
 case "${yn}" in
-  [Yy]|[Yy][Ee][Ss])
-    ./neko/update/docker.sh "$@"
+  [Dd])
+    ./neko/update/docker.sh 'docker' "$@"
+    ;;
+  [Pp])
+    ./neko/update/docker.sh 'podman' "$@"
     ;;
   *)
     ./neko/update/native.sh "$@"
