@@ -5,7 +5,7 @@ set -eu
 
 pull() {
   say 'Pulling the image...'
-  run 'docker pull docker.io/naskya/firefish'
+  run 'docker pull registry.code.naskya.net/naskya/firefish'
 }
 
 if ! pull; then
@@ -14,7 +14,7 @@ if ! pull; then
 
   say 'It takes some time! Why not brew a cup of cofe?'
   run "$(cat - << EOC
-docker build --tag docker.io/naskya/firefish --build-arg VERSION="$(version)" .
+docker build --tag registry.code.naskya.net/naskya/firefish --build-arg VERSION="$(version)" .
 EOC
   )"
 fi

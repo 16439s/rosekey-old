@@ -1,0 +1,15 @@
+ ---------------------------------------------------
+| For Docker users:                                 |
+| The Docker image will be migrated from docker.io  |
+| to registry.code.naskya.net, so please edit your  |
+| docker-compose.yml to use the following tag:      |
+|                                                   |
+|  registry.code.naskya.net/naskya/firefish:latest  |
+|                                                   |
+| The image will be pushed to both registries until |
+| 2024-01-31, after which docker.io/naskya/firefish |
+| will be removed.                                  |
+|                                                   |
+| For the detailed explanation, see:                |
+| https://post.naskya.net/notes/9o27gac4dj8p483c    |
+ ---------------------------------------------------
