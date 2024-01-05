@@ -2,7 +2,7 @@ import { url } from "@/config";
 import { i18n } from "@/i18n";
 import { instance } from "@/instance";
 import * as os from "@/os";
-import { $i } from "@/reactiveAccount";
+import { $i, isSignedIn, isModerator } from "@/reactiveAccount";
 import copyToClipboard from "@/scripts/copy-to-clipboard";
 import { getUserMenu } from "@/scripts/get-user-menu";
 import icon from "@/scripts/icon";
@@ -230,18 +230,18 @@ export function getNoteMenu(props: {
 		props.isDeleted.value = true;
 	}
 
-	async function promote(): Promise<void> {
-		const { canceled, result: days } = await os.inputNumber({
-			title: i18n.ts.numberOfDays,
-		});
+	// async function promote(): Promise<void> {
+	// 	const { canceled, result: days } = await os.inputNumber({
+	// 		title: i18n.ts.numberOfDays,
+	// 	});
 
-		if (canceled) return;
+	// 	if (canceled) return;
 
-		os.apiWithDialog("admin/promo/create", {
-			noteId: appearNote.id,
-			expiresAt: Date.now() + 86400000 * days,
-		});
-	}
+	// 	os.apiWithDialog("admin/promo/create", {
+	// 		noteId: appearNote.id,
+	// 		expiresAt: Date.now() + 86400000 * days,
+	// 	});
+	// }
 
 	function share(): void {
 		navigator.share({
@@ -283,13 +283,12 @@ export function getNoteMenu(props: {
 	}
 
 	let menu;
-	if ($i) {
+	if (isSignedIn) {
 		const statePromise = os.api("notes/state", {
 			noteId: appearNote.id,
 		});
 
 		const isAppearAuthor = appearNote.userId === $i.id;
-		const isModerator = $i.isAdmin || $i.isModerator;
 
 		menu = [
 			...(props.currentClipPage?.value.userId === $i.id
@@ -410,7 +409,7 @@ export function getNoteMenu(props: {
 				],
 			},
 			/*
-		...($i.isModerator || $i.isAdmin ? [
+		...(isModerator ? [
 			null,
 			{
 				icon: `${icon('ph-megaphone-simple')}`,

@@ -4,7 +4,7 @@ import type { Ref } from "vue";
 import { onUnmounted, ref, watch } from "vue";
 import { api } from "./os";
 import { useStream } from "./stream";
-import { $i } from "@/reactiveAccount";
+import { $i, isSignedIn } from "@/reactiveAccount";
 
 type StateDef = Record<
 	string,
@@ -17,7 +17,7 @@ type StateDef = Record<
 type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
 
 const stream = useStream();
-const connection = $i && stream.useChannel("main");
+const connection = isSignedIn && stream.useChannel("main");
 
 export class Storage<T extends StateDef> {
 	public readonly key: string;
@@ -43,12 +43,12 @@ export class Storage<T extends StateDef> {
 		const deviceState = JSON.parse(
 			localStorage.getItem(this.keyForLocalStorage) || "{}",
 		);
-		const deviceAccountState = $i
+		const deviceAccountState = isSignedIn
 			? JSON.parse(
 					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) || "{}",
 			  )
 			: {};
-		const registryCache = $i
+		const registryCache = isSignedIn
 			? JSON.parse(
 					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ||
 						"{}",
@@ -65,7 +65,7 @@ export class Storage<T extends StateDef> {
 				state[k] = deviceState[k];
 			} else if (
 				v.where === "account" &&
-				$i &&
+				isSignedIn &&
 				Object.prototype.hasOwnProperty.call(registryCache, k)
 			) {
 				state[k] = registryCache[k];
@@ -85,7 +85,7 @@ export class Storage<T extends StateDef> {
 		this.state = state as any;
 		this.reactiveState = reactiveState as any;
 
-		if ($i) {
+		if (isSignedIn) {
 			// なぜかsetTimeoutしないとapi関数内でエラーになる(おそらく循環参照してることに原因がありそう)
 			window.setTimeout(() => {
 				api("i/registry/get-all", { scope: ["client", this.key] }).then(
@@ -169,7 +169,7 @@ export class Storage<T extends StateDef> {
 				break;
 			}
 			case "deviceAccount": {
-				if ($i == null) break;
+				if (!isSignedIn) break;
 				const deviceAccountState = JSON.parse(
 					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) || "{}",
 				);
@@ -181,7 +181,7 @@ export class Storage<T extends StateDef> {
 				break;
 			}
 			case "account": {
-				if ($i == null) break;
+				if (!isSignedIn) break;
 				const cache = JSON.parse(
 					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ||
 						"{}",

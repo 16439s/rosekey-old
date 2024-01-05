@@ -1,9 +1,8 @@
-import { iAmModerator } from "@/account";
+import { $i, isModerator, isSignedIn } from "@/reactiveAccount";
 import { host } from "@/config";
 import { i18n } from "@/i18n";
 import type { Router } from "@/nirax";
 import * as os from "@/os";
-import { $i } from "@/reactiveAccount";
 import { mainRouter } from "@/router";
 import copyToClipboard from "@/scripts/copy-to-clipboard";
 import icon from "@/scripts/icon";
@@ -12,8 +11,6 @@ import * as Acct from "firefish-js/built/acct";
 import { defineAsyncComponent } from "vue";
 
 export function getUserMenu(user, router: Router = mainRouter) {
-	const meId = $i ? $i.id : null;
-
 	async function pushList() {
 		const t = i18n.ts.selectList; // なぜか後で参照すると null になるので最初にメモリに確保しておく
 		const lists = await os.api("users/lists/list");
@@ -282,7 +279,7 @@ export function getUserMenu(user, router: Router = mainRouter) {
 				os.post({ specified: user });
 			},
 		},
-		meId !== user.id
+		$i.id !== user.id
 			? {
 					type: "link",
 					icon: `${icon("ph-chats-teardrop")}`,
@@ -305,7 +302,7 @@ export function getUserMenu(user, router: Router = mainRouter) {
 			text: i18n.ts.addToList,
 			action: pushList,
 		},
-		meId !== user.id
+		$i.id !== user.id
 			? {
 					icon: `${icon("ph-users-three")}`,
 					text: i18n.ts.inviteToGroup,
@@ -320,7 +317,7 @@ export function getUserMenu(user, router: Router = mainRouter) {
 		},
 	] as any;
 
-	if ($i && meId !== user.id) {
+	if (isSignedIn && $i.id !== user.id) {
 		menu = menu.concat([
 			{
 				icon: user.isMuted ? "ph-eye ph-lg" : "ph-eye-slash ph-lg",
@@ -354,7 +351,7 @@ export function getUserMenu(user, router: Router = mainRouter) {
 			},
 		]);
 
-		if (iAmModerator) {
+		if (isModerator) {
 			menu = menu.concat([
 				null,
 				{
@@ -371,7 +368,7 @@ export function getUserMenu(user, router: Router = mainRouter) {
 		}
 	}
 
-	if ($i && meId === user.id) {
+	if (isSignedIn && $i.id === user.id) {
 		menu = menu.concat([
 			null,
 			{

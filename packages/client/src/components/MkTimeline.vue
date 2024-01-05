@@ -49,7 +49,7 @@ import MkPullToRefresh from "@/components/MkPullToRefresh.vue";
 import MkInfo from "@/components/MkInfo.vue";
 import { useStream } from "@/stream";
 import * as sound from "@/scripts/sound";
-import { $i } from "@/reactiveAccount";
+import { $i, isSignedIn } from "@/reactiveAccount";
 import { i18n } from "@/i18n";
 import { defaultStore } from "@/store";
 import icon from "@/scripts/icon";
@@ -77,14 +77,12 @@ let tlHintClosed: boolean;
 let tlNotesCount = 0;
 const queue = ref(0);
 
-const isSignedIn = $i != null;
-
 const prepend = (note) => {
 	tlNotesCount++;
 	tlComponent.value?.pagingComponent?.prepend(note);
 	emit("note");
 	if (props.sound) {
-		sound.play($i && note.userId === $i.id ? "noteMy" : "note");
+		sound.play(isSignedIn && note.userId === $i.id ? "noteMy" : "note");
 	}
 };
 

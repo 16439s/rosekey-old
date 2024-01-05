@@ -209,7 +209,7 @@
 					<FormSwitch
 						v-if="
 							user.host == null &&
-							$i.isAdmin &&
+							isAdmin &&
 							(moderator || !user.isAdmin)
 						"
 						v-model="moderator"
@@ -232,7 +232,7 @@
 					{{ i18n.ts.reflectMayTakeTime }}
 					<div class="_formBlock">
 						<FormButton
-							v-if="user.host == null && iAmModerator"
+							v-if="user.host == null && isModerator"
 							inline
 							style="margin-bottom: 0.4rem"
 							@click="resetPassword"
@@ -240,14 +240,14 @@
 							{{ i18n.ts.resetPassword }}</FormButton
 						>
 						<FormButton
-							v-if="user.host == null && iAmModerator"
+							v-if="user.host == null && isModerator"
 							inline
 							@click="sendModMail"
 							><i :class="icon('ph-warning-diamond')"></i>
 							{{ i18n.ts.sendModMail }}</FormButton
 						>
 						<FormButton
-							v-if="user.host == null && $i.isAdmin"
+							v-if="user.host == null && isAdmin"
 							inline
 							danger
 							@click="delete2fa"
@@ -255,7 +255,7 @@
 							{{ i18n.ts.delete2fa }}</FormButton
 						>
 						<FormButton
-							v-if="user.host == null && $i.isAdmin"
+							v-if="user.host == null && isAdmin"
 							inline
 							danger
 							@click="deletePasskeys"
@@ -263,7 +263,7 @@
 							{{ i18n.ts.deletePasskeys }}</FormButton
 						>
 						<FormButton
-							v-if="$i.isAdmin"
+							v-if="isAdmin"
 							inline
 							primary
 							danger
@@ -281,14 +281,14 @@
 					</FormTextarea>
 					<FormFolder class="_formBlock">
 						<template #label>IP</template>
-						<MkInfo v-if="!iAmAdmin" warn>{{
+						<MkInfo v-if="!isAdmin" warn>{{
 							i18n.ts.requireAdminForView
 						}}</MkInfo>
 						<MkInfo v-else
 							>The date is the IP address was first
 							acknowledged.</MkInfo
 						>
-						<template v-if="iAmAdmin && ips">
+						<template v-if="isAdmin && ips">
 							<div
 								v-for="record in ips"
 								:key="record.ip"
@@ -336,7 +336,7 @@
 					</FormSection>
 				</div>
 				<div v-else-if="tab === 'raw'" class="_formRoot">
-					<MkObjectView v-if="info && $i.isAdmin" tall :value="info">
+					<MkObjectView v-if="info && isAdmin" tall :value="info">
 					</MkObjectView>
 
 					<MkObjectView tall :value="user"> </MkObjectView>
@@ -359,7 +359,6 @@ import FormInput from "@/components/form/input.vue";
 import FormFolder from "@/components/form/folder.vue";
 import FormSelect from "@/components/form/select.vue";
 import MkKeyValue from "@/components/MkKeyValue.vue";
-import MkSelect from "@/components/form/select.vue";
 import FormSuspense from "@/components/form/suspense.vue";
 import MkFileListForAdmin from "@/components/MkFileListForAdmin.vue";
 import MkInfo from "@/components/MkInfo.vue";
@@ -368,7 +367,7 @@ import { url } from "@/config";
 import { acct, userPage } from "@/filters/user";
 import { definePageMetadata } from "@/scripts/page-metadata";
 import { i18n } from "@/i18n";
-import { iAmAdmin, iAmModerator } from "@/account";
+import { isAdmin, isModerator } from "@/reactiveAccount";
 import { instance } from "@/instance";
 import icon from "@/scripts/icon";
 
@@ -397,7 +396,7 @@ const filesPagination = {
 };
 
 function createFetcher() {
-	if (iAmModerator) {
+	if (isModerator) {
 		return () =>
 			Promise.all([
 				os.api("users/show", {
@@ -406,7 +405,7 @@ function createFetcher() {
 				os.api("admin/show-user", {
 					userId: props.userId,
 				}),
-				iAmAdmin
+				isAdmin
 					? os.api("admin/get-user-ips", {
 							userId: props.userId,
 						})
@@ -639,7 +638,7 @@ const headerTabs = computed(() =>
 			title: i18n.ts.overview,
 			icon: `${icon("ph-info")}`,
 		},
-		iAmModerator
+		isModerator
 			? {
 					key: "moderation",
 					title: i18n.ts.moderation,

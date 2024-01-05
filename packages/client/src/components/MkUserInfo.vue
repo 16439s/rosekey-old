@@ -8,7 +8,7 @@
 			:class="{ detailed }"
 		>
 			<span
-				v-if="$i && $i.id != user.id && user.isFollowed"
+				v-if="isSignedIn && $i.id != user.id && user.isFollowed"
 				class="followed"
 				:class="{ 'followed-emph': emphasizeFollowed }"
 				>{{ i18n.ts.followsYou }}</span
@@ -80,7 +80,10 @@
 		</div>
 		<div class="buttons">
 			<slot>
-				<MkFollowButton v-if="$i && user.id != $i.id" :user="user" />
+				<MkFollowButton
+					v-if="isSignedIn && user.id !== $i.id"
+					:user="user"
+				/>
 			</slot>
 		</div>
 	</article>
@@ -96,6 +99,7 @@ import MkNumber from "@/components/MkNumber.vue";
 import { userPage } from "@/filters/user";
 import { i18n } from "@/i18n";
 import { defaultStore } from "@/store";
+import { $i, isSignedIn } from "@/reactiveAccount";
 
 const props = defineProps<{
 	user: firefish.entities.UserDetailed;

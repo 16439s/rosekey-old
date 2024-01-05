@@ -71,7 +71,7 @@
 				</template>
 				<div class="divider"></div>
 				<MkA
-					v-if="$i.isAdmin || $i.isModerator"
+					v-if="isModerator"
 					v-click-anime
 					class="item"
 					active-class="active"
@@ -81,7 +81,7 @@
 					><span class="text">{{ i18n.ts.controlPanel }}</span>
 				</MkA>
 				<MkA
-					v-else-if="$i.emojiModPerm !== 'unauthorized'"
+					v-else-if="isEmojiMod"
 					v-click-anime
 					v-tooltip.noDelay.right="i18n.ts.customEmojis"
 					class="item _button"
@@ -141,7 +141,7 @@ import { computed, defineAsyncComponent, toRef } from "vue";
 import * as os from "@/os";
 import { navbarItemDef } from "@/navbar";
 import { openAccountMenu as openAccountMenu_ } from "@/account";
-import { $i } from "@/reactiveAccount";
+import { $i, isEmojiMod, isModerator } from "@/reactiveAccount";
 import { openHelpMenu_ } from "@/scripts/helpMenu";
 import { defaultStore } from "@/store";
 import { i18n } from "@/i18n";

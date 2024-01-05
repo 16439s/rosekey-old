@@ -43,7 +43,7 @@
 										:user="user"
 										:nowrap="true"
 									/>
-									<div v-if="$i?.isModerator || $i?.isAdmin">
+									<div v-if="isModerator">
 										<span
 											v-if="user.isSilenced"
 											style="
@@ -67,8 +67,8 @@
 									</div>
 									<span
 										v-if="
-											$i &&
-											$i.id != user.id &&
+											isSignedIn &&
+											$i.id !== user.id &&
 											user.isFollowed
 										"
 										class="followed"
@@ -134,8 +134,8 @@
 								/>
 								<span
 									v-if="
-										$i &&
-										$i.id != user.id &&
+										isSignedIn &&
+										$i.id !== user.id &&
 										user.isFollowed
 									"
 									class="followed"
@@ -144,7 +144,7 @@
 									}"
 									>{{ i18n.ts.followsYou }}</span
 								>
-								<div v-if="$i?.isModerator || $i?.isAdmin">
+								<div v-if="isModerator">
 									<span
 										v-if="user.isSilenced"
 										style="color: var(--warn); padding: 5px"
@@ -346,7 +346,7 @@
 						/>
 					</div>
 					<MkInfo
-						v-else-if="$i && $i.id === user.id"
+						v-else-if="isSignedIn && $i.id === user.id"
 						style="margin: 12px 0"
 						>{{ i18n.ts.userPagePinTip }}</MkInfo
 					>
@@ -389,7 +389,7 @@ import { userPage } from "@/filters/user";
 import { defaultStore } from "@/store";
 import * as os from "@/os";
 import { i18n } from "@/i18n";
-import { $i } from "@/reactiveAccount";
+import { $i, isSignedIn, isModerator } from "@/reactiveAccount";
 import { host } from "@/config";
 import icon from "@/scripts/icon";
 

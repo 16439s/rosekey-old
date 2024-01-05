@@ -1,21 +1,10 @@
 import type { AsyncComponentLoader } from "vue";
 import { defineAsyncComponent, inject } from "vue";
-import { iAmEmojiMod, iAmModerator } from "@/account";
+import { isModerator, isEmojiMod } from "@/reactiveAccount";
 import { Router } from "@/nirax";
 import MkError from "@/pages/_error_.vue";
 import MkLoading from "@/pages/_loading_.vue";
-import { $i } from "@/reactiveAccount";
-import { api } from "@/os";
-
-function getGuestTimelineStatus() {
-	api("meta", {
-		detail: false,
-	}).then((meta) => {
-		return meta.enableGuestTimeline;
-	});
-}
-
-const guestTimeline = getGuestTimelineStatus();
+import { $i, isSignedIn } from "@/reactiveAccount";
 
 const page = (loader: AsyncComponentLoader<any>) =>
 	defineAsyncComponent({
@@ -311,10 +300,9 @@ export const routes = [
 	},
 	{
 		path: "/search",
-		component:
-			$i != null
-				? page(() => import("./pages/search.vue"))
-				: page(() => import("./pages/not-found.vue")),
+		component: isSignedIn
+			? page(() => import("./pages/search.vue"))
+			: page(() => import("./pages/not-found.vue")),
 		query: {
 			q: "query",
 			channel: "channel",
@@ -429,20 +417,20 @@ export const routes = [
 	},
 	{
 		path: "/admin/file/:fileId",
-		component: iAmModerator
+		component: isModerator
 			? page(() => import("./pages/admin-file.vue"))
 			: page(() => import("./pages/not-found.vue")),
 	},
 	{
 		path: "/admin/emojis",
 		name: "emojis",
-		component: iAmEmojiMod
+		component: isEmojiMod
 			? page(() => import("./pages/admin/emojis.vue"))
 			: page(() => import("./pages/not-found.vue")),
 	},
 	{
 		path: "/admin",
-		component: iAmModerator
+		component: isModerator
 			? page(() => import("./pages/admin/index.vue"))
 			: page(() => import("./pages/not-found.vue")),
 		children: [

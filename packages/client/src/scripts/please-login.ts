@@ -1,11 +1,11 @@
 import { i18n } from "@/i18n";
 import { popup } from "@/os";
-import { $i } from "@/reactiveAccount";
+import { isSignedIn } from "@/reactiveAccount";
 import { vibrate } from "@/scripts/vibrate";
 import { defineAsyncComponent } from "vue";
 
 export function pleaseLogin(path?: string) {
-	if ($i) return;
+	if (isSignedIn) return;
 	vibrate(100);
 
 	popup(

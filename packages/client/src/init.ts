@@ -41,7 +41,7 @@ import directives from "@/directives";
 import { i18n } from "@/i18n";
 import { fetchInstance, instance } from "@/instance";
 import { alert, api, confirm, popup, post, toast } from "@/os";
-import { $i } from "@/reactiveAccount";
+import { $i, isSignedIn } from "@/reactiveAccount";
 import { deviceKind } from "@/scripts/device-kind";
 import { getAccountFromId } from "@/scripts/get-account-from-id";
 import { makeHotkey } from "@/scripts/hotkey";
@@ -253,7 +253,7 @@ function checkForSplash() {
 		// テーマリビルドするため
 		localStorage.removeItem("theme");
 
-		if ($i && defaultStore.state.showUpdates) {
+		if (isSignedIn && defaultStore.state.showUpdates) {
 			popup(
 				defineAsyncComponent(() => import("@/components/MkUpdated.vue")),
 				{},
@@ -264,7 +264,7 @@ function checkForSplash() {
 	}
 
 	if (
-		$i &&
+		isSignedIn &&
 		defaultStore.state.tutorial === -1 &&
 		!["/announcements", "/announcements/"].includes(window.location.pathname)
 	) {
@@ -418,7 +418,7 @@ function checkForSplash() {
 		s: search,
 	};
 
-	if ($i) {
+	if (isSignedIn) {
 		// only add post shortcuts if logged in
 		hotkeys["p|n"] = post;
 

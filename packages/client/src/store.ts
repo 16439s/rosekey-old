@@ -1,6 +1,6 @@
 import { markRaw, ref } from "vue";
 import { Storage } from "./pizzax";
-import { $i } from "./reactiveAccount";
+import { isSignedIn } from "./reactiveAccount";
 
 export const postFormActions = [];
 export const userActions = [];
@@ -157,7 +157,7 @@ export const defaultStore = markRaw(
 		tl: {
 			where: "deviceAccount",
 			default: {
-				src: ($i != null ? "home" : "local") as
+				src: (isSignedIn ? "home" : "local") as
 					| "home"
 					| "local"
 					| "social"
