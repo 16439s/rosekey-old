@@ -9,7 +9,7 @@ pull() {
 }
 
 if ! pull "$1"; then
-  say 'awawa, the image may not be compatible with your environment...'
+  sadsay 'awawa, the image may not be compatible with your environment...'
   say 'Gonnya try building the image locally!'
 
   say 'It takes some time! Why not brew a cup of cofe?'

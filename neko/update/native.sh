@@ -11,7 +11,7 @@ if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
 
   case "${yn}" in
     [Nn]|[Nn][Oo])
-      say 'You must stop your server first!'
+      sadsay 'You must stop your server first!'
       exit 1
       ;;
     *)
@@ -49,8 +49,9 @@ br
 
 # prevent migration errors
 if [ ! -f packages/backend/native-utils/built/index.js ]; then
-  say 'Something went wrong orz... Gonnya try fixing that.'
+  sadsay 'Something went wrong... Gonnya try fixing that.'
   run 'cp neko/index.js packages/backend/native-utils/built/index.js'
+  br
 else
   say "It's going well so far!"
   br
