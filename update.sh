@@ -21,7 +21,7 @@ run 'git pull --ff --no-edit --autostash --strategy-option theirs'
 NEW_COMMIT=$(git rev-parse --short HEAD)
 
 if [ "${OLD_COMMIT}" != "${NEW_COMMIT}" ]; then
-  run "git log --reverse --format='%s (by %an)' ${OLD_COMMIT}..${NEW_COMMIT} > neko/volume/CHANGELOG"
+  run "git log --no-merges --reverse --format='%s (by %an)' ${OLD_COMMIT}..${NEW_COMMIT} > neko/volume/CHANGELOG"
 fi
 
 say 'Pulled successfully!'
