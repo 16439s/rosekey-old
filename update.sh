@@ -75,15 +75,19 @@ for message in neko/messages/*; do
 done
 
 say 'Do you use Docker or Podman?'
-printf '(d: Docker, p: Podman, n: No) [d/p/N] > '
-read -r yn
+printf 'd: Docker, p: Podman, n: No [d/p/N] > '
+read -r resp
 
-case "${yn}" in
+case "${resp}" in
   [Dd])
     ./neko/update/docker.sh 'docker' "$@"
     ;;
   [Pp])
     ./neko/update/docker.sh 'podman' "$@"
+    ;;
+  [Yy]|[Yy][Ee][Ss])
+    printf "Watch out! ${resp} is not a valid answer.\n" >&2
+    exit 1
     ;;
   *)
     ./neko/update/native.sh "$@"
