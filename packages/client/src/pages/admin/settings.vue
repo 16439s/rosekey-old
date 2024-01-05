@@ -143,7 +143,7 @@
 						<FormSection>
 							<FormInfo class="_formBlock">{{
 								i18n.t("publishTimelinesDescription", {
-									url: `${instanceDomain}/timelime`,
+									url: `${instanceDomain}/timeline`,
 								})
 							}}</FormInfo>
 							<FormSwitch
