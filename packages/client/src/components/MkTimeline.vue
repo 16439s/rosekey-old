@@ -1,6 +1,6 @@
 <template>
 	<MkInfo
-		v-if="tlHint && !tlHintClosed"
+		v-if="tlHint && !tlHintClosed && isSignedIn"
 		:closeable="true"
 		class="_gap"
 		@close="closeHint"
@@ -76,6 +76,8 @@ let tlHint: string;
 let tlHintClosed: boolean;
 let tlNotesCount = 0;
 const queue = ref(0);
+
+const isSignedIn = $i != null;
 
 const prepend = (note) => {
 	tlNotesCount++;

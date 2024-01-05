@@ -82,24 +82,34 @@ import icon from "@/scripts/icon";
 import "swiper/scss";
 import "swiper/scss/virtual";
 
-if (defaultStore.reactiveState.tutorial.value !== -1) {
+const isSignedIn = $i != null;
+
+if (isSignedIn && defaultStore.reactiveState.tutorial.value !== -1) {
 	os.popup(XTutorial, {}, {}, "closed");
 }
 
+const isHomeTimelineAvailable = isSignedIn;
 const isLocalTimelineAvailable =
-	!instance.disableLocalTimeline ||
+	(!instance.disableLocalTimeline &&
+		(isSignedIn || instance.enableGuestTimeline)) ||
 	($i != null && ($i.isModerator || $i.isAdmin));
-const isRecommendedTimelineAvailable = !instance.disableRecommendedTimeline;
+const isSocialTimelineAvailable = isLocalTimelineAvailable && isSignedIn;
+const isRecommendedTimelineAvailable =
+	!instance.disableRecommendedTimeline && isSignedIn;
 const isGlobalTimelineAvailable =
-	!instance.disableGlobalTimeline ||
+	(!instance.disableGlobalTimeline &&
+		(isSignedIn || instance.enableGuestTimeline)) ||
 	($i != null && ($i.isModerator || $i.isAdmin));
 const keymap = {
 	t: focus,
 };
 
-const timelines = ["home"];
+const timelines = [];
 
-if (isLocalTimelineAvailable) {
+if (isHomeTimelineAvailable) {
+	timelines.push("home");
+}
+if (isSocialTimelineAvailable) {
 	timelines.push("social");
 }
 if (isRecommendedTimelineAvailable) {
@@ -126,17 +136,21 @@ window.addEventListener("resize", () => {
 const tlComponent = ref<InstanceType<typeof XTimeline>>();
 const rootEl = ref<HTMLElement>();
 
+const timelineIndex = (timeline: string): number => {
+	const index = timelines.indexOf(timeline);
+	return index === -1 ? 0 : index;
+};
+
 const src = computed({
 	get: () => defaultStore.reactiveState.tl.value.src,
 	set: (x) => {
 		saveSrc(x);
-		syncSlide(timelines.indexOf(x));
+		syncSlide(timelineIndex(x));
 	},
 });
 
-const lists = os.api("users/lists/list");
 async function chooseList(ev: MouseEvent) {
-	await lists.then((res) => {
+	await os.api("users/lists/list").then((res) => {
 		const items = [
 			{
 				type: "link" as const,
@@ -156,9 +170,8 @@ async function chooseList(ev: MouseEvent) {
 	});
 }
 
-const antennas = os.api("antennas/list");
 async function chooseAntenna(ev: MouseEvent) {
-	await antennas.then((res) => {
+	await os.api("antennas/list").then((res) => {
 		const items = [
 			{
 				type: "link" as const,
@@ -193,36 +206,44 @@ function focus(): void {
 	tlComponent.value.focus();
 }
 
-const headerActions = computed(() => [
-	{
-		icon: `${icon("ph-list-bullets")}`,
-		title: i18n.ts.lists,
-		text: i18n.ts.lists,
-		iconOnly: true,
-		handler: chooseList,
-	},
-	{
-		icon: `${icon("ph-flying-saucer")}`,
-		title: i18n.ts.antennas,
-		text: i18n.ts.antennas,
-		iconOnly: true,
-		handler: chooseAntenna,
-	} /* **TODO: fix timetravel** {
+const headerActions = computed(() =>
+	isSignedIn
+		? [
+				{
+					icon: `${icon("ph-list-bullets")}`,
+					title: i18n.ts.lists,
+					text: i18n.ts.lists,
+					iconOnly: true,
+					handler: chooseList,
+				},
+				{
+					icon: `${icon("ph-flying-saucer")}`,
+					title: i18n.ts.antennas,
+					text: i18n.ts.antennas,
+					iconOnly: true,
+					handler: chooseAntenna,
+				} /* **TODO: fix timetravel** {
 	icon: `${icon('ph-calendar-blank')}`,
 	title: i18n.ts.jumpToSpecifiedDate,
 	iconOnly: true,
 	handler: timetravel,
 } */,
-]);
+			]
+		: [],
+);
 
 const headerTabs = computed(() => [
-	{
-		key: "home",
-		title: i18n.ts._timelines.home,
-		icon: `${icon("ph-house")}`,
-		iconOnly: true,
-	},
-	...(isLocalTimelineAvailable
+	...(isHomeTimelineAvailable
+		? [
+				{
+					key: "home",
+					title: i18n.ts._timelines.home,
+					icon: `${icon("ph-house")}`,
+					iconOnly: true,
+				},
+			]
+		: []),
+	...(isSocialTimelineAvailable
 		? [
 				{
 					key: "social",
@@ -284,7 +305,7 @@ let swiperRef: any = null;
 
 function setSwiperRef(swiper) {
 	swiperRef = swiper;
-	syncSlide(timelines.indexOf(src.value));
+	syncSlide(timelineIndex(src.value));
 }
 
 function onSlideChange() {
@@ -296,7 +317,7 @@ function syncSlide(index) {
 }
 
 onMounted(() => {
-	syncSlide(timelines.indexOf(swiperRef.activeIndex));
+	syncSlide(timelineIndex(swiperRef.activeIndex));
 });
 </script>
 

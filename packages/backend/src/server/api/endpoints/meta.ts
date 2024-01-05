@@ -111,6 +111,11 @@ export const meta = {
 				optional: false,
 				nullable: false,
 			},
+			enableGuestTimeline: {
+				type: "boolean",
+				optional: false,
+				nullable: false,
+			},
 			driveCapacityPerLocalUserMb: {
 				type: "number",
 				optional: false,
@@ -432,6 +437,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableRecommendedTimeline: instance.disableRecommendedTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
+		enableGuestTimeline: instance.enableGuestTimeline,
 		driveCapacityPerLocalUserMb: instance.localDriveCapacityMb,
 		driveCapacityPerRemoteUserMb: instance.remoteDriveCapacityMb,
 		emailRequiredForSignup: instance.emailRequiredForSignup,
@@ -506,6 +512,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			localTimeLine: !instance.disableLocalTimeline,
 			recommendedTimeline: !instance.disableRecommendedTimeline,
 			globalTimeLine: !instance.disableGlobalTimeline,
+			gusstTimeline: instance.enableGuestTimeline,
 			emailRequiredForSignup: instance.emailRequiredForSignup,
 			searchFilters: false, // TODO: implement search filters
 			hcaptcha: instance.enableHcaptcha,

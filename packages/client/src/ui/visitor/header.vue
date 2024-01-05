@@ -59,10 +59,10 @@
 					</button>
 				</div>
 				<div class="right">
-					<button class="_button search" @click="search()">
+					<!-- <button class="_button search" @click="search()">
 						<i :class="icon('ph-magnifying-glass icon')"></i
 						><span>{{ i18n.ts.search }}</span>
-					</button>
+					</button> -->
 					<button class="_buttonPrimary signup" @click="signup()">
 						{{ i18n.ts.signup }}
 					</button>
@@ -110,7 +110,7 @@ import XSigninDialog from "@/components/MkSigninDialog.vue";
 import XSignupDialog from "@/components/MkSignupDialog.vue";
 import * as os from "@/os";
 import { instance } from "@/instance";
-import { search } from "@/scripts/search";
+// import { search } from "@/scripts/search";
 import { i18n } from "@/i18n";
 import icon from "@/scripts/icon";
 
@@ -161,7 +161,7 @@ export default defineComponent({
 			);
 		},
 
-		search,
+		// search,
 	},
 });
 </script>
@@ -245,22 +245,22 @@ export default defineComponent({
 			> .right {
 				margin-inline-start: auto;
 
-				> .search {
-					background: var(--bg);
-					border-radius: 999px;
-					width: 230px;
-					line-height: $height - 20px;
-					margin-inline-end: 16px;
-					text-align: initial;
+				// > .search {
+				// 	background: var(--bg);
+				// 	border-radius: 999px;
+				// 	width: 230px;
+				// 	line-height: $height - 20px;
+				// 	margin-inline-end: 16px;
+				// 	text-align: initial;
 
-					> * {
-						opacity: 0.7;
-					}
+				// 	> * {
+				// 		opacity: 0.7;
+				// 	}
 
-					> .icon {
-						padding: 0 16px;
-					}
-				}
+				// 	> .icon {
+				// 		padding: 0 16px;
+				// 	}
+				// }
 
 				> .signup {
 					border-radius: 999px;

@@ -460,7 +460,7 @@ export const paramDef = {
 	required: [],
 } as const;
 
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async (ps) => {
 	const instance = await fetchMeta(true);
 
 	return {
@@ -479,6 +479,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableRecommendedTimeline: instance.disableRecommendedTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
+		enableGuestTimeline: instance.enableGuestTimeline,
 		driveCapacityPerLocalUserMb: instance.localDriveCapacityMb,
 		driveCapacityPerRemoteUserMb: instance.remoteDriveCapacityMb,
 		emailRequiredForSignup: instance.emailRequiredForSignup,

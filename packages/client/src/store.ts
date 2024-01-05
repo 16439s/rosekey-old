@@ -1,5 +1,6 @@
 import { markRaw, ref } from "vue";
 import { Storage } from "./pizzax";
+import { $i } from "./reactiveAccount";
 
 export const postFormActions = [];
 export const userActions = [];
@@ -156,7 +157,12 @@ export const defaultStore = markRaw(
 		tl: {
 			where: "deviceAccount",
 			default: {
-				src: "home" as "home" | "local" | "social" | "global" | "recommended",
+				src: ($i != null ? "home" : "local") as
+					| "home"
+					| "local"
+					| "social"
+					| "global"
+					| "recommended",
 				arg: null,
 			},
 		},
