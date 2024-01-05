@@ -10,6 +10,12 @@ say() {
   color
 }
 
+sadsay() {
+  color 5  # magenta
+  printf '( T-T) < %s\n' "$1"
+  color
+}
+
 run() {
   color 3  # yellow
   printf '[running] $ %s\n' "$1"

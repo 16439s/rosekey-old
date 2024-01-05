@@ -86,7 +86,7 @@ case "${resp}" in
     ./neko/update/docker.sh 'podman' "$@"
     ;;
   [Yy]|[Yy][Ee][Ss])
-    printf "Watch out! ${resp} is not a valid answer.\n" >&2
+    sadsay "Watch out! ${resp} is not a valid answer." >&2
     exit 1
     ;;
   *)
