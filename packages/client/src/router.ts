@@ -424,9 +424,10 @@ export const routes = [
 	{
 		path: "/admin/emojis",
 		name: "emojis",
-		component: isEmojiMod
-			? page(() => import("./pages/admin/emojis.vue"))
-			: page(() => import("./pages/not-found.vue")),
+		component:
+			isModerator || isEmojiMod
+				? page(() => import("./pages/admin/emojis.vue"))
+				: page(() => import("./pages/not-found.vue")),
 	},
 	{
 		path: "/admin",
