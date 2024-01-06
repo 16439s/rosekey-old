@@ -31,21 +31,26 @@ port: 3000
 
 # The bind host your Firefish server should listen on.
 # If unspecified, the wildcard address will be used.
-#bind: 127.0.0.1
+# You may need to comment out the following line if you use Docker/Podman.
+bind: 127.0.0.1
 
 #   ┌──────────────────────────┐
 #───┘ PostgreSQL configuration └────────────────────────────────
 
 db:
+  # If you use docker-compose or podman compose with the default settings,
+  # you need to change this to firefish_db
   host: localhost
+
   port: 5432
   #ssl: false
+
   # Database name
-  db: firefish
+  db: firefish_db
 
   # Auth
-  user: example-firefish-user
-  pass: example-firefish-pass
+  user: firefish
+  pass: very_strong_password
 
   # Whether disable Caching queries
   #disableCache: true
@@ -60,7 +65,10 @@ db:
 #───┘ Redis configuration └─────────────────────────────────────
 
 redis:
+  # If you use docker-compose or podman compose with the default settings,
+  # you need to change this to firefish_redis
   host: localhost
+
   port: 6379
   #tls:
   #  host: localhost
@@ -105,10 +113,10 @@ redis:
 #───┘ Other configuration └─────────────────────────────────────
 
 # Maximum length of a post (default 3000, max 100000)
-#maxNoteLength: 3000
+maxNoteLength: 3000
 
 # Maximum length of an image caption (default 1500, max 8192)
-#maxCaptionLength: 1500
+maxCaptionLength: 1500
 
 # Reserved usernames that only the administrator can register with
 reservedUsernames: [
@@ -133,8 +141,8 @@ reservedUsernames: [
 # inboxJobConcurrency: 16
 
 # Job rate limiter
-# deliverJobPerSec: 128
-# inboxJobPerSec: 16
+deliverJobPerSec: 128
+inboxJobPerSec: 128
 
 # Job attempts
 # deliverJobMaxAttempts: 12
@@ -169,7 +177,7 @@ reservedUsernames: [
 #mediaProxy: https://example.com/proxy
 
 # Proxy remote files (default: false)
-#proxyRemoteFiles: true
+proxyRemoteFiles: true
 
 # Use authorized fetch for outgoing requests
 signToActivityPubGet: true
