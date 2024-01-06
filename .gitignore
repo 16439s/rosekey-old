@@ -79,3 +79,6 @@ yarn*
 # Cargo cache for Docker
 /.cargo-cache
 /.cargo-target
+
+# Custom
+custom/
