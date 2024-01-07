@@ -3,7 +3,7 @@ FROM docker.io/node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
-RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y python3 git wget curl build-essential
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends python3 git wget curl build-essential ca-certificates
 RUN mkdir -m777 /opt/rust /opt/cargo
 ENV RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/cargo PATH=/opt/cargo/bin:$PATH
 RUN wget --https-only --secure-protocol=TLSv1_2 -O- https://sh.rustup.rs | sh /dev/stdin -y
