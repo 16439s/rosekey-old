@@ -3,8 +3,7 @@ FROM docker.io/node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y python3 git wget curl build-essential
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y python3 git wget curl build-essential
 RUN mkdir -m777 /opt/rust /opt/cargo
 ENV RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/cargo PATH=/opt/cargo/bin:$PATH
 RUN wget --https-only --secure-protocol=TLSv1_2 -O- https://sh.rustup.rs | sh /dev/stdin -y
@@ -60,11 +59,10 @@ FROM docker.io/node:21-slim
 WORKDIR /firefish
 
 # Install runtime dependencies
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends zip unzip tini ffmpeg ca-certificates
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends zip unzip tini ffmpeg ca-certificates
 
 RUN echo 'deb https://deb.debian.org/debian experimental main' | tee /etc/apt/sources.list
-RUN apt-get update && apt-get --target-release experimental install -y --no-install-recommends libc6
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get --target-release experimental install -y --no-install-recommends libc6
 
 COPY . ./
 
