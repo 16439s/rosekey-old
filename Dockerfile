@@ -3,9 +3,16 @@ FROM docker.io/node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
-RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends curl build-essential ca-certificates
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends curl build-essential ca-certificates clang
 RUN curl --proto '=https' --tlsv1.2 --silent --show-error --fail https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN echo 'deb https://deb.debian.org/debian testing main' | tee /etc/apt/sources.list
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get --target-release testing install -y --no-install-recommends mold
+RUN <<EOC
+  echo "[target.x86_64-unknown-linux-gnu]\nlinker = '$(which clang)'\nrustflags = ['-C', 'link-arg=--ld-path=$(which mold)']" > /root/.cargo/config
+  echo "[target.aarch64-unknown-linux-gnu]\nlinker = '$(which clang)'\nrustflags = ['-C', 'link-arg=--ld-path=$(which mold)']" >> /root/.cargo/config
+EOC
 
 # Copy only the cargo dependency-related files first, to cache efficiently
 COPY packages/backend/native-utils/Cargo.toml packages/backend/native-utils/Cargo.toml
