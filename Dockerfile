@@ -3,12 +3,9 @@ FROM docker.io/node:21-slim as build
 WORKDIR /firefish
 
 # Install compilation dependencies
-RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends python3 git wget curl build-essential ca-certificates
-RUN mkdir -m777 /opt/rust /opt/cargo
-ENV RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/cargo PATH=/opt/cargo/bin:$PATH
-RUN wget --https-only --secure-protocol=TLSv1_2 -O- https://sh.rustup.rs | sh /dev/stdin -y
-RUN printf '#!/bin/sh\nexport CARGO_HOME=/opt/cargo\nexec /bin/sh "$@"\n' >/usr/local/bin/sh
-RUN chmod +x /usr/local/bin/sh
+RUN apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends curl build-essential ca-certificates
+RUN curl --proto '=https' --tlsv1.2 --silent --show-error --fail https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Copy only the cargo dependency-related files first, to cache efficiently
 COPY packages/backend/native-utils/Cargo.toml packages/backend/native-utils/Cargo.toml
