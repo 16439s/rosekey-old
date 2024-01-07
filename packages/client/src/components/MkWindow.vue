@@ -549,7 +549,8 @@ defineExpose({
 			}
 
 			display: flex;
-			position: relative;
+			position: sticky;
+			top: 0;
 			z-index: 1;
 			flex-shrink: 0;
 			user-select: none;

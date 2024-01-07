@@ -5,6 +5,7 @@
 		:front="true"
 		:buttons-right="buttonsRight"
 		@closed="emit('closed')"
+		class="oxzftdfc"
 	>
 		<template #header>
 			{{ i18n.ts.releaseNotes }}
@@ -64,6 +65,11 @@ const buttonsRight = computed(() => [
 </script>
 
 <style lang="scss" scoped>
+.oxzftdfc {
+	max-height: 70%;
+	overflow-y: scroll;
+}
+
 .asnohbod {
 	white-space: pre-wrap;
 	font-size: 1.2em;
