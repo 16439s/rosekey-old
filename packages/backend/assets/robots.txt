@@ -1,5 +1,3 @@
 User-agent: *
-Disallow: /
-User-agent: FirefishOrg*
-User-agent: FediDB*
-Allow: /
+Disallow:
+
