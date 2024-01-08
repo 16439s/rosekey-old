@@ -77,6 +77,7 @@ export default defineComponent({
 			selectedTags: new Set(),
 			searchEmojis: null,
 			i18n,
+			icon,
 		};
 	},
 
