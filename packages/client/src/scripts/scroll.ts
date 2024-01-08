@@ -36,7 +36,7 @@ export function isBottomVisible(
 }
 
 export function onScrollTop(el: Element, cb) {
-	const container = getScrollContainer(el) || window;
+	const container = getScrollContainer(el) ?? window;
 	const onScroll = (ev) => {
 		if (!document.body.contains(el)) return;
 		if (isTopVisible(el)) {
@@ -48,7 +48,7 @@ export function onScrollTop(el: Element, cb) {
 }
 
 export function onScrollBottom(el: Element, cb) {
-	const container = getScrollContainer(el) || window;
+	const container = getScrollContainer(el) ?? window;
 	const onScroll = (ev) => {
 		if (!document.body.contains(el)) return;
 		const pos = getScrollPosition(el);

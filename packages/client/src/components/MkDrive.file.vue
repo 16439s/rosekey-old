@@ -185,7 +185,7 @@ function describe() {
 		},
 		{
 			done: (result) => {
-				if (!result || result.canceled) return;
+				if (result == null || result.canceled) return;
 				const comment = result.result;
 				os.api("drive/files/update", {
 					fileId: props.file.id,

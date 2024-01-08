@@ -242,7 +242,7 @@ const dialog = ref<InstanceType<typeof XModalWindow>>();
 
 const tutorial = computed({
 	get() {
-		return defaultStore.reactiveState.tutorial.value || 0;
+		return defaultStore.reactiveState.tutorial.value ?? 0;
 	},
 	set(value) {
 		defaultStore.set("tutorial", value);

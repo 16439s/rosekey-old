@@ -16,7 +16,11 @@
 				<div v-if="meta" class="about">
 					<div
 						class="desc"
-						v-html="meta.description || i18n.ts.introFirefish"
+						v-html="
+							meta.description !== ''
+								? meta.description
+								: i18n.ts.introFirefish
+						"
 					></div>
 				</div>
 				<div class="action">

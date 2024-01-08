@@ -1,7 +1,7 @@
 <template>
 	<MkEmoji
 		:emoji="reaction"
-		:custom-emojis="customEmojis || []"
+		:custom-emojis="customEmojis ?? []"
 		:is-reaction="true"
 		:normal="true"
 		:no-style="noStyle"

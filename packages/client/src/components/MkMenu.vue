@@ -21,7 +21,7 @@
 				<template v-for="item in items2">
 					<div v-if="item === null" class="divider"></div>
 					<span v-else-if="item.type === 'label'" class="label item">
-						<span :style="item.textStyle || ''">{{
+						<span :style="item.textStyle ?? ''">{{
 							item.text
 						}}</span>
 					</span>
@@ -50,7 +50,7 @@
 							class="avatar"
 							disable-link
 						/>
-						<span :style="item.textStyle || ''">{{
+						<span :style="item.textStyle ?? ''">{{
 							item.text
 						}}</span>
 						<span
@@ -76,7 +76,7 @@
 							v-if="item.icon"
 							:class="icon(`${item.icon} ph-fw`)"
 						></i>
-						<span :style="item.textStyle || ''">{{
+						<span :style="item.textStyle ?? ''">{{
 							item.text
 						}}</span>
 						<span
@@ -121,7 +121,7 @@
 							v-model="item.ref"
 							:disabled="item.disabled"
 							class="form-switch"
-							:style="item.textStyle || ''"
+							:style="item.textStyle ?? ''"
 							>{{ item.text }}</FormSwitch
 						>
 					</span>
@@ -136,7 +136,7 @@
 							v-if="item.icon"
 							:class="icon(`${item.icon} ph-fw`)"
 						></i>
-						<span :style="item.textStyle || ''">{{
+						<span :style="item.textStyle ?? ''">{{
 							item.text
 						}}</span>
 						<span class="caret"
@@ -166,7 +166,7 @@
 							class="avatar"
 							disable-link
 						/>
-						<span :style="item.textStyle || ''">{{
+						<span :style="item.textStyle ?? ''">{{
 							item.text
 						}}</span>
 						<span

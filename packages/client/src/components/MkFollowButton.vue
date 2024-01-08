@@ -9,7 +9,7 @@
 	</button>
 	<button
 		v-if="!hideFollowButton && isSignedIn && $i.id != user.id"
-		v-tooltip="full ? null : `${state} ${user.name || user.username}`"
+		v-tooltip="full ? null : `${state} ${user.name ?? user.username}`"
 		class="kpoogebi _button follow-button"
 		:class="{
 			wait,
@@ -19,7 +19,7 @@
 			blocking: isBlocking,
 		}"
 		:disabled="wait"
-		:aria-label="`${state} ${user.name || user.username}`"
+		:aria-label="`${state} ${user.name ?? user.username}`"
 		@click.stop="onClick"
 	>
 		<template v-if="!wait">
@@ -141,7 +141,7 @@ async function onClick() {
 			const { canceled } = await os.confirm({
 				type: "warning",
 				text: i18n.t("unfollowConfirm", {
-					name: props.user.name || props.user.username,
+					name: props.user.name ?? props.user.username,
 				}),
 			});
 

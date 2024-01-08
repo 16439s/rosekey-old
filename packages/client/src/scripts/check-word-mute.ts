@@ -15,7 +15,7 @@ function checkLangMute(
 	const mutedLangList = new Set(mutedLangs.flatMap((e) => e));
 	// handle subtags
 	// e.g. if lang = "zh-hant-tw", check ["zh", "zh-hant", "zh-hant-tw"]
-	const langChunks: string[] = (note.lang || "").split("-");
+	const langChunks: string[] = (note.lang ?? "").split("-");
 	for (let i = 0; i < langChunks.length; i++) {
 		const lang = langChunks.slice(0, i + 1).join("-");
 		if (mutedLangList.has(lang)) {

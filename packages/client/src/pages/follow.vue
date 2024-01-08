@@ -11,7 +11,7 @@ import { i18n } from "@/i18n";
 async function follow(user): Promise<void> {
 	const { canceled } = await os.confirm({
 		type: "question",
-		text: i18n.t("followConfirm", { name: user.name || user.username }),
+		text: i18n.t("followConfirm", { name: user.name ?? user.username }),
 	});
 
 	if (canceled) {

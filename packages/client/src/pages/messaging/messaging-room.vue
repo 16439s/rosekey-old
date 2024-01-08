@@ -11,7 +11,7 @@
 					<MkPagination
 						v-if="pagination"
 						ref="pagingComponent"
-						:key="userAcct || groupId"
+						:key="userAcct ?? groupId"
 						:pagination="pagination"
 					>
 						<template #empty>
@@ -162,7 +162,7 @@ async function fetch() {
 		const acct = Acct.parse(props.userAcct);
 		user.value = await os.api("users/show", {
 			username: acct.username,
-			host: acct.host || undefined,
+			host: acct.host ?? undefined,
 		});
 		group.value = null;
 

@@ -30,7 +30,7 @@ export class HpmlTypeChecker {
 	public typeCheck(v: Expr): TypeError | null {
 		if (isLiteralValue(v)) return null;
 
-		const def = funcDefs[v.type || ""];
+		const def = funcDefs[v.type ?? ""];
 		if (def == null) {
 			throw new Error(`Unknown type: ${v.type}`);
 		}
@@ -66,7 +66,7 @@ export class HpmlTypeChecker {
 
 	@autobind
 	public getExpectedType(v: Expr, slot: number): Type {
-		const def = funcDefs[v.type || ""];
+		const def = funcDefs[v.type ?? ""];
 		if (def == null) {
 			throw new Error(`Unknown type: ${v.type}`);
 		}
@@ -86,7 +86,7 @@ export class HpmlTypeChecker {
 		}
 
 		if (typeof def.in[slot] === "number") {
-			return generic[def.in[slot]] || null;
+			return generic[def.in[slot]] ?? null;
 		} else {
 			return def.in[slot];
 		}
@@ -110,7 +110,7 @@ export class HpmlTypeChecker {
 				return pageVar.type;
 			}
 
-			const envVar = envVarsDef[v.value || ""];
+			const envVar = envVarsDef[v.value ?? ""];
 			if (envVar !== undefined) {
 				return envVar;
 			}

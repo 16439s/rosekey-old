@@ -169,7 +169,7 @@ const connection = isSignedIn && stream.useChannel("main");
 const profiles = ref<Record<string, Profile> | null>(null);
 
 os.api("i/registry/get-all", { scope }).then((res) => {
-	profiles.value = res || {};
+	profiles.value = res ?? {};
 });
 
 function isObject(value: unknown): value is Record<string, unknown> {

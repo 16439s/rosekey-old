@@ -181,7 +181,7 @@ onMounted(() => {
 			}
 			for (
 				let i = 0;
-				i < (pagingComponent.value.items || []).length;
+				i < (pagingComponent.value.items ?? []).length;
 				i++
 			) {
 				if (

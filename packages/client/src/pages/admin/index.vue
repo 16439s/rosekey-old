@@ -5,7 +5,11 @@
 				<div class="lxpfedzu">
 					<div class="banner">
 						<img
-							:src="$instance.iconUrl || '/favicon.ico'"
+							:src="
+								$instance.faviconUrl ??
+								$instance.iconUrl ??
+								'/favicon.ico'
+							"
 							alt=""
 							class="icon"
 						/>

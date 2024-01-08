@@ -58,7 +58,7 @@ function calc(el: Element) {
 	const info = mountings.get(el);
 	const width = el.clientWidth;
 
-	if (!info || info.previousWidth === width) return;
+	if (info == null || info.previousWidth === width) return;
 
 	// アクティベート前などでsrcが描画されていない場合
 	if (!width) {

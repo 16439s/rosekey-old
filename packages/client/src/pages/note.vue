@@ -181,7 +181,7 @@ definePageMetadata(
 							? ""
 							: i18n.t("noteOf", {
 									user:
-										appearNote.value.user.name ||
+										appearNote.value.user.name ??
 										appearNote.value.user.username,
 								}),
 					subtitle: new Date(
@@ -192,7 +192,7 @@ definePageMetadata(
 					share: {
 						title: i18n.t("noteOf", {
 							user:
-								appearNote.value.user.name ||
+								appearNote.value.user.name ??
 								appearNote.value.user.username,
 						}),
 						text: appearNote.value.text,

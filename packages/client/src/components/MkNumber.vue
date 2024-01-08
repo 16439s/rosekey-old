@@ -18,7 +18,7 @@ const tweened = reactive({
 watch(
 	() => props.value,
 	(n) => {
-		gsap.to(tweened, { duration: 0.6, number: Number(n) || 0 });
+		gsap.to(tweened, { duration: 0.6, number: Number(n) ?? 0 });
 	},
 	{
 		immediate: true,

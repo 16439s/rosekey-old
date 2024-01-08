@@ -7,7 +7,7 @@ export const acct = (user: firefish.Acct) => {
 };
 
 export const userName = (user: firefish.entities.User) => {
-	return user.name || user.username;
+	return user.name ?? user.username;
 };
 
 export const userPage = (user: firefish.Acct, path?, absolute = false) => {

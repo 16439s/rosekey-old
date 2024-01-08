@@ -126,7 +126,7 @@ const accepted = () => {
 		} else {
 			location.href = `${session.value.app.callbackUrl}?token=${
 				session.value.token
-			}&code=${session.value.token}&state=${getUrlParams().state || ""}`;
+			}&code=${session.value.token}&state=${getUrlParams().state ?? ""}`;
 		}
 	}
 };

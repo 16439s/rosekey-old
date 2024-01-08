@@ -123,7 +123,7 @@ function checkForSplash() {
 
 	// #region Set lang attr
 	const html = document.documentElement;
-	html.setAttribute("lang", lang || "en-US");
+	html.setAttribute("lang", lang ?? "en-US");
 	html.setAttribute("dir", langmap[lang].rtl === true ? "rtl" : "ltr");
 	//#endregion
 
@@ -134,7 +134,7 @@ function checkForSplash() {
 	if (loginId) {
 		const target = getUrlWithoutLoginId(location.href);
 
-		if (!$i || $i.id !== loginId) {
+		if ($i == null || $i.id !== loginId) {
 			const account = await getAccountFromId(loginId);
 			if (account) {
 				await login(account.token, target);
@@ -437,7 +437,7 @@ function checkForSplash() {
 				if (Date.now() - lastUsedDate > 1000 * 60 * 60 * 2) {
 					toast(
 						i18n.t("welcomeBackWithName", {
-							name: $i.name || $i.username,
+							name: $i.name ?? $i.username,
 						}),
 					);
 				}

@@ -41,16 +41,16 @@ export class Storage<T extends StateDef> {
 
 		// TODO: indexedDBにする
 		const deviceState = JSON.parse(
-			localStorage.getItem(this.keyForLocalStorage) || "{}",
+			localStorage.getItem(this.keyForLocalStorage) ?? "{}",
 		);
 		const deviceAccountState = isSignedIn
 			? JSON.parse(
-					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) || "{}",
+					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) ?? "{}",
 			  )
 			: {};
 		const registryCache = isSignedIn
 			? JSON.parse(
-					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ||
+					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ??
 						"{}",
 			  )
 			: {};
@@ -136,7 +136,7 @@ export class Storage<T extends StateDef> {
 					const cache = JSON.parse(
 						localStorage.getItem(
 							`${this.keyForLocalStorage}::cache::${$i.id}`,
-						) || "{}",
+						) ?? "{}",
 					);
 					if (cache[key] !== value) {
 						cache[key] = value;
@@ -159,7 +159,7 @@ export class Storage<T extends StateDef> {
 		switch (this.def[key].where) {
 			case "device": {
 				const deviceState = JSON.parse(
-					localStorage.getItem(this.keyForLocalStorage) || "{}",
+					localStorage.getItem(this.keyForLocalStorage) ?? "{}",
 				);
 				deviceState[key] = value;
 				localStorage.setItem(
@@ -171,7 +171,7 @@ export class Storage<T extends StateDef> {
 			case "deviceAccount": {
 				if (!isSignedIn) break;
 				const deviceAccountState = JSON.parse(
-					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) || "{}",
+					localStorage.getItem(`${this.keyForLocalStorage}::${$i.id}`) ?? "{}",
 				);
 				deviceAccountState[key] = value;
 				localStorage.setItem(
@@ -183,7 +183,7 @@ export class Storage<T extends StateDef> {
 			case "account": {
 				if (!isSignedIn) break;
 				const cache = JSON.parse(
-					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ||
+					localStorage.getItem(`${this.keyForLocalStorage}::cache::${$i.id}`) ??
 						"{}",
 				);
 				cache[key] = value;

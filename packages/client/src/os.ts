@@ -314,7 +314,7 @@ export function confirm(props: {
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",
@@ -342,7 +342,7 @@ export function yesno(props: {
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",
@@ -383,7 +383,7 @@ export function inputText(props: {
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",
@@ -421,7 +421,7 @@ export function inputParagraph(props: {
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",
@@ -461,7 +461,7 @@ export function inputNumber(props: {
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",
@@ -553,7 +553,7 @@ export function select<C = any>(
 			},
 			{
 				done: (result) => {
-					resolve(result || { canceled: true });
+					resolve(result ?? { canceled: true });
 				},
 			},
 			"closed",

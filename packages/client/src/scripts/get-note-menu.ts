@@ -266,7 +266,7 @@ export function getNoteMenu(props: {
 		props.translating.value = true;
 		props.translation.value = await translate_(
 			appearNote.id,
-			translateLang || lang || navigator.language,
+			translateLang ?? lang ?? navigator.language,
 		);
 
 		// use UI language as the second translation target
@@ -274,7 +274,7 @@ export function getNoteMenu(props: {
 			translateLang != null &&
 			lang != null &&
 			translateLang !== lang &&
-			(!props.translation.value ||
+			(props.translation.value == null ||
 				props.translation.value.sourceLang.toLowerCase() ===
 					translateLang.slice(0, 2))
 		)
@@ -349,7 +349,7 @@ export function getNoteMenu(props: {
 					  },
 			),
 			isAppearAuthor
-				? ($i.pinnedNoteIds || []).includes(appearNote.id)
+				? ($i.pinnedNoteIds ?? []).includes(appearNote.id)
 					? {
 							icon: `${icon("ph-push-pin")}`,
 							text: i18n.ts.unpin,
@@ -368,12 +368,12 @@ export function getNoteMenu(props: {
 						action: translate,
 				  }
 				: undefined,
-			appearNote.url || appearNote.uri
+			appearNote.url ?? appearNote.uri
 				? {
 						icon: `${icon("ph-arrow-square-out")}`,
 						text: i18n.ts.showOnRemote,
 						action: () => {
-							window.open(appearNote.url || appearNote.uri, "_blank");
+							window.open(appearNote.url ?? appearNote.uri, "_blank");
 						},
 				  }
 				: undefined,
@@ -392,7 +392,7 @@ export function getNoteMenu(props: {
 						text: i18n.ts.copyLink,
 						action: copyLink,
 					},
-					appearNote.url || appearNote.uri
+					appearNote.url ?? appearNote.uri
 						? {
 								icon: `${icon("ph-link-simple")}`,
 								text: `${i18n.ts.copyLink} (${i18n.ts.origin})`,
@@ -425,8 +425,8 @@ export function getNoteMenu(props: {
 						text: i18n.ts.reportAbuse,
 						action: () => {
 							const u =
-								appearNote.url ||
-								appearNote.uri ||
+								appearNote.url ??
+								appearNote.uri ??
 								`${url}/notes/${appearNote.id}`;
 							os.popup(
 								defineAsyncComponent(
@@ -490,12 +490,12 @@ export function getNoteMenu(props: {
 		].filter((x) => x !== undefined);
 	} else {
 		menu = [
-			appearNote.url || appearNote.uri
+			appearNote.url ?? appearNote.uri
 				? {
 						icon: `${icon("ph-arrow-square-out")}`,
 						text: i18n.ts.showOnRemote,
 						action: () => {
-							window.open(appearNote.url || appearNote.uri, "_blank");
+							window.open(appearNote.url ?? appearNote.uri, "_blank");
 						},
 				  }
 				: undefined,
@@ -509,7 +509,7 @@ export function getNoteMenu(props: {
 				text: i18n.ts.copyLink,
 				action: copyLink,
 			},
-			appearNote.url || appearNote.uri
+			appearNote.url ?? appearNote.uri
 				? {
 						icon: `${icon("ph-link-simple")}`,
 						text: `${i18n.ts.copyLink} (${i18n.ts.origin})`,

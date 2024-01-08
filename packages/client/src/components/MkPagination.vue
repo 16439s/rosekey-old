@@ -151,8 +151,8 @@ const init = async (): Promise<void> => {
 		.api(props.pagination.endpoint, {
 			...params,
 			limit: props.pagination.noPaging
-				? props.pagination.limit || 10
-				: (props.pagination.limit || 10) + 1,
+				? props.pagination.limit ?? 10
+				: (props.pagination.limit ?? 10) + 1,
 		})
 		.then(
 			(res) => {

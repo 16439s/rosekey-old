@@ -106,7 +106,7 @@
 								.map((e) => ':' + e.name + ':')
 						"
 						@chosen="chosen"
-						>{{ category || i18n.ts.other }}</XSection
+						>{{ category ?? i18n.ts.other }}</XSection
 					>
 				</div>
 				<div v-once class="group">
@@ -423,7 +423,7 @@ function reset() {
 function getKey(
 	emoji: string | firefish.entities.CustomEmoji | UnicodeEmojiDef,
 ): string {
-	return typeof emoji === "string" ? emoji : emoji.emoji || `:${emoji.name}:`;
+	return typeof emoji === "string" ? emoji : emoji.emoji ?? `:${emoji.name}:`;
 }
 
 function chosen(emoji: any, ev?: MouseEvent) {
@@ -450,7 +450,7 @@ function chosen(emoji: any, ev?: MouseEvent) {
 }
 
 function paste(event: ClipboardEvent) {
-	const paste = (event.clipboardData || window.clipboardData).getData("text");
+	const paste = (event.clipboardData ?? window.clipboardData).getData("text");
 	if (done(paste)) {
 		event.preventDefault();
 	}

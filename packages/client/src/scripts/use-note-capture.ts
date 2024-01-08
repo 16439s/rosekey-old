@@ -24,14 +24,14 @@ export function useNoteCapture(props: {
 				const reaction = body.reaction;
 
 				if (body.emoji) {
-					const emojis = note.value.emojis || [];
+					const emojis = note.value.emojis ?? [];
 					if (!emojis.includes(body.emoji)) {
 						note.value.emojis = [...emojis, body.emoji];
 					}
 				}
 
-				// TODO: reactionsプロパティがない場合ってあったっけ？ なければ || {} は消せる
-				const currentCount = note.value.reactions?.[reaction] || 0;
+				// TODO: reactionsプロパティがない場合ってあったっけ？
+				const currentCount = note.value.reactions?.[reaction] ?? 0;
 
 				note.value.reactions[reaction] = currentCount + 1;
 
@@ -44,8 +44,8 @@ export function useNoteCapture(props: {
 			case "unreacted": {
 				const reaction = body.reaction;
 
-				// TODO: reactionsプロパティがない場合ってあったっけ？ なければ || {} は消せる
-				const currentCount = note.value.reactions?.[reaction] || 0;
+				// TODO: reactionsプロパティがない場合ってあったっけ？
+				const currentCount = note.value.reactions?.[reaction] ?? 0;
 
 				note.value.reactions[reaction] = Math.max(0, currentCount - 1);
 

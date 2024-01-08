@@ -65,8 +65,10 @@
 				v-model="inputValue"
 				autofocus
 				:autocomplete="input.autocomplete"
-				:type="input.type == 'search' ? 'search' : input.type || 'text'"
-				:placeholder="input.placeholder || undefined"
+				:type="
+					input.type === 'search' ? 'search' : input.type ?? 'text'
+				"
+				:placeholder="input.placeholder ?? undefined"
 				:style="{
 					width: input.type === 'search' ? '300px' : null,
 				}"
@@ -294,7 +296,7 @@ const okButtonDisabled = computed<boolean>(() => {
 	if (props.input) {
 		if (props.input.minLength) {
 			if (
-				(inputValue.value || inputValue.value === "") &&
+				inputValue.value != null &&
 				(inputValue.value as string).length < props.input.minLength
 			) {
 				disabledReason.value = "charactersBelow";

@@ -363,7 +363,7 @@ function urlUpload() {
 		type: "url",
 		placeholder: i18n.ts.uploadFromUrlDescription,
 	}).then(({ canceled, result: url }) => {
-		if (canceled || !url) return;
+		if (canceled || url == null) return;
 		os.api("drive/files/upload-from-url", {
 			url,
 			folderId: folder.value ? folder.value.id : undefined,

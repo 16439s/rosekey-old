@@ -227,14 +227,14 @@ export function getUserMenu(user, router: Router = mainRouter) {
 		{
 			type: "label",
 			text: user.host
-				? `@${user.username}@${user.host || host}`
+				? `@${user.username}@${user.host ?? host}`
 				: `@${user.username}`,
 		},
 		{
 			icon: `${icon("ph-at")}`,
 			text: i18n.ts.copyUsername,
 			action: () => {
-				copyToClipboard(`@${user.username}@${user.host || host}`);
+				copyToClipboard(`@${user.username}@${user.host ?? host}`);
 			},
 		},
 		{

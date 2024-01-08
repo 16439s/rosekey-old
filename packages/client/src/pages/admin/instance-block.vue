@@ -69,9 +69,9 @@ async function init() {
 
 function save() {
 	os.apiWithDialog("admin/update-meta", {
-		blockedHosts: blockedHosts.value.split("\n").map((h) => h.trim()) || [],
+		blockedHosts: blockedHosts.value.split("\n").map((h) => h.trim()) ?? [],
 		silencedHosts:
-			silencedHosts.value.split("\n").map((h) => h.trim()) || [],
+			silencedHosts.value.split("\n").map((h) => h.trim()) ?? [],
 	}).then(() => {
 		fetchInstance();
 	});

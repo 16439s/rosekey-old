@@ -11,7 +11,7 @@
 		@closed="$emit('closed')"
 		@ok="ok()"
 	>
-		<template #header>{{ title || i18n.ts.generateAccessToken }}</template>
+		<template #header>{{ title ?? i18n.ts.generateAccessToken }}</template>
 		<div v-if="information" class="_section">
 			<MkInfo warn>{{ information }}</MkInfo>
 		</div>
@@ -32,7 +32,7 @@
 				i18n.ts.enableAll
 			}}</MkButton>
 			<MkSwitch
-				v-for="kind in initialPermissions || kinds"
+				v-for="kind in initialPermissions ?? kinds"
 				:key="kind"
 				v-model="permissions[kind]"
 				style="margin-bottom: 6px"

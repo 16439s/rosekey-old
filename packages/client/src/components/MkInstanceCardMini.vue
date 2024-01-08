@@ -15,7 +15,7 @@
 			<span class="host">{{ instance.name ?? instance.host }}</span>
 			<span class="sub _monospace"
 				><b>{{ instance.host }}</b> /
-				{{ instance.softwareName || "?" }}
+				{{ instance.softwareName ?? "?" }}
 				{{ instance.softwareVersion }}</span
 			>
 		</div>

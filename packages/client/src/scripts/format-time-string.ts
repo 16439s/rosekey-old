@@ -28,7 +28,7 @@ function formatLocaleString(date: Date, format: string): string {
 				].includes(kind)
 			) {
 				return date.toLocaleString(window.navigator.language, {
-					[kind]: option || defaultLocaleStringFormats[kind],
+					[kind]: option ?? defaultLocaleStringFormats[kind],
 				});
 			} else {
 				return match;
@@ -55,8 +55,14 @@ export function formatDateTimeString(date: Date, format: string): string {
 		.replace(/d/g, date.getDate().toString())
 		.replace(/HH/g, `0${date.getHours()}`.slice(-2))
 		.replace(/H/g, date.getHours().toString())
-		.replace(/hh/g, `0${date.getHours() % 12 || 12}`.slice(-2))
-		.replace(/h/g, (date.getHours() % 12 || 12).toString())
+		.replace(
+			/hh/g,
+			`0${date.getHours() % 12 === 0 ? 12 : date.getHours() % 12}`.slice(-2),
+		)
+		.replace(
+			/h/g,
+			(date.getHours() % 12 === 0 ? 12 : date.getHours() % 12).toString(),
+		)
 		.replace(/mm/g, `0${date.getMinutes()}`.slice(-2))
 		.replace(/m/g, date.getMinutes().toString())
 		.replace(/ss/g, `0${date.getSeconds()}`.slice(-2))
