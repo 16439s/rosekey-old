@@ -143,6 +143,7 @@
 
 うまく動いていそうだったら本家に push されます
 
+- Docker/Podman の環境で `custom` ディレクトリの内容が反映されない不具合を修正
 - 画面を下に引いてタイムラインなどを更新する機能を追加（Misskey から取り込み）
   - 本家にもマージリクエストを出しました ([!10644](https://git.joinfirefish.org/firefish/firefish/-/merge_requests/10644))
 

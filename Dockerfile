@@ -86,7 +86,12 @@ COPY --from=build /firefish/packages/backend/assets/instance.css /firefish/packa
 COPY --from=build /firefish/packages/backend/native-utils/built /firefish/packages/backend/native-utils/built
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
+ARG VERSION
+ENV VERSION=${VERSION}
+RUN pnpm pkg set version="${VERSION}"
+
 ENV NODE_ENV=production
 VOLUME "/firefish/files"
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
-CMD [ "pnpm", "run", "migrateandstart" ]
+
+CMD [ "pnpm", "run", "start:container" ]

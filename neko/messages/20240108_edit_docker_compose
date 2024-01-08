@@ -1,0 +1,16 @@
+ -----------------------------------------------------------
+| For Docker users:                                         |
+| Sorry, there was an error in docker-compose.example.yml,  |
+| so your docker-compose.yml is probably misconfigured too. |
+|                                                           |
+| Please replace                                            |
+|                                                           |
+|   - ./assets:/firefish/custom/assets                      |
+|                                                           |
+| in services.web.volumes with                              |
+|                                                           |
+|   - ./custom:/firefish/custom:ro                          |
+|                                                           |
+| For the detailed explanation, see:                        |
+| https://post.naskya.net/notes/9o817o4hdezf7p8o            |
+ -----------------------------------------------------------
