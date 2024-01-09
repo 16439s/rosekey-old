@@ -91,7 +91,7 @@ else
   case "${resp}" in
     [Yy]|[Yy][Ee][Ss])
       sadsay "Watch out! ${resp} is not a valid answer." >&2
-      exit 1
+      exit 2
       ;;
     [Dd]) docker_update "$@" ;;
     [Pp]) podman_update "$@" ;;
