@@ -1,5 +1,5 @@
  -------------------------------------------------------------------
-| For Docker users:                                                 |
+| For Docker/Podman users:                                          |
 | Please add ./neko/volume:/firefish/neko/volume:ro to              |
 | services.web.volumes in your docker-compose.yml before upgrading! |
 |                                                                   |

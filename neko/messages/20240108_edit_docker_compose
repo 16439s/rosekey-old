@@ -1,5 +1,5 @@
  -----------------------------------------------------------
-| For Docker users:                                         |
+| For Docker/Podman users:                                  |
 | Sorry, there was an error in docker-compose.example.yml,  |
 | so your docker-compose.yml is probably misconfigured too. |
 |                                                           |
