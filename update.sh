@@ -39,39 +39,34 @@ else
 fi
 
 ## show messages
-for message in neko/messages/*; do
+for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort); do
   file=$(basename -- "${message}")
 
-  case "${file}" in
-    *'.resolved') ;;
-    *)
-      if [ ! -f "neko/flags/${file}" ]; then
-        if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
-          say 'There is an important notice!'
-          cat "${message}"
+  if [ ! -f "neko/flags/${file}" ]; then
+    if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
+      say 'There is an important notice!'
+      cat "${message}"
 
-          say 'Continue? (Are you ready for upgrading?)'
-          printf '[y/N] > '
-          read -r yn
+      say 'Continue? (Are you ready for upgrading?)'
+      printf '[y/N] > '
+      read -r yn
 
-          case "${yn}" in
-            [Yy]|[Yy][Ee][Ss])
-              touch "neko/flags/${file}"
-              say "Let's go!"
-              say "To read the message again, run: \$ cat ${message}"
-              br
-              ;;
-            *)
-              say "Okay, please run this script again when you're ready!"
-              exit 1
-              ;;
-          esac
-        else
+      case "${yn}" in
+        [Yy]|[Yy][Ee][Ss])
           touch "neko/flags/${file}"
-        fi
-      fi
-    ;;
-  esac
+          say "Let's go!"
+          say "To read the message again, run: \$ cat ${message}"
+          br
+          ;;
+        *)
+          say "Okay, please run this script again when you're ready!"
+          exit 1
+          ;;
+      esac
+    else
+      touch "neko/flags/${file}"
+    fi
+  fi
 done
 
 say 'Do you use Docker or Podman?'
