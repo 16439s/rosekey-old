@@ -43,7 +43,9 @@ for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort);
   file=$(basename -- "${message}")
 
   if [ ! -f "neko/flags/${file}" ]; then
-    if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
+    if contains '--skip-all-confirmations' "$@"; then
+      touch "neko/flags/${file}"
+    else
       say 'There is an important notice!'
       cat "${message}"
 
@@ -63,8 +65,6 @@ for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort);
           exit 1
           ;;
       esac
-    else
-      touch "neko/flags/${file}"
     fi
   fi
 done
