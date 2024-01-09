@@ -206,11 +206,13 @@ cp .config/example.yml .config/default.yml
 
 docker-compose up db --detach
 docker-compose exec db psql --command='CREATE EXTENSION pgroonga;' --user=firefish --dbname=firefish_db
+
+./update.sh --install
 ```
 
 #### systemd 版
 
-このリポジトリをクローンして、本家版と同様にサーバーを構築します。ビルド等の作業 (`pnpm install`, `pnpm run build`, `pnpm run migrate`) は添付のアップデートスクリプトによって一括で行えます。`--skip-all-confirmations` というオプションは普段のアップデートでは使用しないでください（重要なお知らせがあっても表示が飛ばされてしまいます）。
+このリポジトリをクローンして、本家版と同様にサーバーを構築します。ビルド等の作業 (`pnpm install`, `pnpm run build`, `pnpm run migrate`) は添付のアップデートスクリプトによって一括で行えます。
 
 ```bash
 # DNS・ファイヤーウォール・リバースプロキシ・PostgreSQL・Redis などを各自でインストールして設定する
@@ -223,7 +225,7 @@ cp .config/example.yml .config/default.yml
 
 sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_db
 
-./update.sh --skip-all-confirmations
+./update.sh --install
 ```
 
 [インストール方法に関する私の記事](https://blog.naskya.net/post/6kic0tebueju/)も参考になるかもしれません。
@@ -387,10 +389,8 @@ sudo -u postgres psql --command "CREATE EXTENSION pgroonga;" --dbname firefish_d
 
     ```bash
     cd calckey
-    ./update.sh --skip-all-confirmations
+    ./update.sh --install
     ```
-
-    **注意**: `--skip-all-confirmations` というオプションは普段のアップデートでは使わないでください。重要なお知らせがある場合でも表示がスキップされてしまいます。
 
 13. サーバーを起動して動作を確認する
 

@@ -43,7 +43,7 @@ for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort);
   file=$(basename -- "${message}")
 
   if [ ! -f "neko/flags/${file}" ]; then
-    if contains '--skip-all-confirmations' "$@"; then
+    if contains '--install' "$@"; then
       touch "neko/flags/${file}"
     else
       say 'There is an important notice!'

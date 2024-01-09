@@ -4,7 +4,7 @@ set -eu
 . neko/update/utils
 
 # Confirm that the server is stopped
-if ! contains '--skip-all-confirmations' "$@"; then
+if ! contains '--install' "$@"; then
   say 'Did you stop your server?'
   printf '[Y/n] > '
   read -r yn
