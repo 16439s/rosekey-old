@@ -69,25 +69,35 @@ for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort);
   fi
 done
 
-say 'Do you use Docker or Podman?'
-printf 'd: Docker, p: Podman, n: No [d/p/N] > '
-read -r resp
+docker_update() {
+  ./neko/update/container.sh 'docker' "$@"
+}
+podman_update() {
+  ./neko/update/container.sh 'podman' "$@"
+}
+native_update() {
+  ./neko/update/native.sh "$@"
+}
 
-case "${resp}" in
-  [Dd])
-    ./neko/update/docker.sh 'docker' "$@"
-    ;;
-  [Pp])
-    ./neko/update/docker.sh 'podman' "$@"
-    ;;
-  [Yy]|[Yy][Ee][Ss])
-    sadsay "Watch out! ${resp} is not a valid answer." >&2
-    exit 1
-    ;;
-  *)
-    ./neko/update/native.sh "$@"
-    ;;
-esac
+if   contains '--docker' "$@"; then docker_update "$@"
+elif contains '--podman' "$@"; then podman_update "$@"
+elif contains '--native' "$@"; then native_update "$@"
+
+else
+  say 'Do you use Docker or Podman?'
+  printf 'd: Docker, p: Podman, n: No [d/p/N] > '
+  read -r resp
+
+  case "${resp}" in
+    [Yy]|[Yy][Ee][Ss])
+      sadsay "Watch out! ${resp} is not a valid answer." >&2
+      exit 1
+      ;;
+    [Dd]) docker_update "$@" ;;
+    [Pp]) podman_update "$@" ;;
+    *)    native_update "$@" ;;
+  esac
+fi
 
 # Done
 say 'Enjoy your sabakan life~'
