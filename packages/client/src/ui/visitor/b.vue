@@ -86,10 +86,9 @@ import XKanban from "./kanban.vue";
 import { host, instanceName } from "@/config";
 import { search } from "@/scripts/search";
 import * as os from "@/os";
-import { instance } from "@/instance";
 import XSigninDialog from "@/components/MkSigninDialog.vue";
 import XSignupDialog from "@/components/MkSignupDialog.vue";
-import { ColdDeviceStorage, defaultStore } from "@/store";
+import { defaultStore } from "@/store";
 import { mainRouter } from "@/router";
 import type { PageMetadata } from "@/scripts/page-metadata";
 import { provideMetadataReceiver } from "@/scripts/page-metadata";
@@ -108,28 +107,10 @@ provideMetadataReceiver((info) => {
 	}
 });
 
-const announcements = {
-	endpoint: "announcements",
-	limit: 10,
-};
-const isTimelineAvailable =
-	!instance.disableLocalTimeline ||
-	!instance.disableRecommendedTimeline ||
-	!instance.disableGlobalTimeline;
 const showMenu = ref(false);
 const isDesktop = ref(window.innerWidth >= DESKTOP_THRESHOLD);
 const narrow = ref(window.innerWidth < 1280);
 const meta = ref();
-
-const keymap = computed(() => {
-	return {
-		d: () => {
-			if (ColdDeviceStorage.get("syncDeviceDarkMode")) return;
-			defaultStore.set("darkMode", !defaultStore.state.darkMode);
-		},
-		s: search,
-	};
-});
 
 const root = computed(() => mainRouter.currentRoute.value.name === "index");
 
@@ -226,9 +207,6 @@ defineExpose({
 	> .main {
 		flex: 1;
 		min-width: 0;
-
-		> .banner {
-		}
 
 		> .contents {
 			position: relative;

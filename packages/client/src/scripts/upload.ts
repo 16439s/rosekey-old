@@ -44,7 +44,7 @@ export function uploadFile(
 		reader.onload = async (ev) => {
 			const ctx = reactive<Uploading>({
 				id,
-				name: name || file.name || "untitled",
+				name: name ?? file.name ?? "untitled",
 				progressMax: undefined,
 				progressValue: undefined,
 				img: window.URL.createObjectURL(file),
@@ -78,7 +78,7 @@ export function uploadFile(
 
 			const formData = new FormData();
 			formData.append("force", "true");
-			formData.append("file", resizedImage || file);
+			formData.append("file", resizedImage ?? file);
 			formData.append("name", ctx.name);
 			if (folder) formData.append("folderId", folder);
 

@@ -64,7 +64,7 @@ const props = withDefaults(
 	},
 );
 
-const includingTypes = computed(() => props.includingTypes || []);
+const includingTypes = computed(() => props.includingTypes ?? []);
 
 const dialog = ref<InstanceType<typeof XModalWindow>>();
 

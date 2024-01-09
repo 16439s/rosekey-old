@@ -41,7 +41,7 @@ function menu(ev) {
 						(res) => {
 							os.alert({
 								type: "info",
-								text: `${res.license || i18n.ts.notSet}`,
+								text: `${res.license ?? i18n.ts.notSet}`,
 							});
 						},
 					);

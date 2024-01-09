@@ -12,7 +12,7 @@ ChiptuneJsConfig.prototype.constructor = ChiptuneJsConfig;
 export function ChiptuneJsPlayer(config: object) {
 	this.libopenmpt = null;
 	this.config = config;
-	this.audioContext = config.context || new ChiptuneAudioContext();
+	this.audioContext = config.context ?? new ChiptuneAudioContext();
 	this.context = this.audioContext.createGain();
 	this.currentPlayingNode = null;
 	this.handlers = [];
@@ -157,7 +157,7 @@ ChiptuneJsPlayer.prototype.play = async function (buffer: ArrayBuffer) {
 		}
 		this.libopenmpt._openmpt_module_set_repeat_count(
 			processNode.modulePtr,
-			this.config.repeatCount || 0,
+			this.config.repeatCount ?? 0,
 		);
 		this.currentPlayingNode = processNode;
 		processNode.connect(this.context);

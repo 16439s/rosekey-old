@@ -103,7 +103,7 @@ export class HpmlScope {
 		name?: HpmlScope["name"],
 	) {
 		this.layerdStates = layerdStates;
-		this.name = name || "anonymous";
+		this.name = name ?? "anonymous";
 	}
 
 	@autobind

@@ -5,7 +5,7 @@ import { $i, isSignedIn } from "@/reactiveAccount";
 const lsCacheKey = isSignedIn ? `themes:${$i.id}` : "";
 
 export function getThemes(): Theme[] {
-	return JSON.parse(localStorage.getItem(lsCacheKey) || "[]");
+	return JSON.parse(localStorage.getItem(lsCacheKey) ?? "[]");
 }
 
 export async function fetchThemes(): Promise<void> {

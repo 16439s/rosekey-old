@@ -79,7 +79,7 @@ export class Hpml {
 				? `${opts.url}/@${this.page.user.username}/pages/${this.page.name}`
 				: "",
 			LOGIN: opts.visitor != null,
-			NAME: opts.visitor ? opts.visitor.name || opts.visitor.username : "",
+			NAME: opts.visitor ? opts.visitor.name ?? opts.visitor.username : "",
 			USERNAME: opts.visitor ? opts.visitor.username : "",
 			USERID: opts.visitor ? opts.visitor.id : "",
 			NOTES_COUNT: opts.visitor ? opts.visitor.notesCount : 0,
@@ -187,11 +187,11 @@ export class Hpml {
 			}
 
 			if (expr.type === "text" || expr.type === "multiLineText") {
-				return this._interpolateScope(expr.value || "", scope);
+				return this._interpolateScope(expr.value ?? "", scope);
 			}
 
 			if (expr.type === "textList") {
-				return this._interpolateScope(expr.value || "", scope)
+				return this._interpolateScope(expr.value ?? "", scope)
 					.trim()
 					.split("\n");
 			}

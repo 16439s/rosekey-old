@@ -33,7 +33,7 @@
 						<div class="fnfelxur">
 							<img :src="faviconUrl" alt="" class="icon" />
 							<span class="name">{{
-								instance.name || `(${i18n.ts.unknown})`
+								instance.name ?? `(${i18n.ts.unknown})`
 							}}</span>
 						</div>
 						<MkKeyValue :copy="host" oneline style="margin: 1em 0">
@@ -51,12 +51,12 @@
 							<template #value
 								><span class="_monospace"
 									>{{
-										instance.softwareName ||
+										instance.softwareName ??
 										`(${i18n.ts.unknown})`
 									}}
 									/
 									{{
-										instance.softwareVersion ||
+										instance.softwareVersion ??
 										`(${i18n.ts.unknown})`
 									}}</span
 								></template
@@ -68,11 +68,11 @@
 							}}</template>
 							<template #value
 								>{{
-									instance.maintainerName ||
+									instance.maintainerName ??
 									`(${i18n.ts.unknown})`
 								}}
 								({{
-									instance.maintainerEmail ||
+									instance.maintainerEmail ??
 									`(${i18n.ts.unknown})`
 								}})</template
 							>

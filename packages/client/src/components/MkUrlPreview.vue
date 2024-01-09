@@ -13,7 +13,7 @@
 				:target="target"
 				:title="url"
 				:class="{
-					hasButton: tweetId || player.url,
+					hasButton: tweetId ?? player.url,
 				}"
 			>
 				<div v-if="thumbnail" class="thumbnail">
@@ -51,10 +51,10 @@
 					<MkLoading mini />
 				</div>
 				<div v-else>
-					<h3 :title="title || undefined">{{ title || url }}</h3>
-					<p :title="description">
+					<h3 :title="title ?? undefined">{{ title ?? url }}</h3>
+					<p :title="description ?? undefined">
 						<span>
-							<span :title="sitename || undefined">
+							<span :title="sitename ?? undefined">
 								<img v-if="icon" class="icon" :src="icon" />
 								{{ sitename }}
 							</span>
@@ -72,7 +72,7 @@
 						: '?autoplay=1&auto_play=1')
 				"
 				:style="`aspect-ratio: ${
-					(player.width || 1) / (player.height || 1)
+					(player.width ?? 1) / (player.height ?? 1)
 				}`"
 				frameborder="0"
 				allow="autoplay; encrypted-media"
@@ -153,7 +153,7 @@ if (
 	requestUrl.hostname = "www.youtube.com";
 }
 
-const requestLang = (lang || "ja-JP").replace("ja-KS", "ja-JP");
+const requestLang = (lang ?? "ja-JP").replace("ja-KS", "ja-JP");
 
 requestUrl.hash = "";
 

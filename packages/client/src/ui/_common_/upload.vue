@@ -41,8 +41,8 @@
 					</p>
 				</div>
 				<progress
-					:value="ctx.progressValue || 0"
-					:max="ctx.progressMax || 0"
+					:value="ctx.progressValue ?? 0"
+					:max="ctx.progressMax ?? 0"
 					:class="{
 						initing: ctx.progressValue === undefined,
 						waiting:

@@ -11,7 +11,7 @@
 		<span class="main">
 			<span class="username">@{{ username }}</span>
 			<span
-				v-if="host != localHost || defaultStore.state.showFullAcct"
+				v-if="host !== localHost || defaultStore.state.showFullAcct"
 				class="host"
 				>@{{ toUnicode(host) }}</span
 			>

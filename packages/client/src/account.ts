@@ -55,7 +55,7 @@ export async function signout() {
 export async function getAccounts(): Promise<
 	{ id: Account["id"]; token: Account["token"] }[]
 > {
-	return (await get("accounts")) || [];
+	return (await get("accounts")) ?? [];
 }
 
 export async function addAccount(id: Account["id"], token: Account["token"]) {

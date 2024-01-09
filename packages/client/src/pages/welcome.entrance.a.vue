@@ -17,8 +17,8 @@
 			<div class="main">
 				<img
 					:src="
-						instance.iconUrl ||
-						instance.faviconUrl ||
+						instance.faviconUrl ??
+						instance.iconUrl ??
 						'/favicon.ico'
 					"
 					alt=""
@@ -41,7 +41,7 @@
 						<div
 							class="desc"
 							v-html="
-								meta.description || i18n.ts.headlineFirefish
+								meta.description ?? i18n.ts.headlineFirefish
 							"
 						></div>
 					</div>

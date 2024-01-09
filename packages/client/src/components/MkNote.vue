@@ -375,7 +375,7 @@ const isForeignLanguage: boolean =
 	defaultStore.state.detectPostLanguage &&
 	appearNote.value.text != null &&
 	(() => {
-		const targetLang = (translateLang || lang || navigator.language)?.slice(
+		const targetLang = (translateLang ?? lang ?? navigator.language)?.slice(
 			0,
 			2,
 		);
@@ -395,7 +395,7 @@ async function translate() {
 	translating.value = true;
 	translation.value = await translate_(
 		appearNote.value.id,
-		translateLang || lang || navigator.language,
+		translateLang ?? lang ?? navigator.language,
 	);
 
 	// use UI language as the second translation language
@@ -403,7 +403,7 @@ async function translate() {
 		translateLang != null &&
 		lang != null &&
 		translateLang !== lang &&
-		(!translation.value ||
+		(translation.value == null ||
 			translation.value.sourceLang.toLowerCase() ===
 				translateLang.slice(0, 2))
 	)

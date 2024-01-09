@@ -2,7 +2,7 @@
 	<Mfm
 		v-if="show"
 		:class="$style.root"
-		:text="user.name || user.username"
+		:text="user.name ?? user.username"
 		:plain="true"
 		:nowrap="nowrap"
 		:custom-emojis="user.emojis"

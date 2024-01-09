@@ -59,7 +59,7 @@ const emit = defineEmits<{
 }>();
 
 const uiWindow = ref<InstanceType<typeof XWindow>>();
-const comment = ref(props.initialComment || "");
+const comment = ref(props.initialComment ?? "");
 
 function send() {
 	os.apiWithDialog(

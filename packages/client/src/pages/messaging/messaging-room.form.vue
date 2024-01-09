@@ -238,7 +238,7 @@ function clear() {
 }
 
 function saveDraft() {
-	const drafts = JSON.parse(localStorage.getItem("message_drafts") || "{}");
+	const drafts = JSON.parse(localStorage.getItem("message_drafts") ?? "{}");
 
 	drafts[draftKey.value] = {
 		updatedAt: new Date(),
@@ -252,7 +252,7 @@ function saveDraft() {
 }
 
 function deleteDraft() {
-	const drafts = JSON.parse(localStorage.getItem("message_drafts") || "{}");
+	const drafts = JSON.parse(localStorage.getItem("message_drafts") ?? "{}");
 
 	delete drafts[draftKey.value];
 
@@ -270,7 +270,7 @@ onMounted(() => {
 	new Autocomplete(textEl.value, text);
 
 	// 書きかけの投稿を復元
-	const draft = JSON.parse(localStorage.getItem("message_drafts") || "{}")[
+	const draft = JSON.parse(localStorage.getItem("message_drafts") ?? "{}")[
 		draftKey.value
 	];
 	if (draft) {

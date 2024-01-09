@@ -504,7 +504,7 @@ export function initHpmlLib(
 		strPick: (a: string, b: number) => a[b - 1],
 		strReplace: (a: string, b: string, c: string) => a.split(b).join(c),
 		strReverse: (a: string) => a.split("").reverse().join(""),
-		join: (texts: string[], separator: string) => texts.join(separator || ""),
+		join: (texts: string[], separator: string) => texts.join(separator ?? ""),
 		stringToNumber: (a: string) => parseInt(a),
 		numberToString: (a: number) => a.toString(),
 		splitStrByLine: (a: string) => a.split("\n"),

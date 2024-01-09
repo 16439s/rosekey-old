@@ -105,7 +105,7 @@ async function describe(file) {
 		},
 		{
 			done: (result) => {
-				if (!result || result.canceled) return;
+				if (result == null || result.canceled) return;
 				const comment =
 					result.result.length === 0 ? null : result.result;
 				os.api("drive/files/update", {

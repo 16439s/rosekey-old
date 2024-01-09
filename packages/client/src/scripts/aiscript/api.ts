@@ -34,7 +34,7 @@ export function createAiScriptEnv(opts) {
 			const res = await os.api(
 				ep.value,
 				utils.valToJs(param),
-				token ? token.value : opts.token || null,
+				token ? token.value : opts.token ?? null,
 			);
 			return utils.jsToVal(res);
 		}),

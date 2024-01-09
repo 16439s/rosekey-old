@@ -50,7 +50,7 @@ export default defineComponent({
 
 		const renderChildren = () =>
 			props.items.map((item, i) => {
-				if (!slots || !slots.default) return;
+				if (slots == null || slots.default == null) return;
 
 				const el = slots.default({
 					item,

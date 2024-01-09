@@ -31,7 +31,7 @@
 			:key="category"
 			class="emojis"
 		>
-			<template #header>{{ category || i18n.ts.other }}</template>
+			<template #header>{{ category ?? i18n.ts.other }}</template>
 			<div class="zuvgdzyt">
 				<XEmoji
 					v-for="emoji in customEmojis.filter(

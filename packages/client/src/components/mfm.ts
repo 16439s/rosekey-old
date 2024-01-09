@@ -113,31 +113,31 @@ export default defineComponent({
 							let style: string;
 							switch (token.props.name) {
 								case "tada": {
-									const speed = validTime(token.props.args.speed) || "1s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
-									// const ease = validEase(token.props.args.ease) || "linear";
+									const speed = validTime(token.props.args.speed) ?? "1s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
+									// const ease = validEase(token.props.args.ease) ?? "linear";
 									style = `font-size: 150%; animation: tada ${speed} ${delay} linear ${loop} both;`;
 									break;
 								}
 								case "jelly": {
-									const speed = validTime(token.props.args.speed) || "1s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "1s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-rubberBand ${speed} ${delay} linear ${loop} both;`;
 									break;
 								}
 								case "twitch": {
-									const speed = validTime(token.props.args.speed) || "0.5s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "0.5s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-twitch ${speed} ${delay} ease ${loop};`;
 									break;
 								}
 								case "shake": {
-									const speed = validTime(token.props.args.speed) || "0.5s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "0.5s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-shake ${speed} ${delay} ease ${loop};`;
 									break;
 								}
@@ -152,30 +152,30 @@ export default defineComponent({
 										: token.props.args.y
 										  ? "mfm-spinY"
 										  : "mfm-spin";
-									const speed = validTime(token.props.args.speed) || "1.5s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "1.5s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: ${anime} ${speed} ${delay} linear ${loop}; animation-direction: ${direction};`;
 									break;
 								}
 								case "jump": {
-									const speed = validTime(token.props.args.speed) || "0.75s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "0.75s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-jump ${speed} ${delay} linear ${loop};`;
 									break;
 								}
 								case "bounce": {
-									const speed = validTime(token.props.args.speed) || "0.75s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "0.75s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-bounce ${speed} ${delay} linear ${loop}; transform-origin: center bottom;`;
 									break;
 								}
 								case "rainbow": {
-									const speed = validTime(token.props.args.speed) || "1s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "1s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-rainbow ${speed} ${delay} linear ${loop};`;
 									break;
 								}
@@ -189,9 +189,9 @@ export default defineComponent({
 									const direction = token.props.args.out
 										? "alternate-reverse"
 										: "alternate";
-									const speed = validTime(token.props.args.speed) || "1.5s";
-									const delay = validTime(token.props.args.delay) || "0s";
-									const loop = validNumber(token.props.args.loop) || "infinite";
+									const speed = validTime(token.props.args.speed) ?? "1.5s";
+									const delay = validTime(token.props.args.delay) ?? "0s";
+									const loop = validNumber(token.props.args.loop) ?? "infinite";
 									style = `animation: mfm-fade ${speed} ${delay} linear ${loop}; animation-direction: ${direction};`;
 									break;
 								}
@@ -395,7 +395,7 @@ export default defineComponent({
 										this.author &&
 										this.author.host != null
 											? this.author.host
-											: token.props.host) || host,
+											: token.props.host) ?? host,
 									username: token.props.username,
 								}),
 							];

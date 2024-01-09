@@ -389,7 +389,7 @@ const draghover = ref(false);
 const quoteId = ref(null);
 const hasNotSpecifiedMentions = ref(false);
 const recentHashtags = ref(
-	JSON.parse(localStorage.getItem("hashtags") || "[]"),
+	JSON.parse(localStorage.getItem("hashtags") ?? "[]"),
 );
 const imeText = ref("");
 
@@ -460,10 +460,10 @@ const canPost = computed((): boolean => {
 		!posting.value &&
 		(textLength.value >= 1 ||
 			files.value.length >= 1 ||
-			!!poll.value ||
-			!!props.renote) &&
+			poll.value != null ||
+			props.renote != null) &&
 		textLength.value <= maxTextLength.value &&
-		(!poll.value || poll.value.choices.length >= 2)
+		(poll.value == null || poll.value.choices.length >= 2)
 	);
 });
 
@@ -970,7 +970,7 @@ function onDrop(ev): void {
 }
 
 function saveDraft() {
-	const draftData = JSON.parse(localStorage.getItem("drafts") || "{}");
+	const draftData = JSON.parse(localStorage.getItem("drafts") ?? "{}");
 
 	draftData[draftKey.value] = {
 		updatedAt: new Date(),
@@ -990,7 +990,7 @@ function saveDraft() {
 }
 
 function deleteDraft() {
-	const draftData = JSON.parse(localStorage.getItem("drafts") || "{}");
+	const draftData = JSON.parse(localStorage.getItem("drafts") ?? "{}");
 
 	delete draftData[draftKey.value];
 
@@ -1013,7 +1013,7 @@ async function post() {
 				: undefined,
 		channelId: props.channel ? props.channel.id : undefined,
 		poll: poll.value,
-		cw: useCw.value ? cw.value || "" : undefined,
+		cw: useCw.value ? cw.value ?? "" : undefined,
 		lang: language.value ? language.value : undefined,
 		localOnly: localOnly.value,
 		visibility:
@@ -1065,7 +1065,7 @@ async function post() {
 						.filter((x) => x.type === "hashtag")
 						.map((x) => x.props.hashtag);
 					const history = JSON.parse(
-						localStorage.getItem("hashtags") || "[]",
+						localStorage.getItem("hashtags") ?? "[]",
 					) as string[];
 					localStorage.setItem(
 						"hashtags",
@@ -1184,7 +1184,7 @@ onMounted(() => {
 		autosize(textareaEl.value);
 		// 書きかけの投稿を復元
 		if (!props.instant && !props.mention && !props.specified) {
-			const draft = JSON.parse(localStorage.getItem("drafts") || "{}")[
+			const draft = JSON.parse(localStorage.getItem("drafts") ?? "{}")[
 				draftKey.value
 			];
 			if (draft) {
@@ -1194,7 +1194,7 @@ onMounted(() => {
 				visibility.value = draft.data.visibility;
 				localOnly.value = draft.data.localOnly;
 				language.value = draft.data.lang;
-				files.value = (draft.data.files || []).filter(
+				files.value = (draft.data.files ?? []).filter(
 					(draftFile) => draftFile,
 				);
 				if (draft.data.poll) {

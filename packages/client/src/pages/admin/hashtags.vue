@@ -47,7 +47,7 @@ async function init() {
 function save() {
 	os.apiWithDialog("admin/update-meta", {
 		hiddenTags:
-			hiddenTags.value.split("\n").map((h: string) => h.trim()) || [],
+			hiddenTags.value.split("\n").map((h: string) => h.trim()) ?? [],
 	}).then(() => {
 		fetchInstance();
 	});

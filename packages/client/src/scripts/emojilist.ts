@@ -37,7 +37,7 @@ export const categoryMapping = {
 } as const;
 
 export function addSkinTone(emoji: string, skinTone?: number) {
-	const chosenSkinTone = skinTone || defaultStore.state.reactionPickerSkinTone;
+	const chosenSkinTone = skinTone ?? defaultStore.state.reactionPickerSkinTone;
 	const skinToneModifiers = [
 		"",
 		emojiComponents.light_skin_tone,
@@ -51,7 +51,7 @@ export function addSkinTone(emoji: string, skinTone?: number) {
 		"",
 	);
 	if (individualData[strippedEmoji].skin_tone_support) {
-		return strippedEmoji + (skinToneModifiers[chosenSkinTone - 1] || "");
+		return strippedEmoji + (skinToneModifiers[chosenSkinTone - 1] ?? "");
 	} else {
 		return emoji;
 	}
@@ -62,7 +62,7 @@ const newData = {};
 for (const originalCategory of Object.keys(data)) {
 	const newCategory = categoryMapping[originalCategory];
 	if (newCategory) {
-		newData[newCategory] = newData[newCategory] || [];
+		newData[newCategory] = newData[newCategory] ?? [];
 		for (const emojiIndex of Object.keys(data[originalCategory])) {
 			const emojiObj = { ...data[originalCategory][emojiIndex] };
 			emojiObj.category = newCategory;
@@ -79,8 +79,8 @@ export const emojilist: UnicodeEmojiDef[] = Object.keys(newData).reduce(
 				emoji: item.emoji,
 				slug: item.slug,
 				category: item.category,
-				skin_tone_support: item.skin_tone_support || false,
-				keywords: item.keywords || [],
+				skin_tone_support: item.skin_tone_support ?? false,
+				keywords: item.keywords ?? [],
 			};
 		});
 		return acc.concat(categoryItems);
@@ -92,6 +92,6 @@ export function getNicelyLabeledCategory(internalName) {
 	return (
 		Object.keys(categoryMapping).find(
 			(key) => categoryMapping[key] === internalName,
-		) || internalName
+		) ?? internalName
 	);
 }

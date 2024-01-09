@@ -33,7 +33,7 @@
 							>{{ instance.host }}</a
 						>
 						<p>
-							{{ instance.softwareName || "?" }}
+							{{ instance.softwareName ?? "?" }}
 							{{ instance.softwareVersion }}
 						</p>
 					</div>

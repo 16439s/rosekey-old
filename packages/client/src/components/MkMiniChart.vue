@@ -48,7 +48,7 @@ const color = accent.toRgbString();
 
 function draw(): void {
 	const stats = props.src.slice().reverse();
-	const peak = Math.max.apply(null, stats) || 1;
+	const peak = Math.max(1, ...stats);
 
 	const _polylinePoints = stats.map((n, i) => [
 		i * (viewBoxX / (stats.length - 1)),

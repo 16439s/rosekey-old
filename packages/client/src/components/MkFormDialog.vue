@@ -25,11 +25,11 @@
 						v-if="form[item].type === 'number'"
 						v-model="values[item]"
 						type="number"
-						:step="form[item].step || 1"
+						:step="form[item].step ?? 1"
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -48,7 +48,7 @@
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -65,7 +65,7 @@
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -79,7 +79,7 @@
 						v-model="values[item]"
 						class="_formBlock"
 					>
-						<span v-text="form[item].label || item"></span>
+						<span v-text="form[item].label ?? item"></span>
 						<template v-if="form[item].description" #caption>{{
 							form[item].description
 						}}</template>
@@ -90,7 +90,7 @@
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -109,7 +109,7 @@
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -132,7 +132,7 @@
 						class="_formBlock"
 					>
 						<template #label
-							><span v-text="form[item].label || item"></span
+							><span v-text="form[item].label ?? item"></span
 							><span v-if="form[item].required === false">
 								({{ i18n.ts.optional }})</span
 							></template
@@ -146,7 +146,7 @@
 						class="_formBlock"
 						@click="form[item].action($event, values)"
 					>
-						<span v-text="form[item].content || item"></span>
+						<span v-text="form[item].content ?? item"></span>
 					</MkButton>
 				</template>
 			</div>

@@ -39,60 +39,65 @@ else
 fi
 
 ## show messages
-for message in neko/messages/*; do
+for message in $(find neko/messages -type f ! -name '*.resolved' -print | sort); do
   file=$(basename -- "${message}")
 
-  case "${file}" in
-    *'.resolved') ;;
-    *)
-      if [ ! -f "neko/flags/${file}" ]; then
-        if [ "$#" != '1' ] || [ "$1" != '--skip-all-confirmations' ]; then
-          say 'There is an important notice!'
-          cat "${message}"
+  if [ ! -f "neko/flags/${file}" ]; then
+    if contains '--install' "$@"; then
+      touch "neko/flags/${file}"
+    else
+      say 'There is an important notice!'
+      cat "${message}"
 
-          say 'Continue? (Are you ready for upgrading?)'
-          printf '[y/N] > '
-          read -r yn
+      say 'Continue? (Are you ready for upgrading?)'
+      printf '[y/N] > '
+      read -r yn
 
-          case "${yn}" in
-            [Yy]|[Yy][Ee][Ss])
-              touch "neko/flags/${file}"
-              say "Let's go!"
-              say "To read the message again, run: \$ cat ${message}"
-              br
-              ;;
-            *)
-              say "Okay, please run this script again when you're ready!"
-              exit 1
-              ;;
-          esac
-        else
+      case "${yn}" in
+        [Yy]|[Yy][Ee][Ss])
           touch "neko/flags/${file}"
-        fi
-      fi
-    ;;
-  esac
+          say "Let's go!"
+          say "To read the message again, run: \$ cat ${message}"
+          br
+          ;;
+        *)
+          say "Okay, please run this script again when you're ready!"
+          exit 1
+          ;;
+      esac
+    fi
+  fi
 done
 
-say 'Do you use Docker or Podman?'
-printf 'd: Docker, p: Podman, n: No [d/p/N] > '
-read -r resp
+docker_update() {
+  ./neko/update/container.sh 'docker' "$@"
+}
+podman_update() {
+  ./neko/update/container.sh 'podman' "$@"
+}
+native_update() {
+  ./neko/update/native.sh "$@"
+}
 
-case "${resp}" in
-  [Dd])
-    ./neko/update/docker.sh 'docker' "$@"
-    ;;
-  [Pp])
-    ./neko/update/docker.sh 'podman' "$@"
-    ;;
-  [Yy]|[Yy][Ee][Ss])
-    sadsay "Watch out! ${resp} is not a valid answer." >&2
-    exit 1
-    ;;
-  *)
-    ./neko/update/native.sh "$@"
-    ;;
-esac
+if   contains '--docker' "$@"; then docker_update "$@"
+elif contains '--podman' "$@"; then podman_update "$@"
+elif contains '--native' "$@"; then native_update "$@"
+
+else
+  say 'Do you use Docker or Podman?'
+  printf 'd: Docker, p: Podman, n: No [d/p/N] > '
+  read -r resp
+
+  case "${resp}" in
+    [Yy]|[Yy][Ee][Ss])
+      sadsay "Watch out! ${resp} is not a valid answer." >&2
+      exit 2
+      ;;
+    [Dd]) docker_update "$@" ;;
+    [Pp]) podman_update "$@" ;;
+    *)    native_update "$@" ;;
+  esac
+fi
 
 # Done
 say 'Enjoy your sabakan life~'

@@ -27,6 +27,19 @@ br() {
   printf '\n'
 }
 
+contains() {
+  target="$1"
+  shift
+
+  for item in "$@"; do
+    if [ "${item}" = "${target}" ]; then
+      return 0  # found
+    fi
+  done
+
+  return 1  # not found
+}
+
 version() {
   UPSTREAM_VERSION=$(pnpm pkg get version | sed -e 's/"//g')
   COMMIT_DATE=$(git show --no-patch --pretty='%cs' FETCH_HEAD | sed -e 's/-//g' | cut -c 3-)

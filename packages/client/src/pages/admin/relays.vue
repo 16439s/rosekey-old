@@ -66,7 +66,7 @@ async function addRelay() {
 		.catch((err: any) => {
 			os.alert({
 				type: "error",
-				text: err.message || err,
+				text: err.message ?? err,
 			});
 		});
 }
@@ -81,7 +81,7 @@ function remove(inbox: string) {
 		.catch((err: any) => {
 			os.alert({
 				type: "error",
-				text: err.message || err,
+				text: err.message ?? err,
 			});
 		});
 }

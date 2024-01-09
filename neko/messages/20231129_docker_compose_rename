@@ -1,5 +1,5 @@
  ----------------------------------------------------------
-| For Docker users:                                        |
+| For Docker/Podman users:                                 |
 | docker-compose.yml has now been renamed to               |
 | docker-compose.example.yml. So you need to restore it by |
 | $ cp docker-compose.example.yml docker-compose.yml       |

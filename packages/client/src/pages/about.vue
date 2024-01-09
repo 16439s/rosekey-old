@@ -41,7 +41,7 @@
 									@click="easterEgg"
 								/>
 								<div class="name">
-									<b>{{ $instance.name || host }}</b>
+									<b>{{ $instance.name ?? host }}</b>
 								</div>
 							</div>
 						</div>
@@ -99,7 +99,7 @@
 								></template>
 								{{
 									i18n.t("_aboutFirefish.donateHost", {
-										host: $instance.name || host,
+										host: $instance.name ?? host,
 									})
 								}}
 								<template #suffix>Donate</template>
@@ -209,7 +209,7 @@ withDefaults(
 const stats = ref(null);
 const instanceIcon = ref<HTMLImageElement>();
 let iconClicks = 0;
-const iconSrc = ref(instance.iconUrl || instance.faviconUrl || "/favicon.ico");
+const iconSrc = ref(instance.faviconUrl ?? instance.iconUrl ?? "/favicon.ico");
 const instanceIconAnimation = ref("");
 const tabs = ["overview", "emojis", "charts"];
 const tab = ref(tabs[0]);
@@ -276,8 +276,8 @@ function easterEgg() {
 			setTimeout(() => {
 				if (iconClicks % 6 === 0) {
 					iconSrc.value =
-						instance.iconUrl ||
-						instance.faviconUrl ||
+						instance.faviconUrl ??
+						instance.iconUrl ??
 						"/favicon.ico";
 				} else {
 					iconSrc.value = "/static-assets/woozy.png";

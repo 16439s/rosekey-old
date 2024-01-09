@@ -78,14 +78,14 @@ const src = computed(() => {
 });
 
 const captcha = computed<Captcha>(
-	() => window[variable.value] || ({} as unknown as Captcha),
+	() => window[variable.value] ?? ({} as Captcha),
 );
 
 if (loaded) {
 	available.value = true;
 } else {
 	(
-		document.getElementById(props.provider) ||
+		document.getElementById(props.provider) ??
 		document.head.appendChild(
 			Object.assign(document.createElement("script"), {
 				async: true,

@@ -105,7 +105,7 @@
 									<MkAcct :user="post.user" />
 								</div>
 								<MkFollowButton
-									v-if="!$i || $i.id != post.user.id"
+									v-if="!isSignedIn || $i.id !== post.user.id"
 									:user="post.user"
 									:inline="true"
 									:transparent="false"
@@ -163,7 +163,7 @@ import { definePageMetadata } from "@/scripts/page-metadata";
 import { shareAvailable } from "@/scripts/share-available";
 import { defaultStore } from "@/store";
 import icon from "@/scripts/icon";
-import { isSignedIn } from "@/reactiveAccount";
+import { $i, isSignedIn } from "@/reactiveAccount";
 
 const router = useRouter();
 

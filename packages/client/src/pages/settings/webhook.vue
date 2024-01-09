@@ -37,7 +37,7 @@
 								:style="{ color: 'var(--error)' }"
 							></i>
 						</template>
-						{{ webhook.name || webhook.url }}
+						{{ webhook.name ?? webhook.url }}
 						<template #suffix>
 							<MkTime
 								v-if="webhook.latestSentAt"

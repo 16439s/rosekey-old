@@ -33,7 +33,7 @@
 					<template #suffix>@{{ host }}</template>
 				</MkInput>
 				<MkInput
-					v-if="!user || (user && !user.usePasswordLessLogin)"
+					v-if="user == null || (user && !user.usePasswordLessLogin)"
 					v-model="password"
 					class="_formBlock"
 					:placeholder="i18n.ts.password"

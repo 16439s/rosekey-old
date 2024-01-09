@@ -268,7 +268,7 @@ function exec() {
 	} else if (props.type === "hashtag") {
 		if (!props.q || props.q === "") {
 			hashtags.value = JSON.parse(
-				localStorage.getItem("hashtags") || "[]",
+				localStorage.getItem("hashtags") ?? "[]",
 			);
 			fetching.value = false;
 		} else {

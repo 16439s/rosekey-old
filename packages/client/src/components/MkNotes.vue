@@ -28,7 +28,7 @@
 					class="notes"
 				>
 					<XNote
-						:key="note._featuredId_ || note._prId_ || note.id"
+						:key="note._featuredId_ ?? note._prId_ ?? note.id"
 						class="qtqtichx"
 						:note="note"
 					/>

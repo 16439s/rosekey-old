@@ -90,7 +90,7 @@ export function physics(container: HTMLElement) {
 				objEl.offsetHeight,
 				{
 					chamfer: {
-						radius: parseInt(style.borderRadius || "0", 10),
+						radius: parseInt(style.borderRadius ?? "0", 10),
 					},
 					restitution: 0.5,
 				},

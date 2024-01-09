@@ -21,7 +21,7 @@
 				>
 					{{ i18n.t("_sfx." + type) }}
 					<template #suffix>{{
-						sounds[type].type || i18n.ts.none
+						sounds[type].type ?? i18n.ts.none
 					}}</template>
 					<template #suffixIcon
 						><i :class="icon('ph-caret-down')"></i

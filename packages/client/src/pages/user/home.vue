@@ -108,7 +108,7 @@
 										v-if="
 											patrons?.includes(
 												`@${user.username}@${
-													user.host || host
+													user.host ?? host
 												}`,
 											)
 										"
@@ -197,7 +197,7 @@
 									v-if="
 										patrons?.includes(
 											`@${user.username}@${
-												user.host || host
+												user.host ?? host
 											}`,
 										)
 									"

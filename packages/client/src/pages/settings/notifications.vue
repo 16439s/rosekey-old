@@ -66,7 +66,7 @@ const pushRegistrationInServer = computed(
 	() => allowButton.value?.pushRegistrationInServer,
 );
 const sendReadMessage = computed(
-	() => pushRegistrationInServer.value?.sendReadMessage || false,
+	() => pushRegistrationInServer.value?.sendReadMessage ?? false,
 );
 
 async function readAllUnreadNotes() {

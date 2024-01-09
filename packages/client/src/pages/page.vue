@@ -150,7 +150,7 @@
 									<MkAcct :user="page.user" />
 								</div>
 								<MkFollowButton
-									v-if="!$i || $i.id != page.user.id"
+									v-if="!isSignedIn || $i.id !== page.user.id"
 									:user="page.user"
 									:inline="true"
 									:transparent="false"
@@ -215,7 +215,7 @@ import { definePageMetadata } from "@/scripts/page-metadata";
 import { shareAvailable } from "@/scripts/share-available";
 import { defaultStore } from "@/store";
 import icon from "@/scripts/icon";
-import { isSignedIn } from "@/reactiveAccount";
+import { $i, isSignedIn } from "@/reactiveAccount";
 
 const props = defineProps<{
 	pageName: string;
@@ -272,7 +272,7 @@ function share() {
 
 function shareWithNote() {
 	os.post({
-		initialText: `${page.value.title || page.value.name} ${url}/@${
+		initialText: `${page.value.title ?? page.value.name} ${url}/@${
 			page.value.user.username
 		}/pages/${page.value.name}`,
 	});
@@ -312,11 +312,11 @@ definePageMetadata(
 	computed(() =>
 		page.value
 			? {
-					title: computed(() => page.value.title || page.value.name),
+					title: computed(() => page.value.title ?? page.value.name),
 					avatar: page.value.user,
 					path: `/@${page.value.user.username}/pages/${page.value.name}`,
 					share: {
-						title: page.value.title || page.value.name,
+						title: page.value.title ?? page.value.name,
 						text: page.value.summary,
 					},
 				}

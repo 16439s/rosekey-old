@@ -4,7 +4,7 @@
 		<span
 			v-if="user.host || detail || defaultStore.state.showFullAcct"
 			class="host"
-			>@{{ user.host || host }}</span
+			>@{{ user.host ?? host }}</span
 		>
 	</span>
 </template>

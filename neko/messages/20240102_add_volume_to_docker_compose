@@ -1,11 +1,11 @@
  -------------------------------------------------------------------
-| For Docker users:                                                 |
+| For Docker/Podman users:                                          |
 | Please add ./neko/volume:/firefish/neko/volume:ro to              |
 | services.web.volumes in your docker-compose.yml before upgrading! |
 |                                                                   |
 | After editing, services.web.volumes should look like this:        |
 | volumes:                                                          |
-|   - ./assets:/firefish/custom/assets                              |
+|   - ./custom:/firefish/custom:ro                                  |
 |   - ./files:/firefish/files                                       |
 |   - ./.config:/firefish/.config:ro                                |
 |   - ./neko/volume:/firefish/neko/volume:ro  <-- add this line     |

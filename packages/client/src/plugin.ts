@@ -143,7 +143,7 @@ function registerPostFormAction({ pluginId, title, handler }) {
 			pluginContext.execFn(handler, [
 				utils.jsToVal(form),
 				values.FN_NATIVE(([key, value]) => {
-					if (!key || !value) {
+					if (key == null || value == null) {
 						return;
 					}
 					update(utils.valToJs(key), utils.valToJs(value));
